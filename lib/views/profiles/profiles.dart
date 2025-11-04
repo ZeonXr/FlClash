@@ -8,6 +8,7 @@ import 'package:fl_clash/state.dart';
 import 'package:fl_clash/views/profiles/scripts.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'add.dart';
@@ -252,16 +253,12 @@ class ProfileItem extends StatelessWidget {
     ];
   }
 
-  // _handleCopyLink(BuildContext context) async {
-  //   await Clipboard.setData(
-  //     ClipboardData(
-  //       text: profile.url,
-  //     ),
-  //   );
-  //   if (context.mounted) {
-  //     context.showNotifier(appLocalizations.copySuccess);
-  //   }
-  // }
+  Future<void> _handleCopyLink(BuildContext context) async {
+    await Clipboard.setData(ClipboardData(text: profile.url));
+    if (context.mounted) {
+      context.showNotifier(appLocalizations.copySuccess);
+    }
+  }
 
   Future<void> _handleExportFile(BuildContext context) async {
     final res = await globalState.appController.safeRun<bool>(
@@ -340,6 +337,15 @@ class ProfileItem extends StatelessWidget {
                                 _handlePushGenProfilePage(context, profile.id);
                               },
                             ),
+                            if (profile.type == ProfileType.url) ...[
+                              PopupMenuItemData(
+                                icon: Icons.copy,
+                                label: appLocalizations.copyLink,
+                                onPressed: () {
+                                  _handleCopyLink(context);
+                                },
+                              ),
+                            ],
                             PopupMenuItemData(
                               icon: Icons.file_copy_outlined,
                               label: appLocalizations.exportFile,
@@ -348,9 +354,6 @@ class ProfileItem extends StatelessWidget {
                               },
                             ),
                           ],
-                          // onPressed: () {
-                          //   // _handleExportFile(context);
-                          // },
                         ),
                         PopupMenuItemData(
                           danger: true,
