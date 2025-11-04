@@ -178,9 +178,9 @@ extension ProfileExtension on Profile {
     if (message.isNotEmpty) {
       throw message;
     }
+    final file = await getFile();
     await Isolate.run(() async {
-      final file = await getFile();
-      await file.writeAsBytes(bytes);
+      return await file.writeAsBytes(bytes);
     });
     return copyWith(lastUpdateDate: DateTime.now());
   }

@@ -336,31 +336,35 @@ class _CommonPopupMenuItemsState extends State<_CommonPopupMenuItems> {
   Widget _buildSubMenu() {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 8, top: 8, bottom: 4),
+          padding: EdgeInsets.only(left: 8, top: 6, bottom: 2),
           child: Row(
-            spacing: 8,
+            spacing: 4,
             children: [
               IconButton(
                 icon: Icon(
                   Icons.arrow_back_outlined,
-                  color: context.colorScheme.onSurfaceVariant,
+                  color: context.colorScheme.onSurfaceVariant.opacity80,
                 ),
                 onPressed: () {
                   setState(() {
                     _status = false;
                   });
                 },
-                iconSize: 20,
-                padding: EdgeInsets.all(2),
-                visualDensity: VisualDensity.compact,
+                iconSize: 18,
+                style: ButtonStyle(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: WidgetStatePropertyAll(Size.zero),
+                  padding: WidgetStatePropertyAll(EdgeInsets.all(6)),
+                ),
               ),
               if (_subTitle != null)
                 Text(
                   _subTitle!,
-                  style: context.textTheme.titleSmall?.copyWith(
-                    color: context.colorScheme.onSurfaceVariant,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: context.colorScheme.onSurfaceVariant.opacity80,
                   ),
                 ),
             ],
