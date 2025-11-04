@@ -302,15 +302,23 @@ class GlobalState {
     return params;
   }
 
-  Future<void> genConfigFile(ClashConfig pathConfig) async {
-    final configFilePath = await appPath.configFilePath;
+  Future<Map> getPatchedConfig(
+    Profile? profile,
+    ClashConfig patchConfig,
+  ) async {
     var config = {};
     try {
-      config = await patchRawConfig(patchConfig: pathConfig);
+      config = await patchRawConfig(profile: profile, patchConfig: patchConfig);
     } catch (e) {
       globalState.showNotifier(e.toString());
       config = {};
     }
+    return config;
+  }
+
+  Future<void> genConfigFile(Profile? profile, ClashConfig patchConfig) async {
+    final configFilePath = await appPath.configFilePath;
+    final config = await getPatchedConfig(profile, patchConfig);
     final res = await Isolate.run<String>(() async {
       try {
         final res = json.encode(config);
@@ -375,9 +383,9 @@ class GlobalState {
   }
 
   Future<Map<String, dynamic>> patchRawConfig({
+    required Profile? profile,
     required ClashConfig patchConfig,
   }) async {
-    final profile = config.currentProfile;
     if (profile == null) {
       return {};
     }

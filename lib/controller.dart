@@ -313,7 +313,11 @@ class AppController {
     }
     final realTunEnable = _ref.read(realTunEnableProvider);
     final realPatchConfig = patchConfig.copyWith.tun(enable: realTunEnable);
-    final message = await coreController.setupConfig(realPatchConfig);
+    final currentProfile = _ref.read(currentProfileProvider);
+    final message = await coreController.setupConfig(
+      currentProfile,
+      realPatchConfig,
+    );
     lastProfileModified = await _ref.read(
       currentProfileProvider.select((state) => state?.profileLastModified),
     );

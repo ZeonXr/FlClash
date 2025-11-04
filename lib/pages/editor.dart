@@ -50,11 +50,13 @@ class _EditorPageState extends ConsumerState<EditorPage> {
   late CodeFindController _findController;
   late TextEditingController _titleController;
   late FocusNode _focusNode;
+  late bool readOnly = false;
 
   @override
   void initState() {
     super.initState();
-    _focusNode = FocusNode(canRequestFocus: widget.onSave != null);
+    readOnly = widget.onSave == null;
+    _focusNode = FocusNode(canRequestFocus: readOnly);
     _controller = CodeLineEditingController.fromText(widget.content);
     _findController = CodeFindController(_controller);
     _titleController = TextEditingController(text: widget.title);
@@ -180,7 +182,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
             autofocus: false,
           ),
           actions: genActions([
-            if (widget.onSave != null)
+            if (!readOnly)
               _wrapController(
                 (value) => _wrapTitleController(
                   (value) => IconButton(
@@ -226,7 +228,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                       label: appLocalizations.redo,
                       onPressed: _controller.canRedo ? _controller.redo : null,
                     ),
-                    if (widget.supportRemoteDownload)
+                    if (widget.supportRemoteDownload && !readOnly)
                       PopupMenuItemData(
                         icon: Icons.arrow_downward,
                         label: '外部获取',
@@ -248,7 +250,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
           ]),
         ),
         body: CodeEditor(
-          readOnly: widget.onSave == null,
+          readOnly: readOnly,
           findController: _findController,
           findBuilder: (context, controller, readOnly) => FindPanel(
             controller: controller,
@@ -264,7 +266,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
               child: child,
             );
           },
-          toolbarController: ContextMenuControllerImpl(),
+          toolbarController: ContextMenuControllerImpl(readOnly),
           indicatorBuilder:
               (context, editingController, chunkController, notifier) {
                 return Row(
@@ -506,6 +508,9 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
 class ContextMenuControllerImpl implements SelectionToolbarController {
   OverlayEntry? _overlayEntry;
   bool _isFirstRender = true;
+  bool readOnly = false;
+
+  ContextMenuControllerImpl(this.readOnly);
 
   void _removeOverLayEntry() {
     _overlayEntry?.remove();
@@ -542,11 +547,12 @@ class ContextMenuControllerImpl implements SelectionToolbarController {
                   label: appLocalizations.copy,
                   onPressed: controller.copy,
                 ),
-              PopupMenuItemData(
-                label: appLocalizations.paste,
-                onPressed: controller.paste,
-              ),
-              if (isNotEmpty)
+              if (!readOnly)
+                PopupMenuItemData(
+                  label: appLocalizations.paste,
+                  onPressed: controller.paste,
+                ),
+              if (isNotEmpty && !readOnly)
                 PopupMenuItemData(
                   label: appLocalizations.cut,
                   onPressed: controller.cut,

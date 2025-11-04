@@ -94,10 +94,11 @@ class CoreController {
   }
 
   Future<String> setupConfig(
+    Profile? profile,
     ClashConfig clashConfig, {
     VoidCallback? preloadInvoke,
   }) async {
-    await globalState.genConfigFile(clashConfig);
+    await globalState.genConfigFile(profile, clashConfig);
     final params = await globalState.getSetupParams();
     final res = _interface.setupConfig(params);
     if (preloadInvoke != null) {

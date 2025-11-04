@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fl_clash/models/config.dart';
 import 'package:fl_clash/plugins/app.dart';
 import 'package:fl_clash/plugins/tile.dart';
 import 'package:fl_clash/state.dart';
@@ -40,6 +41,7 @@ Future<void> _service(List<String> flags) async {
     enable: false,
   );
   coreController.setupConfig(
+    globalState.config.currentProfile,
     clashConfig,
     preloadInvoke: () {
       globalState.handleStart();

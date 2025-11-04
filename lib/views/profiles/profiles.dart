@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:fl_clash/common/common.dart';
@@ -204,10 +206,21 @@ class ProfileItem extends StatelessWidget {
     await globalState.appController.deleteProfile(profile.id);
   }
 
-  void _handlePreview(BuildContext context) {
+  Future<void> _handlePreview(BuildContext context) async {
+    final config = await globalState.getPatchedConfig(
+      profile,
+      globalState.config.patchClashConfig,
+    );
+    final content = await Isolate.run(() {
+      return JsonEncoder.withIndent(' ').convert(config);
+    });
+    if (!context.mounted) {
+      return;
+    }
     final previewPage = EditorPage(
       title: profile.label ?? profile.id,
-      content: '',
+      content: content,
+      languages: [Language.json],
     );
     BaseNavigator.push<String>(context, previewPage);
   }
