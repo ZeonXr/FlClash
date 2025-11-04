@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:fl_clash/pages/editor.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/views/profiles/scripts.dart';
@@ -203,6 +204,14 @@ class ProfileItem extends StatelessWidget {
     await globalState.appController.deleteProfile(profile.id);
   }
 
+  void _handlePreview(BuildContext context) {
+    final previewPage = EditorPage(
+      title: profile.label ?? profile.id,
+      content: '',
+    );
+    BaseNavigator.push<String>(context, previewPage);
+  }
+
   Future updateProfile() async {
     final appController = globalState.appController;
     if (profile.type == ProfileType.file) return;
@@ -316,6 +325,13 @@ class ProfileItem extends StatelessWidget {
                             _handleShowEditExtendPage(context);
                           },
                         ),
+                        PopupMenuItemData(
+                          icon: Icons.visibility_outlined,
+                          label: appLocalizations.preview,
+                          onPressed: () {
+                            _handlePreview(context);
+                          },
+                        ),
                         if (profile.type == ProfileType.url) ...[
                           PopupMenuItemData(
                             icon: Icons.sync_alt_sharp,
@@ -325,7 +341,6 @@ class ProfileItem extends StatelessWidget {
                             },
                           ),
                         ],
-
                         PopupMenuItemData(
                           icon: Icons.emergency_outlined,
                           label: appLocalizations.more,

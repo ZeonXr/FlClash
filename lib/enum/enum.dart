@@ -390,7 +390,7 @@ enum RecoveryStrategy { compatible, override }
 
 enum CacheTag { logs, rules, requests, proxiesList }
 
-enum Language { yaml, javaScript }
+enum Language { yaml, javaScript, json }
 
 enum ImportOption { file, url }
 
