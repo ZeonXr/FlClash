@@ -389,7 +389,7 @@ class _CommonPopupMenuItemsState extends State<_CommonPopupMenuItems> {
       crossSlideState: _status
           ? CrossSlideState.showSecond
           : CrossSlideState.showFirst,
-      duration: midDuration,
+      duration: Duration(milliseconds: 250),
     );
   }
 }

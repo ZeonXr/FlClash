@@ -457,6 +457,7 @@ class AppController {
       await proxy?.stopProxy();
       await macOS?.updateDns(true);
       await coreController.destroy();
+      commonPrint.log('exit');
     } finally {
       system.exit();
     }

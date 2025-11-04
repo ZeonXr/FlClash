@@ -504,7 +504,10 @@ class _ListHeaderState extends State<ListHeader> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(groupName, style: context.textTheme.titleMedium),
+                        EmojiText(
+                          groupName,
+                          style: context.textTheme.titleMedium,
+                        ),
                         const SizedBox(height: 4),
                         Flexible(
                           flex: 1,
