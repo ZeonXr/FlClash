@@ -170,7 +170,7 @@ extension ProfileExtension on Profile {
     return await copyWith(
       label: label ?? utils.getFileNameForDisposition(disposition) ?? id,
       subscriptionInfo: SubscriptionInfo.formHString(userinfo),
-    ).saveFile(response.data);
+    ).saveFile(response.data ?? Uint8List.fromList([]));
   }
 
   Future<Profile> saveFile(Uint8List bytes) async {

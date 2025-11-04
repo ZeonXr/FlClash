@@ -146,7 +146,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
       return;
     }
     final res = await request.getTextResponseForUrl(url);
-    _controller.text = res.data;
+    _controller.text = res.data ?? '';
   }
 
   @override
