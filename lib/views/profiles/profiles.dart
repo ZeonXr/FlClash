@@ -328,19 +328,29 @@ class ProfileItem extends StatelessWidget {
                             },
                           ),
                         ],
+
                         PopupMenuItemData(
-                          icon: Icons.extension_outlined,
-                          label: appLocalizations.override,
-                          onPressed: () {
-                            _handlePushGenProfilePage(context, profile.id);
-                          },
-                        ),
-                        PopupMenuItemData(
-                          icon: Icons.file_copy_outlined,
-                          label: appLocalizations.exportFile,
-                          onPressed: () {
-                            _handleExportFile(context);
-                          },
+                          icon: Icons.emergency_outlined,
+                          label: appLocalizations.more,
+                          subItems: [
+                            PopupMenuItemData(
+                              icon: Icons.extension_outlined,
+                              label: appLocalizations.override,
+                              onPressed: () {
+                                _handlePushGenProfilePage(context, profile.id);
+                              },
+                            ),
+                            PopupMenuItemData(
+                              icon: Icons.file_copy_outlined,
+                              label: appLocalizations.exportFile,
+                              onPressed: () {
+                                _handleExportFile(context);
+                              },
+                            ),
+                          ],
+                          // onPressed: () {
+                          //   // _handleExportFile(context);
+                          // },
                         ),
                         PopupMenuItemData(
                           danger: true,

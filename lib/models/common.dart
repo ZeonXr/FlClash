@@ -423,20 +423,20 @@ abstract class Field with _$Field {
   }) = _Field;
 }
 
-enum PopupMenuItemType { primary, danger }
-
 class PopupMenuItemData {
   const PopupMenuItemData({
     this.icon,
     required this.label,
-    required this.onPressed,
+    this.onPressed,
     this.danger = false,
+    this.subItems = const [],
   });
 
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
   final bool danger;
+  final List<PopupMenuItemData> subItems;
 }
 
 @freezed

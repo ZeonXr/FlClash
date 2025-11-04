@@ -449,14 +449,13 @@ class AppController {
   }
 
   Future<void> handleExit() async {
-    Future.delayed(commonDuration, () {
+    Future.delayed(Duration(seconds: 3), () {
       system.exit();
     });
     try {
       await savePreferences();
-      await macOS?.updateDns(true);
       await proxy?.stopProxy();
-      await coreController.shutdown();
+      await macOS?.updateDns(true);
       await coreController.destroy();
     } finally {
       system.exit();
