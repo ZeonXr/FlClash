@@ -572,6 +572,9 @@ class _ListHeaderState extends State<ListHeader> {
                     onPressed: () {
                       widget.onScrollToSelected(groupName);
                     },
+                    style: ButtonStyle(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     iconSize: 19,
                     icon: const Icon(Icons.adjust),
                   ),
@@ -581,6 +584,9 @@ class _ListHeaderState extends State<ListHeader> {
                     visualDensity: VisualDensity.compact,
                     padding: EdgeInsets.all(2),
                     onPressed: _delayTest,
+                    style: ButtonStyle(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
                     icon: const Icon(Icons.network_ping),
                   ),
                   const SizedBox(width: 6),
@@ -590,6 +596,9 @@ class _ListHeaderState extends State<ListHeader> {
                   visualDensity: VisualDensity.compact,
                   padding: EdgeInsets.all(2),
                   iconSize: 24,
+                  style: ButtonStyle(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
                   onPressed: () {
                     _handleChange(groupName);
                   },

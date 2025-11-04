@@ -383,7 +383,6 @@ class _CommonPopupMenuItemsState extends State<_CommonPopupMenuItems> {
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossSlide(
-      sizeCurve: Curves.elasticInOut,
       secondCurve: Curves.easeOut,
       firstChild: _buildItems(widget.items),
       secondChild: _nextItems.isEmpty ? Container() : _buildSubMenu(),
