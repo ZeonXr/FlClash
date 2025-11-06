@@ -321,7 +321,7 @@ class GlobalState {
     final config = await getPatchedConfig(profile, patchConfig);
     final res = await Isolate.run<String>(() async {
       try {
-        final res = json.encode(config);
+        final res = yaml.encode(config);
         final file = File(configFilePath);
         if (!await file.exists()) {
           await file.create(recursive: true);
@@ -518,7 +518,7 @@ class GlobalState {
         rules = [...overrideData.runningRule, ...rules];
       }
     }
-    rawConfig['rule'] = rules;
+    rawConfig['rules'] = rules;
     return rawConfig;
   }
 

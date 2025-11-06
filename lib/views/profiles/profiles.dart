@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -8,7 +7,6 @@ import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/pages/editor.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
-import 'package:fl_clash/views/profiles/scripts.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,27 +79,27 @@ class _ProfilesViewState extends State<ProfilesView> {
         },
         icon: const Icon(Icons.sync),
       ),
-      IconButton(
-        onPressed: () {
-          showExtend(
-            context,
-            builder: (_, type) {
-              return ScriptsView();
-            },
-          );
-        },
-        icon: Consumer(
-          builder: (context, ref, _) {
-            final isScriptMode = ref.watch(
-              scriptStateProvider.select((state) => state.realId != null),
-            );
-            return Icon(
-              Icons.functions,
-              color: isScriptMode ? context.colorScheme.primary : null,
-            );
-          },
-        ),
-      ),
+      // IconButton(
+      //   onPressed: () {
+      //     showExtend(
+      //       context,
+      //       builder: (_, type) {
+      //         return ScriptsView();
+      //       },
+      //     );
+      //   },
+      //   icon: Consumer(
+      //     builder: (context, ref, _) {
+      //       final isScriptMode = ref.watch(
+      //         scriptStateProvider.select((state) => state.realId != null),
+      //       );
+      //       return Icon(
+      //         Icons.functions,
+      //         color: isScriptMode ? context.colorScheme.primary : null,
+      //       );
+      //     },
+      //   ),
+      // ),
       IconButton(
         onPressed: () {
           final profiles = globalState.config.profiles;
@@ -212,7 +210,7 @@ class ProfileItem extends StatelessWidget {
       globalState.config.patchClashConfig,
     );
     final content = await Isolate.run(() {
-      return JsonEncoder.withIndent(' ').convert(config);
+      return yaml.encode(config);
     });
     if (!context.mounted) {
       return;
@@ -220,7 +218,6 @@ class ProfileItem extends StatelessWidget {
     final previewPage = EditorPage(
       title: profile.label ?? profile.id,
       content: content,
-      languages: [Language.json],
     );
     BaseNavigator.push<String>(context, previewPage);
   }

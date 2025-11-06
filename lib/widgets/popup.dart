@@ -357,7 +357,7 @@ class _CommonPopupMenuItemsState extends State<_CommonPopupMenuItems> {
                 style: ButtonStyle(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   minimumSize: WidgetStatePropertyAll(Size.zero),
-                  padding: WidgetStatePropertyAll(EdgeInsets.all(6)),
+                  padding: WidgetStatePropertyAll(EdgeInsets.all(8)),
                 ),
               ),
               if (_subTitle != null)

@@ -123,7 +123,6 @@ class _EditorPageState extends ConsumerState<EditorPage> {
       return;
     }
     final res = String.fromCharCodes(file.bytes?.toList() ?? []);
-    print(res);
     _controller.text = res;
   }
 
