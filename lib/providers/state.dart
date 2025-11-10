@@ -23,7 +23,7 @@ Config configState(Ref ref) {
   final networkProps = ref.watch(networkSettingProvider);
   final vpnProps = ref.watch(vpnSettingProvider);
   final proxiesStyle = ref.watch(proxiesStyleSettingProvider);
-  final scriptProps = ref.watch(scriptStateProvider);
+  final scripts = ref.watch(scriptsProvider);
   final hotKeyActions = ref.watch(hotKeyActionsProvider);
   final dav = ref.watch(appDAVSettingProvider);
   final windowProps = ref.watch(windowSettingProvider);
@@ -31,7 +31,6 @@ Config configState(Ref ref) {
     dav: dav,
     windowProps: windowProps,
     hotKeyActions: hotKeyActions,
-    scriptProps: scriptProps,
     proxiesStyle: proxiesStyle,
     vpnProps: vpnProps,
     networkProps: networkProps,
@@ -41,6 +40,7 @@ Config configState(Ref ref) {
     appSetting: appSetting,
     themeProps: themeProps,
     patchClashConfig: patchClashConfig,
+    scripts: scripts,
   );
 }
 
@@ -575,9 +575,9 @@ ColorScheme genColorScheme(
 @riverpod
 VM4<String?, String?, Dns?, bool> needSetup(Ref ref) {
   final profileId = ref.watch(currentProfileIdProvider);
-  final content = ref.watch(
-    scriptStateProvider.select((state) => state.currentScript?.content),
-  );
+  // final content = ref.watch(
+  //   scriptsProvider.select((state) => state.currentScript?.content),
+  // );
   final overrideDns = ref.watch(overrideDnsProvider);
   final dns = overrideDns == true
       ? ref.watch(patchClashConfigProvider.select((state) => state.dns))
@@ -585,7 +585,7 @@ VM4<String?, String?, Dns?, bool> needSetup(Ref ref) {
   final appendSystemDns = ref.watch(
     networkSettingProvider.select((state) => state.appendSystemDns),
   );
-  return VM4(profileId, content, dns, appendSystemDns);
+  return VM4(profileId, '', dns, appendSystemDns);
 }
 
 @riverpod

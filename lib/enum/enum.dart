@@ -384,6 +384,14 @@ extension RuleActionExt on RuleAction {
 
 enum OverrideRuleType { override, added }
 
+enum OverwriteType {
+  // none,
+  standard,
+  added,
+  script,
+  // custom,
+}
+
 enum RuleTarget { DIRECT, REJECT }
 
 enum RecoveryStrategy { compatible, override }

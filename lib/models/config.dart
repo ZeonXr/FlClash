@@ -258,7 +258,7 @@ abstract class Config with _$Config {
     @Default(defaultProxiesStyle) ProxiesStyle proxiesStyle,
     @Default(defaultWindowProps) WindowProps windowProps,
     @Default(defaultClashConfig) ClashConfig patchClashConfig,
-    @Default(ScriptProps()) ScriptProps scriptProps,
+    @Default([]) List<Script> scripts,
   }) = _Config;
 
   factory Config.fromJson(Map<String, Object?> json) => _$ConfigFromJson(json);

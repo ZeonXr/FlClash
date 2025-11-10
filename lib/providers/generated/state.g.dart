@@ -48,7 +48,7 @@ final class ConfigStateProvider
   }
 }
 
-String _$configStateHash() => r'1f4ea3cc8f6461ba734e7e0c5d7295bfa4fd5afb';
+String _$configStateHash() => r'ecf9d6f30f2cf247fd0fa8e338bc0fa3c1c619e7';
 
 @ProviderFor(currentGroupsState)
 const currentGroupsStateProvider = CurrentGroupsStateProvider._();
@@ -2180,7 +2180,7 @@ final class NeedSetupProvider
   }
 }
 
-String _$needSetupHash() => r'25352164c340a5fb02add21246062dd1287595fb';
+String _$needSetupHash() => r'6ea0d2be3df2046bbfa4e6c5d751727f06e7a4b3';
 
 @ProviderFor(currentBrightness)
 const currentBrightnessProvider = CurrentBrightnessProvider._();

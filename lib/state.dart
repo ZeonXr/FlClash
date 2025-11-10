@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi' show Pointer;
 import 'dart:io';
 import 'dart:isolate';
 
@@ -15,7 +13,6 @@ import 'package:fl_clash/plugins/service.dart';
 import 'package:fl_clash/widgets/dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_js/flutter_js.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path/path.dart';
@@ -511,7 +508,7 @@ class GlobalState {
     rawConfig.remove('rules');
 
     final overrideData = profile.overrideData;
-    if (overrideData.enable && config.scriptProps.currentScript == null) {
+    if (overrideData.enable) {
       if (overrideData.rule.type == OverrideRuleType.override) {
         rules = overrideData.runningRule;
       } else {
@@ -532,27 +529,28 @@ class GlobalState {
   Future<Map<String, dynamic>> handleEvaluate(
     Map<String, dynamic> config,
   ) async {
-    final currentScript = globalState.config.scriptProps.currentScript;
-    if (currentScript == null) {
-      return config;
-    }
-    if (config['proxy-providers'] == null) {
-      config['proxy-providers'] = {};
-    }
-    final configJs = json.encode(config);
-    final runtime = getJavascriptRuntime();
-    final res = await runtime.evaluateAsync('''
-      ${currentScript.content}
-      main($configJs)
-    ''');
-    if (res.isError) {
-      throw res.stringResult;
-    }
-    final value = switch (res.rawResult is Pointer) {
-      true => runtime.convertValue<Map<String, dynamic>>(res),
-      false => Map<String, dynamic>.from(res.rawResult),
-    };
-    return value ?? config;
+    return config;
+    // final currentScript = globalState.config.scriptProps.currentScript;
+    // if (currentScript == null) {
+    //   return config;
+    // }
+    // if (config['proxy-providers'] == null) {
+    //   config['proxy-providers'] = {};
+    // }
+    // final configJs = json.encode(config);
+    // final runtime = getJavascriptRuntime();
+    // final res = await runtime.evaluateAsync('''
+    //   ${currentScript.content}
+    //   main($configJs)
+    // ''');
+    // if (res.isError) {
+    //   throw res.stringResult;
+    // }
+    // final value = switch (res.rawResult is Pointer) {
+    //   true => runtime.convertValue<Map<String, dynamic>>(res),
+    //   false => Map<String, dynamic>.from(res.rawResult),
+    // };
+    // return value ?? config;
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/pages/editor.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/views/profiles/overwrite/overwrite.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'add.dart';
 import 'edit.dart';
-import 'overwrite.dart';
 
 class ProfilesView extends StatefulWidget {
   const ProfilesView({super.key});
@@ -299,8 +299,9 @@ class ProfileItem extends StatelessWidget {
   }
 
   void _handlePushGenProfilePage(BuildContext context, String id) {
-    final overrideProfileView = OverrideProfileView(profileId: id);
-    BaseNavigator.push(context, overrideProfileView);
+    // final overrideProfileView = OverrideProfileView(profileId: id);
+    // BaseNavigator.push(context, overrideProfileView);
+    BaseNavigator.push(context, OverwriteView());
   }
 
   @override

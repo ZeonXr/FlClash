@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart' show dirname, join;
 
 import 'backup_and_recovery.dart';
+import 'config/advanced.dart';
 import 'developer.dart';
 import 'theme.dart';
 
@@ -71,14 +72,15 @@ class _ToolViewState extends ConsumerState<ToolsView> {
     return generateSection(
       title: appLocalizations.settings,
       items: [
-        _LocaleItem(),
-        _ThemeItem(),
-        _BackupItem(),
-        if (system.isDesktop) _HotkeyItem(),
-        if (system.isWindows) _LoopbackItem(),
-        if (system.isAndroid) _AccessItem(),
-        _ConfigItem(),
-        _SettingItem(),
+        const _LocaleItem(),
+        const _ThemeItem(),
+        const _BackupItem(),
+        if (system.isDesktop) const _HotkeyItem(),
+        if (system.isWindows) const _LoopbackItem(),
+        if (system.isAndroid) const _AccessItem(),
+        const _ConfigItem(),
+        const _AdvancedConfigItem(),
+        const _SettingItem(),
       ],
     );
   }
@@ -251,11 +253,25 @@ class _ConfigItem extends StatelessWidget {
     return ListItem.open(
       leading: const Icon(Icons.edit),
       title: Text(appLocalizations.basicConfig),
-      subtitle: Text(appLocalizations.basicConfigDesc),
+      subtitle: Text('全局修改基础选项'),
       delegate: OpenDelegate(
         title: appLocalizations.basicConfig,
         widget: const ConfigView(),
       ),
+    );
+  }
+}
+
+class _AdvancedConfigItem extends StatelessWidget {
+  const _AdvancedConfigItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListItem.open(
+      leading: const Icon(Icons.build),
+      title: Text('进阶配置'),
+      subtitle: Text('提供多样化配置'),
+      delegate: OpenDelegate(title: '进阶配置', widget: const AdvancedConfigView()),
     );
   }
 }

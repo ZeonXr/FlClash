@@ -953,7 +953,7 @@ class AppController {
       _ref.read(overrideDnsProvider.notifier).value = config.overrideDns;
       _ref.read(networkSettingProvider.notifier).value = config.networkProps;
       _ref.read(hotKeyActionsProvider.notifier).value = config.hotKeyActions;
-      _ref.read(scriptStateProvider.notifier).value = config.scriptProps;
+      _ref.read(scriptsProvider.notifier).value = config.scripts;
     }
     final currentProfile = _ref.read(currentProfileProvider);
     if (currentProfile == null) {
