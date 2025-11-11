@@ -23,6 +23,7 @@ class AdvancedConfigView extends StatelessWidget {
         delegate: OpenDelegate(
           title: appLocalizations.network,
           blur: false,
+          wrap: true,
           actions: [
             Consumer(
               builder: (_, ref, _) {
@@ -62,6 +63,7 @@ class AdvancedConfigView extends StatelessWidget {
         subtitle: Text(appLocalizations.dnsDesc),
         leading: const Icon(Icons.dns),
         delegate: OpenDelegate(
+          wrap: true,
           title: 'DNS',
           actions: [
             Consumer(
@@ -99,7 +101,6 @@ class AdvancedConfigView extends StatelessWidget {
           title: appLocalizations.script,
           widget: const ScriptsView(),
           blur: false,
-          wrap: false,
         ),
       ),
     ];

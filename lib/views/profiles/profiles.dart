@@ -486,13 +486,19 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
     return AdaptiveSheetScaffold(
       type: widget.type,
       actions: [
-        IconButton(
+        FilledButton.tonal(
+          style: FilledButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.padded,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            visualDensity: VisualDensity.compact,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
             globalState.appController.setProfiles(profiles);
           },
-          icon: Icon(Icons.save),
+          child: Text(appLocalizations.save),
         ),
+        SizedBox(width: 2),
       ],
       body: Padding(
         padding: EdgeInsets.only(bottom: 32, top: 16),

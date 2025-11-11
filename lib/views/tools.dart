@@ -168,6 +168,7 @@ class _ThemeItem extends StatelessWidget {
       title: Text(appLocalizations.theme),
       subtitle: Text(appLocalizations.themeDesc),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.theme,
         widget: const ThemeView(),
       ),
@@ -185,6 +186,7 @@ class _BackupItem extends StatelessWidget {
       title: Text(appLocalizations.backupAndRecovery),
       subtitle: Text(appLocalizations.backupAndRecoveryDesc),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.backupAndRecovery,
         widget: const BackupAndRecovery(),
       ),
@@ -202,6 +204,7 @@ class _HotkeyItem extends StatelessWidget {
       title: Text(appLocalizations.hotkeyManagement),
       subtitle: Text(appLocalizations.hotkeyManagementDesc),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.hotkeyManagement,
         widget: const HotKeyView(),
       ),
@@ -238,6 +241,7 @@ class _AccessItem extends StatelessWidget {
       title: Text(appLocalizations.accessControl),
       subtitle: Text(appLocalizations.accessControlDesc),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.appAccessControl,
         widget: const AccessView(),
       ),
@@ -255,6 +259,7 @@ class _ConfigItem extends StatelessWidget {
       title: Text(appLocalizations.basicConfig),
       subtitle: Text('全局修改基础选项'),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.basicConfig,
         widget: const ConfigView(),
       ),
@@ -271,7 +276,11 @@ class _AdvancedConfigItem extends StatelessWidget {
       leading: const Icon(Icons.build),
       title: Text('进阶配置'),
       subtitle: Text('提供多样化配置'),
-      delegate: OpenDelegate(title: '进阶配置', widget: const AdvancedConfigView()),
+      delegate: OpenDelegate(
+        title: '进阶配置',
+        widget: const AdvancedConfigView(),
+        wrap: true,
+      ),
     );
   }
 }
@@ -286,6 +295,7 @@ class _SettingItem extends StatelessWidget {
       title: Text(appLocalizations.application),
       subtitle: Text(appLocalizations.applicationDesc),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.application,
         widget: const ApplicationSettingView(),
       ),
@@ -321,6 +331,7 @@ class _InfoItem extends StatelessWidget {
       leading: const Icon(Icons.info),
       title: Text(appLocalizations.about),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.about,
         widget: const AboutView(),
       ),
@@ -337,6 +348,7 @@ class _DeveloperItem extends StatelessWidget {
       leading: const Icon(Icons.developer_board),
       title: Text(appLocalizations.developerMode),
       delegate: OpenDelegate(
+        wrap: true,
         title: appLocalizations.developerMode,
         widget: const DeveloperView(),
       ),

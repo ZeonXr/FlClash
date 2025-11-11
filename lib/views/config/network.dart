@@ -329,6 +329,7 @@ class RouteAddressItem extends ConsumerWidget {
         blur: false,
         maxWidth: 360,
         title: appLocalizations.routeAddress,
+        actions: [],
         widget: Consumer(
           builder: (_, ref, _) {
             final routeAddress = ref.watch(

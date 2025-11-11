@@ -4,11 +4,11 @@ import 'package:fl_clash/models/common.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/dialog.dart';
 import 'package:fl_clash/widgets/null_status.dart';
+import 'package:fl_clash/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
 import 'card.dart';
 import 'effect.dart';
-import 'float_layout.dart';
 import 'list.dart';
 
 class OptionsDialog<T> extends StatelessWidget {
@@ -257,16 +257,23 @@ class ListInputPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatLayout(
-      floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {
+    return CommonScaffold(
+      title: title,
+      actions: [
+        FilledButton.tonal(
+          style: FilledButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.padded,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            visualDensity: VisualDensity.compact,
+          ),
+          onPressed: () {
             _handleAddOrEdit();
           },
-          child: const Icon(Icons.add),
+          child: Text(appLocalizations.add),
         ),
-      ),
-      child: items.isEmpty
+        SizedBox(width: 8),
+      ],
+      body: items.isEmpty
           ? NullStatus(label: appLocalizations.noData)
           : ReorderableListView.builder(
               padding: const EdgeInsets.only(bottom: 16 + 64),
@@ -397,16 +404,23 @@ class MapInputPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatLayout(
-      floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {
+    return CommonScaffold(
+      title: title,
+      actions: [
+        FilledButton.tonal(
+          style: FilledButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.padded,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            visualDensity: VisualDensity.compact,
+          ),
+          onPressed: () {
             _handleAddOrEdit();
           },
-          child: const Icon(Icons.add),
+          child: Text(appLocalizations.add),
         ),
-      ),
-      child: items.isEmpty
+        SizedBox(width: 8),
+      ],
+      body: items.isEmpty
           ? NullStatus(label: appLocalizations.noData)
           : ReorderableListView.builder(
               padding: const EdgeInsets.only(bottom: 16 + 64),

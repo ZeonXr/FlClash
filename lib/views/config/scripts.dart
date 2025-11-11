@@ -191,12 +191,20 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _handleToEditor();
-        },
-        child: Icon(Icons.add),
-      ),
+      actions: [
+        FilledButton.tonal(
+          style: FilledButton.styleFrom(
+            tapTargetSize: MaterialTapTargetSize.padded,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            visualDensity: VisualDensity.compact,
+          ),
+          onPressed: () {
+            _handleToEditor();
+          },
+          child: Text(appLocalizations.add),
+        ),
+        SizedBox(width: 8),
+      ],
       body: _buildContent(),
       title: appLocalizations.script,
     );

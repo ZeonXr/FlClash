@@ -96,6 +96,7 @@ class AdaptiveSheetScaffold extends StatefulWidget {
   final SheetType type;
   final Widget body;
   final String title;
+  final bool? centerTitle;
   final List<Widget> actions;
 
   const AdaptiveSheetScaffold({
@@ -103,6 +104,7 @@ class AdaptiveSheetScaffold extends StatefulWidget {
     required this.type,
     required this.body,
     required this.title,
+    this.centerTitle,
     this.actions = const [],
   });
 
@@ -123,7 +125,7 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
           : widget.actions.isEmpty && sideSheet
           ? false
           : true,
-      centerTitle: bottomSheet,
+      centerTitle: widget.centerTitle ?? bottomSheet,
       backgroundColor: backgroundColor,
       title: Text(widget.title),
       actions: genActions([

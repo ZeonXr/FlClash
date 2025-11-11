@@ -50,7 +50,7 @@ class OpenDelegate extends Delegate {
     this.maxWidth,
     this.actions = const [],
     this.blur = true,
-    this.wrap = true,
+    this.wrap = false,
     this.forceFull = true,
   });
 }
