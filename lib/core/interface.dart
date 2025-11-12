@@ -89,7 +89,10 @@ abstract class CoreHandlerInterface with CoreInterface {
     try {
       await completer.future.timeout(const Duration(seconds: 10));
     } catch (e) {
-      commonPrint.log('Invoke pre timeout $e', logLevel: LogLevel.error);
+      commonPrint.log(
+        'Invoke pre ${method.name} timeout $e',
+        logLevel: LogLevel.error,
+      );
       return null;
     }
     if (kDebugMode) {

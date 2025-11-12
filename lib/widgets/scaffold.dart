@@ -380,3 +380,21 @@ class CommonScaffoldBackActionProvider extends InheritedWidget {
     return false;
   }
 }
+
+class BaseScaffold extends StatelessWidget {
+  final String title;
+  final List<Widget> actions;
+  final Widget body;
+
+  const BaseScaffold({
+    super.key,
+    required this.title,
+    this.actions = const [],
+    required this.body,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CommonScaffold(body: body, title: title, actions: actions);
+  }
+}

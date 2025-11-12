@@ -4,6 +4,7 @@ import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/providers/config.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/list.dart';
+import 'package:fl_clash/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -170,9 +171,12 @@ class AboutView extends StatelessWidget {
       ..._buildContributorsSection(),
       ..._buildMoreSection(context),
     ];
-    return Padding(
-      padding: kMaterialListPadding.copyWith(top: 16, bottom: 16),
-      child: generateListView(items),
+    return BaseScaffold(
+      title: appLocalizations.about,
+      body: Padding(
+        padding: kMaterialListPadding.copyWith(top: 16, bottom: 16),
+        child: generateListView(items),
+      ),
     );
   }
 }

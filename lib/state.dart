@@ -86,7 +86,7 @@ class GlobalState {
     final profileIds = config.profiles.map((item) => item.id);
     final providersRootPath = await appPath.getProvidersRootPath();
     final profilesRootPath = await appPath.profilesPath;
-    Isolate.run(() async {
+    final entities = await Isolate.run<List<FileSystemEntity>>(() async {
       final profilesDir = Directory(profilesRootPath);
       final providersDir = Directory(providersRootPath);
       final List<FileSystemEntity> entities = [];
@@ -100,17 +100,18 @@ class GlobalState {
       if (await providersDir.exists()) {
         entities.addAll(providersDir.listSync());
       }
-      final deleteFutures = entities.map((entity) async {
-        if (!profileIds.contains(basenameWithoutExtension(entity.path))) {
-          final res = await coreController.deleteFile(entity.path);
-          if (res.isNotEmpty) {
-            throw res;
-          }
-        }
-        return true;
-      });
-      await Future.wait(deleteFutures);
+      return entities;
     });
+    final deleteFutures = entities.map((entity) async {
+      if (!profileIds.contains(basenameWithoutExtension(entity.path))) {
+        final res = await coreController.deleteFile(entity.path);
+        if (res.isNotEmpty) {
+          throw res;
+        }
+      }
+      return true;
+    });
+    await Future.wait(deleteFutures);
   }
 
   Future<void> _initDynamicColor() async {

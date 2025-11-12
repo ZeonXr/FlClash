@@ -37,40 +37,24 @@ class CheckboxDelegate<T> extends Delegate {
 
 class OpenDelegate extends Delegate {
   final Widget widget;
-  final String title;
   final double? maxWidth;
-  final List<Widget> actions;
   final bool blur;
-  final bool wrap;
   final bool forceFull;
 
   const OpenDelegate({
-    required this.title,
     required this.widget,
     this.maxWidth,
-    this.actions = const [],
     this.blur = true,
-    this.wrap = false,
     this.forceFull = true,
   });
 }
 
 class NextDelegate extends Delegate {
   final Widget widget;
-  final String title;
   final double? maxWidth;
-  final List<Widget> actions;
   final bool blur;
-  final bool wrap;
 
-  const NextDelegate({
-    required this.title,
-    required this.widget,
-    this.maxWidth,
-    this.actions = const [],
-    this.blur = true,
-    this.wrap = true,
-  });
+  const NextDelegate({required this.widget, this.maxWidth, this.blur = true});
 }
 
 class OptionsDelegate<T> extends Delegate {
@@ -291,14 +275,7 @@ class ListItem<T> extends StatelessWidget {
                   forceFull: openDelegate.forceFull,
                 ),
                 builder: (_, type) {
-                  return openDelegate.wrap
-                      ? AdaptiveSheetScaffold(
-                          actions: openDelegate.actions,
-                          type: type,
-                          body: child,
-                          title: openDelegate.title,
-                        )
-                      : child;
+                  return child;
                 },
               );
               return;
@@ -309,14 +286,7 @@ class ListItem<T> extends StatelessWidget {
           return _buildListTile(onTap: openAction);
         },
         openBuilder: (_, action) {
-          return openDelegate.wrap
-              ? CommonScaffold(
-                  key: Key(openDelegate.title),
-                  title: openDelegate.title,
-                  body: child,
-                  actions: openDelegate.actions,
-                )
-              : child;
+          return child;
         },
       );
     }
@@ -333,14 +303,7 @@ class ListItem<T> extends StatelessWidget {
               maxWidth: nextDelegate.maxWidth,
             ),
             builder: (_, type) {
-              return nextDelegate.wrap
-                  ? AdaptiveSheetScaffold(
-                      actions: nextDelegate.actions,
-                      type: type,
-                      body: child,
-                      title: nextDelegate.title,
-                    )
-                  : child;
+              return child;
             },
           );
         },

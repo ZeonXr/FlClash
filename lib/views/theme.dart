@@ -44,14 +44,17 @@ class ThemeView extends StatelessWidget {
       _TextScaleFactorItem(),
       const SizedBox(height: 64),
     ];
-    return ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (_, index) {
-        return items[index];
-      },
-      separatorBuilder: (_, _) {
-        return SizedBox(height: 24);
-      },
+    return BaseScaffold(
+      title: appLocalizations.theme,
+      body: ListView.separated(
+        itemCount: items.length,
+        itemBuilder: (_, index) {
+          return items[index];
+        },
+        separatorBuilder: (_, _) {
+          return SizedBox(height: 24);
+        },
+      ),
     );
   }
 }

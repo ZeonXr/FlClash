@@ -71,31 +71,34 @@ class DeveloperView extends ConsumerWidget {
     final enable = ref.watch(
       appSettingProvider.select((state) => state.developerMode),
     );
-    return SingleChildScrollView(
-      padding: baseInfoEdgeInsets,
-      child: Column(
-        children: [
-          CommonCard(
-            type: CommonCardType.filled,
-            radius: 18,
-            child: ListItem.switchItem(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              title: Text(appLocalizations.developerMode),
-              delegate: SwitchDelegate(
-                value: enable,
-                onChanged: (value) {
-                  ref
-                      .read(appSettingProvider.notifier)
-                      .updateState(
-                        (state) => state.copyWith(developerMode: value),
-                      );
-                },
+    return BaseScaffold(
+      title: appLocalizations.developerMode,
+      body: SingleChildScrollView(
+        padding: baseInfoEdgeInsets,
+        child: Column(
+          children: [
+            CommonCard(
+              type: CommonCardType.filled,
+              radius: 18,
+              child: ListItem.switchItem(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                title: Text(appLocalizations.developerMode),
+                delegate: SwitchDelegate(
+                  value: enable,
+                  onChanged: (value) {
+                    ref
+                        .read(appSettingProvider.notifier)
+                        .updateState(
+                          (state) => state.copyWith(developerMode: value),
+                        );
+                  },
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 16),
-          _getDeveloperList(context, ref),
-        ],
+            SizedBox(height: 16),
+            _getDeveloperList(context, ref),
+          ],
+        ),
       ),
     );
   }
