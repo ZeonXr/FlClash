@@ -365,6 +365,11 @@ _Config _$ConfigFromJson(Map<String, dynamic> json) => _Config(
           ?.map((e) => Script.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
+  rules:
+      (json['rules'] as List<dynamic>?)
+          ?.map((e) => Rule.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$ConfigToJson(_Config instance) => <String, dynamic>{
@@ -381,4 +386,5 @@ Map<String, dynamic> _$ConfigToJson(_Config instance) => <String, dynamic>{
   'windowProps': instance.windowProps,
   'patchClashConfig': instance.patchClashConfig,
   'scripts': instance.scripts,
+  'rules': instance.rules,
 };

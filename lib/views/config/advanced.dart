@@ -75,7 +75,7 @@ class AdvancedConfigView extends StatelessWidget {
       ListItem.open(
         title: Text(appLocalizations.script),
         subtitle: Text('管理覆写脚本'),
-        leading: const Icon(Icons.functions_sharp, fontWeight: FontWeight.w900),
+        leading: const Icon(Icons.rocket, fontWeight: FontWeight.w900),
         delegate: OpenDelegate(widget: const ScriptsView(), blur: false),
       ),
     ];

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'card.dart';
 import 'effect.dart';
 import 'list.dart';
+import 'theme.dart';
 
 class OptionsDialog<T> extends StatelessWidget {
   final String title;
@@ -260,16 +261,13 @@ class ListInputPage extends StatelessWidget {
     return CommonScaffold(
       title: title,
       actions: [
-        FilledButton.tonal(
-          style: FilledButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.padded,
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            visualDensity: VisualDensity.compact,
+        CommonFilledButtonTheme(
+          child: FilledButton.tonal(
+            onPressed: () {
+              _handleAddOrEdit();
+            },
+            child: Text(appLocalizations.add),
           ),
-          onPressed: () {
-            _handleAddOrEdit();
-          },
-          child: Text(appLocalizations.add),
         ),
         SizedBox(width: 8),
       ],
@@ -407,16 +405,13 @@ class MapInputPage extends StatelessWidget {
     return CommonScaffold(
       title: title,
       actions: [
-        FilledButton.tonal(
-          style: FilledButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.padded,
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            visualDensity: VisualDensity.compact,
+        CommonFilledButtonTheme(
+          child: FilledButton.tonal(
+            onPressed: () {
+              _handleAddOrEdit();
+            },
+            child: Text(appLocalizations.add),
           ),
-          onPressed: () {
-            _handleAddOrEdit();
-          },
-          child: Text(appLocalizations.add),
         ),
         SizedBox(width: 8),
       ],

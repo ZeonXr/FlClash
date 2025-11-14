@@ -10,6 +10,7 @@ import 'package:fl_clash/widgets/list.dart';
 import 'package:fl_clash/widgets/null_status.dart';
 import 'package:fl_clash/widgets/popup.dart';
 import 'package:fl_clash/widgets/scaffold.dart';
+import 'package:fl_clash/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -192,16 +193,13 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
   Widget build(BuildContext context) {
     return CommonScaffold(
       actions: [
-        FilledButton.tonal(
-          style: FilledButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.padded,
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            visualDensity: VisualDensity.compact,
+        CommonFilledButtonTheme(
+          child: FilledButton.tonal(
+            onPressed: () {
+              _handleToEditor();
+            },
+            child: Text(appLocalizations.add),
           ),
-          onPressed: () {
-            _handleToEditor();
-          },
-          child: Text(appLocalizations.add),
         ),
         SizedBox(width: 8),
       ],

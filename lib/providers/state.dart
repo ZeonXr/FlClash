@@ -27,6 +27,7 @@ Config configState(Ref ref) {
   final hotKeyActions = ref.watch(hotKeyActionsProvider);
   final dav = ref.watch(appDAVSettingProvider);
   final windowProps = ref.watch(windowSettingProvider);
+  final rules = ref.watch(rulesProvider);
   return Config(
     dav: dav,
     windowProps: windowProps,
@@ -41,6 +42,7 @@ Config configState(Ref ref) {
     themeProps: themeProps,
     patchClashConfig: patchClashConfig,
     scripts: scripts,
+    rules: rules,
   );
 }
 
@@ -621,6 +623,13 @@ VM3<bool, int, ProxiesSortType> needUpdateGroups(Ref ref) {
     proxiesStyleSettingProvider.select((state) => state.sortType),
   );
   return VM3(a: isProxies, b: sortNum, c: sortType);
+}
+
+@riverpod
+VM2<Set<String>, List<Rule>> addedRulesState(Ref ref) {
+  final selectedRules = ref.watch(selectedRulesProvider);
+  final rules = ref.watch(rulesProvider);
+  return VM2(a: selectedRules, b: rules);
 }
 
 @riverpod

@@ -48,7 +48,7 @@ final class ConfigStateProvider
   }
 }
 
-String _$configStateHash() => r'ecf9d6f30f2cf247fd0fa8e338bc0fa3c1c619e7';
+String _$configStateHash() => r'0eb72e2cf30d1d0de694d28a3ec3c7658e825e92';
 
 @ProviderFor(currentGroupsState)
 const currentGroupsStateProvider = CurrentGroupsStateProvider._();
@@ -2314,6 +2314,53 @@ final class NeedUpdateGroupsProvider
 }
 
 String _$needUpdateGroupsHash() => r'1d1fbf135b4b5d2a2ee984e421ccffe7c4bb0a47';
+
+@ProviderFor(addedRulesState)
+const addedRulesStateProvider = AddedRulesStateProvider._();
+
+final class AddedRulesStateProvider
+    extends
+        $FunctionalProvider<
+          VM2<Set<String>, List<Rule>>,
+          VM2<Set<String>, List<Rule>>,
+          VM2<Set<String>, List<Rule>>
+        >
+    with $Provider<VM2<Set<String>, List<Rule>>> {
+  const AddedRulesStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'addedRulesStateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$addedRulesStateHash();
+
+  @$internal
+  @override
+  $ProviderElement<VM2<Set<String>, List<Rule>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  VM2<Set<String>, List<Rule>> create(Ref ref) {
+    return addedRulesState(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(VM2<Set<String>, List<Rule>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<VM2<Set<String>, List<Rule>>>(value),
+    );
+  }
+}
+
+String _$addedRulesStateHash() => r'5093ce9dd8afbb6ae474bad577b02a75fb13aab3';
 
 @ProviderFor(androidState)
 const androidStateProvider = AndroidStateProvider._();

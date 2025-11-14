@@ -643,6 +643,58 @@ abstract class _$Scripts extends $Notifier<List<Script>> {
   }
 }
 
+@ProviderFor(Rules)
+const rulesProvider = RulesProvider._();
+
+final class RulesProvider extends $NotifierProvider<Rules, List<Rule>> {
+  const RulesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'rulesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$rulesHash();
+
+  @$internal
+  @override
+  Rules create() => Rules();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Rule> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Rule>>(value),
+    );
+  }
+}
+
+String _$rulesHash() => r'f7bff65a28782376f3c225404654341c66648c79';
+
+abstract class _$Rules extends $Notifier<List<Rule>> {
+  List<Rule> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<List<Rule>, List<Rule>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<Rule>, List<Rule>>,
+              List<Rule>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
 @ProviderFor(PatchClashConfig)
 const patchClashConfigProvider = PatchClashConfigProvider._();
 

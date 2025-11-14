@@ -420,3 +420,14 @@ class QueryMap extends _$QueryMap with AutoDisposeNotifierMixin {
     this.value = Map.from(globalState.appState.queryMap)..[tag] = value;
   }
 }
+
+@riverpod
+class SelectedRules extends _$SelectedRules with AutoDisposeNotifierMixin {
+  @override
+  Set<String> build() => globalState.appState.selectedRules;
+
+  @override
+  onUpdate(value) {
+    globalState.appState = globalState.appState.copyWith(selectedRules: value);
+  }
+}

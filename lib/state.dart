@@ -251,6 +251,7 @@ class GlobalState {
     required Widget child,
     BuildContext? context,
     bool? dismissible,
+    bool filter = true,
   }) async {
     return await showModal<T>(
       useRootNavigator: false,
@@ -260,7 +261,7 @@ class GlobalState {
         barrierDismissible: dismissible ?? true,
       ),
       builder: (_) => child,
-      filter: commonFilter,
+      filter: filter ? commonFilter : null,
     );
   }
 

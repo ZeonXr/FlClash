@@ -368,6 +368,18 @@ enum RuleAction {
   final String value;
 
   const RuleAction(this.value);
+
+  static List<RuleAction> get addedRuleActions {
+    return RuleAction.values
+        .where(
+          (item) => ![
+            RuleAction.MATCH,
+            RuleAction.RULE_SET,
+            RuleAction.SUB_RULE,
+          ].contains(item),
+        )
+        .toList();
+  }
 }
 
 extension RuleActionExt on RuleAction {
@@ -392,7 +404,7 @@ enum OverwriteType {
   // custom,
 }
 
-enum RuleTarget { DIRECT, REJECT }
+enum RuleTarget { DIRECT, REJECT, MATCH }
 
 enum RecoveryStrategy { compatible, override }
 
