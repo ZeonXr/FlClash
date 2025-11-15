@@ -1,4 +1,4 @@
-import 'package:fl_clash/manager/message_manager.dart';
+import 'package:fl_clash/manager/manager.dart';
 import 'package:fl_clash/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +8,7 @@ extension BuildContextExtension on BuildContext {
   }
 
   void showNotifier(String text) {
-    return findAncestorStateOfType<MessageManagerState>()?.message(text);
+    return findAncestorStateOfType<StatusManagerState>()?.message(text);
   }
 
   void showSnackBar(String message, {SnackBarAction? action}) {

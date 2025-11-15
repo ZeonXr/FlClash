@@ -38,30 +38,35 @@ class HotKeyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: HotAction.values.length,
-      itemBuilder: (_, index) {
-        final hotAction = HotAction.values[index];
-        return Consumer(
-          builder: (_, ref, _) {
-            final hotKeyAction = ref.watch(getHotKeyActionProvider(hotAction));
-            return ListItem(
-              title: Text(IntlExt.actionMessage(hotAction.name)),
-              subtitle: Text(
-                getSubtitle(hotKeyAction),
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.primary,
+    return BaseScaffold(
+      title: appLocalizations.hotkeyManagement,
+      body: ListView.builder(
+        itemCount: HotAction.values.length,
+        itemBuilder: (_, index) {
+          final hotAction = HotAction.values[index];
+          return Consumer(
+            builder: (_, ref, _) {
+              final hotKeyAction = ref.watch(
+                getHotKeyActionProvider(hotAction),
+              );
+              return ListItem(
+                title: Text(IntlExt.actionMessage(hotAction.name)),
+                subtitle: Text(
+                  getSubtitle(hotKeyAction),
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: context.colorScheme.primary,
+                  ),
                 ),
-              ),
-              onTap: () {
-                globalState.showCommonDialog(
-                  child: HotKeyRecorder(hotKeyAction: hotKeyAction),
-                );
-              },
-            );
-          },
-        );
-      },
+                onTap: () {
+                  globalState.showCommonDialog(
+                    child: HotKeyRecorder(hotKeyAction: hotKeyAction),
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

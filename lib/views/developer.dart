@@ -2,6 +2,7 @@ import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/core/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/common.dart';
+import 'package:fl_clash/providers/app.dart';
 import 'package:fl_clash/providers/config.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
@@ -36,32 +37,42 @@ class DeveloperView extends ConsumerWidget {
             }
           },
         ),
-        ListItem(
-          title: Text(appLocalizations.crashTest),
-          minVerticalPadding: 14,
-          onTap: () {
-            // coreController.crash();
-            if (kDebugMode) {
+        if (kDebugMode)
+          ListItem(
+            title: Text(appLocalizations.crashTest),
+            minVerticalPadding: 14,
+            onTap: () async {
+              final res = await globalState.showMessage(
+                message: TextSpan(text: '确定要强制崩溃核心？'),
+              );
+              if (res != true) {
+                return;
+              }
               coreController.crash();
-            }
-          },
-        ),
+            },
+          ),
         ListItem(
           title: Text(appLocalizations.clearData),
           minVerticalPadding: 14,
           onTap: () async {
+            final res = globalState.showMessage(
+              message: TextSpan(text: '确定要清除所有数据？'),
+            );
+            if (res != true) {
+              return;
+            }
             await globalState.appController.handleClear();
           },
         ),
-        // ListItem(
-        //   title: Text('Loading'),
-        //   minVerticalPadding: 14,
-        //   onTap: () {
-        //     ref.read(loadingProvider.notifier).value = !ref.read(
-        //       loadingProvider,
-        //     );
-        //   },
-        // ),
+        ListItem(
+          title: Text('Loading'),
+          minVerticalPadding: 14,
+          onTap: () {
+            ref.read(loadingProvider.notifier).value = !ref.read(
+              loadingProvider,
+            );
+          },
+        ),
       ],
     );
   }

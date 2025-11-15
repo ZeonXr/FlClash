@@ -399,7 +399,6 @@ enum OverrideRuleType { override, added }
 enum OverwriteType {
   // none,
   standard,
-  added,
   script,
   // custom,
 }

@@ -2,11 +2,11 @@ import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
-import 'package:fl_clash/widgets/open_container.dart';
 import 'package:flutter/material.dart';
 
 import 'card.dart';
 import 'input.dart';
+import 'open_container.dart';
 import 'scaffold.dart';
 import 'sheet.dart';
 

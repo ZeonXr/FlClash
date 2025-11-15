@@ -1,10 +1,8 @@
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
-import 'package:fl_clash/providers/app.dart';
 import 'package:fl_clash/widgets/pop_scope.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'chip.dart';
 
@@ -46,6 +44,7 @@ class CommonScaffold extends StatefulWidget {
 class CommonScaffoldState extends State<CommonScaffold> {
   late final ValueNotifier<AppBarState> _appBarState;
   final ValueNotifier<Widget?> _floatingActionButton = ValueNotifier(null);
+  final ValueNotifier<bool> _loadingVisible = ValueNotifier(false);
   final ValueNotifier<List<String>> _keywordsNotifier = ValueNotifier([]);
   final _textController = TextEditingController();
 
@@ -143,6 +142,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
     _appBarState.dispose();
     _textController.dispose();
     _floatingActionButton.dispose();
+    _loadingVisible.dispose();
     super.dispose();
   }
 
@@ -246,18 +246,6 @@ class CommonScaffoldState extends State<CommonScaffold> {
     return appBar;
   }
 
-  Widget _buildLoading() {
-    return Consumer(
-      builder: (_, ref, _) {
-        final loading = ref.watch(loadingProvider);
-        final isMobileView = ref.watch(isMobileViewProvider);
-        return loading && isMobileView
-            ? const LinearProgressIndicator()
-            : Container();
-      },
-    );
-  }
-
   PreferredSizeWidget _buildAppBar(VoidCallback? backAction) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -286,7 +274,6 @@ class CommonScaffoldState extends State<CommonScaffold> {
                   );
                 },
               ),
-          _buildLoading(),
         ],
       ),
     );

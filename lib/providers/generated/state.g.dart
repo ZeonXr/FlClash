@@ -2491,3 +2491,44 @@ abstract class _$Query extends $Notifier<String> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(overlayTopOffset)
+const overlayTopOffsetProvider = OverlayTopOffsetProvider._();
+
+final class OverlayTopOffsetProvider
+    extends $FunctionalProvider<double, double, double>
+    with $Provider<double> {
+  const OverlayTopOffsetProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'overlayTopOffsetProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$overlayTopOffsetHash();
+
+  @$internal
+  @override
+  $ProviderElement<double> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  double create(Ref ref) {
+    return overlayTopOffset(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(double value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<double>(value),
+    );
+  }
+}
+
+String _$overlayTopOffsetHash() => r'b2462f67acbd88b7a881dfe4c6353e68ba49961d';
