@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/providers/providers.dart';
+import 'package:fl_clash/widgets/fade_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -90,85 +91,78 @@ class StatusManagerState extends State<StatusManager> {
               child: child,
             );
           },
-          child: AnimatedSize(
-            alignment: Alignment.topCenter,
-            duration: midDuration,
-            curve: Curves.easeOut,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                LoadingIndicator(),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ValueListenableBuilder(
-                      valueListenable: _messagesNotifier,
-                      builder: (_, messages, _) {
-                        return messages.isEmpty
-                            ? SizedBox()
-                            : LayoutBuilder(
-                                key: Key(messages.last.id),
-                                builder: (_, constraints) {
-                                  return Dismissible(
-                                    key: ValueKey(messages.last.id),
-                                    onDismissed: (_) {
-                                      _cancelMessage(messages.last.id);
-                                    },
-                                    child: Card(
-                                      shape: const RoundedSuperellipseBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(14),
-                                        ),
-                                      ),
-                                      elevation: 10,
-                                      color: context
-                                          .colorScheme
-                                          .surfaceContainerHigh,
-                                      child: Container(
-                                        width: min(constraints.maxWidth, 500),
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                          vertical: 8,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Flexible(
-                                              child: Text(
-                                                messages.last.text,
-                                                maxLines: 3,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            SizedBox(width: 16),
-                                            IconButton(
-                                              padding: EdgeInsets.all(2),
-                                              visualDensity:
-                                                  VisualDensity.compact,
-                                              onPressed: () {
-                                                _cancelMessage(
-                                                  messages.last.id,
-                                                );
-                                              },
-                                              icon: Icon(Icons.close),
-                                            ),
-                                          ],
-                                        ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              LoadingIndicator(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: ValueListenableBuilder(
+                  valueListenable: _messagesNotifier,
+                  builder: (_, messages, _) {
+                    return FadeThroughBox(
+                      alignment: Alignment.centerRight,
+                      child: messages.isEmpty
+                          ? SizedBox()
+                          : LayoutBuilder(
+                              key: Key(messages.last.id),
+                              builder: (_, constraints) {
+                                return Dismissible(
+                                  key: ValueKey(messages.last.id),
+                                  onDismissed: (_) {
+                                    _cancelMessage(messages.last.id);
+                                  },
+                                  child: Card(
+                                    shape: const RoundedSuperellipseBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(14),
                                       ),
                                     ),
-                                  );
-                                },
-                              );
-                      },
-                    ),
-                  ),
+                                    elevation: 10,
+                                    color: context
+                                        .colorScheme
+                                        .surfaceContainerHigh,
+                                    child: Container(
+                                      width: min(constraints.maxWidth, 500),
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 8,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              messages.last.text,
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          SizedBox(width: 16),
+                                          IconButton(
+                                            padding: EdgeInsets.all(2),
+                                            visualDensity:
+                                                VisualDensity.compact,
+                                            onPressed: () {
+                                              _cancelMessage(messages.last.id);
+                                            },
+                                            icon: Icon(Icons.close),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
@@ -199,7 +193,7 @@ class LoadingIndicator extends ConsumerWidget {
               height: 36,
               margin: EdgeInsets.only(top: 8),
               decoration: BoxDecoration(
-                color: context.colorScheme.surfaceContainer,
+                color: context.colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(18),
                   bottomRight: Radius.circular(18),
@@ -208,7 +202,7 @@ class LoadingIndicator extends ConsumerWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(width: 20, height: 36),
+                  SizedBox(width: 10, height: 36),
                   SizedBox(
                     width: 36,
                     height: 36,
