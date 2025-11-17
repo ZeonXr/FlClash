@@ -635,6 +635,547 @@ $OverrideDataCopyWith<$Res> get overrideData {
 
 
 /// @nodoc
+mixin _$Overwrite {
+
+ OverwriteType get type;
+/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OverwriteCopyWith<Overwrite> get copyWith => _$OverwriteCopyWithImpl<Overwrite>(this as Overwrite, _$identity);
+
+  /// Serializes this Overwrite to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Overwrite&&(identical(other.type, type) || other.type == type));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type);
+
+@override
+String toString() {
+  return 'Overwrite(type: $type)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OverwriteCopyWith<$Res>  {
+  factory $OverwriteCopyWith(Overwrite value, $Res Function(Overwrite) _then) = _$OverwriteCopyWithImpl;
+@useResult
+$Res call({
+ OverwriteType type
+});
+
+
+
+
+}
+/// @nodoc
+class _$OverwriteCopyWithImpl<$Res>
+    implements $OverwriteCopyWith<$Res> {
+  _$OverwriteCopyWithImpl(this._self, this._then);
+
+  final Overwrite _self;
+  final $Res Function(Overwrite) _then;
+
+/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,}) {
+  return _then(_self.copyWith(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as OverwriteType,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Overwrite].
+extension OverwritePatterns on Overwrite {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Overwrite value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Overwrite() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Overwrite value)  $default,){
+final _that = this;
+switch (_that) {
+case _Overwrite():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Overwrite value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Overwrite() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OverwriteType type)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Overwrite() when $default != null:
+return $default(_that.type);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OverwriteType type)  $default,) {final _that = this;
+switch (_that) {
+case _Overwrite():
+return $default(_that.type);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OverwriteType type)?  $default,) {final _that = this;
+switch (_that) {
+case _Overwrite() when $default != null:
+return $default(_that.type);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _Overwrite implements Overwrite {
+  const _Overwrite({this.type = OverwriteType.standard});
+  factory _Overwrite.fromJson(Map<String, dynamic> json) => _$OverwriteFromJson(json);
+
+@override@JsonKey() final  OverwriteType type;
+
+/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$OverwriteCopyWith<_Overwrite> get copyWith => __$OverwriteCopyWithImpl<_Overwrite>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$OverwriteToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Overwrite&&(identical(other.type, type) || other.type == type));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type);
+
+@override
+String toString() {
+  return 'Overwrite(type: $type)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$OverwriteCopyWith<$Res> implements $OverwriteCopyWith<$Res> {
+  factory _$OverwriteCopyWith(_Overwrite value, $Res Function(_Overwrite) _then) = __$OverwriteCopyWithImpl;
+@override @useResult
+$Res call({
+ OverwriteType type
+});
+
+
+
+
+}
+/// @nodoc
+class __$OverwriteCopyWithImpl<$Res>
+    implements _$OverwriteCopyWith<$Res> {
+  __$OverwriteCopyWithImpl(this._self, this._then);
+
+  final _Overwrite _self;
+  final $Res Function(_Overwrite) _then;
+
+/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,}) {
+  return _then(_Overwrite(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as OverwriteType,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$StandardOverwrite {
+
+ List<Rule> get addedRules; List<String> get disabledRuleIds;
+/// Create a copy of StandardOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$StandardOverwriteCopyWith<StandardOverwrite> get copyWith => _$StandardOverwriteCopyWithImpl<StandardOverwrite>(this as StandardOverwrite, _$identity);
+
+  /// Serializes this StandardOverwrite to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StandardOverwrite&&const DeepCollectionEquality().equals(other.addedRules, addedRules)&&const DeepCollectionEquality().equals(other.disabledRuleIds, disabledRuleIds));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(addedRules),const DeepCollectionEquality().hash(disabledRuleIds));
+
+@override
+String toString() {
+  return 'StandardOverwrite(addedRules: $addedRules, disabledRuleIds: $disabledRuleIds)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $StandardOverwriteCopyWith<$Res>  {
+  factory $StandardOverwriteCopyWith(StandardOverwrite value, $Res Function(StandardOverwrite) _then) = _$StandardOverwriteCopyWithImpl;
+@useResult
+$Res call({
+ List<Rule> addedRules, List<String> disabledRuleIds
+});
+
+
+
+
+}
+/// @nodoc
+class _$StandardOverwriteCopyWithImpl<$Res>
+    implements $StandardOverwriteCopyWith<$Res> {
+  _$StandardOverwriteCopyWithImpl(this._self, this._then);
+
+  final StandardOverwrite _self;
+  final $Res Function(StandardOverwrite) _then;
+
+/// Create a copy of StandardOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? addedRules = null,Object? disabledRuleIds = null,}) {
+  return _then(_self.copyWith(
+addedRules: null == addedRules ? _self.addedRules : addedRules // ignore: cast_nullable_to_non_nullable
+as List<Rule>,disabledRuleIds: null == disabledRuleIds ? _self.disabledRuleIds : disabledRuleIds // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [StandardOverwrite].
+extension StandardOverwritePatterns on StandardOverwrite {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _StandardOverwrite value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _StandardOverwrite() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _StandardOverwrite value)  $default,){
+final _that = this;
+switch (_that) {
+case _StandardOverwrite():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _StandardOverwrite value)?  $default,){
+final _that = this;
+switch (_that) {
+case _StandardOverwrite() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Rule> addedRules,  List<String> disabledRuleIds)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _StandardOverwrite() when $default != null:
+return $default(_that.addedRules,_that.disabledRuleIds);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Rule> addedRules,  List<String> disabledRuleIds)  $default,) {final _that = this;
+switch (_that) {
+case _StandardOverwrite():
+return $default(_that.addedRules,_that.disabledRuleIds);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Rule> addedRules,  List<String> disabledRuleIds)?  $default,) {final _that = this;
+switch (_that) {
+case _StandardOverwrite() when $default != null:
+return $default(_that.addedRules,_that.disabledRuleIds);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _StandardOverwrite implements StandardOverwrite {
+  const _StandardOverwrite({final  List<Rule> addedRules = const [], final  List<String> disabledRuleIds = const []}): _addedRules = addedRules,_disabledRuleIds = disabledRuleIds;
+  factory _StandardOverwrite.fromJson(Map<String, dynamic> json) => _$StandardOverwriteFromJson(json);
+
+ final  List<Rule> _addedRules;
+@override@JsonKey() List<Rule> get addedRules {
+  if (_addedRules is EqualUnmodifiableListView) return _addedRules;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_addedRules);
+}
+
+ final  List<String> _disabledRuleIds;
+@override@JsonKey() List<String> get disabledRuleIds {
+  if (_disabledRuleIds is EqualUnmodifiableListView) return _disabledRuleIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_disabledRuleIds);
+}
+
+
+/// Create a copy of StandardOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$StandardOverwriteCopyWith<_StandardOverwrite> get copyWith => __$StandardOverwriteCopyWithImpl<_StandardOverwrite>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$StandardOverwriteToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StandardOverwrite&&const DeepCollectionEquality().equals(other._addedRules, _addedRules)&&const DeepCollectionEquality().equals(other._disabledRuleIds, _disabledRuleIds));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_addedRules),const DeepCollectionEquality().hash(_disabledRuleIds));
+
+@override
+String toString() {
+  return 'StandardOverwrite(addedRules: $addedRules, disabledRuleIds: $disabledRuleIds)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$StandardOverwriteCopyWith<$Res> implements $StandardOverwriteCopyWith<$Res> {
+  factory _$StandardOverwriteCopyWith(_StandardOverwrite value, $Res Function(_StandardOverwrite) _then) = __$StandardOverwriteCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Rule> addedRules, List<String> disabledRuleIds
+});
+
+
+
+
+}
+/// @nodoc
+class __$StandardOverwriteCopyWithImpl<$Res>
+    implements _$StandardOverwriteCopyWith<$Res> {
+  __$StandardOverwriteCopyWithImpl(this._self, this._then);
+
+  final _StandardOverwrite _self;
+  final $Res Function(_StandardOverwrite) _then;
+
+/// Create a copy of StandardOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? addedRules = null,Object? disabledRuleIds = null,}) {
+  return _then(_StandardOverwrite(
+addedRules: null == addedRules ? _self._addedRules : addedRules // ignore: cast_nullable_to_non_nullable
+as List<Rule>,disabledRuleIds: null == disabledRuleIds ? _self._disabledRuleIds : disabledRuleIds // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$OverrideData {
 
  bool get enable; OverrideRule get rule;

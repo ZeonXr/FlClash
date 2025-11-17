@@ -192,26 +192,28 @@ class LoadingIndicator extends ConsumerWidget {
           ? Container(
               height: 36,
               margin: EdgeInsets.only(top: 8),
-              decoration: BoxDecoration(
-                color: context.colorScheme.surfaceContainerHighest,
+              child: Material(
+                elevation: 3,
+                color: context.colorScheme.surfaceContainer,
+                surfaceTintColor: context.colorScheme.surfaceTint,
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(18),
                   bottomRight: Radius.circular(18),
                 ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(width: 10, height: 36),
-                  SizedBox(
-                    width: 36,
-                    height: 36,
-                    child: Padding(
-                      padding: EdgeInsets.all(6),
-                      child: CircularProgressIndicator(),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(width: 10, height: 36),
+                    SizedBox(
+                      width: 36,
+                      height: 36,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: CircularProgressIndicator(),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           : SizedBox(),

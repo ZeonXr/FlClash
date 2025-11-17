@@ -76,6 +76,27 @@ abstract class Profile with _$Profile {
 }
 
 @freezed
+abstract class Overwrite with _$Overwrite {
+  const factory Overwrite({
+    @Default(OverwriteType.standard) OverwriteType type,
+  }) = _Overwrite;
+
+  factory Overwrite.fromJson(Map<String, Object?> json) =>
+      _$OverwriteFromJson(json);
+}
+
+@freezed
+abstract class StandardOverwrite with _$StandardOverwrite {
+  const factory StandardOverwrite({
+    @Default([]) List<Rule> addedRules,
+    @Default([]) List<String> disabledRuleIds,
+  }) = _StandardOverwrite;
+
+  factory StandardOverwrite.fromJson(Map<String, Object?> json) =>
+      _$StandardOverwriteFromJson(json);
+}
+
+@freezed
 abstract class OverrideData with _$OverrideData {
   const factory OverrideData({
     @Default(false) bool enable,
@@ -84,15 +105,6 @@ abstract class OverrideData with _$OverrideData {
 
   factory OverrideData.fromJson(Map<String, Object?> json) =>
       _$OverrideDataFromJson(json);
-}
-
-extension OverrideDataExt on OverrideData {
-  List<String> get runningRule {
-    if (!enable) {
-      return [];
-    }
-    return rule.rules.map((item) => item.value).toList();
-  }
 }
 
 @freezed
@@ -105,6 +117,15 @@ abstract class OverrideRule with _$OverrideRule {
 
   factory OverrideRule.fromJson(Map<String, Object?> json) =>
       _$OverrideRuleFromJson(json);
+}
+
+extension OverrideDataExt on OverrideData {
+  List<String> get runningRule {
+    if (!enable) {
+      return [];
+    }
+    return rule.rules.map((item) => item.value).toList();
+  }
 }
 
 extension OverrideRuleExt on OverrideRule {

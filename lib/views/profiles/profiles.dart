@@ -15,6 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'add.dart';
 import 'edit.dart';
+import 'overwrite.dart';
 
 class ProfilesView extends StatefulWidget {
   const ProfilesView({super.key});
@@ -299,8 +300,6 @@ class ProfileItem extends StatelessWidget {
   }
 
   void _handlePushGenProfilePage(BuildContext context, String id) {
-    // final overrideProfileView = OverrideProfileView(profileId: id);
-    // BaseNavigator.push(context, overrideProfileView);
     BaseNavigator.push(context, OverwriteView());
   }
 
@@ -361,6 +360,19 @@ class ProfileItem extends StatelessWidget {
                               label: appLocalizations.override,
                               onPressed: () {
                                 _handlePushGenProfilePage(context, profile.id);
+                              },
+                            ),
+                            PopupMenuItemData(
+                              icon: Icons.extension_outlined,
+                              label: appLocalizations.override + "1",
+                              onPressed: () {
+                                final overrideProfileView = OverrideProfileView(
+                                  profileId: profile.id,
+                                );
+                                BaseNavigator.push(
+                                  context,
+                                  overrideProfileView,
+                                );
                               },
                             ),
                             if (profile.type == ProfileType.url) ...[

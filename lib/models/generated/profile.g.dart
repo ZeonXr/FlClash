@@ -66,6 +66,40 @@ Map<String, dynamic> _$ProfileToJson(_Profile instance) => <String, dynamic>{
   'overrideData': instance.overrideData,
 };
 
+_Overwrite _$OverwriteFromJson(Map<String, dynamic> json) => _Overwrite(
+  type:
+      $enumDecodeNullable(_$OverwriteTypeEnumMap, json['type']) ??
+      OverwriteType.standard,
+);
+
+Map<String, dynamic> _$OverwriteToJson(_Overwrite instance) =>
+    <String, dynamic>{'type': _$OverwriteTypeEnumMap[instance.type]!};
+
+const _$OverwriteTypeEnumMap = {
+  OverwriteType.standard: 'standard',
+  OverwriteType.script: 'script',
+};
+
+_StandardOverwrite _$StandardOverwriteFromJson(Map<String, dynamic> json) =>
+    _StandardOverwrite(
+      addedRules:
+          (json['addedRules'] as List<dynamic>?)
+              ?.map((e) => Rule.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      disabledRuleIds:
+          (json['disabledRuleIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$StandardOverwriteToJson(_StandardOverwrite instance) =>
+    <String, dynamic>{
+      'addedRules': instance.addedRules,
+      'disabledRuleIds': instance.disabledRuleIds,
+    };
+
 _OverrideData _$OverrideDataFromJson(Map<String, dynamic> json) =>
     _OverrideData(
       enable: json['enable'] as bool? ?? false,

@@ -55,7 +55,7 @@ class DeveloperView extends ConsumerWidget {
           title: Text(appLocalizations.clearData),
           minVerticalPadding: 14,
           onTap: () async {
-            final res = globalState.showMessage(
+            final res = await globalState.showMessage(
               message: TextSpan(text: '确定要清除所有数据？'),
             );
             if (res != true) {
@@ -65,7 +65,7 @@ class DeveloperView extends ConsumerWidget {
           },
         ),
         ListItem(
-          title: Text('Loading'),
+          title: Text('加载测试'),
           minVerticalPadding: 14,
           onTap: () {
             ref.read(loadingProvider.notifier).value = !ref.read(
