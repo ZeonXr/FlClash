@@ -193,7 +193,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
   Widget build(BuildContext context) {
     return CommonScaffold(
       actions: [
-        CommonFilledButtonTheme(
+        CommonMinFilledButtonTheme(
           child: FilledButton.tonal(
             onPressed: () {
               _handleToEditor();

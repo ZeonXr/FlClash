@@ -670,3 +670,16 @@ double overlayTopOffset(Ref ref) {
   }
   return kToolbarHeight + top;
 }
+
+@riverpod
+class SelectedRules extends _$SelectedRules with AutoDisposeNotifierMixin {
+  @override
+  Set<String> build() => {};
+}
+
+@riverpod
+Overwrite? getProfileOverwrite(Ref ref, String profileId) {
+  return ref.watch(
+    profilesProvider.select((state) => state.getProfile(profileId)?.overwrite),
+  );
+}

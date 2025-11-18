@@ -261,7 +261,7 @@ class ListInputPage extends StatelessWidget {
     return CommonScaffold(
       title: title,
       actions: [
-        CommonFilledButtonTheme(
+        CommonMinFilledButtonTheme(
           child: FilledButton.tonal(
             onPressed: () {
               _handleAddOrEdit();
@@ -405,7 +405,7 @@ class MapInputPage extends StatelessWidget {
     return CommonScaffold(
       title: title,
       actions: [
-        CommonFilledButtonTheme(
+        CommonMinFilledButtonTheme(
           child: FilledButton.tonal(
             onPressed: () {
               _handleAddOrEdit();

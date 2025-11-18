@@ -272,17 +272,6 @@ class Rules extends _$Rules with AutoDisposeNotifierMixin {
   onUpdate(value) {
     globalState.config = globalState.config.copyWith(rules: value);
   }
-
-  void set(Rule rule) {
-    final list = List<Rule>.from(state);
-    final index = list.indexWhere((item) => item.id == rule.id);
-    if (index != -1) {
-      list[index] = rule;
-    } else {
-      list.add(rule);
-    }
-    value = list;
-  }
 }
 
 @riverpod

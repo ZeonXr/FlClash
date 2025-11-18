@@ -674,7 +674,7 @@ final class RulesProvider extends $NotifierProvider<Rules, List<Rule>> {
   }
 }
 
-String _$rulesHash() => r'f7bff65a28782376f3c225404654341c66648c79';
+String _$rulesHash() => r'ca7fdb6c8b9c5071002ac950494ec7c20937aa1b';
 
 abstract class _$Rules extends $Notifier<List<Rule>> {
   List<Rule> build();

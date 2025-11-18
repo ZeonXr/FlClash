@@ -1,9 +1,10 @@
+import 'package:fl_clash/common/common.dart';
 import 'package:flutter/material.dart';
 
-class CommonFilledButtonTheme extends StatelessWidget {
+class CommonMinFilledButtonTheme extends StatelessWidget {
   final Widget child;
 
-  const CommonFilledButtonTheme({super.key, required this.child});
+  const CommonMinFilledButtonTheme({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,26 @@ class CommonFilledButtonTheme extends StatelessWidget {
         style: FilledButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 8),
           visualDensity: VisualDensity.compact,
+        ),
+      ),
+      child: child,
+    );
+  }
+}
+
+class CommonMinIconButtonTheme extends StatelessWidget {
+  final Widget child;
+
+  const CommonMinIconButtonTheme({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButtonTheme(
+      data: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 4),
+          visualDensity: VisualDensity.compact,
+          iconSize: 20.ap,
         ),
       ),
       child: child,

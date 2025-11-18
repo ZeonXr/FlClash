@@ -39,7 +39,6 @@ abstract class AppState with _$AppState {
     ProfileOverrideModel? profileOverrideModel,
     @Default({}) Map<QueryTag, String> queryMap,
     @Default(CoreStatus.connecting) CoreStatus coreStatus,
-    @Default({}) Set<String> selectedRules,
   }) = _AppState;
 }
 

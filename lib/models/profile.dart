@@ -57,6 +57,7 @@ abstract class Profile with _$Profile {
     @Default({}) SelectedMap selectedMap,
     @Default({}) Set<String> unfoldSet,
     @Default(OverrideData()) OverrideData overrideData,
+    @Default(Overwrite()) Overwrite overwrite,
     @JsonKey(includeToJson: false, includeFromJson: false)
     @Default(false)
     bool isUpdating,
@@ -79,6 +80,7 @@ abstract class Profile with _$Profile {
 abstract class Overwrite with _$Overwrite {
   const factory Overwrite({
     @Default(OverwriteType.standard) OverwriteType type,
+    @Default(StandardOverwrite()) StandardOverwrite standardOverwrite,
   }) = _Overwrite;
 
   factory Overwrite.fromJson(Map<String, Object?> json) =>
