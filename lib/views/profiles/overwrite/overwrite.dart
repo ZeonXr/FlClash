@@ -327,7 +327,11 @@ class _ScriptContent extends ConsumerWidget {
 
   void _handleChange(WidgetRef ref, String scriptId) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
-      return state.copyWith.overwrite.scriptOverwrite(scriptId: scriptId);
+      String? newScriptId = scriptId;
+      if (newScriptId == state.overwrite.scriptOverwrite.scriptId) {
+        newScriptId = null;
+      }
+      return state.copyWith.overwrite.scriptOverwrite(scriptId: newScriptId);
     });
   }
 
@@ -364,6 +368,7 @@ class _ScriptContent extends ConsumerWidget {
                       radius: 18,
                       child: ListTile(
                         leading: Radio(
+                          toggleable: true,
                           value: script.id,
                           groupValue: scriptId,
                           onChanged: (value) {
@@ -373,6 +378,7 @@ class _ScriptContent extends ConsumerWidget {
                             _handleChange(ref, value);
                           },
                         ),
+                        minLeadingWidth: 0,
                         minTileHeight: 0,
                         minVerticalPadding: 0,
                         contentPadding: const EdgeInsets.symmetric(
@@ -409,7 +415,7 @@ class _ScriptContent extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text('前往编辑脚本', style: context.textTheme.bodyLarge),
+                      child: Text('前往配置脚本', style: context.textTheme.bodyLarge),
                     ),
                     SizedBox(width: 4),
                     Icon(Icons.arrow_forward, size: 18),
