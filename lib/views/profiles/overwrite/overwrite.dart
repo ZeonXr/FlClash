@@ -284,7 +284,6 @@ class _StandardContent extends ConsumerWidget {
             child: CommonCard(
               padding: EdgeInsets.zero,
               radius: 18,
-              // type: CommonCardType.filled,
               child: ListTile(
                 minTileHeight: 0,
                 minVerticalPadding: 0,
@@ -293,18 +292,12 @@ class _StandardContent extends ConsumerWidget {
                   horizontal: 16,
                   vertical: 16,
                 ),
-                onTap: () {
-                  BaseNavigator.push(
-                    context,
-                    _EditGlobalAddedRules(profileId: profileId),
-                  );
-                },
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
                       child: Text(
-                        '编辑全局附加规则',
+                        '控制全局附加规则',
                         style: context.textTheme.bodyLarge,
                       ),
                     ),
@@ -313,7 +306,12 @@ class _StandardContent extends ConsumerWidget {
                   ],
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                BaseNavigator.push(
+                  context,
+                  _EditGlobalAddedRules(profileId: profileId),
+                );
+              },
             ),
           ),
         ),
@@ -407,21 +405,20 @@ class _ScriptContent extends ConsumerWidget {
                   horizontal: 16,
                   vertical: 16,
                 ),
-                onTap: () {
-                  BaseNavigator.push(context, const ScriptsView());
-                },
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text('前往配置脚本', style: context.textTheme.bodyLarge),
+                      child: Text('前往编辑脚本', style: context.textTheme.bodyLarge),
                     ),
                     SizedBox(width: 4),
                     Icon(Icons.arrow_forward, size: 18),
                   ],
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                BaseNavigator.push(context, const ScriptsView());
+              },
             ),
           ),
         ),
