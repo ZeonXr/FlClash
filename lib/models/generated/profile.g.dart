@@ -79,12 +79,18 @@ _Overwrite _$OverwriteFromJson(Map<String, dynamic> json) => _Overwrite(
       : StandardOverwrite.fromJson(
           json['standardOverwrite'] as Map<String, dynamic>,
         ),
+  scriptOverwrite: json['scriptOverwrite'] == null
+      ? const ScriptOverwrite()
+      : ScriptOverwrite.fromJson(
+          json['scriptOverwrite'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$OverwriteToJson(_Overwrite instance) =>
     <String, dynamic>{
       'type': _$OverwriteTypeEnumMap[instance.type]!,
       'standardOverwrite': instance.standardOverwrite,
+      'scriptOverwrite': instance.scriptOverwrite,
     };
 
 const _$OverwriteTypeEnumMap = {
@@ -111,6 +117,12 @@ Map<String, dynamic> _$StandardOverwriteToJson(_StandardOverwrite instance) =>
       'addedRules': instance.addedRules,
       'disabledRuleIds': instance.disabledRuleIds,
     };
+
+_ScriptOverwrite _$ScriptOverwriteFromJson(Map<String, dynamic> json) =>
+    _ScriptOverwrite(scriptId: json['scriptId'] as String?);
+
+Map<String, dynamic> _$ScriptOverwriteToJson(_ScriptOverwrite instance) =>
+    <String, dynamic>{'scriptId': instance.scriptId};
 
 _OverrideData _$OverrideDataFromJson(Map<String, dynamic> json) =>
     _OverrideData(

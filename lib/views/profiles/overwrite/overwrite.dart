@@ -1,9 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/features/features.dart';
 import 'package:fl_clash/models/clash_config.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/views/config/scripts.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +26,7 @@ class _OverwriteViewState extends State<OverwriteView> {
     return CommonScaffold(
       title: '覆写',
       body: CustomScrollView(
-        slivers: [_Title(widget.profileId), _StandardContent(widget.profileId)],
+        slivers: [_Title(widget.profileId), _Content(widget.profileId)],
       ),
     );
   }
@@ -117,6 +120,25 @@ class _Title extends ConsumerWidget {
   }
 }
 
+class _Content extends ConsumerWidget {
+  final String profileId;
+
+  const _Content(this.profileId);
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final type = ref.watch(
+      getProfileOverwriteProvider(
+        profileId,
+      ).select((state) => state?.type ?? OverwriteType.standard),
+    );
+    return switch (type) {
+      OverwriteType.standard => _StandardContent(profileId),
+      OverwriteType.script => _ScriptContent(profileId),
+    };
+  }
+}
+
 class _StandardContent extends ConsumerWidget {
   final String profileId;
 
@@ -199,7 +221,6 @@ class _StandardContent extends ConsumerWidget {
             children: [
               InfoHeader(
                 info: Info(label: '附加规则'),
-                padding: EdgeInsets.symmetric(horizontal: 16.ap),
                 actions: [
                   if (selectedRules.isNotEmpty) ...[
                     CommonMinIconButtonTheme(
@@ -210,7 +231,7 @@ class _StandardContent extends ConsumerWidget {
                         icon: Icon(Icons.delete),
                       ),
                     ),
-                    SizedBox(width: 6),
+                    SizedBox(width: 8),
                   ],
                   CommonMinFilledButtonTheme(
                     child: selectedRules.isNotEmpty
@@ -275,7 +296,7 @@ class _StandardContent extends ConsumerWidget {
                 onTap: () {
                   BaseNavigator.push(
                     context,
-                    EditGlobalAddedRules(profileId: profileId),
+                    _EditGlobalAddedRules(profileId: profileId),
                   );
                 },
                 title: Row(
@@ -301,10 +322,118 @@ class _StandardContent extends ConsumerWidget {
   }
 }
 
-class EditGlobalAddedRules extends ConsumerWidget {
+class _ScriptContent extends ConsumerWidget {
   final String profileId;
 
-  const EditGlobalAddedRules({super.key, required this.profileId});
+  const _ScriptContent(this.profileId);
+
+  void _handleChange(WidgetRef ref, String scriptId) {
+    ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
+      return state.copyWith.overwrite.scriptOverwrite(scriptId: scriptId);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final scriptId = ref.watch(
+      getProfileOverwriteProvider(
+        profileId,
+      ).select((state) => state?.scriptOverwrite.scriptId),
+    );
+    final scripts = ref.watch(scriptsProvider);
+    return SliverMainAxisGroup(
+      slivers: [
+        SliverToBoxAdapter(child: SizedBox(height: 24)),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [InfoHeader(info: Info(label: '覆写脚本'))],
+          ),
+        ),
+        SliverToBoxAdapter(child: SizedBox(height: 8)),
+        Consumer(
+          builder: (_, ref, _) {
+            return SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverList.builder(
+                itemCount: scripts.length,
+                itemBuilder: (_, index) {
+                  final script = scripts[index];
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 4),
+                    child: CommonCard(
+                      padding: EdgeInsets.zero,
+                      type: CommonCardType.filled,
+                      radius: 18,
+                      child: ListTile(
+                        leading: Radio(
+                          value: script.id,
+                          groupValue: scriptId,
+                          onChanged: (value) {
+                            if (value == null) {
+                              return;
+                            }
+                            _handleChange(ref, value);
+                          },
+                        ),
+                        minTileHeight: 0,
+                        minVerticalPadding: 0,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 14,
+                        ),
+                        title: Text(script.label),
+                        onTap: () {
+                          _handleChange(ref, script.id);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: CommonCard(
+              padding: EdgeInsets.zero,
+              radius: 18,
+              child: ListTile(
+                minTileHeight: 0,
+                minVerticalPadding: 0,
+                titleTextStyle: context.textTheme.bodyMedium?.toJetBrainsMono,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
+                onTap: () {
+                  BaseNavigator.push(context, const ScriptsView());
+                },
+                title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text('前往配置脚本', style: context.textTheme.bodyLarge),
+                    ),
+                    SizedBox(width: 4),
+                    Icon(Icons.arrow_forward, size: 18),
+                  ],
+                ),
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _EditGlobalAddedRules extends ConsumerWidget {
+  final String profileId;
+
+  const _EditGlobalAddedRules({required this.profileId});
 
   void _handleChange(WidgetRef ref, String ruleId) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {

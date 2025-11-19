@@ -81,6 +81,7 @@ abstract class Overwrite with _$Overwrite {
   const factory Overwrite({
     @Default(OverwriteType.standard) OverwriteType type,
     @Default(StandardOverwrite()) StandardOverwrite standardOverwrite,
+    @Default(ScriptOverwrite()) ScriptOverwrite scriptOverwrite,
   }) = _Overwrite;
 
   factory Overwrite.fromJson(Map<String, Object?> json) =>
@@ -96,6 +97,14 @@ abstract class StandardOverwrite with _$StandardOverwrite {
 
   factory StandardOverwrite.fromJson(Map<String, Object?> json) =>
       _$StandardOverwriteFromJson(json);
+}
+
+@freezed
+abstract class ScriptOverwrite with _$ScriptOverwrite {
+  const factory ScriptOverwrite({String? scriptId}) = _ScriptOverwrite;
+
+  factory ScriptOverwrite.fromJson(Map<String, Object?> json) =>
+      _$ScriptOverwriteFromJson(json);
 }
 
 @freezed

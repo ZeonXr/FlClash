@@ -658,7 +658,7 @@ $OverwriteCopyWith<$Res> get overwrite {
 /// @nodoc
 mixin _$Overwrite {
 
- OverwriteType get type; StandardOverwrite get standardOverwrite;
+ OverwriteType get type; StandardOverwrite get standardOverwrite; ScriptOverwrite get scriptOverwrite;
 /// Create a copy of Overwrite
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -671,16 +671,16 @@ $OverwriteCopyWith<Overwrite> get copyWith => _$OverwriteCopyWithImpl<Overwrite>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Overwrite&&(identical(other.type, type) || other.type == type)&&(identical(other.standardOverwrite, standardOverwrite) || other.standardOverwrite == standardOverwrite));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Overwrite&&(identical(other.type, type) || other.type == type)&&(identical(other.standardOverwrite, standardOverwrite) || other.standardOverwrite == standardOverwrite)&&(identical(other.scriptOverwrite, scriptOverwrite) || other.scriptOverwrite == scriptOverwrite));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,standardOverwrite);
+int get hashCode => Object.hash(runtimeType,type,standardOverwrite,scriptOverwrite);
 
 @override
 String toString() {
-  return 'Overwrite(type: $type, standardOverwrite: $standardOverwrite)';
+  return 'Overwrite(type: $type, standardOverwrite: $standardOverwrite, scriptOverwrite: $scriptOverwrite)';
 }
 
 
@@ -691,11 +691,11 @@ abstract mixin class $OverwriteCopyWith<$Res>  {
   factory $OverwriteCopyWith(Overwrite value, $Res Function(Overwrite) _then) = _$OverwriteCopyWithImpl;
 @useResult
 $Res call({
- OverwriteType type, StandardOverwrite standardOverwrite
+ OverwriteType type, StandardOverwrite standardOverwrite, ScriptOverwrite scriptOverwrite
 });
 
 
-$StandardOverwriteCopyWith<$Res> get standardOverwrite;
+$StandardOverwriteCopyWith<$Res> get standardOverwrite;$ScriptOverwriteCopyWith<$Res> get scriptOverwrite;
 
 }
 /// @nodoc
@@ -708,11 +708,12 @@ class _$OverwriteCopyWithImpl<$Res>
 
 /// Create a copy of Overwrite
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? standardOverwrite = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? standardOverwrite = null,Object? scriptOverwrite = null,}) {
   return _then(_self.copyWith(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as OverwriteType,standardOverwrite: null == standardOverwrite ? _self.standardOverwrite : standardOverwrite // ignore: cast_nullable_to_non_nullable
-as StandardOverwrite,
+as StandardOverwrite,scriptOverwrite: null == scriptOverwrite ? _self.scriptOverwrite : scriptOverwrite // ignore: cast_nullable_to_non_nullable
+as ScriptOverwrite,
   ));
 }
 /// Create a copy of Overwrite
@@ -723,6 +724,15 @@ $StandardOverwriteCopyWith<$Res> get standardOverwrite {
   
   return $StandardOverwriteCopyWith<$Res>(_self.standardOverwrite, (value) {
     return _then(_self.copyWith(standardOverwrite: value));
+  });
+}/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScriptOverwriteCopyWith<$Res> get scriptOverwrite {
+  
+  return $ScriptOverwriteCopyWith<$Res>(_self.scriptOverwrite, (value) {
+    return _then(_self.copyWith(scriptOverwrite: value));
   });
 }
 }
@@ -806,10 +816,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OverwriteType type,  StandardOverwrite standardOverwrite)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( OverwriteType type,  StandardOverwrite standardOverwrite,  ScriptOverwrite scriptOverwrite)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Overwrite() when $default != null:
-return $default(_that.type,_that.standardOverwrite);case _:
+return $default(_that.type,_that.standardOverwrite,_that.scriptOverwrite);case _:
   return orElse();
 
 }
@@ -827,10 +837,10 @@ return $default(_that.type,_that.standardOverwrite);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OverwriteType type,  StandardOverwrite standardOverwrite)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( OverwriteType type,  StandardOverwrite standardOverwrite,  ScriptOverwrite scriptOverwrite)  $default,) {final _that = this;
 switch (_that) {
 case _Overwrite():
-return $default(_that.type,_that.standardOverwrite);case _:
+return $default(_that.type,_that.standardOverwrite,_that.scriptOverwrite);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -847,10 +857,10 @@ return $default(_that.type,_that.standardOverwrite);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OverwriteType type,  StandardOverwrite standardOverwrite)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( OverwriteType type,  StandardOverwrite standardOverwrite,  ScriptOverwrite scriptOverwrite)?  $default,) {final _that = this;
 switch (_that) {
 case _Overwrite() when $default != null:
-return $default(_that.type,_that.standardOverwrite);case _:
+return $default(_that.type,_that.standardOverwrite,_that.scriptOverwrite);case _:
   return null;
 
 }
@@ -862,11 +872,12 @@ return $default(_that.type,_that.standardOverwrite);case _:
 @JsonSerializable()
 
 class _Overwrite implements Overwrite {
-  const _Overwrite({this.type = OverwriteType.standard, this.standardOverwrite = const StandardOverwrite()});
+  const _Overwrite({this.type = OverwriteType.standard, this.standardOverwrite = const StandardOverwrite(), this.scriptOverwrite = const ScriptOverwrite()});
   factory _Overwrite.fromJson(Map<String, dynamic> json) => _$OverwriteFromJson(json);
 
 @override@JsonKey() final  OverwriteType type;
 @override@JsonKey() final  StandardOverwrite standardOverwrite;
+@override@JsonKey() final  ScriptOverwrite scriptOverwrite;
 
 /// Create a copy of Overwrite
 /// with the given fields replaced by the non-null parameter values.
@@ -881,16 +892,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Overwrite&&(identical(other.type, type) || other.type == type)&&(identical(other.standardOverwrite, standardOverwrite) || other.standardOverwrite == standardOverwrite));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Overwrite&&(identical(other.type, type) || other.type == type)&&(identical(other.standardOverwrite, standardOverwrite) || other.standardOverwrite == standardOverwrite)&&(identical(other.scriptOverwrite, scriptOverwrite) || other.scriptOverwrite == scriptOverwrite));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,standardOverwrite);
+int get hashCode => Object.hash(runtimeType,type,standardOverwrite,scriptOverwrite);
 
 @override
 String toString() {
-  return 'Overwrite(type: $type, standardOverwrite: $standardOverwrite)';
+  return 'Overwrite(type: $type, standardOverwrite: $standardOverwrite, scriptOverwrite: $scriptOverwrite)';
 }
 
 
@@ -901,11 +912,11 @@ abstract mixin class _$OverwriteCopyWith<$Res> implements $OverwriteCopyWith<$Re
   factory _$OverwriteCopyWith(_Overwrite value, $Res Function(_Overwrite) _then) = __$OverwriteCopyWithImpl;
 @override @useResult
 $Res call({
- OverwriteType type, StandardOverwrite standardOverwrite
+ OverwriteType type, StandardOverwrite standardOverwrite, ScriptOverwrite scriptOverwrite
 });
 
 
-@override $StandardOverwriteCopyWith<$Res> get standardOverwrite;
+@override $StandardOverwriteCopyWith<$Res> get standardOverwrite;@override $ScriptOverwriteCopyWith<$Res> get scriptOverwrite;
 
 }
 /// @nodoc
@@ -918,11 +929,12 @@ class __$OverwriteCopyWithImpl<$Res>
 
 /// Create a copy of Overwrite
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? standardOverwrite = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? standardOverwrite = null,Object? scriptOverwrite = null,}) {
   return _then(_Overwrite(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as OverwriteType,standardOverwrite: null == standardOverwrite ? _self.standardOverwrite : standardOverwrite // ignore: cast_nullable_to_non_nullable
-as StandardOverwrite,
+as StandardOverwrite,scriptOverwrite: null == scriptOverwrite ? _self.scriptOverwrite : scriptOverwrite // ignore: cast_nullable_to_non_nullable
+as ScriptOverwrite,
   ));
 }
 
@@ -934,6 +946,15 @@ $StandardOverwriteCopyWith<$Res> get standardOverwrite {
   
   return $StandardOverwriteCopyWith<$Res>(_self.standardOverwrite, (value) {
     return _then(_self.copyWith(standardOverwrite: value));
+  });
+}/// Create a copy of Overwrite
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScriptOverwriteCopyWith<$Res> get scriptOverwrite {
+  
+  return $ScriptOverwriteCopyWith<$Res>(_self.scriptOverwrite, (value) {
+    return _then(_self.copyWith(scriptOverwrite: value));
   });
 }
 }
@@ -1210,6 +1231,269 @@ class __$StandardOverwriteCopyWithImpl<$Res>
 addedRules: null == addedRules ? _self._addedRules : addedRules // ignore: cast_nullable_to_non_nullable
 as List<Rule>,disabledRuleIds: null == disabledRuleIds ? _self._disabledRuleIds : disabledRuleIds // ignore: cast_nullable_to_non_nullable
 as List<String>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ScriptOverwrite {
+
+ String? get scriptId;
+/// Create a copy of ScriptOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScriptOverwriteCopyWith<ScriptOverwrite> get copyWith => _$ScriptOverwriteCopyWithImpl<ScriptOverwrite>(this as ScriptOverwrite, _$identity);
+
+  /// Serializes this ScriptOverwrite to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScriptOverwrite&&(identical(other.scriptId, scriptId) || other.scriptId == scriptId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,scriptId);
+
+@override
+String toString() {
+  return 'ScriptOverwrite(scriptId: $scriptId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ScriptOverwriteCopyWith<$Res>  {
+  factory $ScriptOverwriteCopyWith(ScriptOverwrite value, $Res Function(ScriptOverwrite) _then) = _$ScriptOverwriteCopyWithImpl;
+@useResult
+$Res call({
+ String? scriptId
+});
+
+
+
+
+}
+/// @nodoc
+class _$ScriptOverwriteCopyWithImpl<$Res>
+    implements $ScriptOverwriteCopyWith<$Res> {
+  _$ScriptOverwriteCopyWithImpl(this._self, this._then);
+
+  final ScriptOverwrite _self;
+  final $Res Function(ScriptOverwrite) _then;
+
+/// Create a copy of ScriptOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? scriptId = freezed,}) {
+  return _then(_self.copyWith(
+scriptId: freezed == scriptId ? _self.scriptId : scriptId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ScriptOverwrite].
+extension ScriptOverwritePatterns on ScriptOverwrite {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ScriptOverwrite value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ScriptOverwrite() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ScriptOverwrite value)  $default,){
+final _that = this;
+switch (_that) {
+case _ScriptOverwrite():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ScriptOverwrite value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ScriptOverwrite() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? scriptId)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ScriptOverwrite() when $default != null:
+return $default(_that.scriptId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? scriptId)  $default,) {final _that = this;
+switch (_that) {
+case _ScriptOverwrite():
+return $default(_that.scriptId);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? scriptId)?  $default,) {final _that = this;
+switch (_that) {
+case _ScriptOverwrite() when $default != null:
+return $default(_that.scriptId);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ScriptOverwrite implements ScriptOverwrite {
+  const _ScriptOverwrite({this.scriptId});
+  factory _ScriptOverwrite.fromJson(Map<String, dynamic> json) => _$ScriptOverwriteFromJson(json);
+
+@override final  String? scriptId;
+
+/// Create a copy of ScriptOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ScriptOverwriteCopyWith<_ScriptOverwrite> get copyWith => __$ScriptOverwriteCopyWithImpl<_ScriptOverwrite>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ScriptOverwriteToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScriptOverwrite&&(identical(other.scriptId, scriptId) || other.scriptId == scriptId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,scriptId);
+
+@override
+String toString() {
+  return 'ScriptOverwrite(scriptId: $scriptId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ScriptOverwriteCopyWith<$Res> implements $ScriptOverwriteCopyWith<$Res> {
+  factory _$ScriptOverwriteCopyWith(_ScriptOverwrite value, $Res Function(_ScriptOverwrite) _then) = __$ScriptOverwriteCopyWithImpl;
+@override @useResult
+$Res call({
+ String? scriptId
+});
+
+
+
+
+}
+/// @nodoc
+class __$ScriptOverwriteCopyWithImpl<$Res>
+    implements _$ScriptOverwriteCopyWith<$Res> {
+  __$ScriptOverwriteCopyWithImpl(this._self, this._then);
+
+  final _ScriptOverwrite _self;
+  final $Res Function(_ScriptOverwrite) _then;
+
+/// Create a copy of ScriptOverwrite
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? scriptId = freezed,}) {
+  return _then(_ScriptOverwrite(
+scriptId: freezed == scriptId ? _self.scriptId : scriptId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
