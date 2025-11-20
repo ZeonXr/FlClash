@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
@@ -30,6 +31,11 @@ class BaseNavigator {
   //   );
   // }
 }
+
+const commonSharedXPageTransitions = SharedAxisPageTransitionsBuilder(
+  transitionType: SharedAxisTransitionType.horizontal,
+  fillColor: Colors.transparent,
+);
 
 class CommonDesktopRoute<T> extends PageRoute<T> {
   final Widget Function(BuildContext context) builder;
@@ -68,12 +74,6 @@ class CommonDesktopRoute<T> extends PageRoute<T> {
 
 class CommonRoute<T> extends MaterialPageRoute<T> {
   CommonRoute({required super.builder});
-
-  @override
-  Duration get transitionDuration => const Duration(milliseconds: 500);
-
-  @override
-  Duration get reverseTransitionDuration => const Duration(milliseconds: 500);
 }
 
 final Animatable<Offset> _kRightMiddleTween = Tween<Offset>(
