@@ -261,6 +261,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
                       automaticallyImplyLeading: backAction != null
                           ? false
                           : true,
+                      animateColor: true,
                       centerTitle: widget.centerTitle ?? false,
                       leading: _buildLeading(backAction),
                       title: _buildTitle(state.searchState),

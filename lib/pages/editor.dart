@@ -196,7 +196,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                             );
                           }
                         : null,
-                    icon: const Icon(Icons.save_sharp),
+                    icon: const Icon(Icons.save),
                   ),
                 ),
               ),

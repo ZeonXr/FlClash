@@ -497,25 +497,34 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
     return AdaptiveSheetScaffold(
       type: widget.type,
       actions: [
-        FilledButton.tonal(
-          style: FilledButton.styleFrom(
-            tapTargetSize: MaterialTapTargetSize.padded,
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            visualDensity: VisualDensity.compact,
+        if (widget.type == SheetType.bottomSheet)
+          IconButton.filledTonal(
+            onPressed: () {
+              Navigator.of(context).pop();
+              globalState.appController.setProfiles(profiles);
+            },
+            style: IconButton.styleFrom(
+              visualDensity: VisualDensity.comfortable,
+              tapTargetSize: MaterialTapTargetSize.padded,
+              padding: EdgeInsets.all(8),
+              iconSize: 20,
+            ),
+            icon: Icon(Icons.check),
+          )
+        else
+          IconButton.filledTonal(
+            icon: Icon(Icons.check),
+            onPressed: () {
+              Navigator.of(context).pop();
+              globalState.appController.setProfiles(profiles);
+            },
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-            globalState.appController.setProfiles(profiles);
-          },
-          child: Text(appLocalizations.save),
-        ),
-        SizedBox(width: 2),
       ],
       body: Padding(
-        padding: EdgeInsets.only(bottom: 32, top: 16),
+        padding: EdgeInsets.only(bottom: 16, top: 0),
         child: ReorderableListView.builder(
           buildDefaultDragHandles: false,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           proxyDecorator: proxyDecorator,
           onReorder: (oldIndex, newIndex) {
             setState(() {

@@ -367,25 +367,30 @@ class _ScriptContent extends ConsumerWidget {
                       type: CommonCardType.filled,
                       radius: 18,
                       child: ListTile(
-                        leading: Radio(
-                          toggleable: true,
-                          value: script.id,
-                          groupValue: scriptId,
-                          onChanged: (value) {
-                            if (value == null) {
-                              return;
-                            }
-                            _handleChange(ref, value);
-                          },
-                        ),
                         minLeadingWidth: 0,
                         minTileHeight: 0,
                         minVerticalPadding: 0,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 14,
                           vertical: 14,
+                        ).copyWith(left: 12),
+                        title: Row(
+                          children: [
+                            Radio(
+                              toggleable: true,
+                              value: script.id,
+                              groupValue: scriptId,
+                              onChanged: (value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                _handleChange(ref, value);
+                              },
+                            ),
+                            SizedBox(width: 8),
+                            Flexible(child: Text(script.label)),
+                          ],
                         ),
-                        title: Text(script.label),
                         onTap: () {
                           _handleChange(ref, script.id);
                         },
@@ -459,20 +464,22 @@ class _EditGlobalAddedRules extends ConsumerWidget {
     final rules = ref.watch(rulesProvider);
     return BaseScaffold(
       title: '编辑全局规则',
-      body: ListView.builder(
-        padding: EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          final rule = rules[index];
-          return RuleStatusItem(
-            status: !disabledRuleIds.contains(rule.id),
-            rule: rule,
-            onChange: (_) {
-              _handleChange(ref, rule.id);
-            },
-          );
-        },
-        itemCount: rules.length,
-      ),
+      body: rules.isEmpty
+          ? NullStatus(label: appLocalizations.noData)
+          : ListView.builder(
+              padding: EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                final rule = rules[index];
+                return RuleStatusItem(
+                  status: !disabledRuleIds.contains(rule.id),
+                  rule: rule,
+                  onChange: (_) {
+                    _handleChange(ref, rule.id);
+                  },
+                );
+              },
+              itemCount: rules.length,
+            ),
     );
   }
 }

@@ -97,35 +97,37 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
         ),
         SizedBox(width: 8),
       ],
-      body: ReorderableList(
-        padding: EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          final rule = rules[index];
-          return ReorderableDelayedDragStartListener(
-            key: ObjectKey(rule),
-            index: index,
-            child: RuleItem(
-              isEditing: selectedRules.isNotEmpty,
-              rule: rule,
-              isSelected: selectedRules.contains(rule.id),
-              onSelected: _handleSelected,
-              onEdit: (Rule rule) {
-                _handleAddOrUpdate(rule);
+      body: rules.isEmpty
+          ? NullStatus(label: appLocalizations.nullTip(appLocalizations.rule))
+          : ReorderableList(
+              padding: EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                final rule = rules[index];
+                return ReorderableDelayedDragStartListener(
+                  key: ObjectKey(rule),
+                  index: index,
+                  child: RuleItem(
+                    isEditing: selectedRules.isNotEmpty,
+                    rule: rule,
+                    isSelected: selectedRules.contains(rule.id),
+                    onSelected: _handleSelected,
+                    onEdit: (Rule rule) {
+                      _handleAddOrUpdate(rule);
+                    },
+                  ),
+                );
+              },
+              itemCount: rules.length,
+              onReorder: (int oldIndex, int newIndex) {
+                if (oldIndex < newIndex) {
+                  newIndex -= 1;
+                }
+                final newRules = List<Rule>.from(rules);
+                final item = newRules.removeAt(oldIndex);
+                newRules.insert(newIndex, item);
+                ref.read(rulesProvider.notifier).value = newRules;
               },
             ),
-          );
-        },
-        itemCount: rules.length,
-        onReorder: (int oldIndex, int newIndex) {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final newRules = List<Rule>.from(rules);
-          final item = newRules.removeAt(oldIndex);
-          newRules.insert(newIndex, item);
-          ref.read(rulesProvider.notifier).value = newRules;
-        },
-      ),
     );
   }
 }

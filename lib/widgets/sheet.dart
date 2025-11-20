@@ -125,7 +125,8 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
           : widget.actions.isEmpty && sideSheet
           ? false
           : true,
-      centerTitle: widget.centerTitle ?? bottomSheet,
+      centerTitle:
+          widget.centerTitle ?? (bottomSheet && widget.actions.isEmpty),
       backgroundColor: backgroundColor,
       title: Text(widget.title),
       actions: genActions([
@@ -160,7 +161,10 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
                 ),
               ),
             ),
-            appBar,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: appBar,
+            ),
             Flexible(flex: 1, child: widget.body),
           ],
         ),
