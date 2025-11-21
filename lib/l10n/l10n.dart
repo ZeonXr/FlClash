@@ -3034,10 +3034,10 @@ class AppLocalizations {
     );
   }
 
-  /// `No {label} at the moment`
+  /// `No {label} yet`
   String nullTip(Object label) {
     return Intl.message(
-      'No $label at the moment',
+      'No $label yet',
       name: 'nullTip',
       desc: '',
       args: [label],

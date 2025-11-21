@@ -392,7 +392,7 @@
   "existsTip": "Current {label} already exists",
   "deleteTip": "Are you sure you want to delete the current {label}?",
   "deleteMultipTip": "Are you sure you want to delete the selected {label}?",
-  "nullTip": "No {label} at the moment",
+  "nullTip": "No {label} yet",
   "script": "Script",
   "color": "Color",
   "rename": "Rename",

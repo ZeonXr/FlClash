@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m8(count) =>
       "${Intl.plural(count, one: '${count} месяц назад', few: '${count} месяца назад', many: '${count} месяцев назад', other: '${count} месяца назад')}";
 
-  static String m9(label) => "Сейчас ${label} нет";
+  static String m9(label) => "${label} пока отсутствуют";
 
   static String m10(label) => "${label} должно быть числом";
 

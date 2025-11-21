@@ -393,7 +393,7 @@
   "existsTip": "現在の{label}は既に存在しています",
   "deleteTip": "現在の{label}を削除してもよろしいですか？",
   "deleteMultipTip": "選択された{label}を削除してもよろしいですか？",
-  "nullTip": "現在{label}はありません",
+  "nullTip": "まだ{label}はありません",
   "script": "スクリプト",
   "color": "カラー",
   "rename": "リネーム",

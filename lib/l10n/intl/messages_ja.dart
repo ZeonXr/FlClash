@@ -38,7 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(count) => "${count}ヶ月前";
 
-  static String m9(label) => "現在${label}はありません";
+  static String m9(label) => "まだ${label}はありません";
 
   static String m10(label) => "${label}は数字でなければなりません";
 

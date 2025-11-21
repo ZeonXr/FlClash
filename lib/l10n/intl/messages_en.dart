@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m8(count) =>
       "${Intl.plural(count, one: '1 month ago', other: '${count} months ago')}";
 
-  static String m9(label) => "No ${label} at the moment";
+  static String m9(label) => "No ${label} yet";
 
   static String m10(label) => "${label} must be a number";
 
