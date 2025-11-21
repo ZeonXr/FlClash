@@ -98,7 +98,7 @@ class CoreController {
     ClashConfig clashConfig, {
     VoidCallback? preloadInvoke,
   }) async {
-    await globalState.genConfigFile(profile, clashConfig);
+    await globalState.buildConfigFile(profile, clashConfig);
     final params = await globalState.getSetupParams();
     final res = _interface.setupConfig(params);
     if (preloadInvoke != null) {

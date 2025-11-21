@@ -492,6 +492,19 @@ abstract class Script with _$Script {
   factory Script.fromJson(Map<String, Object?> json) => _$ScriptFromJson(json);
 }
 
+extension ScriptsExt on List<Script> {
+  Script? get(String? id) {
+    if (id == null) {
+      return null;
+    }
+    final index = indexWhere((script) => script.id == id);
+    if (index != -1) {
+      return this[index];
+    }
+    return null;
+  }
+}
+
 @freezed
 abstract class DelayState with _$DelayState {
   const factory DelayState({required int delay, required bool group}) =

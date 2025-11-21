@@ -223,24 +223,6 @@ abstract class ScriptProps with _$ScriptProps {
       _$ScriptPropsFromJson(json);
 }
 
-extension ScriptPropsExt on ScriptProps {
-  String? get realId {
-    final index = scripts.indexWhere((script) => script.id == currentId);
-    if (index != -1) {
-      return currentId;
-    }
-    return null;
-  }
-
-  Script? get currentScript {
-    final index = scripts.indexWhere((script) => script.id == currentId);
-    if (index != -1) {
-      return scripts[index];
-    }
-    return null;
-  }
-}
-
 @freezed
 abstract class Config with _$Config {
   const factory Config({
