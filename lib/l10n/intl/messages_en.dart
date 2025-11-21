@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addedOriginRules": MessageLookupByLibrary.simpleMessage(
       "Attach on the original rules",
     ),
+    "addedRules": MessageLookupByLibrary.simpleMessage("Added rules"),
     "address": MessageLookupByLibrary.simpleMessage("Address"),
     "addressHelp": MessageLookupByLibrary.simpleMessage(
       "WebDAV server address",
@@ -79,6 +80,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adminAutoLaunchDesc": MessageLookupByLibrary.simpleMessage(
       "Boot up by using admin mode",
+    ),
+    "advancedConfig": MessageLookupByLibrary.simpleMessage(
+      "Advanced configuration",
+    ),
+    "advancedConfigDesc": MessageLookupByLibrary.simpleMessage(
+      "Provide diverse configuration options",
     ),
     "ago": MessageLookupByLibrary.simpleMessage(" Ago"),
     "agree": MessageLookupByLibrary.simpleMessage("Agree"),
@@ -183,6 +190,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Opening it will lose part of its application ability and gain the support of full amount of Clash.",
     ),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "confirmClearAllData": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to clear all data?",
+    ),
+    "confirmForceCrashCore": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to force crash the core?",
+    ),
     "connected": MessageLookupByLibrary.simpleMessage("Connected"),
     "connecting": MessageLookupByLibrary.simpleMessage("Connecting..."),
     "connection": MessageLookupByLibrary.simpleMessage("Connection"),
@@ -194,6 +207,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactMe": MessageLookupByLibrary.simpleMessage("Contact me"),
     "content": MessageLookupByLibrary.simpleMessage("Content"),
     "contentScheme": MessageLookupByLibrary.simpleMessage("Content"),
+    "controlGlobalAddedRules": MessageLookupByLibrary.simpleMessage(
+      "Control global added rules",
+    ),
     "copy": MessageLookupByLibrary.simpleMessage("Copy"),
     "copyEnvVar": MessageLookupByLibrary.simpleMessage(
       "Copying environment variables",
@@ -275,6 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "domain": MessageLookupByLibrary.simpleMessage("Domain"),
     "download": MessageLookupByLibrary.simpleMessage("Download"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+    "editGlobalRules": MessageLookupByLibrary.simpleMessage(
+      "Edit global rules",
+    ),
+    "editRule": MessageLookupByLibrary.simpleMessage("Edit rule"),
     "emptyTip": m3,
     "en": MessageLookupByLibrary.simpleMessage("English"),
     "enableOverride": MessageLookupByLibrary.simpleMessage("Enable override"),
@@ -297,6 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "externalControllerDesc": MessageLookupByLibrary.simpleMessage(
       "Once enabled, the Clash kernel can be controlled on port 9090",
     ),
+    "externalFetch": MessageLookupByLibrary.simpleMessage("External fetch"),
     "externalLink": MessageLookupByLibrary.simpleMessage("External link"),
     "externalResources": MessageLookupByLibrary.simpleMessage(
       "External resources",
@@ -345,6 +366,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "global": MessageLookupByLibrary.simpleMessage("Global"),
     "go": MessageLookupByLibrary.simpleMessage("Go"),
     "goDownload": MessageLookupByLibrary.simpleMessage("Go to download"),
+    "goToConfigureScript": MessageLookupByLibrary.simpleMessage(
+      "Go to configure script",
+    ),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "Do you want to cache the changes?",
     ),
@@ -396,6 +420,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "light": MessageLookupByLibrary.simpleMessage("Light"),
     "list": MessageLookupByLibrary.simpleMessage("List"),
     "listen": MessageLookupByLibrary.simpleMessage("Listen"),
+    "loadTest": MessageLookupByLibrary.simpleMessage("Load test"),
     "local": MessageLookupByLibrary.simpleMessage("Local"),
     "localBackupDesc": MessageLookupByLibrary.simpleMessage(
       "Backup local data to local",
@@ -504,9 +529,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "overrideInvalidTip": MessageLookupByLibrary.simpleMessage(
       "Does not take effect in script mode",
     ),
+    "overrideMode": MessageLookupByLibrary.simpleMessage("Override mode"),
     "overrideOriginRules": MessageLookupByLibrary.simpleMessage(
       "Override the original rule",
     ),
+    "overrideScript": MessageLookupByLibrary.simpleMessage("Override script"),
     "palette": MessageLookupByLibrary.simpleMessage("Palette"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "paste": MessageLookupByLibrary.simpleMessage("Paste"),
@@ -655,6 +682,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Are you sure you want to save?",
     ),
     "script": MessageLookupByLibrary.simpleMessage("Script"),
+    "scriptModeDesc": MessageLookupByLibrary.simpleMessage(
+      "Script mode, use external extension scripts, provide one-click override configuration capability",
+    ),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
     "seconds": MessageLookupByLibrary.simpleMessage("Seconds"),
     "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
@@ -676,6 +706,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "specialRules": MessageLookupByLibrary.simpleMessage("special rules"),
     "stackMode": MessageLookupByLibrary.simpleMessage("Stack mode"),
     "standard": MessageLookupByLibrary.simpleMessage("Standard"),
+    "standardModeDesc": MessageLookupByLibrary.simpleMessage(
+      "Standard mode, override basic configuration, provide simple rule addition capability",
+    ),
     "start": MessageLookupByLibrary.simpleMessage("Start"),
     "startVpn": MessageLookupByLibrary.simpleMessage("Starting VPN..."),
     "status": MessageLookupByLibrary.simpleMessage("Status"),

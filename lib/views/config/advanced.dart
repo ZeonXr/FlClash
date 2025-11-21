@@ -17,6 +17,7 @@ class AdvancedConfigView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = context.appLocalizations;
     List<Widget> items = [
       ListItem.open(
         title: Text(appLocalizations.network),
@@ -31,7 +32,7 @@ class AdvancedConfigView extends StatelessWidget {
         ),
       ),
       ListItem.open(
-        title: const Text('DNS'),
+        title: Text('DNS'),
         subtitle: Text(appLocalizations.dnsDesc),
         leading: const Icon(Icons.dns),
         delegate: OpenDelegate(
@@ -67,20 +68,20 @@ class AdvancedConfigView extends StatelessWidget {
         ),
       ),
       ListItem.open(
-        title: Text('附加规则'),
-        subtitle: Text('配置全局附加规则'),
+        title: Text(appLocalizations.addedRules),
+        subtitle: Text(appLocalizations.controlGlobalAddedRules),
         leading: const Icon(Icons.library_books),
         delegate: OpenDelegate(widget: const AddedRulesView(), blur: false),
       ),
       ListItem.open(
         title: Text(appLocalizations.script),
-        subtitle: Text('管理覆写脚本'),
+        subtitle: Text(appLocalizations.overrideScript),
         leading: const Icon(Icons.rocket, fontWeight: FontWeight.w900),
         delegate: OpenDelegate(widget: const ScriptsView(), blur: false),
       ),
     ];
     return BaseScaffold(
-      title: '进阶配置',
+      title: appLocalizations.advancedConfig,
       body: generateListView(
         items.separated(const Divider(height: 0)).toList(),
       ),

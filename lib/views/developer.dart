@@ -43,7 +43,7 @@ class DeveloperView extends ConsumerWidget {
             minVerticalPadding: 14,
             onTap: () async {
               final res = await globalState.showMessage(
-                message: TextSpan(text: '确定要强制崩溃核心？'),
+                message: TextSpan(text: appLocalizations.confirmForceCrashCore),
               );
               if (res != true) {
                 return;
@@ -56,7 +56,7 @@ class DeveloperView extends ConsumerWidget {
           minVerticalPadding: 14,
           onTap: () async {
             final res = await globalState.showMessage(
-              message: TextSpan(text: '确定要清除所有数据？'),
+              message: TextSpan(text: appLocalizations.confirmClearAllData),
             );
             if (res != true) {
               return;
@@ -65,7 +65,7 @@ class DeveloperView extends ConsumerWidget {
           },
         ),
         ListItem(
-          title: Text('加载测试'),
+          title: Text(appLocalizations.loadTest),
           minVerticalPadding: 14,
           onTap: () {
             ref.read(loadingProvider.notifier).value = !ref.read(

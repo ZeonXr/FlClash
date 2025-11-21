@@ -189,7 +189,9 @@ class _AddOrEditRuleDialogState extends State<AddOrEditRuleDialog> {
   @override
   Widget build(BuildContext context) {
     return CommonDialog(
-      title: widget.rule != null ? '编辑规则' : appLocalizations.addRule,
+      title: widget.rule != null
+          ? appLocalizations.editRule
+          : appLocalizations.addRule,
       actions: [
         TextButton(
           onPressed: _handleSubmit,

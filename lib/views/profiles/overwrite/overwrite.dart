@@ -24,7 +24,7 @@ class _OverwriteViewState extends State<OverwriteView> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
-      title: '覆写',
+      title: appLocalizations.override,
       body: CustomScrollView(
         slivers: [_Title(widget.profileId), _Content(widget.profileId)],
       ),
@@ -39,8 +39,8 @@ class _Title extends ConsumerWidget {
 
   String _getTitle(OverwriteType type) {
     return switch (type) {
-      OverwriteType.standard => '标准',
-      OverwriteType.script => '脚本',
+      OverwriteType.standard => appLocalizations.standard,
+      OverwriteType.script => appLocalizations.script,
     };
   }
 
@@ -53,8 +53,8 @@ class _Title extends ConsumerWidget {
 
   String _getDesc(OverwriteType type) {
     return switch (type) {
-      OverwriteType.standard => '标准模式，覆写基本配置，提供简单追加规则能力',
-      OverwriteType.script => '脚本模式，使用外部扩展脚本，提供一键覆写配置的能力',
+      OverwriteType.standard => appLocalizations.standardModeDesc,
+      OverwriteType.script => appLocalizations.scriptModeDesc,
     };
   }
 
@@ -75,7 +75,7 @@ class _Title extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InfoHeader(info: Info(label: '覆写模式')),
+          InfoHeader(info: Info(label: appLocalizations.overrideMode)),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -220,7 +220,7 @@ class _StandardContent extends ConsumerWidget {
           child: Column(
             children: [
               InfoHeader(
-                info: Info(label: '附加规则'),
+                info: Info(label: appLocalizations.addedRules),
                 actions: [
                   if (selectedRules.isNotEmpty) ...[
                     CommonMinIconButtonTheme(
@@ -297,7 +297,7 @@ class _StandardContent extends ConsumerWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        '控制全局附加规则',
+                        appLocalizations.controlGlobalAddedRules,
                         style: context.textTheme.bodyLarge,
                       ),
                     ),
@@ -348,7 +348,7 @@ class _ScriptContent extends ConsumerWidget {
         SliverToBoxAdapter(child: SizedBox(height: 24)),
         SliverToBoxAdapter(
           child: Column(
-            children: [InfoHeader(info: Info(label: '覆写脚本'))],
+            children: [InfoHeader(info: Info(label: appLocalizations.overrideScript))],
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 8)),
@@ -372,11 +372,13 @@ class _ScriptContent extends ConsumerWidget {
                         minVerticalPadding: 0,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 14,
-                          vertical: 14,
+                          vertical: 10,
                         ).copyWith(left: 12),
                         title: Row(
                           children: [
                             Radio(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
                               toggleable: true,
                               value: script.id,
                               groupValue: scriptId,
@@ -420,7 +422,7 @@ class _ScriptContent extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text('前往配置脚本', style: context.textTheme.bodyLarge),
+                      child: Text(appLocalizations.goToConfigureScript, style: context.textTheme.bodyLarge),
                     ),
                     SizedBox(width: 4),
                     Icon(Icons.arrow_forward, size: 18),
@@ -463,7 +465,7 @@ class _EditGlobalAddedRules extends ConsumerWidget {
     );
     final rules = ref.watch(rulesProvider);
     return BaseScaffold(
-      title: '编辑全局规则',
+      title: appLocalizations.editGlobalRules,
       body: rules.isEmpty
           ? NullStatus(label: appLocalizations.noData)
           : ListView.builder(

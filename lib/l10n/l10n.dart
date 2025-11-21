@@ -2619,6 +2619,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Advanced configuration`
+  String get advancedConfig {
+    return Intl.message(
+      'Advanced configuration',
+      name: 'advancedConfig',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Provide diverse configuration options`
+  String get advancedConfigDesc {
+    return Intl.message(
+      'Provide diverse configuration options',
+      name: 'advancedConfigDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `{count} items have been selected`
   String selectedCountTitle(Object count) {
     return Intl.message(
@@ -3377,6 +3397,121 @@ class AppLocalizations {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Edit rule`
+  String get editRule {
+    return Intl.message('Edit rule', name: 'editRule', desc: '', args: []);
+  }
+
+  /// `Override mode`
+  String get overrideMode {
+    return Intl.message(
+      'Override mode',
+      name: 'overrideMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Standard mode, override basic configuration, provide simple rule addition capability`
+  String get standardModeDesc {
+    return Intl.message(
+      'Standard mode, override basic configuration, provide simple rule addition capability',
+      name: 'standardModeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Script mode, use external extension scripts, provide one-click override configuration capability`
+  String get scriptModeDesc {
+    return Intl.message(
+      'Script mode, use external extension scripts, provide one-click override configuration capability',
+      name: 'scriptModeDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added rules`
+  String get addedRules {
+    return Intl.message('Added rules', name: 'addedRules', desc: '', args: []);
+  }
+
+  /// `Control global added rules`
+  String get controlGlobalAddedRules {
+    return Intl.message(
+      'Control global added rules',
+      name: 'controlGlobalAddedRules',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Override script`
+  String get overrideScript {
+    return Intl.message(
+      'Override script',
+      name: 'overrideScript',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to configure script`
+  String get goToConfigureScript {
+    return Intl.message(
+      'Go to configure script',
+      name: 'goToConfigureScript',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit global rules`
+  String get editGlobalRules {
+    return Intl.message(
+      'Edit global rules',
+      name: 'editGlobalRules',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `External fetch`
+  String get externalFetch {
+    return Intl.message(
+      'External fetch',
+      name: 'externalFetch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to force crash the core?`
+  String get confirmForceCrashCore {
+    return Intl.message(
+      'Are you sure you want to force crash the core?',
+      name: 'confirmForceCrashCore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to clear all data?`
+  String get confirmClearAllData {
+    return Intl.message(
+      'Are you sure you want to clear all data?',
+      name: 'confirmClearAllData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load test`
+  String get loadTest {
+    return Intl.message('Load test', name: 'loadTest', desc: '', args: []);
   }
 }
 

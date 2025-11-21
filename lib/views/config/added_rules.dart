@@ -71,7 +71,7 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
     final selectedRules = vm2.a;
     final rules = vm2.b;
     return BaseScaffold(
-      title: '附加规则',
+      title: appLocalizations.addedRules,
       actions: [
         if (selectedRules.isNotEmpty) ...[
           CommonMinIconButtonTheme(

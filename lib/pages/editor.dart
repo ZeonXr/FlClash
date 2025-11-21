@@ -230,7 +230,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                     if (widget.supportRemoteDownload && !readOnly)
                       PopupMenuItemData(
                         icon: Icons.arrow_downward,
-                        label: '外部获取',
+                        label: appLocalizations.externalFetch,
                         subItems: [
                           PopupMenuItemData(
                             label: appLocalizations.importUrl,
