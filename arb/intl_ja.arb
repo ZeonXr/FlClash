@@ -450,5 +450,11 @@
   "externalFetch": "外部取得",
   "confirmForceCrashCore": "コアを強制的にクラッシュさせてもよろしいですか？",
   "confirmClearAllData": "すべてのデータをクリアしてもよろしいですか？",
-  "loadTest": "読み込みテスト"
+  "loadTest": "読み込みテスト",
+  "yearsAgo": "{count}年前",
+  "monthsAgo": "{count}ヶ月前",
+  "daysAgo": "{count}日前",
+  "hoursAgo": "{count}時間前",
+  "minutesAgo": "{count}分前",
+  "justNow": "たった今"
 }

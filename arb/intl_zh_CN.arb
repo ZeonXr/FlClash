@@ -450,5 +450,11 @@
   "externalFetch": "外部获取",
   "confirmForceCrashCore": "确定要强制崩溃核心？",
   "confirmClearAllData": "确定要清除所有数据？",
-  "loadTest": "加载测试"
+  "loadTest": "加载测试",
+  "yearsAgo": "{count} 年前",
+  "monthsAgo": "{count} 个月前",
+  "daysAgo": "{count} 天前",
+  "hoursAgo": "{count} 小时前",
+  "minutesAgo": "{count} 分钟前",
+  "justNow": "刚刚"
 }

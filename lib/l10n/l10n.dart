@@ -3513,6 +3513,71 @@ class AppLocalizations {
   String get loadTest {
     return Intl.message('Load test', name: 'loadTest', desc: '', args: []);
   }
+
+  /// `{count, plural, =1{1 year ago} other{{count} years ago}}`
+  String yearsAgo(num count) {
+    return Intl.plural(
+      count,
+      one: '1 year ago',
+      other: '$count years ago',
+      name: 'yearsAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count, plural, =1{1 month ago} other{{count} months ago}}`
+  String monthsAgo(num count) {
+    return Intl.plural(
+      count,
+      one: '1 month ago',
+      other: '$count months ago',
+      name: 'monthsAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count, plural, =1{1 day ago} other{{count} days ago}}`
+  String daysAgo(num count) {
+    return Intl.plural(
+      count,
+      one: '1 day ago',
+      other: '$count days ago',
+      name: 'daysAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count, plural, =1{1 hour ago} other{{count} hours ago}}`
+  String hoursAgo(num count) {
+    return Intl.plural(
+      count,
+      one: '1 hour ago',
+      other: '$count hours ago',
+      name: 'hoursAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count, plural, =1{1 minute ago} other{{count} minutes ago}}`
+  String minutesAgo(num count) {
+    return Intl.plural(
+      count,
+      one: '1 minute ago',
+      other: '$count minutes ago',
+      name: 'minutesAgo',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

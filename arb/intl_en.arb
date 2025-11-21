@@ -449,5 +449,11 @@
   "externalFetch": "External fetch",
   "confirmForceCrashCore": "Are you sure you want to force crash the core?",
   "confirmClearAllData": "Are you sure you want to clear all data?",
-  "loadTest": "Load test"
+  "loadTest": "Load test",
+  "yearsAgo": "{count, plural, =1{1 year ago} other{{count} years ago}}",
+  "monthsAgo": "{count, plural, =1{1 month ago} other{{count} months ago}}",
+  "daysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "hoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "minutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "justNow": "Just now"
 }
