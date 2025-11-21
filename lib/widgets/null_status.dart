@@ -22,6 +22,7 @@ class NullStatus extends StatelessWidget {
             width: 200,
             height: 200,
           ),
+          SizedBox(height: 16),
           Text(
             label,
             style: Theme.of(context).textTheme.titleMedium?.toBold.toLight,
@@ -46,33 +47,45 @@ class ThemeAwareSvg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
-    return FutureBuilder<String>(
-      future: rootBundle.loadString(assetPath),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          String svgString = snapshot.data!;
-          svgString = svgString.replaceAll(
-            '#E8DEF8',
-            '#${_colorToHex(colorScheme.secondaryContainer)}',
-          );
-          svgString = svgString.replaceAll(
-            '#6750A4',
-            '#${_colorToHex(colorScheme.primary)}',
-          );
-          svgString = svgString.replaceAll(
-            '#FDF7FF',
-            '#${_colorToHex(colorScheme.surface)}',
-          );
-          svgString = svgString.replaceAll(
-            '#C4C7C5',
-            '#${_colorToHex(colorScheme.outlineVariant)}',
-          );
-          return SvgPicture.string(svgString, width: width, height: height);
-        } else if (snapshot.hasError) {
-          return const Icon(Icons.error);
-        }
-        return SizedBox(width: width, height: height);
-      },
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 3,
+          innerRadiusRatio: 1,
+          pointRounding: 0.3,
+          valleyRounding: 0.5,
+          squash: 0.2,
+        ),
+      ),
+      child: FutureBuilder<String>(
+        future: rootBundle.loadString(assetPath),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            String svgString = snapshot.data!;
+            svgString = svgString.replaceAll(
+              '#E8DEF8',
+              '#${_colorToHex(colorScheme.secondaryContainer)}',
+            );
+            svgString = svgString.replaceAll(
+              '#6750A4',
+              '#${_colorToHex(colorScheme.primary)}',
+            );
+            svgString = svgString.replaceAll(
+              '#FDF7FF',
+              '#${_colorToHex(colorScheme.surface)}',
+            );
+            svgString = svgString.replaceAll(
+              '#C4C7C5',
+              '#${_colorToHex(colorScheme.outlineVariant)}',
+            );
+            return SvgPicture.string(svgString, width: width, height: height);
+          } else if (snapshot.hasError) {
+            return const Icon(Icons.error);
+          }
+          return SizedBox(width: width, height: height);
+        },
+      ),
     );
   }
 }
