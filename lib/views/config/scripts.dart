@@ -40,6 +40,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
         final scripts = ref.watch(scriptsProvider);
         if (scripts.isEmpty) {
           return NullStatus(
+            illustration: ScriptEmptyIllustration(),
             label: appLocalizations.nullTip(appLocalizations.script),
           );
         }

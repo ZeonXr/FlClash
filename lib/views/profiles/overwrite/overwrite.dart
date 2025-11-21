@@ -470,7 +470,10 @@ class _EditGlobalAddedRules extends ConsumerWidget {
     return BaseScaffold(
       title: appLocalizations.editGlobalRules,
       body: rules.isEmpty
-          ? NullStatus(label: appLocalizations.noData)
+          ? NullStatus(
+              label: appLocalizations.nullTip(appLocalizations.rule),
+              illustration: RuleEmptyIllustration(),
+            )
           : ListView.builder(
               padding: EdgeInsets.all(16),
               itemBuilder: (context, index) {

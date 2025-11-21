@@ -98,7 +98,10 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
         SizedBox(width: 8),
       ],
       body: rules.isEmpty
-          ? NullStatus(label: appLocalizations.nullTip(appLocalizations.rule))
+          ? NullStatus(
+              label: appLocalizations.nullTip(appLocalizations.rule),
+              illustration: RuleEmptyIllustration(),
+            )
           : ReorderableList(
               padding: EdgeInsets.all(16),
               itemBuilder: (context, index) {

@@ -174,6 +174,7 @@ class ProxiesTabViewState extends ConsumerState<ProxiesTabView>
     final groups = state.groups;
     if (groups.isEmpty) {
       return NullStatus(
+        illustration: ProxyEmptyIllustration(),
         label: appLocalizations.nullTip(appLocalizations.proxies),
       );
     }

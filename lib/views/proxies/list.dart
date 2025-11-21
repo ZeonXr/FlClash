@@ -290,6 +290,7 @@ class _ProxiesListViewState extends State<ProxiesListView> {
         ref.watch(themeSettingProvider.select((state) => state.textScale));
         if (state.groups.isEmpty) {
           return NullStatus(
+            illustration: ProxyEmptyIllustration(),
             label: appLocalizations.nullTip(appLocalizations.proxies),
           );
         }

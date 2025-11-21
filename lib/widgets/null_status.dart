@@ -5,8 +5,13 @@ import 'package:flutter_svg/svg.dart';
 
 class NullStatus extends StatelessWidget {
   final String label;
+  final Widget illustration;
 
-  const NullStatus({super.key, required this.label});
+  const NullStatus({
+    super.key,
+    required this.label,
+    this.illustration = const DataEmptyIllustration(),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +22,7 @@ class NullStatus extends StatelessWidget {
         runAlignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          ThemeAwareSvg(
-            'assets/images/empty_data.svg',
-            width: 200,
-            height: 200,
-          ),
+          illustration,
           SizedBox(height: 16),
           Text(
             label,
@@ -33,20 +34,53 @@ class NullStatus extends StatelessWidget {
   }
 }
 
-class ThemeAwareSvg extends StatelessWidget {
-  final String assetPath;
-  final double? width;
-  final double? height;
-
-  const ThemeAwareSvg(this.assetPath, {super.key, this.width, this.height});
-
-  String _colorToHex(Color color) {
-    return color.toARGB32().toRadixString(16).substring(2);
-  }
+class LogEmptyIllustration extends StatelessWidget {
+  const LogEmptyIllustration({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = context.colorScheme;
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.primaryContainer,
+        shape: StarBorder(
+          points: 5,
+          innerRadiusRatio: 0.8,
+          pointRounding: 0.7,
+          valleyRounding: 0.1,
+          squash: 0.5,
+        ),
+      ),
+      child: _ThemeAwareSvg('assets/images/empty/log.svg'),
+    );
+  }
+}
+
+class ProxyEmptyIllustration extends StatelessWidget {
+  const ProxyEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 12,
+          innerRadiusRatio: 0.8,
+          pointRounding: 0.5,
+          valleyRounding: 0.4,
+          squash: 0.6,
+        ),
+      ),
+      child: _ThemeAwareSvg('assets/images/empty/proxy.svg'),
+    );
+  }
+}
+
+class DataEmptyIllustration extends StatelessWidget {
+  const DataEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
         color: context.colorScheme.secondaryContainer,
@@ -58,34 +92,137 @@ class ThemeAwareSvg extends StatelessWidget {
           squash: 0.2,
         ),
       ),
-      child: FutureBuilder<String>(
-        future: rootBundle.loadString(assetPath),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            String svgString = snapshot.data!;
-            svgString = svgString.replaceAll(
-              '#E8DEF8',
-              '#${_colorToHex(colorScheme.secondaryContainer)}',
-            );
-            svgString = svgString.replaceAll(
-              '#6750A4',
-              '#${_colorToHex(colorScheme.primary)}',
-            );
-            svgString = svgString.replaceAll(
-              '#FDF7FF',
-              '#${_colorToHex(colorScheme.surface)}',
-            );
-            svgString = svgString.replaceAll(
-              '#C4C7C5',
-              '#${_colorToHex(colorScheme.outlineVariant)}',
-            );
-            return SvgPicture.string(svgString, width: width, height: height);
-          } else if (snapshot.hasError) {
-            return const Icon(Icons.error);
-          }
-          return SizedBox(width: width, height: height);
-        },
+      child: _ThemeAwareSvg('assets/images/empty/data.svg'),
+    );
+  }
+}
+
+class ProfileEmptyIllustration extends StatelessWidget {
+  const ProfileEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 8,
+          innerRadiusRatio: 0.6,
+          pointRounding: 1,
+          valleyRounding: 0,
+          squash: 1,
+        ),
       ),
+      child: _ThemeAwareSvg('assets/images/empty/profile.svg'),
+    );
+  }
+}
+
+class ScriptEmptyIllustration extends StatelessWidget {
+  const ScriptEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 3,
+          innerRadiusRatio: 0.6,
+          pointRounding: 0.6,
+          valleyRounding: 0.2,
+          squash: 0.1,
+        ),
+      ),
+      child: _ThemeAwareSvg('assets/images/empty/script.svg'),
+    );
+  }
+}
+
+class RuleEmptyIllustration extends StatelessWidget {
+  const RuleEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 7,
+          innerRadiusRatio: 0.3,
+          pointRounding: 0.9,
+          valleyRounding: 0.1,
+          squash: 0,
+        ),
+      ),
+      child: _ThemeAwareSvg('assets/images/empty/rule.svg'),
+    );
+  }
+}
+
+class ConnectionEmptyIllustration extends StatelessWidget {
+  const ConnectionEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: StarBorder(
+          points: 4,
+          innerRadiusRatio: 0.1,
+          pointRounding: 1,
+          valleyRounding: 0,
+          squash: 1,
+          rotation: 45,
+        ),
+      ),
+      child: _ThemeAwareSvg('assets/images/empty/connection.svg'),
+    );
+  }
+}
+
+class _ThemeAwareSvg extends StatelessWidget {
+  final String assetPath;
+  final Color? surface;
+  final Color? primary;
+
+  const _ThemeAwareSvg(this.assetPath, {this.surface, this.primary});
+
+  String _colorToHex(Color color) {
+    return color.toARGB32().toRadixString(16).substring(2);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = context.colorScheme;
+    return FutureBuilder<String>(
+      future: rootBundle.loadString(assetPath),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          String svgString = snapshot.data!;
+          svgString = svgString.replaceAll(
+            '#E8DEF8',
+            '#${_colorToHex(colorScheme.secondaryContainer)}',
+          );
+          svgString = svgString.replaceAll(
+            '#6750A4',
+            '#${_colorToHex(primary ?? colorScheme.primary)}',
+          );
+          svgString = svgString.replaceAll(
+            '#FDF7FF',
+            '#${_colorToHex(surface ?? colorScheme.surface)}',
+          );
+          svgString = svgString.replaceAll(
+            '#C4C7C5',
+            '#${_colorToHex(colorScheme.outlineVariant)}',
+          );
+          return SvgPicture.string(svgString, width: 200, height: 200);
+        } else if (snapshot.hasError) {
+          return const Icon(Icons.error);
+        }
+        return SizedBox(width: 200, height: 200);
+      },
     );
   }
 }

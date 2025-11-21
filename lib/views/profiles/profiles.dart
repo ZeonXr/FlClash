@@ -136,7 +136,10 @@ class _ProfilesViewState extends State<ProfilesView> {
             profilesSelectorStateProvider,
           );
           if (profilesSelectorState.profiles.isEmpty) {
-            return NullStatus(label: appLocalizations.nullProfileDesc);
+            return NullStatus(
+              label: appLocalizations.nullProfileDesc,
+              illustration: ProfileEmptyIllustration(),
+            );
           }
           return Align(
             alignment: Alignment.topCenter,
