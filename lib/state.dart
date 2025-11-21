@@ -424,6 +424,11 @@ class GlobalState {
     if (script != null) {
       rawConfig = await handleEvaluate(script, rawConfig);
     }
+    final directory = await appPath.profilesPath;
+    String getProvidersFilePathInner(String id, String type, String url) {
+      return join(directory, 'providers', id, type, url.toMd5());
+    }
+
     final res = await Isolate.run<Map<String, dynamic>>(() async {
       rawConfig['external-controller'] =
           realPatchConfig.externalController.value;
@@ -474,7 +479,7 @@ class GlobalState {
             continue;
           }
           if (proxyProvider['url'] != null) {
-            proxyProvider['path'] = await appPath.getProvidersFilePath(
+            proxyProvider['path'] = getProvidersFilePathInner(
               profile.id,
               'proxies',
               proxyProvider['url'],
@@ -490,7 +495,7 @@ class GlobalState {
             continue;
           }
           if (ruleProvider['url'] != null) {
-            ruleProvider['path'] = await appPath.getProvidersFilePath(
+            ruleProvider['path'] = getProvidersFilePathInner(
               profile.id,
               'rules',
               ruleProvider['url'],
@@ -537,10 +542,10 @@ class GlobalState {
         rules = rawConfig['rules'];
       }
       rawConfig.remove('rules');
-      if (addedRules.isNotEmpty) {
-        final realAddedRules = addedRules.map((item) => item.value).toList();
-        rules = [...rules, ...realAddedRules];
-      }
+      // if (addedRules.isNotEmpty) {
+      //   final realAddedRules = addedRules.map((item) => item.value).toList();
+      //   rules = [...rules, ...realAddedRules];
+      // }
       rawConfig['rules'] = rules;
       return rawConfig;
     });
