@@ -348,7 +348,9 @@ class _ScriptContent extends ConsumerWidget {
         SliverToBoxAdapter(child: SizedBox(height: 24)),
         SliverToBoxAdapter(
           child: Column(
-            children: [InfoHeader(info: Info(label: appLocalizations.overrideScript))],
+            children: [
+              InfoHeader(info: Info(label: appLocalizations.overrideScript)),
+            ],
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: 8)),
@@ -379,14 +381,12 @@ class _ScriptContent extends ConsumerWidget {
                             Radio(
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity.compact,
                               toggleable: true,
                               value: script.id,
                               groupValue: scriptId,
-                              onChanged: (value) {
-                                if (value == null) {
-                                  return;
-                                }
-                                _handleChange(ref, value);
+                              onChanged: (_) {
+                                _handleChange(ref, script.id);
                               },
                             ),
                             SizedBox(width: 8),
@@ -422,7 +422,10 @@ class _ScriptContent extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
-                      child: Text(appLocalizations.goToConfigureScript, style: context.textTheme.bodyLarge),
+                      child: Text(
+                        appLocalizations.goToConfigureScript,
+                        style: context.textTheme.bodyLarge,
+                      ),
                     ),
                     SizedBox(width: 4),
                     Icon(Icons.arrow_forward, size: 18),

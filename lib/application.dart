@@ -24,7 +24,6 @@ class Application extends ConsumerStatefulWidget {
 }
 
 class ApplicationState extends ConsumerState<Application> {
-  Timer? _autoUpdateGroupTaskTimer;
   Timer? _autoUpdateProfilesTaskTimer;
 
   final _pageTransitionsTheme = const PageTransitionsTheme(
@@ -162,7 +161,6 @@ class ApplicationState extends ConsumerState<Application> {
   @override
   Future<void> dispose() async {
     linkManager.destroy();
-    _autoUpdateGroupTaskTimer?.cancel();
     _autoUpdateProfilesTaskTimer?.cancel();
     await coreController.destroy();
     await globalState.appController.savePreferences();

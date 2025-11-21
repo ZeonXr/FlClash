@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
@@ -72,8 +73,45 @@ class CommonDesktopRoute<T> extends PageRoute<T> {
   Duration get reverseTransitionDuration => Duration(milliseconds: 200);
 }
 
-class CommonRoute<T> extends MaterialPageRoute<T> {
-  CommonRoute({required super.builder});
+class CommonRoute<T> extends PageRoute<T> {
+  final Widget Function(BuildContext context) builder;
+
+  CommonRoute({required this.builder});
+
+  @override
+  Color? get barrierColor => null;
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
+    final Widget result = builder(context);
+    return Semantics(
+      scopesRoute: true,
+      explicitChildNodes: true,
+      child: SharedAxisTransition(
+        animation: animation,
+        secondaryAnimation: secondaryAnimation,
+        transitionType: SharedAxisTransitionType.horizontal,
+        fillColor: context.colorScheme.surface,
+        child: result,
+      ),
+    );
+  }
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 300);
+
+  @override
+  Duration get reverseTransitionDuration => Duration(milliseconds: 300);
 }
 
 final Animatable<Offset> _kRightMiddleTween = Tween<Offset>(

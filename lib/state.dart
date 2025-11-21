@@ -470,7 +470,7 @@ class GlobalState {
 
     rawConfig['profile']['store-selected'] = false;
     rawConfig['geox-url'] = realPatchConfig.geoXUrl.toJson();
-    rawConfig['global-ua'] = realPatchConfig.globalUa;
+    rawConfig['global-ua'] = realPatchConfig.globalUa ?? packageInfo.ua;
     if (rawConfig['hosts'] == null) {
       rawConfig['hosts'] = {};
     }
