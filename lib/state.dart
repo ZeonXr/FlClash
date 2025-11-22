@@ -583,7 +583,7 @@ class GlobalState {
         } else {
           finalAddedRules = addedRules.map((e) => e.value).toList();
         }
-        rules = [...rules, ...finalAddedRules];
+        rules = [...finalAddedRules, ...rules];
       }
       rawConfig['rules'] = rules;
       return rawConfig;
