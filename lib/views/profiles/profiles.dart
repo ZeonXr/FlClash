@@ -218,6 +218,7 @@ class ProfileItem extends StatelessWidget {
     if (!context.mounted) {
       return;
     }
+
     final previewPage = EditorPage(
       title: profile.label ?? profile.id,
       content: content,

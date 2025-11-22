@@ -532,20 +532,58 @@ class GlobalState {
         }
       }
       if (appendSystemDns) {
-        final List<dynamic> nameserver = rawConfig['dns']['nameserver'] ?? [];
+        final List<String> nameserver = List<String>.from(
+          rawConfig['dns']['nameserver'] ?? [],
+        );
         if (!nameserver.contains(systemDns)) {
           rawConfig['dns']['nameserver'] = [...nameserver, systemDns];
         }
       }
-      List rules = [];
+      List<String> rules = [];
       if (rawConfig['rules'] != null) {
-        rules = rawConfig['rules'];
+        rules = List<String>.from(rawConfig['rules']);
       }
       rawConfig.remove('rules');
-      // if (addedRules.isNotEmpty) {
-      //   final realAddedRules = addedRules.map((item) => item.value).toList();
-      //   rules = [...rules, ...realAddedRules];
-      // }
+      if (addedRules.isNotEmpty) {
+        final parsedNewRules = addedRules
+            .map((item) => ParsedRule.parseString(item.value))
+            .toList();
+        final hasMatchPlaceholder = parsedNewRules.any(
+          (item) => item.ruleTarget?.toUpperCase() == 'MATCH',
+        );
+        String? replacementTarget;
+
+        if (hasMatchPlaceholder) {
+          for (int i = rules.length - 1; i >= 0; i--) {
+            final parsed = ParsedRule.parseString(rules[i]);
+            if (parsed.ruleAction == RuleAction.MATCH) {
+              final target = parsed.ruleTarget;
+              if (target != null && target.isNotEmpty) {
+                replacementTarget = target;
+                break;
+              }
+            }
+          }
+        }
+        final List<String> finalAddedRules;
+
+        if (replacementTarget?.isNotEmpty == true) {
+          finalAddedRules = [];
+          for (int i = 0; i < parsedNewRules.length; i++) {
+            final parsed = parsedNewRules[i];
+            if (parsed.ruleTarget?.toUpperCase() == 'MATCH') {
+              finalAddedRules.add(
+                parsed.copyWith(ruleTarget: replacementTarget).value,
+              );
+            } else {
+              finalAddedRules.add(addedRules[i].value);
+            }
+          }
+        } else {
+          finalAddedRules = addedRules.map((e) => e.value).toList();
+        }
+        rules = [...rules, ...finalAddedRules];
+      }
       rawConfig['rules'] = rules;
       return rawConfig;
     });

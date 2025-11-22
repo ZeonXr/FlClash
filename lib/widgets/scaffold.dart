@@ -328,6 +328,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
     return Scaffold(
       appBar: _buildAppBar(backActionProvider?.backAction),
       body: body,
+      resizeToAvoidBottomInset: false,
       backgroundColor: widget.backgroundColor,
       floatingActionButton:
           widget.floatingActionButton ??

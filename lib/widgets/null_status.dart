@@ -184,10 +184,8 @@ class ConnectionEmptyIllustration extends StatelessWidget {
 
 class _ThemeAwareSvg extends StatelessWidget {
   final String assetPath;
-  final Color? surface;
-  final Color? primary;
 
-  const _ThemeAwareSvg(this.assetPath, {this.surface, this.primary});
+  const _ThemeAwareSvg(this.assetPath);
 
   String _colorToHex(Color color) {
     return color.toARGB32().toRadixString(16).substring(2);
@@ -205,13 +203,15 @@ class _ThemeAwareSvg extends StatelessWidget {
             '#E8DEF8',
             '#${_colorToHex(colorScheme.secondaryContainer)}',
           );
+          // primary ??
           svgString = svgString.replaceAll(
             '#6750A4',
-            '#${_colorToHex(primary ?? colorScheme.primary)}',
+            '#${_colorToHex(colorScheme.primary)}',
           );
+          // surface ??
           svgString = svgString.replaceAll(
             '#FDF7FF',
-            '#${_colorToHex(surface ?? colorScheme.surface)}',
+            '#${_colorToHex(colorScheme.surface)}',
           );
           svgString = svgString.replaceAll(
             '#C4C7C5',
