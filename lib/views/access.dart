@@ -111,7 +111,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
         return AdaptiveSheetScaffold(
           type: type,
           body: AccessControlPanel(),
-          title: '访问控制设置',
+          title: appLocalizations.accessControlSettings,
         );
       },
     );
@@ -225,7 +225,9 @@ class _AccessViewState extends ConsumerState<AccessView> {
           items: [
             PopupMenuItemData(
               icon: Icons.swap_horiz,
-              label: enable ? '关闭' : '开启',
+              label: enable
+                  ? appLocalizations.turnOff
+                  : appLocalizations.turnOn,
               onPressed: _handleToggle,
             ),
             PopupMenuItemData(
@@ -249,12 +251,12 @@ class _AccessViewState extends ConsumerState<AccessView> {
                 ),
                 PopupMenuItemData(
                   icon: Icons.content_copy,
-                  label: '导出至剪切板',
+                  label: appLocalizations.clipboardExport,
                   onPressed: _exportToClipboard,
                 ),
                 PopupMenuItemData(
                   icon: Icons.paste,
-                  label: '从剪切板导入',
+                  label: appLocalizations.clipboardImport,
                   onPressed: _importFormClipboard,
                 ),
               ],

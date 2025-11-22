@@ -456,5 +456,8 @@
   "hoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
   "minutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
   "justNow": "Just now",
-  "noLongerRemind": "Don't remind again"
+  "noLongerRemind": "Don't remind again",
+  "accessControlSettings": "Access Control Settings",
+  "turnOn": "Turn On",
+  "turnOff": "Turn Off"
 }

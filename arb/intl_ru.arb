@@ -457,5 +457,8 @@
   "hoursAgo": "{count, plural, one{{count} час назад} few{{count} часа назад} many{{count} часов назад} other{{count} часа назад}}",
   "minutesAgo": "{count, plural, one{{count} минута назад} few{{count} минуты назад} many{{count} минут назад} other{{count} минуты назад}}",
   "justNow": "Только что",
-  "noLongerRemind": "Больше не напоминать"
+  "noLongerRemind": "Больше не напоминать",
+  "accessControlSettings": "Настройки контроля доступа",
+  "turnOn": "Включить",
+  "turnOff": "Выключить"
 }

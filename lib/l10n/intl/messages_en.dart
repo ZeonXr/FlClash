@@ -70,6 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "accessControlNotAllowDesc": MessageLookupByLibrary.simpleMessage(
       "The selected application will be excluded from VPN",
     ),
+    "accessControlSettings": MessageLookupByLibrary.simpleMessage(
+      "Access Control Settings",
+    ),
     "account": MessageLookupByLibrary.simpleMessage("Account"),
     "action": MessageLookupByLibrary.simpleMessage("Action"),
     "action_mode": MessageLookupByLibrary.simpleMessage("Switch mode"),
@@ -781,6 +784,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "tunDesc": MessageLookupByLibrary.simpleMessage(
       "only effective in administrator mode",
     ),
+    "turnOff": MessageLookupByLibrary.simpleMessage("Turn Off"),
+    "turnOn": MessageLookupByLibrary.simpleMessage("Turn On"),
     "twoColumns": MessageLookupByLibrary.simpleMessage("Two columns"),
     "unableToUpdateCurrentProfileDesc": MessageLookupByLibrary.simpleMessage(
       "unable to update current profile",

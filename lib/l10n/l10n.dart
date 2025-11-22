@@ -3588,6 +3588,26 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Access Control Settings`
+  String get accessControlSettings {
+    return Intl.message(
+      'Access Control Settings',
+      name: 'accessControlSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Turn On`
+  String get turnOn {
+    return Intl.message('Turn On', name: 'turnOn', desc: '', args: []);
+  }
+
+  /// `Turn Off`
+  String get turnOff {
+    return Intl.message('Turn Off', name: 'turnOff', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
