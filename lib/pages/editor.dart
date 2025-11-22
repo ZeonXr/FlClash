@@ -56,7 +56,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
   void initState() {
     super.initState();
     readOnly = widget.onSave == null;
-    _focusNode = FocusNode(canRequestFocus: readOnly);
+    _focusNode = FocusNode(canRequestFocus: !readOnly);
     _controller = CodeLineEditingController.fromText(widget.content);
     _findController = CodeFindController(_controller);
     _titleController = TextEditingController(text: widget.title);
@@ -205,7 +205,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                 targetBuilder: (open) {
                   return IconButton(
                     onPressed: () {
-                      open(offset: Offset(0, 0));
+                      open(offset: Offset(0, -10));
                     },
                     icon: const Icon(Icons.more_vert),
                   );

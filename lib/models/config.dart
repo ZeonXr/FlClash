@@ -116,6 +116,11 @@ extension AccessControlExt on AccessControl {
     AccessControlMode.acceptSelected => acceptList,
     AccessControlMode.rejectSelected => rejectList,
   };
+
+  AccessControl updateListWith(List<String> value) => switch (mode) {
+    AccessControlMode.acceptSelected => copyWith(acceptList: value),
+    AccessControlMode.rejectSelected => copyWith(rejectList: value),
+  };
 }
 
 @freezed

@@ -407,9 +407,7 @@ class ListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding:
-          padding ??
-          const EdgeInsets.only(left: 16, right: 8, top: 24, bottom: 8),
+      padding: padding ?? listHeaderPadding,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -450,6 +448,7 @@ List<Widget> generateSection({
   String? title,
   required Iterable<Widget> items,
   List<Widget>? actions,
+  bool isFirst = false,
   bool separated = true,
 }) {
   final genItems = separated
@@ -457,7 +456,13 @@ List<Widget> generateSection({
       : items;
   return [
     if (items.isNotEmpty && title != null)
-      ListHeader(title: title, actions: actions),
+      ListHeader(
+        title: title,
+        actions: actions,
+        padding: isFirst
+            ? listHeaderPadding.copyWith(top: 8.ap)
+            : listHeaderPadding,
+      ),
     ...genItems,
   ];
 }

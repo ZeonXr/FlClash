@@ -54,7 +54,7 @@ Future<T?> showSheet<T>({
       context: context,
       isScrollControlled: props.isScrollControlled,
       builder: (_) {
-        return SafeArea(child: builder(context, SheetType.bottomSheet));
+        return builder(context, SheetType.bottomSheet);
       },
       showDragHandle: false,
       useSafeArea: props.useSafeArea,
@@ -166,6 +166,7 @@ class _AdaptiveSheetScaffoldState extends State<AdaptiveSheetScaffold> {
               child: appBar,
             ),
             Flexible(flex: 1, child: widget.body),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
           ],
         ),
       );

@@ -742,7 +742,7 @@ final class ProxiesListStateProvider
   }
 }
 
-String _$proxiesListStateHash() => r'b16ad96516ece78f6cb22f558a0535000b784317';
+String _$proxiesListStateHash() => r'32a748d651a6372b96931aae2100afc0529a83c9';
 
 @ProviderFor(proxiesTabState)
 const proxiesTabStateProvider = ProxiesTabStateProvider._();
@@ -784,7 +784,7 @@ final class ProxiesTabStateProvider
   }
 }
 
-String _$proxiesTabStateHash() => r'143b106d74da618327cbac48af15078efd8cabee';
+String _$proxiesTabStateHash() => r'510372c724217a41788129bc75fa1c4ec37c73c0';
 
 @ProviderFor(isStart)
 const isStartProvider = IsStartProvider._();
@@ -2315,53 +2315,6 @@ final class NeedUpdateGroupsProvider
 
 String _$needUpdateGroupsHash() => r'1d1fbf135b4b5d2a2ee984e421ccffe7c4bb0a47';
 
-@ProviderFor(addedRulesState)
-const addedRulesStateProvider = AddedRulesStateProvider._();
-
-final class AddedRulesStateProvider
-    extends
-        $FunctionalProvider<
-          VM2<Set<String>, List<Rule>>,
-          VM2<Set<String>, List<Rule>>,
-          VM2<Set<String>, List<Rule>>
-        >
-    with $Provider<VM2<Set<String>, List<Rule>>> {
-  const AddedRulesStateProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'addedRulesStateProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$addedRulesStateHash();
-
-  @$internal
-  @override
-  $ProviderElement<VM2<Set<String>, List<Rule>>> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  VM2<Set<String>, List<Rule>> create(Ref ref) {
-    return addedRulesState(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(VM2<Set<String>, List<Rule>> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<VM2<Set<String>, List<Rule>>>(value),
-    );
-  }
-}
-
-String _$addedRulesStateHash() => r'5093ce9dd8afbb6ae474bad577b02a75fb13aab3';
-
 @ProviderFor(androidState)
 const androidStateProvider = AndroidStateProvider._();
 
@@ -2404,29 +2357,22 @@ final class AndroidStateProvider
 String _$androidStateHash() => r'9f527fbb00c7e0c177f023e77d2f23458543d72f';
 
 @ProviderFor(Query)
-const queryProvider = QueryFamily._();
+const queryProvider = QueryProvider._();
 
 final class QueryProvider extends $NotifierProvider<Query, String> {
-  const QueryProvider._({
-    required QueryFamily super.from,
-    required QueryTag super.argument,
-  }) : super(
-         retry: null,
-         name: r'queryProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+  const QueryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'queryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$queryHash();
-
-  @override
-  String toString() {
-    return r'queryProvider'
-        ''
-        '($argument)';
-  }
 
   @$internal
   @override
@@ -2439,46 +2385,16 @@ final class QueryProvider extends $NotifierProvider<Query, String> {
       providerOverride: $SyncValueProvider<String>(value),
     );
   }
-
-  @override
-  bool operator ==(Object other) {
-    return other is QueryProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
 }
 
-String _$queryHash() => r'64c25c898d6d63f468d7e36fd591d390621c5624';
-
-final class QueryFamily extends $Family
-    with $ClassFamilyOverride<Query, String, String, String, QueryTag> {
-  const QueryFamily._()
-    : super(
-        retry: null,
-        name: r'queryProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  QueryProvider call(QueryTag id) => QueryProvider._(argument: id, from: this);
-
-  @override
-  String toString() => r'queryProvider';
-}
+String _$queryHash() => r'e99b2a2439872f88f09fee8d63f0cc7fb4852186';
 
 abstract class _$Query extends $Notifier<String> {
-  late final _$args = ref.$arg as QueryTag;
-  QueryTag get id => _$args;
-
-  String build(QueryTag id);
+  String build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build(_$args);
+    final created = build();
     final ref = this.ref as $Ref<String, String>;
     final element =
         ref.element
@@ -2533,28 +2449,28 @@ final class OverlayTopOffsetProvider
 
 String _$overlayTopOffsetHash() => r'b2462f67acbd88b7a881dfe4c6353e68ba49961d';
 
-@ProviderFor(SelectedRules)
-const selectedRulesProvider = SelectedRulesProvider._();
+@ProviderFor(SelectedIds)
+const selectedIdsProvider = SelectedIdsProvider._();
 
-final class SelectedRulesProvider
-    extends $NotifierProvider<SelectedRules, Set<String>> {
-  const SelectedRulesProvider._()
+final class SelectedIdsProvider
+    extends $NotifierProvider<SelectedIds, Set<String>> {
+  const SelectedIdsProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'selectedRulesProvider',
+        name: r'selectedIdsProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$selectedRulesHash();
+  String debugGetCreateSourceHash() => _$selectedIdsHash();
 
   @$internal
   @override
-  SelectedRules create() => SelectedRules();
+  SelectedIds create() => SelectedIds();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(Set<String> value) {
@@ -2565,9 +2481,9 @@ final class SelectedRulesProvider
   }
 }
 
-String _$selectedRulesHash() => r'f3d6c8d0c444e933738cb9069b54a99362562582';
+String _$selectedIdsHash() => r'c22de28608456be15d03cc7911274ea215caf952';
 
-abstract class _$SelectedRules extends $Notifier<Set<String>> {
+abstract class _$SelectedIds extends $Notifier<Set<String>> {
   Set<String> build();
   @$mustCallSuper
   @override
@@ -2662,4 +2578,58 @@ final class GetProfileOverwriteFamily extends $Family
 
   @override
   String toString() => r'getProfileOverwriteProvider';
+}
+
+@ProviderFor(AccessControlState)
+const accessControlStateProvider = AccessControlStateProvider._();
+
+final class AccessControlStateProvider
+    extends $NotifierProvider<AccessControlState, AccessControl> {
+  const AccessControlStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'accessControlStateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$accessControlStateHash();
+
+  @$internal
+  @override
+  AccessControlState create() => AccessControlState();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AccessControl value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AccessControl>(value),
+    );
+  }
+}
+
+String _$accessControlStateHash() =>
+    r'f7e23637439b8b6c80744d8fa83498edf15acc11';
+
+abstract class _$AccessControlState extends $Notifier<AccessControl> {
+  AccessControl build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AccessControl, AccessControl>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AccessControl, AccessControl>,
+              AccessControl,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
 }

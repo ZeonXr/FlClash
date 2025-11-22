@@ -851,7 +851,7 @@ $AppBarEditStateCopyWith<$Res>? get editState {
 /// @nodoc
 mixin _$AppBarSearchState {
 
-  Function(String) get onSearch; String? get query;
+  Function(String) get onSearch; bool get autoAddSearch; String? get query;
 /// Create a copy of AppBarSearchState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -862,16 +862,16 @@ $AppBarSearchStateCopyWith<AppBarSearchState> get copyWith => _$AppBarSearchStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppBarSearchState&&(identical(other.onSearch, onSearch) || other.onSearch == onSearch)&&(identical(other.query, query) || other.query == query));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppBarSearchState&&(identical(other.onSearch, onSearch) || other.onSearch == onSearch)&&(identical(other.autoAddSearch, autoAddSearch) || other.autoAddSearch == autoAddSearch)&&(identical(other.query, query) || other.query == query));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,onSearch,query);
+int get hashCode => Object.hash(runtimeType,onSearch,autoAddSearch,query);
 
 @override
 String toString() {
-  return 'AppBarSearchState(onSearch: $onSearch, query: $query)';
+  return 'AppBarSearchState(onSearch: $onSearch, autoAddSearch: $autoAddSearch, query: $query)';
 }
 
 
@@ -882,7 +882,7 @@ abstract mixin class $AppBarSearchStateCopyWith<$Res>  {
   factory $AppBarSearchStateCopyWith(AppBarSearchState value, $Res Function(AppBarSearchState) _then) = _$AppBarSearchStateCopyWithImpl;
 @useResult
 $Res call({
-  Function(String) onSearch, String? query
+  Function(String) onSearch, bool autoAddSearch, String? query
 });
 
 
@@ -899,10 +899,11 @@ class _$AppBarSearchStateCopyWithImpl<$Res>
 
 /// Create a copy of AppBarSearchState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? onSearch = null,Object? query = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? onSearch = null,Object? autoAddSearch = null,Object? query = freezed,}) {
   return _then(_self.copyWith(
 onSearch: null == onSearch ? _self.onSearch : onSearch // ignore: cast_nullable_to_non_nullable
-as  Function(String),query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as  Function(String),autoAddSearch: null == autoAddSearch ? _self.autoAddSearch : autoAddSearch // ignore: cast_nullable_to_non_nullable
+as bool,query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -988,10 +989,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(  Function(String) onSearch,  String? query)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(  Function(String) onSearch,  bool autoAddSearch,  String? query)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppBarSearchState() when $default != null:
-return $default(_that.onSearch,_that.query);case _:
+return $default(_that.onSearch,_that.autoAddSearch,_that.query);case _:
   return orElse();
 
 }
@@ -1009,10 +1010,10 @@ return $default(_that.onSearch,_that.query);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(  Function(String) onSearch,  String? query)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(  Function(String) onSearch,  bool autoAddSearch,  String? query)  $default,) {final _that = this;
 switch (_that) {
 case _AppBarSearchState():
-return $default(_that.onSearch,_that.query);case _:
+return $default(_that.onSearch,_that.autoAddSearch,_that.query);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1029,10 +1030,10 @@ return $default(_that.onSearch,_that.query);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(  Function(String) onSearch,  String? query)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(  Function(String) onSearch,  bool autoAddSearch,  String? query)?  $default,) {final _that = this;
 switch (_that) {
 case _AppBarSearchState() when $default != null:
-return $default(_that.onSearch,_that.query);case _:
+return $default(_that.onSearch,_that.autoAddSearch,_that.query);case _:
   return null;
 
 }
@@ -1044,10 +1045,11 @@ return $default(_that.onSearch,_that.query);case _:
 
 
 class _AppBarSearchState implements AppBarSearchState {
-  const _AppBarSearchState({required this.onSearch, this.query = null});
+  const _AppBarSearchState({required this.onSearch, this.autoAddSearch = true, this.query = null});
   
 
 @override final   Function(String) onSearch;
+@override@JsonKey() final  bool autoAddSearch;
 @override@JsonKey() final  String? query;
 
 /// Create a copy of AppBarSearchState
@@ -1060,16 +1062,16 @@ _$AppBarSearchStateCopyWith<_AppBarSearchState> get copyWith => __$AppBarSearchS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppBarSearchState&&(identical(other.onSearch, onSearch) || other.onSearch == onSearch)&&(identical(other.query, query) || other.query == query));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppBarSearchState&&(identical(other.onSearch, onSearch) || other.onSearch == onSearch)&&(identical(other.autoAddSearch, autoAddSearch) || other.autoAddSearch == autoAddSearch)&&(identical(other.query, query) || other.query == query));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,onSearch,query);
+int get hashCode => Object.hash(runtimeType,onSearch,autoAddSearch,query);
 
 @override
 String toString() {
-  return 'AppBarSearchState(onSearch: $onSearch, query: $query)';
+  return 'AppBarSearchState(onSearch: $onSearch, autoAddSearch: $autoAddSearch, query: $query)';
 }
 
 
@@ -1080,7 +1082,7 @@ abstract mixin class _$AppBarSearchStateCopyWith<$Res> implements $AppBarSearchS
   factory _$AppBarSearchStateCopyWith(_AppBarSearchState value, $Res Function(_AppBarSearchState) _then) = __$AppBarSearchStateCopyWithImpl;
 @override @useResult
 $Res call({
-  Function(String) onSearch, String? query
+  Function(String) onSearch, bool autoAddSearch, String? query
 });
 
 
@@ -1097,10 +1099,11 @@ class __$AppBarSearchStateCopyWithImpl<$Res>
 
 /// Create a copy of AppBarSearchState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? onSearch = null,Object? query = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? onSearch = null,Object? autoAddSearch = null,Object? query = freezed,}) {
   return _then(_AppBarSearchState(
 onSearch: null == onSearch ? _self.onSearch : onSearch // ignore: cast_nullable_to_non_nullable
-as  Function(String),query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as  Function(String),autoAddSearch: null == autoAddSearch ? _self.autoAddSearch : autoAddSearch // ignore: cast_nullable_to_non_nullable
+as bool,query: freezed == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

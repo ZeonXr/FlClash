@@ -74,6 +74,10 @@ class CommonScaffoldState extends State<CommonScaffold> {
     );
   }
 
+  void handleToSearch() {
+    _updateSearchState((state) => state?.copyWith(query: ''));
+  }
+
   set floatingActionButton(Widget? floatingActionButton) {
     if (_floatingActionButton.value != floatingActionButton) {
       _floatingActionButton.value = floatingActionButton;
@@ -132,7 +136,10 @@ class CommonScaffoldState extends State<CommonScaffold> {
     _updateSearchState((state) => state?.copyWith(query: null));
   }
 
-  void _handleExitSearching() {
+  void handleExitSearching() {
+    if (!_isSearch) {
+      return;
+    }
     _handleClearInput();
     _updateSearchState((state) => state?.copyWith(query: null));
   }
@@ -170,7 +177,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
     }
     if (_isSearch) {
       return IconButton(
-        onPressed: _handleExitSearching,
+        onPressed: handleExitSearching,
         icon: Icon(Icons.arrow_back),
       );
     }
@@ -215,7 +222,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
       ]);
     }
     return genActions([
-      if (hasSearch)
+      if (hasSearch && widget.searchState?.autoAddSearch == true)
         IconButton(
           onPressed: () {
             _updateSearchState((state) => state?.copyWith(query: ''));
@@ -233,7 +240,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
         child: CommonPopScope(
           onPop: (context) {
             if (_isEdit || _isSearch) {
-              _handleExitSearching();
+              handleExitSearching();
               _appBarState.value.editState?.onExit();
               return false;
             }

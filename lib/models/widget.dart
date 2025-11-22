@@ -5,9 +5,7 @@ part 'generated/widget.freezed.dart';
 
 @freezed
 abstract class ActivateState with _$ActivateState {
-  const factory ActivateState({
-    required bool active,
-  }) = _ActivateState;
+  const factory ActivateState({required bool active}) = _ActivateState;
 }
 
 @freezed
@@ -32,6 +30,7 @@ abstract class AppBarState with _$AppBarState {
 abstract class AppBarSearchState with _$AppBarSearchState {
   const factory AppBarSearchState({
     required Function(String) onSearch,
+    @Default(true) bool autoAddSearch,
     @Default(null) String? query,
   }) = _AppBarSearchState;
 }

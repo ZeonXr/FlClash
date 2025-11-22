@@ -31,7 +31,7 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
   }
 
   void _handleSelected(String ruleId) {
-    ref.read(selectedRulesProvider.notifier).update((selectedRules) {
+    ref.read(selectedIdsProvider.notifier).update((selectedRules) {
       final newSelectedRules = Set<String>.from(selectedRules)
         ..addOrRemove(ruleId);
       return newSelectedRules;
@@ -40,7 +40,7 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
 
   void _handleSelectAll() {
     final ids = ref.read(rulesProvider).map((item) => item.id).toSet();
-    ref.read(selectedRulesProvider.notifier).update((selected) {
+    ref.read(selectedIdsProvider.notifier).update((selected) {
       return selected.containsAll(ids) ? {} : ids;
     });
   }
@@ -55,21 +55,20 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
     if (res != true) {
       return;
     }
-    final selectedRules = ref.read(selectedRulesProvider);
+    final selectedRules = ref.read(selectedIdsProvider);
     ref.read(rulesProvider.notifier).update((rules) {
       final newRules = List<Rule>.from(
         rules.where((item) => !selectedRules.contains(item.id)),
       );
       return newRules;
     });
-    ref.read(selectedRulesProvider.notifier).value = {};
+    ref.read(selectedIdsProvider.notifier).value = {};
   }
 
   @override
   Widget build(BuildContext context) {
-    final vm2 = ref.watch(addedRulesStateProvider);
-    final selectedRules = vm2.a;
-    final rules = vm2.b;
+    final rules = ref.watch(rulesProvider);
+    final selectedRules = ref.watch(selectedIdsProvider);
     return BaseScaffold(
       title: appLocalizations.addedRules,
       actions: [

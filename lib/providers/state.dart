@@ -274,7 +274,9 @@ GroupsState filterGroupsState(Ref ref, String query) {
 
 @riverpod
 ProxiesListState proxiesListState(Ref ref) {
-  final query = ref.watch(queryProvider(QueryTag.proxies));
+  final query = ref.watch(
+    queryMapProvider.select((state) => state[QueryTag.proxies] ?? ''),
+  );
   final currentGroups = ref.watch(filterGroupsStateProvider(query));
   final currentUnfoldSet = ref.watch(unfoldSetProvider);
   final cardType = ref.watch(
@@ -292,7 +294,9 @@ ProxiesListState proxiesListState(Ref ref) {
 
 @riverpod
 ProxiesTabState proxiesTabState(Ref ref) {
-  final query = ref.watch(queryProvider(QueryTag.proxies));
+  final query = ref.watch(
+    queryMapProvider.select((state) => state[QueryTag.proxies] ?? ''),
+  );
   final currentGroups = ref.watch(filterGroupsStateProvider(query));
   final currentGroupName = ref.watch(
     currentProfileProvider.select((state) => state?.currentGroupName),
@@ -626,13 +630,6 @@ VM3<bool, int, ProxiesSortType> needUpdateGroups(Ref ref) {
 }
 
 @riverpod
-VM2<Set<String>, List<Rule>> addedRulesState(Ref ref) {
-  final selectedRules = ref.watch(selectedRulesProvider);
-  final rules = ref.watch(rulesProvider);
-  return VM2(a: selectedRules, b: rules);
-}
-
-@riverpod
 AndroidState androidState(Ref ref) {
   final currentProfileName = ref.watch(
     currentProfileProvider.select((state) => state?.label ?? ''),
@@ -653,10 +650,9 @@ AndroidState androidState(Ref ref) {
 }
 
 @riverpod
-class Query extends _$Query {
+class Query extends _$Query with AutoDisposeNotifierMixin {
   @override
-  String build(QueryTag id) =>
-      ref.watch(queryMapProvider.select((state) => state[id] ?? ''));
+  String build() => '';
 }
 
 @riverpod
@@ -672,7 +668,7 @@ double overlayTopOffset(Ref ref) {
 }
 
 @riverpod
-class SelectedRules extends _$SelectedRules with AutoDisposeNotifierMixin {
+class SelectedIds extends _$SelectedIds with AutoDisposeNotifierMixin {
   @override
   Set<String> build() => {};
 }
@@ -682,4 +678,11 @@ Overwrite? getProfileOverwrite(Ref ref, String profileId) {
   return ref.watch(
     profilesProvider.select((state) => state.getProfile(profileId)?.overwrite),
   );
+}
+
+@riverpod
+class AccessControlState extends _$AccessControlState
+    with AutoDisposeNotifierMixin {
+  @override
+  AccessControl build() => AccessControl();
 }

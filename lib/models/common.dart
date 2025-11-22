@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,27 @@ abstract class Package with _$Package {
 
   factory Package.fromJson(Map<String, Object?> json) =>
       _$PackageFromJson(json);
+}
+
+extension PackagesExt on List<Package> {
+  List<Package> getSortList({
+    required List<String> pinedList,
+    required AccessSortType sortType,
+  }) {
+    return sorted((a, b) {
+      final isSelectA = pinedList.contains(a.packageName);
+      final isSelectB = pinedList.contains(b.packageName);
+
+      if (isSelectA != isSelectB) {
+        return isSelectA ? -1 : 1;
+      }
+      return switch (sortType) {
+        AccessSortType.none => 0,
+        AccessSortType.name => a.label.compareTo(b.label),
+        AccessSortType.time => b.lastUpdateTime.compareTo(a.lastUpdateTime),
+      };
+    });
+  }
 }
 
 @freezed
