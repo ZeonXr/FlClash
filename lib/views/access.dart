@@ -216,7 +216,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
         targetBuilder: (open) {
           return IconButton(
             onPressed: () {
-              open(offset: Offset(0, -10));
+              open(offset: Offset(0, 0));
             },
             icon: Icon(Icons.more_vert),
           );

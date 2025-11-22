@@ -205,7 +205,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                 targetBuilder: (open) {
                   return IconButton(
                     onPressed: () {
-                      open(offset: Offset(0, -10));
+                      open(offset: Offset(0, 0));
                     },
                     icon: const Icon(Icons.more_vert),
                   );
