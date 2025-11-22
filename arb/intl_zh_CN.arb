@@ -456,5 +456,6 @@
   "daysAgo": "{count} 天前",
   "hoursAgo": "{count} 小时前",
   "minutesAgo": "{count} 分钟前",
-  "justNow": "刚刚"
+  "justNow": "刚刚",
+  "noLongerRemind": "不再提示"
 }

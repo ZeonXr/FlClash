@@ -481,7 +481,7 @@ class AppController {
 
   Future<void> checkUpdateResultHandle({
     Map<String, dynamic>? data,
-    bool handleError = false,
+    bool isUser = false,
   }) async {
     if (data != null) {
       final tagName = data['tag_name'];
@@ -500,12 +500,16 @@ class AppController {
           ],
         ),
         confirmText: appLocalizations.goDownload,
+        cancelText: isUser ? null : appLocalizations.noLongerRemind,
       );
-      if (res != true) {
-        return;
+      if (res == true) {
+        launchUrl(Uri.parse('https://github.com/$repository/releases/latest'));
+      } else if (!isUser && res == false) {
+        _ref
+            .read(appSettingProvider.notifier)
+            .update((state) => state.copyWith(autoCheckUpdate: false));
       }
-      launchUrl(Uri.parse('https://github.com/$repository/releases/latest'));
-    } else if (handleError) {
+    } else if (isUser) {
       globalState.showMessage(
         title: appLocalizations.checkUpdate,
         message: TextSpan(text: appLocalizations.checkUpdateError),

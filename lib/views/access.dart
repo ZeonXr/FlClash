@@ -172,6 +172,15 @@ class _AccessViewState extends ConsumerState<AccessView> {
     });
   }
 
+  _buildConfirm() {
+    return CommonMinFilledButtonTheme(
+      child: FilledButton.tonal(
+        onPressed: () {},
+        child: Text(context.appLocalizations.save),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(packageListSelectorStateProvider);
@@ -190,6 +199,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
         : appLocalizations.accessControlNotAllowDesc;
     return BaseScaffold(
       title: appLocalizations.appAccessControl,
+      actions: [_buildConfirm()],
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -214,130 +224,120 @@ class _AccessViewState extends ConsumerState<AccessView> {
             child: Divider(height: 12),
           ),
           Flexible(
-            child: DisabledMask(
-              status: !accessControl.enable,
-              child: Column(
-                children: [
-                  ActivateBox(
-                    active: accessControl.enable,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4,
-                        bottom: 4,
-                        left: 16,
-                        right: 8,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: IntrinsicHeight(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Row(
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            appLocalizations.selected,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge
-                                                ?.copyWith(
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.primary,
-                                                ),
-                                          ),
-                                        ),
-                                        const Flexible(
-                                          child: SizedBox(width: 8),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            '${valueList.length}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge
-                                                ?.copyWith(
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).colorScheme.primary,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Flexible(child: Text(describe)),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.end,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 4,
+                    bottom: 4,
+                    left: 16,
+                    right: 8,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: IntrinsicHeight(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Flexible(child: _buildSearchButton()),
-                              Flexible(
-                                child: _buildSelectedAllButton(
-                                  isSelectedAll:
-                                      valueList.length ==
-                                      packageNameList.length,
-                                  allValueList: packageNameList,
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        appLocalizations.selected,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.primary,
+                                            ),
+                                      ),
+                                    ),
+                                    const Flexible(child: SizedBox(width: 8)),
+                                    Flexible(
+                                      child: Text(
+                                        '${valueList.length}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.primary,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Flexible(child: _buildSettingButton()),
+                              Flexible(child: Text(describe)),
                             ],
                           ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Flexible(child: _buildSearchButton()),
+                          Flexible(
+                            child: _buildSelectedAllButton(
+                              isSelectedAll:
+                                  valueList.length == packageNameList.length,
+                              allValueList: packageNameList,
+                            ),
+                          ),
+                          Flexible(child: _buildSettingButton()),
                         ],
                       ),
-                    ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: FutureBuilder(
-                      future: _completer.future,
-                      builder: (_, snapshot) {
-                        if (snapshot.connectionState != ConnectionState.done) {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                        return packages.isEmpty
-                            ? NullStatus(label: appLocalizations.noData)
-                            : CommonScrollBar(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: FutureBuilder(
+                    future: _completer.future,
+                    builder: (_, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      return packages.isEmpty
+                          ? NullStatus(label: appLocalizations.noData)
+                          : CommonScrollBar(
+                              controller: _controller,
+                              child: ListView.builder(
                                 controller: _controller,
-                                child: ListView.builder(
-                                  controller: _controller,
-                                  itemCount: packages.length,
-                                  itemExtent: 72,
-                                  itemBuilder: (_, index) {
-                                    final package = packages[index];
-                                    return PackageListItem(
-                                      key: Key(package.packageName),
-                                      package: package,
-                                      value: valueList.contains(
-                                        package.packageName,
-                                      ),
-                                      isActive: accessControl.enable,
-                                      onChanged: (value) {
-                                        _handleSelected(
-                                          valueList,
-                                          package,
-                                          value,
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              );
-                      },
-                    ),
+                                itemCount: packages.length,
+                                itemExtent: 72,
+                                itemBuilder: (_, index) {
+                                  final package = packages[index];
+                                  return PackageListItem(
+                                    key: Key(package.packageName),
+                                    package: package,
+                                    value: valueList.contains(
+                                      package.packageName,
+                                    ),
+                                    onChanged: (value) {
+                                      _handleSelected(
+                                        valueList,
+                                        package,
+                                        value,
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -349,55 +349,48 @@ class _AccessViewState extends ConsumerState<AccessView> {
 class PackageListItem extends StatelessWidget {
   final Package package;
   final bool value;
-  final bool isActive;
   final void Function(bool?) onChanged;
 
   const PackageListItem({
     super.key,
     required this.package,
     required this.value,
-    required this.isActive,
     required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FadeScaleEnterBox(
-      child: ActivateBox(
-        active: isActive,
-        child: ListItem.checkbox(
-          leading: SizedBox(
-            width: 48,
-            height: 48,
-            child: FutureBuilder<ImageProvider?>(
-              future: app?.getPackageIcon(package.packageName),
-              builder: (_, snapshot) {
-                if (!snapshot.hasData && snapshot.data == null) {
-                  return Container();
-                } else {
-                  return Image(
-                    image: snapshot.data!,
-                    gaplessPlayback: true,
-                    width: 48,
-                    height: 48,
-                  );
-                }
-              },
-            ),
-          ),
-          title: Text(
-            package.label,
-            style: const TextStyle(overflow: TextOverflow.ellipsis),
-            maxLines: 1,
-          ),
-          subtitle: Text(
-            package.packageName,
-            style: const TextStyle(overflow: TextOverflow.ellipsis),
-            maxLines: 1,
-          ),
-          delegate: CheckboxDelegate(value: value, onChanged: onChanged),
+    return ListItem.checkbox(
+      leading: SizedBox(
+        width: 48,
+        height: 48,
+        child: FutureBuilder<ImageProvider?>(
+          future: app?.getPackageIcon(package.packageName),
+          builder: (_, snapshot) {
+            if (!snapshot.hasData && snapshot.data == null) {
+              return Container();
+            } else {
+              return Image(
+                image: snapshot.data!,
+                gaplessPlayback: true,
+                width: 48,
+                height: 48,
+              );
+            }
+          },
         ),
       ),
+      title: Text(
+        package.label,
+        style: const TextStyle(overflow: TextOverflow.ellipsis),
+        maxLines: 1,
+      ),
+      subtitle: Text(
+        package.packageName,
+        style: const TextStyle(overflow: TextOverflow.ellipsis),
+        maxLines: 1,
+      ),
+      delegate: CheckboxDelegate(value: value, onChanged: onChanged),
     );
   }
 }
@@ -483,27 +476,22 @@ class AccessControlSearchDelegate extends SearchDelegate {
                   package.packageName.contains(lowQuery),
             )
             .toList();
-        final isAccessControl = vm3.b;
         final currentList = vm3.c;
         final packageNameList = packages.map((e) => e.packageName).toList();
         final valueList = currentList.intersection(packageNameList);
-        return DisabledMask(
-          status: !isAccessControl,
-          child: ListView.builder(
-            itemCount: queryPackages.length,
-            itemBuilder: (_, index) {
-              final package = queryPackages[index];
-              return PackageListItem(
-                key: Key(package.packageName),
-                package: package,
-                value: valueList.contains(package.packageName),
-                isActive: isAccessControl,
-                onChanged: (value) {
-                  _handleSelected(ref, valueList, package, value);
-                },
-              );
-            },
-          ),
+        return ListView.builder(
+          itemCount: queryPackages.length,
+          itemBuilder: (_, index) {
+            final package = queryPackages[index];
+            return PackageListItem(
+              key: Key(package.packageName),
+              package: package,
+              value: valueList.contains(package.packageName),
+              onChanged: (value) {
+                _handleSelected(ref, valueList, package, value);
+              },
+            );
+          },
         );
       },
     );

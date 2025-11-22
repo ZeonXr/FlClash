@@ -456,5 +456,6 @@
   "daysAgo": "{count, plural, one{{count} день назад} few{{count} дня назад} many{{count} дней назад} other{{count} дня назад}}",
   "hoursAgo": "{count, plural, one{{count} час назад} few{{count} часа назад} many{{count} часов назад} other{{count} часа назад}}",
   "minutesAgo": "{count, plural, one{{count} минута назад} few{{count} минуты назад} many{{count} минут назад} other{{count} минуты назад}}",
-  "justNow": "Только что"
+  "justNow": "Только что",
+  "noLongerRemind": "Больше не напоминать"
 }

@@ -189,6 +189,7 @@ class GlobalState {
     BuildContext? context,
     String? title,
     String? confirmText,
+    String? cancelText,
     bool cancelable = true,
     bool? dismissible,
   }) async {
@@ -205,7 +206,7 @@ class GlobalState {
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },
-                  child: Text(appLocalizations.cancel),
+                  child: Text(cancelText ?? appLocalizations.cancel),
                 ),
               TextButton(
                 onPressed: () {

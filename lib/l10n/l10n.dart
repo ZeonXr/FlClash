@@ -3578,6 +3578,16 @@ class AppLocalizations {
   String get justNow {
     return Intl.message('Just now', name: 'justNow', desc: '', args: []);
   }
+
+  /// `Don't remind again`
+  String get noLongerRemind {
+    return Intl.message(
+      'Don\'t remind again',
+      name: 'noLongerRemind',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

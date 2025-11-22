@@ -205,7 +205,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                 targetBuilder: (open) {
                   return IconButton(
                     onPressed: () {
-                      open(offset: Offset(-20, 20));
+                      open(offset: Offset(0, 0));
                     },
                     icon: const Icon(Icons.more_vert),
                   );
@@ -305,7 +305,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
   }
 }
 
-const double _kDefaultFindPanelHeight = 52;
+const double _kDefaultFindPanelHeight = 56;
 
 class FindPanel extends StatelessWidget implements PreferredSizeWidget {
   final CodeFindController controller;
@@ -351,49 +351,49 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
     } else {
       result = '${value.result!.index + 1}/${value.result!.matches.length}';
     }
-    final bar = Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        if (!isMobileView) ...[
-          ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 360),
-            child: _buildFindInput(context, value),
+    final bar = CommonMinIconButtonTheme(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (!isMobileView) ...[
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 360),
+              child: _buildFindInput(context, value),
+            ),
+            SizedBox(width: 12),
+          ],
+          Text(result, style: context.textTheme.bodyMedium),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              spacing: 2,
+              children: [
+                _buildIconButton(
+                  onPressed: value.result == null
+                      ? null
+                      : () {
+                          controller.previousMatch();
+                        },
+                  icon: Icons.arrow_upward,
+                ),
+                _buildIconButton(
+                  onPressed: value.result == null
+                      ? null
+                      : () {
+                          controller.nextMatch();
+                        },
+                  icon: Icons.arrow_downward,
+                ),
+                SizedBox(width: 2),
+                IconButton.filledTonal(
+                  onPressed: controller.close,
+                  icon: Icon(Icons.close, size: 16),
+                ),
+              ],
+            ),
           ),
-          SizedBox(width: 12),
         ],
-        Text(result, style: context.textTheme.bodyMedium),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            spacing: 6,
-            children: [
-              _buildIconButton(
-                onPressed: value.result == null
-                    ? null
-                    : () {
-                        controller.previousMatch();
-                      },
-                icon: Icons.arrow_upward,
-              ),
-              _buildIconButton(
-                onPressed: value.result == null
-                    ? null
-                    : () {
-                        controller.nextMatch();
-                      },
-                icon: Icons.arrow_downward,
-              ),
-              SizedBox(width: 2),
-              IconButton.filledTonal(
-                visualDensity: VisualDensity.compact,
-                onPressed: controller.close,
-                style: IconButton.styleFrom(padding: EdgeInsets.zero),
-                icon: Icon(Icons.close, size: 16),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
     if (isMobileView) {
       return Column(
@@ -495,12 +495,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildIconButton({required IconData icon, VoidCallback? onPressed}) {
-    return IconButton(
-      visualDensity: VisualDensity.compact,
-      onPressed: onPressed,
-      style: IconButton.styleFrom(padding: EdgeInsets.all(0)),
-      icon: Icon(icon, size: 16),
-    );
+    return IconButton(onPressed: onPressed, icon: Icon(icon, size: 16));
   }
 }
 
