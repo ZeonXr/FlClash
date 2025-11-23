@@ -246,3 +246,50 @@ abstract class ProfileOverrideModel with _$ProfileOverrideModel {
     OverrideData? overrideData,
   }) = _ProfileOverrideModel;
 }
+
+@freezed
+abstract class SetupState with _$SetupState {
+  const factory SetupState({
+    required String? profileId,
+    required int? profileLastUpdateDate,
+    required OverwriteType overwriteType,
+    required List<Rule> addedRules,
+    required String? scriptContent,
+    required bool overrideDns,
+    required Dns dns,
+  }) = _SetupState;
+}
+
+extension SetupStateExt on SetupState {
+  bool needSetup(SetupState? lastSetupState) {
+    if (lastSetupState == null) {
+      return true;
+    }
+    if (profileId != lastSetupState.profileId) {
+      return true;
+    }
+    if (profileLastUpdateDate != lastSetupState.profileLastUpdateDate) {
+      return true;
+    }
+    if (overwriteType != lastSetupState.overwriteType) {
+      return true;
+    }
+    if (overwriteType == OverwriteType.script) {
+      if (scriptContent != lastSetupState.scriptContent) {
+        return true;
+      }
+    }
+    if (overwriteType == OverwriteType.standard) {
+      if (addedRules != lastSetupState.addedRules) {
+        return true;
+      }
+    }
+    if (overrideDns != lastSetupState.overrideDns) {
+      return true;
+    }
+    if (overrideDns == true && dns != lastSetupState.dns) {
+      return true;
+    }
+    return false;
+  }
+}

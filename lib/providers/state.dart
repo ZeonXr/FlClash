@@ -674,9 +674,16 @@ class SelectedIds extends _$SelectedIds with AutoDisposeNotifierMixin {
 }
 
 @riverpod
-Overwrite? getProfileOverwrite(Ref ref, String profileId) {
+Profile? profile(Ref ref, String profileId) {
   return ref.watch(
-    profilesProvider.select((state) => state.getProfile(profileId)?.overwrite),
+    profilesProvider.select((state) => state.getProfile(profileId)),
+  );
+}
+
+@riverpod
+Overwrite? profileOverwrite(Ref ref, String profileId) {
+  return ref.watch(
+    profileProvider(profileId).select((state) => state?.overwrite),
   );
 }
 
@@ -685,4 +692,19 @@ class AccessControlState extends _$AccessControlState
     with AutoDisposeNotifierMixin {
   @override
   AccessControl build() => AccessControl();
+}
+
+@riverpod
+SetupState setupState(Ref ref, String profileId) {
+  ref.watch(
+    profileProvider(profileId).select(
+      (state) =>
+          VM3(a: state?.id, b: state?.lastUpdateDate, c: state?.overwrite),
+    ),
+  );
+  ref.watch(patchClashConfigProvider.select((state) => state.dns));
+  ref.watch(overrideDnsProvider);
+  ref.watch(scriptsProvider);
+  ref.watch(rulesProvider);
+  return globalState.getSetupState(profileId);
 }

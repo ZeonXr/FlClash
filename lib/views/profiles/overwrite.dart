@@ -67,7 +67,7 @@ class _Title extends ConsumerWidget {
   @override
   Widget build(context, ref) {
     final overwriteType = ref.watch(
-      getProfileOverwriteProvider(
+      profileOverwriteProvider(
         profileId,
       ).select((state) => state?.type ?? OverwriteType.standard),
     );
@@ -128,7 +128,7 @@ class _Content extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final type = ref.watch(
-      getProfileOverwriteProvider(
+      profileOverwriteProvider(
         profileId,
       ).select((state) => state?.type ?? OverwriteType.standard),
     );
@@ -171,7 +171,7 @@ class _StandardContent extends ConsumerWidget {
   void _handleSelectAll(WidgetRef ref) {
     final ids = ref
         .read(
-          getProfileOverwriteProvider(
+          profileOverwriteProvider(
             profileId,
           ).select((state) => state?.standardOverwrite.addedRules ?? []),
         )
@@ -207,7 +207,7 @@ class _StandardContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final standardOverwrite = ref.watch(
-      getProfileOverwriteProvider(
+      profileOverwriteProvider(
         profileId,
       ).select((state) => state?.standardOverwrite),
     );
@@ -338,7 +338,7 @@ class _ScriptContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final scriptId = ref.watch(
-      getProfileOverwriteProvider(
+      profileOverwriteProvider(
         profileId,
       ).select((state) => state?.scriptOverwrite.scriptId),
     );
@@ -462,7 +462,7 @@ class _EditGlobalAddedRules extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final disabledRuleIds = ref.watch(
-      getProfileOverwriteProvider(
+      profileOverwriteProvider(
         profileId,
       ).select((state) => state?.standardOverwrite.disabledRuleIds ?? []),
     );

@@ -305,45 +305,19 @@ class GlobalState {
     return params;
   }
 
-  Future<Map> getPatchedConfig(
-    Profile? profile,
-    ClashConfig patchConfig,
-  ) async {
-    var config = {};
+  Future<Map> getConfigMap(String profileId) async {
+    var res = {};
     try {
-      config = await buildRealConfig(
-        profile: profile,
-        patchConfig: patchConfig,
+      final setupState = globalState.getSetupState(profileId);
+      res = await makeRealConfig(
+        setupState: setupState,
+        patchConfig: config.patchClashConfig,
       );
     } catch (e) {
       globalState.showNotifier(e.toString());
-      config = {};
+      res = {};
     }
-    return config;
-  }
-
-  Future<void> buildConfigFile(
-    Profile? profile,
-    ClashConfig patchConfig,
-  ) async {
-    final configFilePath = await appPath.configFilePath;
-    final config = await getPatchedConfig(profile, patchConfig);
-    final res = await Isolate.run<String>(() async {
-      try {
-        final res = yaml.encode(config);
-        final file = File(configFilePath);
-        if (!await file.exists()) {
-          await file.create(recursive: true);
-        }
-        await file.writeAsString(res);
-        return '';
-      } catch (e) {
-        return e.toString();
-      }
-    });
-    if (res.isNotEmpty) {
-      throw res;
-    }
+    return res;
   }
 
   Future<void> genValidateFile(String path, String data) async {
@@ -391,29 +365,55 @@ class GlobalState {
     );
   }
 
-  Future<Map<String, dynamic>> buildRealConfig({
-    required Profile? profile,
+  Future<String> setupConfig({
+    required SetupState setupState,
+    required ClashConfig patchConfig,
+    VoidCallback? preloadInvoke,
+  }) async {
+    final config = await makeRealConfig(
+      setupState: setupState,
+      patchConfig: patchConfig,
+    );
+    final configFilePath = await appPath.configFilePath;
+    final res = await Isolate.run<String>(() async {
+      try {
+        final res = yaml.encode(config);
+        final file = File(configFilePath);
+        if (!await file.exists()) {
+          await file.create(recursive: true);
+        }
+        await file.writeAsString(res);
+        return '';
+      } catch (e) {
+        return e.toString();
+      }
+    });
+    if (res.isNotEmpty) {
+      throw res;
+    }
+    final params = await globalState.getSetupParams();
+    return await coreController.setupConfig(
+      params: params,
+      setupState: setupState,
+      preloadInvoke: preloadInvoke,
+    );
+  }
+
+  Future<Map<String, dynamic>> makeRealConfig({
+    required SetupState setupState,
     required ClashConfig patchConfig,
   }) async {
-    if (profile == null) {
+    final profileId = setupState.profileId;
+    if (profileId == null) {
       return {};
     }
-    final overwrite = profile.overwrite;
-    final profileId = profile.id;
     final configMap = await getProfileConfig(profileId);
-    Script? script;
+    String? scriptContent;
     final List<Rule> addedRules = [];
-    if (overwrite.type == OverwriteType.script) {
-      script = globalState.config.scripts.get(
-        overwrite.scriptOverwrite.scriptId,
-      );
+    if (setupState.overwriteType == OverwriteType.script) {
+      scriptContent = setupState.scriptContent;
     } else {
-      final standardOverwrite = overwrite.standardOverwrite;
-      final profileAddedRules = standardOverwrite.addedRules;
-      final globalAddedRules = globalState.config.rules.where(
-        (item) => !standardOverwrite.disabledRuleIds.contains(item.id),
-      );
-      addedRules.addAll([...profileAddedRules, ...globalAddedRules]);
+      addedRules.addAll(setupState.addedRules);
     }
     final defaultUA = packageInfo.ua;
     final appendSystemDns = config.networkProps.appendSystemDns;
@@ -422,12 +422,12 @@ class GlobalState {
     );
     final overrideDns = globalState.config.overrideDns;
     Map<String, dynamic> rawConfig = configMap;
-    if (script != null) {
-      rawConfig = await handleEvaluate(script, rawConfig);
+    if (scriptContent?.isNotEmpty == true) {
+      rawConfig = await handleEvaluate(scriptContent!, rawConfig);
     }
     final directory = await appPath.profilesPath;
-    String getProvidersFilePathInner(String id, String type, String url) {
-      return join(directory, 'providers', id, type, url.toMd5());
+    String getProvidersFilePathInner(String type, String url) {
+      return join(directory, 'providers', profileId, type, url.toMd5());
     }
 
     final res = await Isolate.run<Map<String, dynamic>>(() async {
@@ -481,7 +481,6 @@ class GlobalState {
           }
           if (proxyProvider['url'] != null) {
             proxyProvider['path'] = getProvidersFilePathInner(
-              profile.id,
               'proxies',
               proxyProvider['url'],
             );
@@ -497,7 +496,6 @@ class GlobalState {
           }
           if (ruleProvider['url'] != null) {
             ruleProvider['path'] = getProvidersFilePathInner(
-              profile.id,
               'rules',
               ruleProvider['url'],
             );
@@ -591,15 +589,8 @@ class GlobalState {
     return res;
   }
 
-  Future<Map<String, dynamic>> getProfileConfig(String profileId) async {
-    final configMap = await coreController.getConfig(profileId);
-    configMap['rules'] = configMap['rule'];
-    configMap.remove('rule');
-    return configMap;
-  }
-
   Future<Map<String, dynamic>> handleEvaluate(
-    Script script,
+    String scriptContent,
     Map<String, dynamic> config,
   ) async {
     if (config['proxy-providers'] == null) {
@@ -608,7 +599,7 @@ class GlobalState {
     final configJs = json.encode(config);
     final runtime = getJavascriptRuntime();
     final res = await runtime.evaluateAsync('''
-      ${script.content}
+      $scriptContent
       main($configJs)
     ''');
     if (res.isError) {
@@ -619,6 +610,42 @@ class GlobalState {
       false => Map<String, dynamic>.from(res.rawResult),
     };
     return value ?? config;
+  }
+
+  SetupState getSetupState(String? profileId) {
+    final profile = config.profiles.getProfile(profileId);
+    final profileState = VM3(
+      a: profile?.id,
+      b: profile?.lastUpdateDate,
+      c: profile?.overwrite,
+    );
+    final overwrite = profileState.c;
+    final scriptContent = config.scripts
+        .get(overwrite?.scriptOverwrite.scriptId)
+        ?.content;
+    final standardOverwrite =
+        overwrite?.standardOverwrite ?? StandardOverwrite();
+    final rules = config.rules;
+    final globalAddedRules = rules.where(
+      (item) => !standardOverwrite.disabledRuleIds.contains(item.id),
+    );
+    final addedRules = [...standardOverwrite.addedRules, ...globalAddedRules];
+    return SetupState(
+      profileId: profileId,
+      profileLastUpdateDate: profile?.lastUpdateDate?.millisecondsSinceEpoch,
+      overwriteType: profile?.overwrite.type ?? OverwriteType.standard,
+      addedRules: addedRules,
+      scriptContent: scriptContent,
+      overrideDns: config.overrideDns,
+      dns: config.patchClashConfig.dns,
+    );
+  }
+
+  Future<Map<String, dynamic>> getProfileConfig(String profileId) async {
+    final configMap = await coreController.getConfig(profileId);
+    configMap['rules'] = configMap['rule'];
+    configMap.remove('rule');
+    return configMap;
   }
 }
 

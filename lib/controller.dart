@@ -22,7 +22,7 @@ import 'common/common.dart';
 import 'models/models.dart';
 
 class AppController {
-  int? lastProfileModified;
+  SetupState? _lastSetupState;
 
   final BuildContext context;
   final WidgetRef _ref;
@@ -99,14 +99,9 @@ class AppController {
     if (isStart) {
       await globalState.appController.tryStartCore();
       await globalState.handleStart([updateRunTime, updateTraffic]);
-      final currentLastModified = await _ref
-          .read(currentProfileProvider)
-          ?.profileLastModified;
-      if (currentLastModified == null || lastProfileModified == null) {
-        addCheckIpNumDebounce();
-        return;
-      }
-      if (currentLastModified <= (lastProfileModified ?? 0)) {
+      final profileId = _ref.read(currentProfileIdProvider);
+      final setupState = globalState.getSetupState(profileId);
+      if (!setupState.needSetup(_lastSetupState)) {
         addCheckIpNumDebounce();
         return;
       }
@@ -314,12 +309,11 @@ class AppController {
     final realTunEnable = _ref.read(realTunEnableProvider);
     final realPatchConfig = patchConfig.copyWith.tun(enable: realTunEnable);
     final currentProfile = _ref.read(currentProfileProvider);
-    final message = await coreController.setupConfig(
-      currentProfile,
-      realPatchConfig,
-    );
-    lastProfileModified = await _ref.read(
-      currentProfileProvider.select((state) => state?.profileLastModified),
+    final setupState = _ref.read(setupStateProvider(currentProfile?.id ?? ''));
+    _lastSetupState = setupState;
+    final message = await globalState.setupConfig(
+      setupState: setupState,
+      patchConfig: realPatchConfig,
     );
     if (message.isNotEmpty) {
       throw message;

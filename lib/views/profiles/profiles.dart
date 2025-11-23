@@ -208,10 +208,7 @@ class ProfileItem extends StatelessWidget {
   }
 
   Future<void> _handlePreview(BuildContext context) async {
-    final config = await globalState.getPatchedConfig(
-      profile,
-      globalState.config.patchClashConfig,
-    );
+    final config = await globalState.getConfigMap(profile.id);
     final content = await Isolate.run(() {
       return yaml.encode(config);
     });
