@@ -14,7 +14,16 @@ abstract class CommonMessage with _$CommonMessage {
     required String id,
     required String text,
     @Default(Duration(seconds: 3)) Duration duration,
+    MessageActionState? actionState,
   }) = _CommonMessage;
+}
+
+@freezed
+abstract class MessageActionState with _$MessageActionState {
+  const factory MessageActionState({
+    required String actionText,
+    required VoidCallback action,
+  }) = _MessageActionState;
 }
 
 @freezed

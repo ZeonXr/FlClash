@@ -3608,6 +3608,36 @@ class AppLocalizations {
   String get turnOff {
     return Intl.message('Turn Off', name: 'turnOff', desc: '', args: []);
   }
+
+  /// `Core configuration change detected`
+  String get coreConfigChangeDetected {
+    return Intl.message(
+      'Core configuration change detected',
+      name: 'coreConfigChangeDetected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get reload {
+    return Intl.message('Reload', name: 'reload', desc: '', args: []);
+  }
+
+  /// `VPN configuration change detected`
+  String get vpnConfigChangeDetected {
+    return Intl.message(
+      'VPN configuration change detected',
+      name: 'vpnConfigChangeDetected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restart`
+  String get restart {
+    return Intl.message('Restart', name: 'restart', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -30,6 +30,14 @@ class _OverwriteViewState extends State<OverwriteView> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      globalState.appController.checkNeedSetup();
+    });
+  }
 }
 
 class _Title extends ConsumerWidget {

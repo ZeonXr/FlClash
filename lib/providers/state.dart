@@ -171,7 +171,6 @@ VpnState vpnState(Ref ref) {
   final stack = ref.watch(
     patchClashConfigProvider.select((state) => state.tun.stack),
   );
-
   return VpnState(stack: stack, vpnProps: vpnProps);
 }
 

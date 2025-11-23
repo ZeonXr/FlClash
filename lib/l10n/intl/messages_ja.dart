@@ -174,6 +174,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyLink": MessageLookupByLibrary.simpleMessage("リンクをコピー"),
     "copySuccess": MessageLookupByLibrary.simpleMessage("コピー成功"),
     "core": MessageLookupByLibrary.simpleMessage("コア"),
+    "coreConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "コア設定の変更が検出されました",
+    ),
     "coreInfo": MessageLookupByLibrary.simpleMessage("コア情報"),
     "coreStatus": MessageLookupByLibrary.simpleMessage("コアステータス"),
     "country": MessageLookupByLibrary.simpleMessage("国"),
@@ -495,6 +498,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "redirPort": MessageLookupByLibrary.simpleMessage("Redirポート"),
     "redo": MessageLookupByLibrary.simpleMessage("やり直す"),
     "regExp": MessageLookupByLibrary.simpleMessage("正規表現"),
+    "reload": MessageLookupByLibrary.simpleMessage("リロード"),
     "remote": MessageLookupByLibrary.simpleMessage("リモート"),
     "remoteBackupDesc": MessageLookupByLibrary.simpleMessage(
       "WebDAVにデータをバックアップ",
@@ -516,6 +520,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "respectRulesDesc": MessageLookupByLibrary.simpleMessage(
       "DNS接続がルールに従う（proxy-server-nameserverの設定が必要）",
     ),
+    "restart": MessageLookupByLibrary.simpleMessage("再起動"),
     "restartCoreTip": MessageLookupByLibrary.simpleMessage("コアを再起動してもよろしいですか？"),
     "routeAddress": MessageLookupByLibrary.simpleMessage("ルートアドレス"),
     "routeAddressDesc": MessageLookupByLibrary.simpleMessage("ルートアドレスを設定"),
@@ -620,6 +625,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "value": MessageLookupByLibrary.simpleMessage("値"),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("ビブラント"),
     "view": MessageLookupByLibrary.simpleMessage("表示"),
+    "vpnConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "VPN設定の変更が検出されました",
+    ),
     "vpnDesc": MessageLookupByLibrary.simpleMessage("VPN関連設定の変更"),
     "vpnEnableDesc": MessageLookupByLibrary.simpleMessage(
       "VpnService経由で全システムトラフィックをルーティング",

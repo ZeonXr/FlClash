@@ -235,6 +235,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyLink": MessageLookupByLibrary.simpleMessage("Copy link"),
     "copySuccess": MessageLookupByLibrary.simpleMessage("Copy success"),
     "core": MessageLookupByLibrary.simpleMessage("Core"),
+    "coreConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "Core configuration change detected",
+    ),
     "coreInfo": MessageLookupByLibrary.simpleMessage("Core info"),
     "coreStatus": MessageLookupByLibrary.simpleMessage("Core status"),
     "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -656,6 +659,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "redirPort": MessageLookupByLibrary.simpleMessage("Redir Port"),
     "redo": MessageLookupByLibrary.simpleMessage("redo"),
     "regExp": MessageLookupByLibrary.simpleMessage("RegExp"),
+    "reload": MessageLookupByLibrary.simpleMessage("Reload"),
     "remote": MessageLookupByLibrary.simpleMessage("Remote"),
     "remoteBackupDesc": MessageLookupByLibrary.simpleMessage(
       "Backup local data to WebDAV",
@@ -683,6 +687,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "respectRulesDesc": MessageLookupByLibrary.simpleMessage(
       "DNS connection following rules, need to configure proxy-server-nameserver",
     ),
+    "restart": MessageLookupByLibrary.simpleMessage("Restart"),
     "restartCoreTip": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to restart the core?",
     ),
@@ -809,6 +814,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "value": MessageLookupByLibrary.simpleMessage("Value"),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("Vibrant"),
     "view": MessageLookupByLibrary.simpleMessage("View"),
+    "vpnConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "VPN configuration change detected",
+    ),
     "vpnDesc": MessageLookupByLibrary.simpleMessage(
       "Modify VPN related settings",
     ),

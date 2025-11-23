@@ -460,5 +460,9 @@
   "noLongerRemind": "今後表示しない",
   "accessControlSettings": "アクセス制御設定",
   "turnOn": "オン",
-  "turnOff": "オフ"
+  "turnOff": "オフ",
+  "coreConfigChangeDetected": "コア設定の変更が検出されました",
+  "reload": "リロード",
+  "vpnConfigChangeDetected": "VPN設定の変更が検出されました",
+  "restart": "再起動"
 }

@@ -271,7 +271,7 @@ as bool,
 /// @nodoc
 mixin _$CommonMessage {
 
- String get id; String get text; Duration get duration;
+ String get id; String get text; Duration get duration; MessageActionState? get actionState;
 /// Create a copy of CommonMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -282,16 +282,16 @@ $CommonMessageCopyWith<CommonMessage> get copyWith => _$CommonMessageCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommonMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.duration, duration) || other.duration == duration));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CommonMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.actionState, actionState) || other.actionState == actionState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,text,duration);
+int get hashCode => Object.hash(runtimeType,id,text,duration,actionState);
 
 @override
 String toString() {
-  return 'CommonMessage(id: $id, text: $text, duration: $duration)';
+  return 'CommonMessage(id: $id, text: $text, duration: $duration, actionState: $actionState)';
 }
 
 
@@ -302,11 +302,11 @@ abstract mixin class $CommonMessageCopyWith<$Res>  {
   factory $CommonMessageCopyWith(CommonMessage value, $Res Function(CommonMessage) _then) = _$CommonMessageCopyWithImpl;
 @useResult
 $Res call({
- String id, String text, Duration duration
+ String id, String text, Duration duration, MessageActionState? actionState
 });
 
 
-
+$MessageActionStateCopyWith<$Res>? get actionState;
 
 }
 /// @nodoc
@@ -319,15 +319,28 @@ class _$CommonMessageCopyWithImpl<$Res>
 
 /// Create a copy of CommonMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? duration = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? duration = null,Object? actionState = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
-as Duration,
+as Duration,actionState: freezed == actionState ? _self.actionState : actionState // ignore: cast_nullable_to_non_nullable
+as MessageActionState?,
   ));
 }
+/// Create a copy of CommonMessage
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MessageActionStateCopyWith<$Res>? get actionState {
+    if (_self.actionState == null) {
+    return null;
+  }
 
+  return $MessageActionStateCopyWith<$Res>(_self.actionState!, (value) {
+    return _then(_self.copyWith(actionState: value));
+  });
+}
 }
 
 
@@ -409,10 +422,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  Duration duration)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  Duration duration,  MessageActionState? actionState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CommonMessage() when $default != null:
-return $default(_that.id,_that.text,_that.duration);case _:
+return $default(_that.id,_that.text,_that.duration,_that.actionState);case _:
   return orElse();
 
 }
@@ -430,10 +443,10 @@ return $default(_that.id,_that.text,_that.duration);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  Duration duration)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  Duration duration,  MessageActionState? actionState)  $default,) {final _that = this;
 switch (_that) {
 case _CommonMessage():
-return $default(_that.id,_that.text,_that.duration);case _:
+return $default(_that.id,_that.text,_that.duration,_that.actionState);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -450,10 +463,10 @@ return $default(_that.id,_that.text,_that.duration);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  Duration duration)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  Duration duration,  MessageActionState? actionState)?  $default,) {final _that = this;
 switch (_that) {
 case _CommonMessage() when $default != null:
-return $default(_that.id,_that.text,_that.duration);case _:
+return $default(_that.id,_that.text,_that.duration,_that.actionState);case _:
   return null;
 
 }
@@ -465,12 +478,13 @@ return $default(_that.id,_that.text,_that.duration);case _:
 
 
 class _CommonMessage implements CommonMessage {
-  const _CommonMessage({required this.id, required this.text, this.duration = const Duration(seconds: 3)});
+  const _CommonMessage({required this.id, required this.text, this.duration = const Duration(seconds: 3), this.actionState});
   
 
 @override final  String id;
 @override final  String text;
 @override@JsonKey() final  Duration duration;
+@override final  MessageActionState? actionState;
 
 /// Create a copy of CommonMessage
 /// with the given fields replaced by the non-null parameter values.
@@ -482,16 +496,16 @@ _$CommonMessageCopyWith<_CommonMessage> get copyWith => __$CommonMessageCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommonMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.duration, duration) || other.duration == duration));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CommonMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.actionState, actionState) || other.actionState == actionState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,text,duration);
+int get hashCode => Object.hash(runtimeType,id,text,duration,actionState);
 
 @override
 String toString() {
-  return 'CommonMessage(id: $id, text: $text, duration: $duration)';
+  return 'CommonMessage(id: $id, text: $text, duration: $duration, actionState: $actionState)';
 }
 
 
@@ -502,11 +516,11 @@ abstract mixin class _$CommonMessageCopyWith<$Res> implements $CommonMessageCopy
   factory _$CommonMessageCopyWith(_CommonMessage value, $Res Function(_CommonMessage) _then) = __$CommonMessageCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String text, Duration duration
+ String id, String text, Duration duration, MessageActionState? actionState
 });
 
 
-
+@override $MessageActionStateCopyWith<$Res>? get actionState;
 
 }
 /// @nodoc
@@ -519,12 +533,285 @@ class __$CommonMessageCopyWithImpl<$Res>
 
 /// Create a copy of CommonMessage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? duration = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? duration = null,Object? actionState = freezed,}) {
   return _then(_CommonMessage(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,duration: null == duration ? _self.duration : duration // ignore: cast_nullable_to_non_nullable
-as Duration,
+as Duration,actionState: freezed == actionState ? _self.actionState : actionState // ignore: cast_nullable_to_non_nullable
+as MessageActionState?,
+  ));
+}
+
+/// Create a copy of CommonMessage
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MessageActionStateCopyWith<$Res>? get actionState {
+    if (_self.actionState == null) {
+    return null;
+  }
+
+  return $MessageActionStateCopyWith<$Res>(_self.actionState!, (value) {
+    return _then(_self.copyWith(actionState: value));
+  });
+}
+}
+
+/// @nodoc
+mixin _$MessageActionState {
+
+ String get actionText; VoidCallback get action;
+/// Create a copy of MessageActionState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MessageActionStateCopyWith<MessageActionState> get copyWith => _$MessageActionStateCopyWithImpl<MessageActionState>(this as MessageActionState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MessageActionState&&(identical(other.actionText, actionText) || other.actionText == actionText)&&(identical(other.action, action) || other.action == action));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,actionText,action);
+
+@override
+String toString() {
+  return 'MessageActionState(actionText: $actionText, action: $action)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MessageActionStateCopyWith<$Res>  {
+  factory $MessageActionStateCopyWith(MessageActionState value, $Res Function(MessageActionState) _then) = _$MessageActionStateCopyWithImpl;
+@useResult
+$Res call({
+ String actionText, VoidCallback action
+});
+
+
+
+
+}
+/// @nodoc
+class _$MessageActionStateCopyWithImpl<$Res>
+    implements $MessageActionStateCopyWith<$Res> {
+  _$MessageActionStateCopyWithImpl(this._self, this._then);
+
+  final MessageActionState _self;
+  final $Res Function(MessageActionState) _then;
+
+/// Create a copy of MessageActionState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? actionText = null,Object? action = null,}) {
+  return _then(_self.copyWith(
+actionText: null == actionText ? _self.actionText : actionText // ignore: cast_nullable_to_non_nullable
+as String,action: null == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
+as VoidCallback,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [MessageActionState].
+extension MessageActionStatePatterns on MessageActionState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MessageActionState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MessageActionState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MessageActionState value)  $default,){
+final _that = this;
+switch (_that) {
+case _MessageActionState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MessageActionState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MessageActionState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String actionText,  VoidCallback action)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MessageActionState() when $default != null:
+return $default(_that.actionText,_that.action);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String actionText,  VoidCallback action)  $default,) {final _that = this;
+switch (_that) {
+case _MessageActionState():
+return $default(_that.actionText,_that.action);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String actionText,  VoidCallback action)?  $default,) {final _that = this;
+switch (_that) {
+case _MessageActionState() when $default != null:
+return $default(_that.actionText,_that.action);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _MessageActionState implements MessageActionState {
+  const _MessageActionState({required this.actionText, required this.action});
+  
+
+@override final  String actionText;
+@override final  VoidCallback action;
+
+/// Create a copy of MessageActionState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MessageActionStateCopyWith<_MessageActionState> get copyWith => __$MessageActionStateCopyWithImpl<_MessageActionState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MessageActionState&&(identical(other.actionText, actionText) || other.actionText == actionText)&&(identical(other.action, action) || other.action == action));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,actionText,action);
+
+@override
+String toString() {
+  return 'MessageActionState(actionText: $actionText, action: $action)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MessageActionStateCopyWith<$Res> implements $MessageActionStateCopyWith<$Res> {
+  factory _$MessageActionStateCopyWith(_MessageActionState value, $Res Function(_MessageActionState) _then) = __$MessageActionStateCopyWithImpl;
+@override @useResult
+$Res call({
+ String actionText, VoidCallback action
+});
+
+
+
+
+}
+/// @nodoc
+class __$MessageActionStateCopyWithImpl<$Res>
+    implements _$MessageActionStateCopyWith<$Res> {
+  __$MessageActionStateCopyWithImpl(this._self, this._then);
+
+  final _MessageActionState _self;
+  final $Res Function(_MessageActionState) _then;
+
+/// Create a copy of MessageActionState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? actionText = null,Object? action = null,}) {
+  return _then(_MessageActionState(
+actionText: null == actionText ? _self.actionText : actionText // ignore: cast_nullable_to_non_nullable
+as String,action: null == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
+as VoidCallback,
   ));
 }
 

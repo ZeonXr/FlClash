@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:flutter/material.dart';
@@ -272,16 +273,20 @@ extension SetupStateExt on SetupState {
       return true;
     }
     if (overwriteType != lastSetupState.overwriteType) {
-      return true;
-    }
-    if (overwriteType == OverwriteType.script) {
-      if (scriptContent != lastSetupState.scriptContent) {
+      if (!ruleEquality.equals(addedRules, lastSetupState.addedRules) ||
+          scriptContent != lastSetupState.scriptContent) {
         return true;
       }
-    }
-    if (overwriteType == OverwriteType.standard) {
-      if (addedRules != lastSetupState.addedRules) {
-        return true;
+    } else {
+      if (overwriteType == OverwriteType.script) {
+        if (scriptContent != lastSetupState.scriptContent) {
+          return true;
+        }
+      }
+      if (overwriteType == OverwriteType.standard) {
+        if (!ruleEquality.equals(addedRules, lastSetupState.addedRules)) {
+          return true;
+        }
       }
     }
     if (overrideDns != lastSetupState.overrideDns) {

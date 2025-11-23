@@ -459,5 +459,9 @@
   "noLongerRemind": "Don't remind again",
   "accessControlSettings": "Access Control Settings",
   "turnOn": "Turn On",
-  "turnOff": "Turn Off"
+  "turnOff": "Turn Off",
+  "coreConfigChangeDetected": "Core configuration change detected",
+  "reload": "Reload",
+  "vpnConfigChangeDetected": "VPN configuration change detected",
+  "restart": "Restart"
 }

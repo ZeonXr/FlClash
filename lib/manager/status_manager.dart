@@ -6,6 +6,7 @@ import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/widgets/fade_box.dart';
+import 'package:fl_clash/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,8 +41,12 @@ class StatusManagerState extends State<StatusManager> {
     super.dispose();
   }
 
-  void message(String text) {
-    final commonMessage = CommonMessage(id: utils.uuidV4, text: text);
+  void message(String text, {MessageActionState? actionState}) {
+    final commonMessage = CommonMessage(
+      id: utils.uuidV4,
+      text: text,
+      actionState: actionState,
+    );
     _bufferMessages.add(commonMessage);
     commonPrint.log('message: $text');
     _processQueue();
@@ -142,14 +147,28 @@ class StatusManagerState extends State<StatusManager> {
                                             ),
                                           ),
                                           SizedBox(width: 16),
-                                          IconButton(
-                                            padding: EdgeInsets.all(2),
-                                            visualDensity:
-                                                VisualDensity.compact,
-                                            onPressed: () {
-                                              _cancelMessage(messages.last.id);
-                                            },
-                                            icon: Icon(Icons.close),
+                                          CommonMinFilledButtonTheme(
+                                            child: FilledButton.tonal(
+                                              onPressed: () async {
+                                                _cancelMessage(
+                                                  messages.last.id,
+                                                );
+                                                final action = messages
+                                                    .last
+                                                    .actionState
+                                                    ?.action;
+                                                if (action != null) {
+                                                  action();
+                                                }
+                                              },
+                                              child: Text(
+                                                messages
+                                                        .last
+                                                        .actionState
+                                                        ?.actionText ??
+                                                    '关闭',
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),

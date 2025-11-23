@@ -460,5 +460,9 @@
   "noLongerRemind": "Больше не напоминать",
   "accessControlSettings": "Настройки контроля доступа",
   "turnOn": "Включить",
-  "turnOff": "Выключить"
+  "turnOff": "Выключить",
+  "coreConfigChangeDetected": "Обнаружено изменение конфигурации ядра",
+  "reload": "Перезагрузить",
+  "vpnConfigChangeDetected": "Обнаружено изменение конфигурации VPN",
+  "restart": "Перезапустить"
 }

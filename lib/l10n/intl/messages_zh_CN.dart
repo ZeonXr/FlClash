@@ -156,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyLink": MessageLookupByLibrary.simpleMessage("复制链接"),
     "copySuccess": MessageLookupByLibrary.simpleMessage("复制成功"),
     "core": MessageLookupByLibrary.simpleMessage("内核"),
+    "coreConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "检测到核心配置更改",
+    ),
     "coreInfo": MessageLookupByLibrary.simpleMessage("内核信息"),
     "coreStatus": MessageLookupByLibrary.simpleMessage("核心状态"),
     "country": MessageLookupByLibrary.simpleMessage("区域"),
@@ -433,6 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "redirPort": MessageLookupByLibrary.simpleMessage("Redir端口"),
     "redo": MessageLookupByLibrary.simpleMessage("重做"),
     "regExp": MessageLookupByLibrary.simpleMessage("正则"),
+    "reload": MessageLookupByLibrary.simpleMessage("重载"),
     "remote": MessageLookupByLibrary.simpleMessage("远程"),
     "remoteBackupDesc": MessageLookupByLibrary.simpleMessage("备份数据到WebDAV"),
     "remoteDestination": MessageLookupByLibrary.simpleMessage("远程目标"),
@@ -450,6 +454,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "respectRulesDesc": MessageLookupByLibrary.simpleMessage(
       "DNS连接跟随rules,需配置proxy-server-nameserver",
     ),
+    "restart": MessageLookupByLibrary.simpleMessage("重启"),
     "restartCoreTip": MessageLookupByLibrary.simpleMessage("您确定要重启核心吗？"),
     "routeAddress": MessageLookupByLibrary.simpleMessage("路由地址"),
     "routeAddressDesc": MessageLookupByLibrary.simpleMessage("配置监听路由地址"),
@@ -548,6 +553,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "value": MessageLookupByLibrary.simpleMessage("值"),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("活力"),
     "view": MessageLookupByLibrary.simpleMessage("查看"),
+    "vpnConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "检测到VPN相关配置改动",
+    ),
     "vpnDesc": MessageLookupByLibrary.simpleMessage("修改VPN相关设置"),
     "vpnEnableDesc": MessageLookupByLibrary.simpleMessage(
       "通过VpnService自动路由系统所有流量",

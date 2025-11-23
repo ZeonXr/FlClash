@@ -1,5 +1,6 @@
 import 'package:fl_clash/l10n/l10n.dart';
 import 'package:fl_clash/manager/manager.dart';
+import 'package:fl_clash/models/widget.dart';
 import 'package:fl_clash/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,11 @@ extension BuildContextExtension on BuildContext {
     return findAncestorStateOfType<CommonScaffoldState>();
   }
 
-  void showNotifier(String text) {
-    return findAncestorStateOfType<StatusManagerState>()?.message(text);
+  void showNotifier(String text, {MessageActionState? actionState}) {
+    return findAncestorStateOfType<StatusManagerState>()?.message(
+      text,
+      actionState: actionState,
+    );
   }
 
   void showSnackBar(String message, {SnackBarAction? action}) {

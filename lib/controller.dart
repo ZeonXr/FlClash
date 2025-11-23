@@ -22,8 +22,6 @@ import 'common/common.dart';
 import 'models/models.dart';
 
 class AppController {
-  SetupState? _lastSetupState;
-
   final BuildContext context;
   final WidgetRef _ref;
 
@@ -101,7 +99,7 @@ class AppController {
       await globalState.handleStart([updateRunTime, updateTraffic]);
       final profileId = _ref.read(currentProfileIdProvider);
       final setupState = globalState.getSetupState(profileId);
-      if (!setupState.needSetup(_lastSetupState)) {
+      if (!setupState.needSetup(globalState.lastSetupState)) {
         addCheckIpNumDebounce();
         return;
       }
@@ -310,7 +308,10 @@ class AppController {
     final realPatchConfig = patchConfig.copyWith.tun(enable: realTunEnable);
     final currentProfile = _ref.read(currentProfileProvider);
     final setupState = _ref.read(setupStateProvider(currentProfile?.id ?? ''));
-    _lastSetupState = setupState;
+    globalState.lastSetupState = setupState;
+    if (system.isAndroid) {
+      globalState.lastVpnState = _ref.read(vpnStateProvider);
+    }
     final message = await globalState.setupConfig(
       setupState: setupState,
       patchConfig: realPatchConfig,
@@ -957,6 +958,43 @@ class AppController {
     if (currentProfile == null) {
       _ref.read(currentProfileIdProvider.notifier).value = profiles.first.id;
     }
+  }
+
+  void checkNeedSetup() {
+    final profileId = _ref.read(currentProfileIdProvider);
+    final setupState = globalState.getSetupState(profileId);
+    if (!setupState.needSetup(globalState.lastSetupState)) {
+      return;
+    }
+    globalState.showNotifier(
+      appLocalizations.coreConfigChangeDetected,
+      actionState: MessageActionState(
+        actionText: appLocalizations.reload,
+        action: () {
+          setupClashConfigDebounce();
+        },
+      ),
+    );
+  }
+
+  void checkVpnStateChanges() {
+    if (!system.isAndroid) {
+      return;
+    }
+    final hasChange = _ref.read(vpnStateProvider) != globalState.lastVpnState;
+    if (!hasChange) {
+      return;
+    }
+    globalState.showNotifier(
+      appLocalizations.vpnConfigChangeDetected,
+      actionState: MessageActionState(
+        actionText: appLocalizations.restart,
+        action: () async {
+          await globalState.handleStop();
+          await updateStatus(true);
+        },
+      ),
+    );
   }
 
   Future<T?> safeRun<T>(

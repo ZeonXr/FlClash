@@ -240,6 +240,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "copyLink": MessageLookupByLibrary.simpleMessage("Копировать ссылку"),
     "copySuccess": MessageLookupByLibrary.simpleMessage("Копирование успешно"),
     "core": MessageLookupByLibrary.simpleMessage("Ядро"),
+    "coreConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "Обнаружено изменение конфигурации ядра",
+    ),
     "coreInfo": MessageLookupByLibrary.simpleMessage("Информация о ядре"),
     "coreStatus": MessageLookupByLibrary.simpleMessage("Основной статус"),
     "country": MessageLookupByLibrary.simpleMessage("Страна"),
@@ -693,6 +696,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "redirPort": MessageLookupByLibrary.simpleMessage("Redir-порт"),
     "redo": MessageLookupByLibrary.simpleMessage("Повторить"),
     "regExp": MessageLookupByLibrary.simpleMessage("Регулярное выражение"),
+    "reload": MessageLookupByLibrary.simpleMessage("Перезагрузить"),
     "remote": MessageLookupByLibrary.simpleMessage("Удаленный"),
     "remoteBackupDesc": MessageLookupByLibrary.simpleMessage(
       "Резервное копирование локальных данных на WebDAV",
@@ -722,6 +726,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "respectRulesDesc": MessageLookupByLibrary.simpleMessage(
       "DNS-соединение следует правилам, необходимо настроить proxy-server-nameserver",
     ),
+    "restart": MessageLookupByLibrary.simpleMessage("Перезапустить"),
     "restartCoreTip": MessageLookupByLibrary.simpleMessage(
       "Вы уверены, что хотите перезапустить ядро?",
     ),
@@ -854,6 +859,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "value": MessageLookupByLibrary.simpleMessage("Значение"),
     "vibrantScheme": MessageLookupByLibrary.simpleMessage("Яркие"),
     "view": MessageLookupByLibrary.simpleMessage("Просмотр"),
+    "vpnConfigChangeDetected": MessageLookupByLibrary.simpleMessage(
+      "Обнаружено изменение конфигурации VPN",
+    ),
     "vpnDesc": MessageLookupByLibrary.simpleMessage(
       "Изменение настроек, связанных с VPN",
     ),

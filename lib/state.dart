@@ -49,6 +49,8 @@ class GlobalState {
   bool isInit = false;
   bool isUserDisconnected = false;
   bool isService = false;
+  SetupState? lastSetupState;
+  VpnState? lastVpnState;
 
   bool get isStart => startTime != null && startTime!.isBeforeNow;
 
@@ -269,11 +271,11 @@ class GlobalState {
     );
   }
 
-  void showNotifier(String text) {
+  void showNotifier(String text, {MessageActionState? actionState}) {
     if (text.isEmpty) {
       return;
     }
-    navigatorKey.currentContext?.showNotifier(text);
+    navigatorKey.currentContext?.showNotifier(text, actionState: actionState);
   }
 
   Future<void> openUrl(String url) async {

@@ -69,6 +69,7 @@ const stringListEquality = ListEquality<String>();
 const intListEquality = ListEquality<int>();
 const logListEquality = ListEquality<Log>();
 const groupListEquality = ListEquality<Group>();
+const ruleEquality = ListEquality<Rule>();
 const externalProviderListEquality = ListEquality<ExternalProvider>();
 const packageListEquality = ListEquality<Package>();
 const hotKeyActionListEquality = ListEquality<HotKeyAction>();

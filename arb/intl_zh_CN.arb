@@ -460,5 +460,9 @@
   "noLongerRemind": "不再提示",
   "accessControlSettings": "访问控制设置",
   "turnOn": "开启",
-  "turnOff": "关闭"
+  "turnOff": "关闭",
+  "coreConfigChangeDetected": "检测到核心配置更改",
+  "reload": "重载",
+  "vpnConfigChangeDetected": "检测到VPN相关配置改动",
+  "restart": "重启"
 }
