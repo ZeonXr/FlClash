@@ -20,6 +20,14 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      globalState.appController.checkVpnStateChanges();
+    });
+  }
+
   Future<void> _handleAddOrUpdate([Rule? rule]) async {
     final res = await globalState.showCommonDialog<Rule>(
       child: AddOrEditRuleDialog(rule: rule),

@@ -43,6 +43,9 @@ class _AccessViewState extends ConsumerState<AccessView> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      globalState.appController.checkVpnStateChanges();
+    });
   }
 
   Widget _buildSelectedAllButton({
