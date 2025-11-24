@@ -130,7 +130,7 @@ class _AddOrEditRuleDialogState extends State<AddOrEditRuleDialog> {
   final _contentController = TextEditingController();
   bool _noResolve = false;
   bool _src = false;
-  List<DropdownMenuEntry> _targetItems = [];
+  List<DropdownMenuEntry<String>> _targetItems = [];
   final _formKey = GlobalKey<FormState>();
 
   @override
