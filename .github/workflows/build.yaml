@@ -69,13 +69,13 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'master'
-          cache: true
+          cache: false
       - name: Setup Flutter
         if: ${{ !(startsWith(matrix.os, 'windows-11-arm') || startsWith(matrix.os, 'ubuntu-24.04-arm')) }}
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: true
+          cache: false
       #          flutter-version: 3.29.3
 
       - name: Get Flutter Dependency
