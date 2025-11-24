@@ -1,3 +1,130 @@
+## v0.8.91
+
+- Merge pull request #3 from ZeonXr/dev
+
+- fix: prevent overwriting google-services.json with empty content in CI
+- fix: prevent overwriting google-services.json with empty content in CI
+
+- Merge pull request #2 from ZeonXr/dev
+
+- Dev
+- fix: resolve undefined scriptStateProvider in override_profile.dart
+
+- fix: resolve DropdownMenuEntry type mismatch in rule.dart
+
+- Merge pull request #1 from ZeonXr/dev
+
+- Dev
+- 修复类型列表以支持字符串类型，并更新 material_color_utilities 依赖版本范围
+
+- 更新 material_color_utilities 依赖版本范围至 >=0.11.1 <0.14.0
+
+- 禁用 Flutter 设置中的缓存
+
+- 更新 material_color_utilities 依赖版本至 ^0.13.0
+
+- 启用 Windows 11 ARM 平台构建
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- cache
+
+- Update changelog
+
 ## v0.8.90
 
 - Fix android tile service
