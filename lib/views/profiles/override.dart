@@ -137,14 +137,14 @@ class _OverrideProfileViewState extends ConsumerState<OverrideProfileView> {
                 SliverToBoxAdapter(
                   child: Consumer(
                     builder: (_, ref, child) {
-                      final scriptMode = ref.watch(
-                        scriptStateProvider.select(
-                          (state) => state.realId != null,
-                        ),
-                      );
-                      if (!scriptMode) {
-                        return SizedBox();
-                      }
+                      // final scriptMode = ref.watch(
+                      //   scriptStateProvider.select(
+                      //     (state) => state.realId != null,
+                      //   ),
+                      // );
+                      // if (!scriptMode) {
+                      //   return SizedBox();
+                      // }
                       return child!;
                     },
                     child: ListItem(
@@ -612,9 +612,9 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
   final _subRuleController = TextEditingController();
   bool _noResolve = false;
   bool _src = false;
-  List<DropdownMenuEntry> _targetItems = [];
-  List<DropdownMenuEntry> _ruleProviderItems = [];
-  List<DropdownMenuEntry> _subRuleItems = [];
+  List<DropdownMenuEntry<String>> _targetItems = [];
+  List<DropdownMenuEntry<String>> _ruleProviderItems = [];
+  List<DropdownMenuEntry<String>> _subRuleItems = [];
   final _formKey = GlobalKey<FormState>();
 
   @override

@@ -2,11 +2,11 @@ import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
-import 'package:fl_clash/widgets/open_container.dart';
 import 'package:flutter/material.dart';
 
 import 'card.dart';
 import 'input.dart';
+import 'open_container.dart';
 import 'scaffold.dart';
 import 'sheet.dart';
 
@@ -37,40 +37,24 @@ class CheckboxDelegate<T> extends Delegate {
 
 class OpenDelegate extends Delegate {
   final Widget widget;
-  final String title;
   final double? maxWidth;
-  final List<Widget> actions;
   final bool blur;
-  final bool wrap;
   final bool forceFull;
 
   const OpenDelegate({
-    required this.title,
     required this.widget,
     this.maxWidth,
-    this.actions = const [],
     this.blur = true,
-    this.wrap = true,
     this.forceFull = true,
   });
 }
 
 class NextDelegate extends Delegate {
   final Widget widget;
-  final String title;
   final double? maxWidth;
-  final List<Widget> actions;
   final bool blur;
-  final bool wrap;
 
-  const NextDelegate({
-    required this.title,
-    required this.widget,
-    this.maxWidth,
-    this.actions = const [],
-    this.blur = true,
-    this.wrap = true,
-  });
+  const NextDelegate({required this.widget, this.maxWidth, this.blur = true});
 }
 
 class OptionsDelegate<T> extends Delegate {
@@ -291,14 +275,7 @@ class ListItem<T> extends StatelessWidget {
                   forceFull: openDelegate.forceFull,
                 ),
                 builder: (_, type) {
-                  return openDelegate.wrap
-                      ? AdaptiveSheetScaffold(
-                          actions: openDelegate.actions,
-                          type: type,
-                          body: child,
-                          title: openDelegate.title,
-                        )
-                      : child;
+                  return child;
                 },
               );
               return;
@@ -309,14 +286,7 @@ class ListItem<T> extends StatelessWidget {
           return _buildListTile(onTap: openAction);
         },
         openBuilder: (_, action) {
-          return openDelegate.wrap
-              ? CommonScaffold(
-                  key: Key(openDelegate.title),
-                  title: openDelegate.title,
-                  body: child,
-                  actions: openDelegate.actions,
-                )
-              : child;
+          return child;
         },
       );
     }
@@ -333,14 +303,7 @@ class ListItem<T> extends StatelessWidget {
               maxWidth: nextDelegate.maxWidth,
             ),
             builder: (_, type) {
-              return nextDelegate.wrap
-                  ? AdaptiveSheetScaffold(
-                      actions: nextDelegate.actions,
-                      type: type,
-                      body: child,
-                      title: nextDelegate.title,
-                    )
-                  : child;
+              return child;
             },
           );
         },
@@ -444,9 +407,7 @@ class ListHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding:
-          padding ??
-          const EdgeInsets.only(left: 16, right: 8, top: 24, bottom: 8),
+      padding: padding ?? listHeaderPadding,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -457,18 +418,16 @@ class ListHeader extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurfaceVariant.opacity80,
+                  style: context.textTheme.labelLarge?.copyWith(
+                    color: context.colorScheme.onSurfaceVariant.opacity80,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 if (subTitle != null)
                   Text(
                     subTitle!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: context.colorScheme.outline,
                     ),
                   ),
               ],
@@ -489,6 +448,7 @@ List<Widget> generateSection({
   String? title,
   required Iterable<Widget> items,
   List<Widget>? actions,
+  bool isFirst = false,
   bool separated = true,
 }) {
   final genItems = separated
@@ -496,7 +456,13 @@ List<Widget> generateSection({
       : items;
   return [
     if (items.isNotEmpty && title != null)
-      ListHeader(title: title, actions: actions),
+      ListHeader(
+        title: title,
+        actions: actions,
+        padding: isFirst
+            ? listHeaderPadding.copyWith(top: 8.ap)
+            : listHeaderPadding,
+      ),
     ...genItems,
   ];
 }
