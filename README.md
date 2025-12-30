@@ -36,6 +36,24 @@ on Mobile:
 
 ## Use
 
+### Configuration
+
+#### UA (User-Agent) Setting
+
+FlClash provides a UA (User-Agent) configuration option in the General settings. The User-Agent is an identification string sent by the application to servers, describing the client type and version.
+
+**Available Options:**
+- **Default** - Uses FlClash's default User-Agent
+- **clash-verge/v2.4.2** - Emulates Clash Verge client
+- **ClashforWindows/0.19.23** - Emulates Clash for Windows client
+
+**Purpose:**
+- Some servers may identify client types based on the User-Agent
+- Customizing the UA can help resolve compatibility issues with certain websites or services
+- In some cases, specific UAs may receive better service quality
+
+**Configuration Path:** Settings → General → UA
+
 ### Linux
 
 ⚠️ Make sure to install the following dependencies before using them

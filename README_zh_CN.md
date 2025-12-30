@@ -36,6 +36,24 @@ on Mobile:
 
 ## Use
 
+### 配置说明
+
+#### UA (User-Agent) 设置
+
+在常规设置中，FlClash 提供了 UA (User-Agent) 配置选项。UA 是浏览器或应用程序发送给服务器的标识字符串，用于说明客户端的类型和版本。
+
+**可用选项：**
+- **默认** - 使用 FlClash 的默认 User-Agent
+- **clash-verge/v2.4.2** - 模拟 Clash Verge 客户端
+- **ClashforWindows/0.19.23** - 模拟 Clash for Windows 客户端
+
+**作用：**
+- 某些服务器可能会根据 User-Agent 来识别客户端类型
+- 自定义 UA 可以帮助解决某些网站或服务的兼容性问题
+- 在某些情况下，特定的 UA 可能会获得更好的服务质量
+
+**配置位置：** 设置 → 常规 → UA
+
 ### Linux
 
 ⚠️ 使用前请确保安装以下依赖
