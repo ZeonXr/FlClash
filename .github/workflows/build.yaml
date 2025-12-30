@@ -18,9 +18,9 @@ jobs:
           - platform: windows
             os: Windows-2022
             arch: amd64
-          - platform: windows
-            os: Windows-2022
-            arch: arm64
+          # - platform: windows
+          #   os: Windows-2022
+          #   arch: arm64
 #          - platform: linux
 #            os: ubuntu-22.04
 #            arch: amd64
@@ -30,9 +30,9 @@ jobs:
 #          - platform: macos
 #            os: macos-latest
 #            arch: arm64
-          #          - platform: windows
-          #            os: windows-11-arm
-          #            arch: arm64
+          - platform: windows
+            os: windows-11-arm
+            arch: arm64
 #          - platform: linux
 #            os: ubuntu-24.04-arm
 #            arch: arm64
@@ -46,9 +46,9 @@ jobs:
           $cargoPath = "$env:USERPROFILE\.cargo\bin"
           Add-Content $env:GITHUB_PATH $cargoPath
 
-      - name: Setup Rust Target
-        if: matrix.platform == 'windows' && matrix.arch == 'arm64'
-        run: rustup target add aarch64-pc-windows-msvc
+      # - name: Setup Rust Target
+      #   if: matrix.platform == 'windows' && matrix.arch == 'arm64'
+      #   run: rustup target add aarch64-pc-windows-msvc
 
       - name: Checkout
         uses: actions/checkout@v4
