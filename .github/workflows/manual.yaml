@@ -2,6 +2,35 @@ name: manual build
 
 on:
   workflow_dispatch:
+    inputs:
+      android:
+        description: 'Android'
+        type: boolean
+        default: false
+      windows_amd64:
+        description: 'Windows (AMD64)'
+        type: boolean
+        default: false
+      windows_arm64:
+        description: 'Windows (ARM64)'
+        type: boolean
+        default: false
+      linux_amd64:
+        description: 'Linux (AMD64)'
+        type: boolean
+        default: false
+      linux_arm64:
+        description: 'Linux (ARM64)'
+        type: boolean
+        default: false
+      macos_amd64:
+        description: 'macOS (Intel)'
+        type: boolean
+        default: false
+      macos_arm64:
+        description: 'macOS (ARM64)'
+        type: boolean
+        default: false
 
 env:
   IS_STABLE: false
@@ -9,6 +38,14 @@ env:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    if: >-
+      (matrix.platform == 'android' && inputs.android) ||
+      (matrix.platform == 'windows' && matrix.arch == 'amd64' && inputs.windows_amd64) ||
+      (matrix.platform == 'windows' && matrix.arch == 'arm64' && inputs.windows_arm64) ||
+      (matrix.platform == 'linux' && matrix.arch == 'amd64' && inputs.linux_amd64) ||
+      (matrix.platform == 'linux' && matrix.arch == 'arm64' && inputs.linux_arm64) ||
+      (matrix.platform == 'macos' && matrix.arch == 'amd64' && inputs.macos_amd64) ||
+      (matrix.platform == 'macos' && matrix.arch == 'arm64' && inputs.macos_arm64)
     strategy:
       matrix:
         include:
@@ -18,7 +55,7 @@ jobs:
             os: Windows-2022
             arch: amd64
           - platform: windows
-            os: Windows-2022
+            os: windows-11-arm
             arch: arm64
           - platform: linux
             os: ubuntu-22.04
@@ -34,9 +71,17 @@ jobs:
             arch: arm64
 
     steps:
-      - name: Setup Rust Target
-        if: matrix.platform == 'windows' && matrix.arch == 'arm64'
-        run: rustup target add aarch64-pc-windows-msvc
+      - name: Setup rust
+        if: startsWith(matrix.os, 'windows-11-arm')
+        run: |
+          Invoke-WebRequest -Uri "https://win.rustup.rs/aarch64" -OutFile rustup-init.exe
+          .\rustup-init.exe -y --default-toolchain stable
+          $cargoPath = "$env:USERPROFILE\.cargo\bin"
+          Add-Content $env:GITHUB_PATH $cargoPath
+
+#      - name: Setup Rust Target
+#        if: matrix.platform == 'windows' && matrix.arch == 'arm64'
+#        run: rustup target add aarch64-pc-windows-msvc
 
       - name: Checkout
         uses: actions/checkout@v4
