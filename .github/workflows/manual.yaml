@@ -36,39 +36,55 @@ env:
   IS_STABLE: false
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        shell: bash
+        run: |
+          matrix_include="["
+
+          if [[ "${{ inputs.android }}" == "true" ]]; then
+            matrix_include+='{"platform": "android", "os": "ubuntu-latest"},'
+          fi
+          if [[ "${{ inputs.windows_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "windows", "os": "Windows-2022", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.windows_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "windows", "os": "windows-11-arm", "arch": "arm64"},'
+          fi
+          if [[ "${{ inputs.linux_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "linux", "os": "ubuntu-22.04", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.linux_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "linux", "os": "ubuntu-24.04-arm", "arch": "arm64"},'
+          fi
+          if [[ "${{ inputs.macos_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "macos", "os": "macos-15-intel", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.macos_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "macos", "os": "macos-latest", "arch": "arm64"},'
+          fi
+
+          # Remove trailing comma if present
+          if [[ "$matrix_include" == *"," ]]; then
+            matrix_include="${matrix_include%,}"
+          fi
+          
+          matrix_include+="]"
+          
+          echo "matrix=$matrix_include" >> $GITHUB_OUTPUT
+
   build:
+    needs: check
+    if: needs.check.outputs.matrix != '[]'
     runs-on: ${{ matrix.os }}
-    if: >-
-      (matrix.platform == 'android' && inputs.android) ||
-      (matrix.platform == 'windows' && matrix.arch == 'amd64' && inputs.windows_amd64) ||
-      (matrix.platform == 'windows' && matrix.arch == 'arm64' && inputs.windows_arm64) ||
-      (matrix.platform == 'linux' && matrix.arch == 'amd64' && inputs.linux_amd64) ||
-      (matrix.platform == 'linux' && matrix.arch == 'arm64' && inputs.linux_arm64) ||
-      (matrix.platform == 'macos' && matrix.arch == 'amd64' && inputs.macos_amd64) ||
-      (matrix.platform == 'macos' && matrix.arch == 'arm64' && inputs.macos_arm64)
     strategy:
+      fail-fast: false
       matrix:
-        include:
-          - platform: android
-            os: ubuntu-latest
-          - platform: windows
-            os: Windows-2022
-            arch: amd64
-          - platform: windows
-            os: windows-11-arm
-            arch: arm64
-          - platform: linux
-            os: ubuntu-22.04
-            arch: amd64
-          - platform: macos
-            os: macos-15-intel
-            arch: amd64
-          - platform: macos
-            os: macos-latest
-            arch: arm64
-          - platform: linux
-            os: ubuntu-24.04-arm
-            arch: arm64
+        include: ${{ fromJson(needs.check.outputs.matrix) }}
 
     steps:
       - name: Setup rust
