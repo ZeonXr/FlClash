@@ -78,6 +78,13 @@ dev_dependencies:
   riverpod_generator: ^3.0.0
   riverpod_lint: ^3.0.0
   isar_community_generator: 3.3.0
+dependency_overrides:
+  # 强制统一底层解析库版本
+  analyzer: ^7.0.0
+  test_api: 0.7.8
+  matcher: 0.12.18
+  # 解决 Isar 生成器对旧版 source_gen 的依赖问题
+  source_gen: ^2.0.0
 
 flutter:
   uses-material-design: true
