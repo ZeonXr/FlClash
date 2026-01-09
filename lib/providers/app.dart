@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/services.dart';
+import 'package:isar_community/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'generated/app.g.dart';
@@ -399,32 +401,6 @@ class SystemUiOverlayStyleState extends _$SystemUiOverlayStyleState
   }
 }
 
-@riverpod
-class ProfileOverrideState extends _$ProfileOverrideState
-    with AutoDisposeNotifierMixin {
-  @override
-  ProfileOverrideModel? build() {
-    return globalState.appState.profileOverrideModel;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.appState = globalState.appState.copyWith(
-      profileOverrideModel: value,
-    );
-  }
-
-  void updateState(
-    ProfileOverrideModel? Function(ProfileOverrideModel? state) builder,
-  ) {
-    final value = builder(state);
-    if (value == null) {
-      return;
-    }
-    this.value = value;
-  }
-}
-
 @Riverpod(name: 'coreStatusProvider')
 class _CoreStatus extends _$CoreStatus with AutoDisposeNotifierMixin {
   @override
@@ -461,7 +437,7 @@ class SelectedItems extends _$SelectedItems with AutoDisposeNotifierMixin {
   late final String _key;
 
   @override
-  Set<String> build(String key) {
+  Set<dynamic> build(String key) {
     _key = key;
     return globalState.appState.selectedItemsMap[_key] ?? {};
   }
@@ -470,7 +446,7 @@ class SelectedItems extends _$SelectedItems with AutoDisposeNotifierMixin {
   onUpdate(value) {
     final newMap = globalState.appState.selectedItemsMap.copyWitUpdate(
       key,
-      value.isEmpty ? null : value,
+      value,
     );
     globalState.appState = globalState.appState.copyWith(
       selectedItemsMap: newMap,
@@ -483,19 +459,150 @@ class SelectedItem extends _$SelectedItem with AutoDisposeNotifierMixin {
   late final String _key;
 
   @override
-  String build(String key) {
+  dynamic build(String key) {
     _key = key;
-    return globalState.appState.selectedItemMap[_key] ?? '';
+    return globalState.appState.selectedItemMap[_key];
   }
 
   @override
   onUpdate(value) {
     final newMap = globalState.appState.selectedItemMap.copyWitUpdate(
       key,
-      value.isEmpty ? null : value,
+      value,
     );
     globalState.appState = globalState.appState.copyWith(
       selectedItemMap: newMap,
     );
+  }
+}
+
+@riverpod
+class Profiles extends _$Profiles with AutoDisposeNotifierMixin {
+  @override
+  List<Profile> build() {
+    return globalState.runningState.profiles;
+  }
+
+  @override
+  onUpdate(value) {
+    globalState.runningState = globalState.runningState.copyWith(
+      profiles: value,
+    );
+    globalState.isar.writeTxn(() async {
+      final newProfileCollections = value.mapIndexed((index, item) {
+        return ProfileCollection.fromProfile(item, index);
+      }).toList();
+      await globalState.isar.profileCollections.setAll(
+        newProfileCollections,
+        getId: (item) => item.id,
+        getIdsInDb: (col) => col.where().idProperty().findAll(),
+      );
+    });
+  }
+
+  void setProfile(Profile profile) {
+    value = state.copyAndAddProfile(profile);
+  }
+
+  void updateProfile(int profileId, Profile Function(Profile profile) builder) {
+    final List<Profile> profilesTemp = List.from(state);
+    final index = profilesTemp.indexWhere((element) => element.id == profileId);
+    if (index != -1) {
+      profilesTemp[index] = builder(profilesTemp[index]);
+    }
+    value = profilesTemp;
+  }
+
+  void deleteProfileById(int id) {
+    value = state.where((element) => element.id != id).toList();
+  }
+}
+
+@riverpod
+class Scripts extends _$Scripts with AutoDisposeNotifierMixin {
+  @override
+  List<Script> build() {
+    return globalState.runningState.scripts;
+  }
+
+  @override
+  onUpdate(value) {
+    globalState.runningState = globalState.runningState.copyWith(
+      scripts: value,
+    );
+    globalState.isar.writeTxn(() async {
+      final newScriptCollections = value
+          .map(ScriptCollection.fromScript)
+          .toList();
+      await globalState.isar.scriptCollections.setAll(
+        newScriptCollections,
+        getId: (item) => item.id,
+        getIdsInDb: (col) => col.where().idProperty().findAll(),
+      );
+    });
+  }
+
+  void setScript(Script script) {
+    final list = List<Script>.from(state);
+    final index = list.indexWhere((item) => item.id == script.id);
+    if (index != -1) {
+      list[index] = script;
+    } else {
+      list.add(script);
+    }
+    value = list;
+  }
+
+  void del(int id) {
+    final list = List<Script>.from(state);
+    final index = list.indexWhere((item) => item.id == id);
+    if (index != -1) {
+      list.removeAt(index);
+    }
+    state = list;
+  }
+
+  bool isExits(String label) {
+    return state.indexWhere((item) => item.label == label) != -1;
+  }
+}
+
+@riverpod
+class Rules extends _$Rules with AutoDisposeNotifierMixin {
+  @override
+  List<Rule> build() {
+    return globalState.runningState.rules;
+  }
+
+  @override
+  onUpdate(value) {
+    globalState.runningState = globalState.runningState.copyWith(rules: value);
+    globalState.isar.writeTxn(() async {
+      final newRuleCollections = value.mapIndexed((index, item) {
+        return RuleCollection.fromRule(item, index);
+      }).toList();
+      await globalState.isar.ruleCollections.setAll(
+        newRuleCollections,
+        getId: (item) => item.id,
+        getIdsInDb: (col) => col.where().idProperty().findAll(),
+      );
+    });
+  }
+}
+
+@riverpod
+class IsUpdating extends _$IsUpdating with AutoDisposeNotifierMixin {
+  late final String _name;
+
+  @override
+  bool build(String name) {
+    _name = name;
+    return globalState.appState.updatingMap[_name] ?? false;
+  }
+
+  @override
+  onUpdate(value) {
+    final newMap = globalState.appState.updatingMap.copyWitUpdate(_name, value);
+    globalState.appState = globalState.appState.copyWith(updatingMap: newMap);
   }
 }

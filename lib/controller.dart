@@ -1,10 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
-import 'package:archive/archive.dart';
-import 'package:fl_clash/common/archive.dart';
 import 'package:fl_clash/core/core.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/plugins/app.dart';
@@ -13,9 +9,7 @@ import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'common/common.dart';
@@ -56,11 +50,9 @@ class AppController {
   }
 
   void savePreferencesDebounce() {
-    debouncer.call(
-      FunctionTag.savePreferences,
-      savePreferences,
-      duration: Duration(seconds: 3),
-    );
+    debouncer.call(FunctionTag.savePreferences, () {
+      globalState.savePreferences();
+    }, duration: Duration(seconds: 3));
   }
 
   void changeProxyDebounce(String groupName, String proxyName) {
@@ -145,17 +137,17 @@ class AppController {
     _ref.read(currentProfileIdProvider.notifier).value = profile.id;
   }
 
-  Future<void> deleteProfile(String id) async {
+  Future<void> deleteProfile(int id) async {
     _ref.read(profilesProvider.notifier).deleteProfileById(id);
     clearEffect(id);
-    if (globalState.config.currentProfileId == id) {
-      final profiles = globalState.config.profiles;
-      final currentProfileId = _ref.read(currentProfileIdProvider.notifier);
+    final currentProfileId = _ref.read(currentProfileIdProvider);
+    if (currentProfileId == id) {
+      final profiles = _ref.read(profilesProvider);
       if (profiles.isNotEmpty) {
         final updateId = profiles.first.id;
-        currentProfileId.value = updateId;
+        _ref.read(currentProfileIdProvider.notifier).value = updateId;
       } else {
-        currentProfileId.value = null;
+        _ref.read(currentProfileIdProvider.notifier).value = null;
         updateStatus(false);
       }
     }
@@ -172,13 +164,43 @@ class AppController {
     _ref.read(localIpProvider.notifier).value = await utils.getLocalIpAddress();
   }
 
-  Future<void> updateProfile(Profile profile) async {
-    final newProfile = await profile.update();
-    _ref
-        .read(profilesProvider.notifier)
-        .setProfile(newProfile.copyWith(isUpdating: false));
-    if (profile.id == _ref.read(currentProfileIdProvider)) {
-      applyProfileDebounce(silence: true);
+  Future<String> updateProvider(
+    ExternalProvider provider, {
+    bool showLoading = false,
+  }) async {
+    try {
+      if (showLoading) {
+        _ref.read(isUpdatingProvider(provider.updatingKey).notifier).value =
+            true;
+      }
+      final message = await coreController.updateExternalProvider(
+        providerName: provider.name,
+      );
+      if (message.isNotEmpty) return message;
+      setProvider(await coreController.getExternalProvider(provider.name));
+      return '';
+    } finally {
+      _ref.read(isUpdatingProvider(provider.updatingKey).notifier).value =
+          false;
+    }
+  }
+
+  Future<void> updateProfile(
+    Profile profile, {
+    bool showLoading = false,
+  }) async {
+    try {
+      if (showLoading) {
+        _ref.read(isUpdatingProvider(profile.updatingKey).notifier).value =
+            true;
+      }
+      final newProfile = await profile.update();
+      _ref.read(profilesProvider.notifier).setProfile(newProfile);
+      if (profile.id == _ref.read(currentProfileIdProvider)) {
+        applyProfileDebounce(silence: true);
+      }
+    } finally {
+      _ref.read(isUpdatingProvider(profile.updatingKey).notifier).value = false;
     }
   }
 
@@ -302,7 +324,12 @@ class AppController {
   }
 
   Future<void> _setupClashConfig() async {
-    await _ref.read(currentProfileProvider)?.checkAndUpdate();
+    final profile = await _ref
+        .read(currentProfileProvider)
+        ?.checkAndUpdateAndCopy();
+    if (profile != null) {
+      _ref.read(profilesProvider.notifier).setProfile(profile);
+    }
     final patchConfig = _ref.read(patchClashConfigProvider);
     final res = await _requestAdmin(patchConfig.tun.enable);
     if (res.isError) {
@@ -311,12 +338,12 @@ class AppController {
     final realTunEnable = _ref.read(realTunEnableProvider);
     final realPatchConfig = patchConfig.copyWith.tun(enable: realTunEnable);
     final currentProfile = _ref.read(currentProfileProvider);
-    final setupState = _ref.read(setupStateProvider(currentProfile?.id ?? ''));
+    final setupState = _ref.read(setupStateProvider(currentProfile?.id));
     globalState.lastSetupState = setupState;
     if (system.isAndroid) {
       globalState.lastVpnState = _ref.read(vpnStateProvider);
     }
-    final message = await globalState.setupConfig(
+    final message = await globalState.setupProfile(
       setupState: setupState,
       patchConfig: realPatchConfig,
     );
@@ -347,7 +374,6 @@ class AppController {
     applyProfile();
     _ref.read(logsProvider.notifier).value = FixedList(500);
     _ref.read(requestsProvider.notifier).value = FixedList(500);
-    globalState.computeHeightMapCache = {};
   }
 
   void updateBrightness() {
@@ -412,11 +438,6 @@ class AppController {
     }
   }
 
-  Future<void> savePreferences() async {
-    commonPrint.log('save preferences');
-    await preferences.saveConfig(globalState.config);
-  }
-
   Future<void> changeProxy({
     required String groupName,
     required String proxyName,
@@ -426,6 +447,8 @@ class AppController {
     );
     if (_ref.read(appSettingProvider).closeConnections) {
       coreController.closeConnections();
+    } else {
+      coreController.resetConnections();
     }
     addCheckIpNumDebounce();
   }
@@ -436,7 +459,7 @@ class AppController {
     }
     if (_ref.read(appSettingProvider).minimizeOnExit) {
       if (system.isDesktop) {
-        await savePreferences();
+        await globalState.savePreferences();
       }
       await system.back();
     } else {
@@ -457,7 +480,7 @@ class AppController {
       system.exit();
     });
     try {
-      await savePreferences();
+      await globalState.savePreferences();
       await proxy?.stopProxy();
       await macOS?.updateDns(true);
       await coreController.destroy();
@@ -471,6 +494,12 @@ class AppController {
     await preferences.clearPreferences();
     commonPrint.log('clear preferences');
     globalState.config = Config(themeProps: defaultThemeProps);
+    globalState.isar.close(deleteFromDisk: true);
+    final homeDir = Directory(await appPath.profilesPath);
+    await for (final file in homeDir.list(recursive: true)) {
+      await file.safeDelete();
+    }
+    handleExit();
   }
 
   Future<void> autoCheckUpdate() async {
@@ -527,10 +556,7 @@ class AppController {
     );
     if (res == true) {
       final file = File(await appPath.sharedPreferencesPath);
-      final isExists = await file.exists();
-      if (isExists) {
-        await file.delete();
-      }
+      await file.safeDelete();
     }
     await handleExit();
   }
@@ -539,8 +565,10 @@ class AppController {
     final isInit = await coreController.isInit;
     if (!isInit) {
       await coreController.init(globalState.appState.version);
+      await applyProfile();
+    } else {
+      await updateGroups();
     }
-    await applyProfile();
   }
 
   Future<void> init() async {
@@ -572,7 +600,7 @@ class AppController {
     _ref.read(coreStatusProvider.notifier).value = CoreStatus.connecting;
     final result = await Future.wait([
       coreController.preload(),
-      if (!globalState.isService) Future.delayed(Duration(milliseconds: 300)),
+      Future.delayed(Duration(milliseconds: 300)),
     ]);
     final String message = result[0];
     if (message.isNotEmpty) {
@@ -592,11 +620,7 @@ class AppController {
     final status = globalState.isStart == true
         ? true
         : _ref.read(appSettingProvider).autoRun;
-
     await updateStatus(status);
-    if (!status) {
-      addCheckIpNumDebounce();
-    }
   }
 
   void setDelay(Delay delay) {
@@ -679,7 +703,7 @@ class AppController {
     );
     _ref
         .read(appSettingProvider.notifier)
-        .updateState((state) => state.copyWith(crashlyticsTip: true));
+        .update((state) => state.copyWith(crashlyticsTip: true));
   }
 
   Future<void> _handlerDisclaimer() async {
@@ -694,7 +718,7 @@ class AppController {
     }
     _ref
         .read(appSettingProvider.notifier)
-        .updateState((state) => state.copyWith(disclaimerAccepted: true));
+        .update((state) => state.copyWith(disclaimerAccepted: true));
     return;
   }
 
@@ -725,7 +749,6 @@ class AppController {
     if (!context.mounted) return;
     globalState.navigatorKey.currentState?.popUntil((route) => route.isFirst);
     toProfiles();
-
     final profile = await safeRun(
       () async {
         await Future.delayed(const Duration(milliseconds: 300));
@@ -755,31 +778,29 @@ class AppController {
     _ref.read(providersProvider.notifier).setProvider(provider);
   }
 
-  Future<void> clearEffect(String profileId) async {
-    final profilePath = await appPath.getProfilePath(profileId);
-    final providersDirPath = await appPath.getProvidersDirPath(profileId);
-    return await Isolate.run(() async {
-      final profileFile = File(profilePath);
-      final isExists = await profileFile.exists();
-      if (isExists) {
-        profileFile.delete(recursive: true);
-      }
-      await coreController.deleteFile(providersDirPath);
-    });
+  Future<void> clearEffect(int profileId) async {
+    final profilePath = await appPath.getProfilePath(profileId.toString());
+    final providersDirPath = await appPath.getProvidersDirPath(
+      profileId.toString(),
+    );
+    final profileFile = File(profilePath);
+    final isExists = await profileFile.exists();
+    if (isExists) {
+      await profileFile.safeDelete(recursive: true);
+    }
+    await coreController.deleteFile(providersDirPath);
   }
 
   void updateTun() {
     _ref
         .read(patchClashConfigProvider.notifier)
-        .updateState((state) => state.copyWith.tun(enable: !state.tun.enable));
+        .update((state) => state.copyWith.tun(enable: !state.tun.enable));
   }
 
   void updateSystemProxy() {
     _ref
         .read(networkSettingProvider.notifier)
-        .updateState(
-          (state) => state.copyWith(systemProxy: !state.systemProxy),
-        );
+        .update((state) => state.copyWith(systemProxy: !state.systemProxy));
   }
 
   void handleCoreDisconnected() {
@@ -832,7 +853,7 @@ class AppController {
   void changeMode(Mode mode) {
     _ref
         .read(patchClashConfigProvider.notifier)
-        .updateState((state) => state.copyWith(mode: mode));
+        .update((state) => state.copyWith(mode: mode));
     if (mode == Mode.global) {
       updateCurrentGroupName(GroupName.GLOBAL.name);
     }
@@ -842,7 +863,7 @@ class AppController {
   void updateAutoLaunch() {
     _ref
         .read(appSettingProvider.notifier)
-        .updateState((state) => state.copyWith(autoLaunch: !state.autoLaunch));
+        .update((state) => state.copyWith(autoLaunch: !state.autoLaunch));
   }
 
   Future<void> updateVisible() async {
@@ -855,7 +876,7 @@ class AppController {
   }
 
   void updateMode() {
-    _ref.read(patchClashConfigProvider.notifier).updateState((state) {
+    _ref.read(patchClashConfigProvider.notifier).update((state) {
       final index = Mode.values.indexWhere((item) => item == state.mode);
       if (index == -1) {
         return null;
@@ -866,109 +887,64 @@ class AppController {
   }
 
   Future<bool> exportLogs() async {
-    final logsRaw = _ref.read(logsProvider).list.map((item) => item.toString());
-    final data = await Isolate.run<List<int>>(() async {
-      final logsRawString = logsRaw.join('\n');
-      return utf8.encode(logsRawString);
-    });
-    return await picker.saveFile(utils.logFile, Uint8List.fromList(data)) !=
-        null;
-  }
-
-  Future<List<int>> backupData() async {
-    final homeDirPath = await appPath.homeDirPath;
-    final profilesPath = await appPath.profilesPath;
-    final configJson = globalState.config.toJson();
-    return Isolate.run<List<int>>(() async {
-      final archive = Archive();
-      archive.addTextFile('config.json', configJson);
-      archive.addDirectoryToArchive(profilesPath, homeDirPath);
-      final zipEncoder = ZipEncoder();
-      return zipEncoder.encode(archive);
-    });
+    final logString = await encodeLogsTask(_ref.read(logsProvider).list);
+    final tempFilePath = await appPath.tempFilePath;
+    final file = await File(tempFilePath).create(recursive: true);
+    await file.writeAsString(logString);
+    bool res = false;
+    res = await picker.saveFileWithPath(utils.logFile, tempFilePath) != null;
+    return res;
   }
 
   Future<void> updateTray([bool focus = false]) async {
     tray?.update(trayState: _ref.read(trayStateProvider));
   }
 
-  Future<void> recoveryData(
-    List<int> data,
-    RecoveryOption recoveryOption,
-  ) async {
-    final archive = await Isolate.run<Archive>(() {
-      final zipDecoder = ZipDecoder();
-      return zipDecoder.decodeBytes(data);
-    });
-    final homeDirPath = await appPath.homeDirPath;
-    final configs = archive.files
-        .where((item) => item.name.endsWith('.json'))
-        .toList();
-    final profiles = archive.files.where(
-      (item) => !item.name.endsWith('.json'),
-    );
-    final configIndex = configs.indexWhere(
-      (config) => config.name == 'config.json',
-    );
-    if (configIndex == -1) throw 'invalid backup file';
-    final configFile = configs[configIndex];
-    var tempConfig = Config.compatibleFromJson(
-      json.decode(utf8.decode(configFile.content)),
-    );
-    for (final profile in profiles) {
-      final filePath = join(homeDirPath, posix.normalize(profile.name));
-      final file = File(filePath);
-      await file.create(recursive: true);
-      await file.writeAsBytes(profile.content);
-    }
-    final clashConfigIndex = configs.indexWhere(
-      (config) => config.name == 'clashConfig.json',
-    );
-    if (clashConfigIndex != -1) {
-      final clashConfigFile = configs[clashConfigIndex];
-      tempConfig = tempConfig.copyWith(
-        patchClashConfig: ClashConfig.fromJson(
-          json.decode(utf8.decode(clashConfigFile.content)),
-        ),
-      );
-    }
-    _recovery(tempConfig, recoveryOption);
-  }
-
-  void _recovery(Config config, RecoveryOption recoveryOption) {
+  Future<void> restore(RestoreOption option) async {
+    final restoreDirPath = await appPath.restoreDirPath;
+    final restoreDir = Directory(restoreDirPath);
     final recoveryStrategy = _ref.read(
       appSettingProvider.select((state) => state.recoveryStrategy),
     );
-    final profiles = config.profiles;
-    if (recoveryStrategy == RecoveryStrategy.override) {
-      _ref.read(profilesProvider.notifier).value = profiles;
-    } else {
-      for (final profile in profiles) {
-        _ref.read(profilesProvider.notifier).setProfile(profile);
+    final isOverride = recoveryStrategy == RecoveryStrategy.override;
+    try {
+      final migrationData = await restoreTask();
+      if (!await restoreDir.exists()) {
+        throw '恢复异常';
       }
-    }
-    final onlyProfiles = recoveryOption == RecoveryOption.onlyProfiles;
-    if (!onlyProfiles) {
+
+      final profiles = migrationData.profiles;
+      if (isOverride) {
+        _ref.read(profilesProvider.notifier).value = profiles;
+      } else {
+        for (final profile in profiles) {
+          _ref.read(profilesProvider.notifier).setProfile(profile);
+        }
+      }
+      final configMap = migrationData.configMap;
+      if (option == RestoreOption.onlyProfiles || configMap == null) {
+        return;
+      }
+      final config = Config.fromJson(configMap);
       _ref.read(patchClashConfigProvider.notifier).value =
           config.patchClashConfig;
-      _ref.read(appSettingProvider.notifier).value = config.appSetting;
+      _ref.read(appSettingProvider.notifier).value = config.appSettingProps;
       _ref.read(currentProfileIdProvider.notifier).value =
           config.currentProfileId;
-      _ref.read(appDAVSettingProvider.notifier).value = config.dav;
+      _ref.read(davSettingProvider.notifier).value = config.davProps;
       _ref.read(themeSettingProvider.notifier).value = config.themeProps;
       _ref.read(windowSettingProvider.notifier).value = config.windowProps;
       _ref.read(vpnSettingProvider.notifier).value = config.vpnProps;
       _ref.read(proxiesStyleSettingProvider.notifier).value =
-          config.proxiesStyle;
+          config.proxiesStyleProps;
       _ref.read(overrideDnsProvider.notifier).value = config.overrideDns;
       _ref.read(networkSettingProvider.notifier).value = config.networkProps;
       _ref.read(hotKeyActionsProvider.notifier).value = config.hotKeyActions;
-      _ref.read(scriptsProvider.notifier).value = config.scripts;
-      _ref.read(rulesProvider.notifier).value = config.rules;
-    }
-    final currentProfile = _ref.read(currentProfileProvider);
-    if (currentProfile == null && profiles.isNotEmpty) {
-      _ref.read(currentProfileIdProvider.notifier).value = profiles.first.id;
+      _ref.read(scriptsProvider.notifier).value = migrationData.scripts;
+      _ref.read(rulesProvider.notifier).value = migrationData.rules;
+      return;
+    } finally {
+      await restoreDir.safeDelete(recursive: true);
     }
   }
 
@@ -992,9 +968,9 @@ class AppController {
   }) async {
     final realSilence = needLoading == true ? true : silence;
     try {
-      if (needLoading) {
-        _ref.read(loadingProvider.notifier).start();
-      }
+      // if (needLoading) {
+      //   _ref.read(loadingProvider.notifier).start();
+      // }
       final res = await futureFunction();
       return res;
     } catch (e) {
@@ -1009,7 +985,7 @@ class AppController {
       }
       return null;
     } finally {
-      _ref.read(loadingProvider.notifier).stop();
+      // _ref.read(loadingProvider.notifier).stop();
     }
   }
 }

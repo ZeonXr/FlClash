@@ -81,6 +81,7 @@ class ApplicationState extends ConsumerState<Application> {
       child: CoreManager(
         child: ConnectivityManager(
           onConnectivityChanged: (results) async {
+            commonPrint.log('connectivityChanged ${results.toString()}');
             if (!results.contains(ConnectivityResult.vpn)) {
               coreController.closeConnections();
             }
@@ -163,7 +164,7 @@ class ApplicationState extends ConsumerState<Application> {
     linkManager.destroy();
     _autoUpdateProfilesTaskTimer?.cancel();
     await coreController.destroy();
-    await globalState.appController.savePreferences();
+    await globalState.savePreferences();
     await globalState.appController.handleExit();
     super.dispose();
   }

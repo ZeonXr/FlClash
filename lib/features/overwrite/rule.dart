@@ -14,7 +14,7 @@ class RuleItem extends StatelessWidget {
   final bool isSelected;
   final bool isEditing;
   final Rule rule;
-  final void Function(String id) onSelected;
+  final void Function() onSelected;
   final void Function(Rule rule) onEdit;
 
   const RuleItem({
@@ -31,7 +31,7 @@ class RuleItem extends StatelessWidget {
     return CommonSelectedListItem(
       isSelected: isSelected,
       onSelected: () {
-        onSelected(rule.id);
+        onSelected();
       },
       title: Text(
         rule.value,
@@ -101,7 +101,7 @@ class _AddOrEditRuleDialogState extends State<AddOrEditRuleDialog> {
   final _contentController = TextEditingController();
   bool _noResolve = false;
   bool _src = false;
-  List<DropdownMenuEntry> _targetItems = [];
+  List<DropdownMenuEntry<String>> _targetItems = [];
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -233,7 +233,7 @@ class _AddOrEditRuleDialogState extends State<AddOrEditRuleDialog> {
                       return null;
                     },
                     builder: (filed) {
-                      return DropdownMenu(
+                      return DropdownMenu<String>(
                         controller: _ruleTargetController,
                         label: Text(appLocalizations.ruleTarget),
                         width: 200,

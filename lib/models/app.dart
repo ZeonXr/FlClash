@@ -1,11 +1,12 @@
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/models/selector.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'clash_config.dart';
 import 'common.dart';
 import 'core.dart';
+import 'profile.dart';
 
 part 'generated/app.freezed.dart';
 
@@ -36,12 +37,21 @@ abstract class AppState with _$AppState {
     @Default(false) bool realTunEnable,
     @Default(false) bool loading,
     required SystemUiOverlayStyle systemUiOverlayStyle,
-    ProfileOverrideModel? profileOverrideModel,
     @Default({}) Map<QueryTag, String> queryMap,
-    @Default({}) Map<String, String> selectedItemMap,
-    @Default({}) Map<String, Set<String>> selectedItemsMap,
+    @Default({}) Map<String, dynamic> selectedItemMap,
+    @Default({}) Map<String, Set<dynamic>> selectedItemsMap,
     @Default(CoreStatus.connecting) CoreStatus coreStatus,
+    @Default({}) Map<String, bool> updatingMap,
   }) = _AppState;
+}
+
+@freezed
+abstract class RunningState with _$RunningState {
+  const factory RunningState({
+    @Default([]) List<Profile> profiles,
+    @Default([]) List<Script> scripts,
+    @Default([]) List<Rule> rules,
+  }) = _RunningState;
 }
 
 extension AppStateExt on AppState {

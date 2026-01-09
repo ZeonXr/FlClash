@@ -25,15 +25,8 @@ class _AppStateManagerState extends ConsumerState<AppStateManager>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    ref.listenManual(layoutChangeProvider, (prev, next) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (prev != next) {
-          globalState.computeHeightMapCache = {};
-        }
-      });
-    });
     ref.listenManual(checkIpProvider, (prev, next) {
-      if (prev != next && next.b) {
+      if (prev != next && next.a && next.c) {
         detectionState.startCheck();
       }
     }, fireImmediately: true);
@@ -251,7 +244,7 @@ class AppSidebarContainer extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(appSettingProvider.notifier)
-                            .updateState(
+                            .update(
                               (state) =>
                                   state.copyWith(showLabel: !state.showLabel),
                             );

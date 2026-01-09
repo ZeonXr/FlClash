@@ -22,9 +22,7 @@ class CoreLib extends CoreHandlerInterface {
       return res ?? '';
     }
     _connectedCompleter.complete(true);
-    final syncRes = await service?.syncAndroidState(
-      globalState.getAndroidState(),
-    );
+    final syncRes = await service?.syncState(globalState.sharedState);
     return syncRes ?? '';
   }
 

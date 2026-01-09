@@ -133,7 +133,7 @@ enum InvokeMessageType { protect, process }
 
 enum FindProcessMode { always, off }
 
-enum RecoveryOption { all, onlyProfiles }
+enum RestoreOption { all, onlyProfiles }
 
 enum ChipType { action, delete }
 
@@ -281,6 +281,7 @@ enum FunctionTag {
   requests,
   autoScrollToEnd,
   loadedProvider,
+  saveSharedFile,
 }
 
 enum DashboardWidget {
@@ -401,7 +402,7 @@ enum OverwriteType {
   // none,
   standard,
   script,
-  // custom,
+  custom,
 }
 
 enum RuleTarget { DIRECT, REJECT, MATCH }

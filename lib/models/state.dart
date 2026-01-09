@@ -1,20 +1,27 @@
 import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'generated/selector.freezed.dart';
+import 'app.dart';
+import 'clash_config.dart';
+import 'common.dart';
+import 'config.dart';
+import 'core.dart';
+import 'profile.dart';
+
+part 'generated/state.freezed.dart';
+part 'generated/state.g.dart';
 
 @freezed
 abstract class VM2<A, B> with _$VM2<A, B> {
-  const factory VM2({required A a, required B b}) = _VM2;
+  const factory VM2(A a, B b) = _VM2;
 }
 
 @freezed
 abstract class VM3<A, B, C> with _$VM3<A, B, C> {
-  const factory VM3({required A a, required B b, required C c}) = _VM3;
+  const factory VM3(A a, B b, C c) = _VM3;
 }
 
 @freezed
@@ -24,13 +31,7 @@ abstract class VM4<A, B, C, D> with _$VM4<A, B, C, D> {
 
 @freezed
 abstract class VM5<A, B, C, D, E> with _$VM5<A, B, C, D, E> {
-  const factory VM5({
-    required A a,
-    required B b,
-    required C c,
-    required D d,
-    required E e,
-  }) = _VM5;
+  const factory VM5(A a, B b, C c, D d, E e) = _VM5;
 }
 
 @freezed
@@ -45,7 +46,7 @@ abstract class StartButtonSelectorState with _$StartButtonSelectorState {
 abstract class ProfilesSelectorState with _$ProfilesSelectorState {
   const factory ProfilesSelectorState({
     required List<Profile> profiles,
-    required String? currentProfileId,
+    required int? currentProfileId,
     required int columns,
   }) = _ProfilesSelectorState;
 }
@@ -149,14 +150,14 @@ abstract class MoreToolsSelectorState with _$MoreToolsSelectorState {
 abstract class PackageListSelectorState with _$PackageListSelectorState {
   const factory PackageListSelectorState({
     required List<Package> packages,
-    required AccessControl accessControl,
+    required AccessControlProps accessControlProps,
   }) = _PackageListSelectorState;
 }
 
 extension PackageListSelectorStateExt on PackageListSelectorState {
   List<Package> get list {
-    final isFilterSystemApp = accessControl.isFilterSystemApp;
-    final isFilterNonInternetApp = accessControl.isFilterNonInternetApp;
+    final isFilterSystemApp = accessControlProps.isFilterSystemApp;
+    final isFilterNonInternetApp = accessControlProps.isFilterNonInternetApp;
     return packages
         .where(
           (item) =>
@@ -167,7 +168,7 @@ extension PackageListSelectorStateExt on PackageListSelectorState {
   }
 
   List<Package> getSortList(List<String> selectedList) {
-    final sort = accessControl.sort;
+    final sort = accessControlProps.sort;
 
     return list.sorted((a, b) {
       final isSelectA = selectedList.contains(a.packageName);
@@ -218,7 +219,6 @@ abstract class ClashConfigState with _$ClashConfigState {
   const factory ClashConfigState({
     required bool overrideDns,
     required ClashConfig clashConfig,
-    required OverrideData overrideData,
     required RouteMode routeMode,
   }) = _ClashConfigState;
 }
@@ -249,22 +249,70 @@ abstract class VpnState with _$VpnState {
 }
 
 @freezed
-abstract class ProfileOverrideModel with _$ProfileOverrideModel {
-  const factory ProfileOverrideModel({
-    @Default(ClashConfigSnippet()) ClashConfigSnippet snippet,
-    @Default({}) Set<String> selectedRules,
-    OverrideData? overrideData,
-  }) = _ProfileOverrideModel;
+abstract class SharedState with _$SharedState {
+  const factory SharedState({
+    SetupParams? setupParams,
+    VpnOptions? vpnOptions,
+    required String stopTip,
+    required String startTip,
+    required String currentProfileName,
+    required String stopText,
+    required bool onlyStatisticsProxy,
+    required bool crashlytics,
+  }) = _SharedState;
+
+  factory SharedState.fromJson(Map<String, Object?> json) =>
+      _$SharedStateFromJson(json);
+}
+
+extension SharedStateExt on SharedState {
+  SharedState get needSyncSharedState => copyWith(setupParams: null);
+}
+
+@freezed
+abstract class ComputeGroupsState with _$ComputeGroupsState {
+  const factory ComputeGroupsState({
+    required Map<String, dynamic> proxies,
+    required ProxiesSortType sortType,
+    required DelayMap delayMap,
+    required Map<String, String> selectedMap,
+    required String defaultTestUrl,
+  }) = _ComputeGroupsState;
+}
+
+@freezed
+abstract class MakeRealProfileState with _$MakeRealProfileState {
+  const factory MakeRealProfileState({
+    required String profilesPath,
+    required int profileId,
+    required Map<String, dynamic> rawConfig,
+    required ClashConfig realPatchConfig,
+    required bool overrideDns,
+    required bool appendSystemDns,
+    required List<Rule> addedRules,
+    required String defaultUA,
+  }) = _MakeRealProfileState;
+}
+
+@freezed
+abstract class MigrationData with _$MigrationData {
+  const factory MigrationData({
+    Map<String, Object?>? configMap,
+    @Default([]) List<Rule> rules,
+    @Default([]) List<Script> scripts,
+    @Default([]) List<Profile> profiles,
+  }) = _MigrationData;
 }
 
 @freezed
 abstract class SetupState with _$SetupState {
   const factory SetupState({
-    required String? profileId,
+    required int? profileId,
     required int? profileLastUpdateDate,
     required OverwriteType overwriteType,
     required List<Rule> addedRules,
-    required String? scriptContent,
+    required int? scriptId,
+    required DateTime? scriptLastUpdateTime,
     required bool overrideDns,
     required Dns dns,
   }) = _SetupState;
@@ -273,7 +321,7 @@ abstract class SetupState with _$SetupState {
 extension SetupStateExt on SetupState {
   bool needSetup(SetupState? lastSetupState) {
     if (lastSetupState == null) {
-      return true;
+      return false;
     }
     if (profileId != lastSetupState.profileId) {
       return true;
@@ -281,14 +329,17 @@ extension SetupStateExt on SetupState {
     if (profileLastUpdateDate != lastSetupState.profileLastUpdateDate) {
       return true;
     }
+    final scriptIsChange =
+        scriptId != lastSetupState.scriptId ||
+        scriptLastUpdateTime != lastSetupState.scriptLastUpdateTime;
     if (overwriteType != lastSetupState.overwriteType) {
       if (!ruleListEquality.equals(addedRules, lastSetupState.addedRules) ||
-          scriptContent != lastSetupState.scriptContent) {
+          scriptIsChange) {
         return true;
       }
     } else {
       if (overwriteType == OverwriteType.script) {
-        if (scriptContent != lastSetupState.scriptContent) {
+        if (scriptIsChange) {
           return true;
         }
       }

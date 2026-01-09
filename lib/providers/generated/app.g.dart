@@ -1330,60 +1330,6 @@ abstract class _$SystemUiOverlayStyleState
   }
 }
 
-@ProviderFor(ProfileOverrideState)
-const profileOverrideStateProvider = ProfileOverrideStateProvider._();
-
-final class ProfileOverrideStateProvider
-    extends $NotifierProvider<ProfileOverrideState, ProfileOverrideModel?> {
-  const ProfileOverrideStateProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'profileOverrideStateProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$profileOverrideStateHash();
-
-  @$internal
-  @override
-  ProfileOverrideState create() => ProfileOverrideState();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ProfileOverrideModel? value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<ProfileOverrideModel?>(value),
-    );
-  }
-}
-
-String _$profileOverrideStateHash() =>
-    r'6bcf739e034cc39623dc63bf304189d63fc19404';
-
-abstract class _$ProfileOverrideState extends $Notifier<ProfileOverrideModel?> {
-  ProfileOverrideModel? build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<ProfileOverrideModel?, ProfileOverrideModel?>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<ProfileOverrideModel?, ProfileOverrideModel?>,
-              ProfileOverrideModel?,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
 @ProviderFor(_CoreStatus)
 const coreStatusProvider = _CoreStatusProvider._();
 
@@ -1531,7 +1477,7 @@ abstract class _$Query extends $Notifier<String> {
 const selectedItemsProvider = SelectedItemsFamily._();
 
 final class SelectedItemsProvider
-    extends $NotifierProvider<SelectedItems, Set<String>> {
+    extends $NotifierProvider<SelectedItems, Set<dynamic>> {
   const SelectedItemsProvider._({
     required SelectedItemsFamily super.from,
     required String super.argument,
@@ -1558,10 +1504,10 @@ final class SelectedItemsProvider
   SelectedItems create() => SelectedItems();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Set<String> value) {
+  Override overrideWithValue(Set<dynamic> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Set<String>>(value),
+      providerOverride: $SyncValueProvider<Set<dynamic>>(value),
     );
   }
 
@@ -1576,15 +1522,15 @@ final class SelectedItemsProvider
   }
 }
 
-String _$selectedItemsHash() => r'9a13ee78fdc100c8708af9de46e2861652d68e77';
+String _$selectedItemsHash() => r'483536e8c20146a2708323eb449f2680c8147c6a';
 
 final class SelectedItemsFamily extends $Family
     with
         $ClassFamilyOverride<
           SelectedItems,
-          Set<String>,
-          Set<String>,
-          Set<String>,
+          Set<dynamic>,
+          Set<dynamic>,
+          Set<dynamic>,
           String
         > {
   const SelectedItemsFamily._()
@@ -1603,21 +1549,21 @@ final class SelectedItemsFamily extends $Family
   String toString() => r'selectedItemsProvider';
 }
 
-abstract class _$SelectedItems extends $Notifier<Set<String>> {
+abstract class _$SelectedItems extends $Notifier<Set<dynamic>> {
   late final _$args = ref.$arg as String;
   String get key => _$args;
 
-  Set<String> build(String key);
+  Set<dynamic> build(String key);
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build(_$args);
-    final ref = this.ref as $Ref<Set<String>, Set<String>>;
+    final ref = this.ref as $Ref<Set<dynamic>, Set<dynamic>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<Set<String>, Set<String>>,
-              Set<String>,
+              AnyNotifier<Set<dynamic>, Set<dynamic>>,
+              Set<dynamic>,
               Object?,
               Object?
             >;
@@ -1629,7 +1575,7 @@ abstract class _$SelectedItems extends $Notifier<Set<String>> {
 const selectedItemProvider = SelectedItemFamily._();
 
 final class SelectedItemProvider
-    extends $NotifierProvider<SelectedItem, String> {
+    extends $NotifierProvider<SelectedItem, dynamic> {
   const SelectedItemProvider._({
     required SelectedItemFamily super.from,
     required String super.argument,
@@ -1656,10 +1602,10 @@ final class SelectedItemProvider
   SelectedItem create() => SelectedItem();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(String value) {
+  Override overrideWithValue(dynamic value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<String>(value),
+      providerOverride: $SyncValueProvider<dynamic>(value),
     );
   }
 
@@ -1674,10 +1620,10 @@ final class SelectedItemProvider
   }
 }
 
-String _$selectedItemHash() => r'374202f309d7a786190706fb0a2ac4945de94213';
+String _$selectedItemHash() => r'b2ddb8182c2022f4d9d3df91497c6d487ad43fbe';
 
 final class SelectedItemFamily extends $Family
-    with $ClassFamilyOverride<SelectedItem, String, String, String, String> {
+    with $ClassFamilyOverride<SelectedItem, dynamic, dynamic, dynamic, String> {
   const SelectedItemFamily._()
     : super(
         retry: null,
@@ -1694,21 +1640,268 @@ final class SelectedItemFamily extends $Family
   String toString() => r'selectedItemProvider';
 }
 
-abstract class _$SelectedItem extends $Notifier<String> {
+abstract class _$SelectedItem extends $Notifier<dynamic> {
   late final _$args = ref.$arg as String;
   String get key => _$args;
 
-  String build(String key);
+  dynamic build(String key);
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build(_$args);
-    final ref = this.ref as $Ref<String, String>;
+    final ref = this.ref as $Ref<dynamic, dynamic>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<String, String>,
-              String,
+              AnyNotifier<dynamic, dynamic>,
+              dynamic,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(Profiles)
+const profilesProvider = ProfilesProvider._();
+
+final class ProfilesProvider
+    extends $NotifierProvider<Profiles, List<Profile>> {
+  const ProfilesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'profilesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$profilesHash();
+
+  @$internal
+  @override
+  Profiles create() => Profiles();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Profile> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Profile>>(value),
+    );
+  }
+}
+
+String _$profilesHash() => r'3f5c0d5c95c88bce07f762902a2689e01e6b07f8';
+
+abstract class _$Profiles extends $Notifier<List<Profile>> {
+  List<Profile> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<List<Profile>, List<Profile>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<Profile>, List<Profile>>,
+              List<Profile>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(Scripts)
+const scriptsProvider = ScriptsProvider._();
+
+final class ScriptsProvider extends $NotifierProvider<Scripts, List<Script>> {
+  const ScriptsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'scriptsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$scriptsHash();
+
+  @$internal
+  @override
+  Scripts create() => Scripts();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Script> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Script>>(value),
+    );
+  }
+}
+
+String _$scriptsHash() => r'79ba80926f7e131c9931838b44a3b02ade3ddcee';
+
+abstract class _$Scripts extends $Notifier<List<Script>> {
+  List<Script> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<List<Script>, List<Script>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<Script>, List<Script>>,
+              List<Script>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(Rules)
+const rulesProvider = RulesProvider._();
+
+final class RulesProvider extends $NotifierProvider<Rules, List<Rule>> {
+  const RulesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'rulesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$rulesHash();
+
+  @$internal
+  @override
+  Rules create() => Rules();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Rule> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Rule>>(value),
+    );
+  }
+}
+
+String _$rulesHash() => r'569a87273580a826bdf474182dd90e02cb32857e';
+
+abstract class _$Rules extends $Notifier<List<Rule>> {
+  List<Rule> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<List<Rule>, List<Rule>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<List<Rule>, List<Rule>>,
+              List<Rule>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(IsUpdating)
+const isUpdatingProvider = IsUpdatingFamily._();
+
+final class IsUpdatingProvider extends $NotifierProvider<IsUpdating, bool> {
+  const IsUpdatingProvider._({
+    required IsUpdatingFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'isUpdatingProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$isUpdatingHash();
+
+  @override
+  String toString() {
+    return r'isUpdatingProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  IsUpdating create() => IsUpdating();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is IsUpdatingProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$isUpdatingHash() => r'e5cb47af4ce8e5a891e67062f0c39ebccfca587c';
+
+final class IsUpdatingFamily extends $Family
+    with $ClassFamilyOverride<IsUpdating, bool, bool, bool, String> {
+  const IsUpdatingFamily._()
+    : super(
+        retry: null,
+        name: r'isUpdatingProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  IsUpdatingProvider call(String name) =>
+      IsUpdatingProvider._(argument: name, from: this);
+
+  @override
+  String toString() => r'isUpdatingProvider';
+}
+
+abstract class _$IsUpdating extends $Notifier<bool> {
+  late final _$args = ref.$arg as String;
+  String get name => _$args;
+
+  bool build(String name);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build(_$args);
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
               Object?,
               Object?
             >;

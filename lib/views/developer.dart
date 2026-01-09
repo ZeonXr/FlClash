@@ -73,6 +73,13 @@ class DeveloperView extends ConsumerWidget {
             );
           },
         ),
+        ListItem(
+          title: Text('修剪缓存'),
+          minVerticalPadding: 12,
+          onTap: () {
+            globalState.shakingStore();
+          },
+        ),
       ],
     );
   }
@@ -99,7 +106,7 @@ class DeveloperView extends ConsumerWidget {
                   onChanged: (value) {
                     ref
                         .read(appSettingProvider.notifier)
-                        .updateState(
+                        .update(
                           (state) => state.copyWith(developerMode: value),
                         );
                   },

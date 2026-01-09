@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/common/dav_client.dart';
@@ -19,7 +19,7 @@ import 'package:intl/intl.dart';
 class BackupAndRecovery extends ConsumerWidget {
   const BackupAndRecovery({super.key});
 
-  Future<void> _showAddWebDAV(DAV? dav) async {
+  Future<void> _showAddWebDAV(DAVProps? dav) async {
     await globalState.showCommonDialog<String>(
       child: WebDAVFormDialog(dav: dav?.copyWith()),
     );
@@ -28,8 +28,11 @@ class BackupAndRecovery extends ConsumerWidget {
   Future<void> _backupOnWebDAV(DAVClient client) async {
     final res = await globalState.appController.safeRun<bool>(
       () async {
-        final backupData = await globalState.appController.backupData();
-        return await client.backup(Uint8List.fromList(backupData));
+        final path = await globalState.backup();
+        if (path.isEmpty) {
+          return false;
+        }
+        return await client.backup(path);
       },
       needLoading: true,
       title: appLocalizations.backup,
@@ -44,12 +47,12 @@ class BackupAndRecovery extends ConsumerWidget {
   Future<void> _recoveryOnWebDAV(
     BuildContext context,
     DAVClient client,
-    RecoveryOption recoveryOption,
+    RestoreOption option,
   ) async {
     final res = await globalState.appController.safeRun<bool>(
       () async {
-        final data = await client.recovery();
-        await globalState.appController.recoveryData(data, recoveryOption);
+        await client.recovery();
+        await globalState.appController.restore(option);
         return true;
       },
       needLoading: true,
@@ -66,7 +69,7 @@ class BackupAndRecovery extends ConsumerWidget {
     BuildContext context,
     DAVClient client,
   ) async {
-    final recoveryOption = await globalState.showCommonDialog<RecoveryOption>(
+    final recoveryOption = await globalState.showCommonDialog<RestoreOption>(
       child: const RecoveryOptionsDialog(),
     );
     if (recoveryOption == null || !context.mounted) return;
@@ -76,10 +79,13 @@ class BackupAndRecovery extends ConsumerWidget {
   Future<void> _backupOnLocal(BuildContext context) async {
     final res = await globalState.appController.safeRun<bool>(
       () async {
-        final backupData = await globalState.appController.backupData();
-        final value = await picker.saveFile(
+        final path = await globalState.backup();
+        if (path.isEmpty) {
+          return false;
+        }
+        final value = await picker.saveFileWithPath(
           utils.getBackupFileName(),
-          Uint8List.fromList(backupData),
+          path,
         );
         if (value == null) return false;
         return true;
@@ -94,16 +100,14 @@ class BackupAndRecovery extends ConsumerWidget {
     );
   }
 
-  Future<void> _recoveryOnLocal(RecoveryOption recoveryOption) async {
-    final file = await picker.pickerFile();
-    final data = file?.bytes;
-    if (data == null) return;
+  Future<void> _recoveryOnLocal(RestoreOption option) async {
+    final file = await picker.pickerFile(withData: false);
+    final path = file?.path;
+    if (path == null) return;
+    await File(path).safeCopy(await appPath.backupFilePath);
     final res = await globalState.appController.safeRun<bool>(
       () async {
-        await globalState.appController.recoveryData(
-          List<int>.from(data),
-          recoveryOption,
-        );
+        await globalState.appController.restore(option);
         return true;
       },
       needLoading: true,
@@ -117,11 +121,11 @@ class BackupAndRecovery extends ConsumerWidget {
   }
 
   Future<void> _handleRecoveryOnLocal(BuildContext context) async {
-    final recoveryOption = await globalState.showCommonDialog<RecoveryOption>(
+    final option = await globalState.showCommonDialog<RestoreOption>(
       child: const RecoveryOptionsDialog(),
     );
-    if (recoveryOption == null || !context.mounted) return;
-    _recoveryOnLocal(recoveryOption);
+    if (option == null || !context.mounted) return;
+    _recoveryOnLocal(option);
   }
 
   void _handleChange(String? value, WidgetRef ref) {
@@ -129,8 +133,8 @@ class BackupAndRecovery extends ConsumerWidget {
       return;
     }
     ref
-        .read(appDAVSettingProvider.notifier)
-        .updateState((state) => state?.copyWith(fileName: value));
+        .read(davSettingProvider.notifier)
+        .update((state) => state?.copyWith(fileName: value));
   }
 
   Future<void> _handleUpdateRecoveryStrategy(WidgetRef ref) async {
@@ -150,12 +154,12 @@ class BackupAndRecovery extends ConsumerWidget {
     }
     ref
         .read(appSettingProvider.notifier)
-        .updateState((state) => state.copyWith(recoveryStrategy: res));
+        .update((state) => state.copyWith(recoveryStrategy: res));
   }
 
   @override
   Widget build(BuildContext context, ref) {
-    final dav = ref.watch(appDAVSettingProvider);
+    final dav = ref.watch(davSettingProvider);
     final client = dav != null ? DAVClient(dav) : null;
     return BaseScaffold(
       title: appLocalizations.backupAndRecovery,
@@ -307,9 +311,9 @@ class RecoveryOptionsDialog extends StatefulWidget {
 }
 
 class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
-  void _handleOnTab(RecoveryOption? value) {
-    if (value == null) return;
-    Navigator.of(context).pop(value);
+  void _handleOnTab(RestoreOption? option) {
+    if (option == null) return;
+    Navigator.of(context).pop(option);
   }
 
   @override
@@ -321,13 +325,13 @@ class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
         children: [
           ListItem(
             onTap: () {
-              _handleOnTab(RecoveryOption.onlyProfiles);
+              _handleOnTab(RestoreOption.onlyProfiles);
             },
             title: Text(appLocalizations.recoveryProfiles),
           ),
           ListItem(
             onTap: () {
-              _handleOnTab(RecoveryOption.all);
+              _handleOnTab(RestoreOption.all);
             },
             title: Text(appLocalizations.recoveryAll),
           ),
@@ -338,7 +342,7 @@ class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
 }
 
 class WebDAVFormDialog extends ConsumerStatefulWidget {
-  final DAV? dav;
+  final DAVProps? dav;
 
   const WebDAVFormDialog({super.key, this.dav});
 
@@ -347,38 +351,41 @@ class WebDAVFormDialog extends ConsumerStatefulWidget {
 }
 
 class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
-  late TextEditingController uriController;
-  late TextEditingController userController;
-  late TextEditingController passwordController;
+  late TextEditingController _uriController;
+  late TextEditingController _userController;
+  late TextEditingController _passwordController;
   final _obscureController = ValueNotifier<bool>(true);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    uriController = TextEditingController(text: widget.dav?.uri);
-    userController = TextEditingController(text: widget.dav?.user);
-    passwordController = TextEditingController(text: widget.dav?.password);
+    _uriController = TextEditingController(text: widget.dav?.uri);
+    _userController = TextEditingController(text: widget.dav?.user);
+    _passwordController = TextEditingController(text: widget.dav?.password);
   }
 
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
-    ref.read(appDAVSettingProvider.notifier).value = DAV(
-      uri: uriController.text,
-      user: userController.text,
-      password: passwordController.text,
+    ref.read(davSettingProvider.notifier).value = DAVProps(
+      uri: _uriController.text,
+      user: _userController.text,
+      password: _passwordController.text,
     );
     Navigator.pop(context);
   }
 
   void _delete() {
-    ref.read(appDAVSettingProvider.notifier).value = null;
+    ref.read(davSettingProvider.notifier).value = null;
     Navigator.pop(context);
   }
 
   @override
   void dispose() {
     _obscureController.dispose();
+    _uriController.dispose();
+    _userController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -397,7 +404,7 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
           runSpacing: 16,
           children: [
             TextFormField(
-              controller: uriController,
+              controller: _uriController,
               maxLines: 5,
               minLines: 1,
               decoration: InputDecoration(
@@ -414,7 +421,7 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
               },
             ),
             TextFormField(
-              controller: userController,
+              controller: _userController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.account_circle),
                 border: const OutlineInputBorder(),
@@ -431,7 +438,7 @@ class _WebDAVFormDialogState extends ConsumerState<WebDAVFormDialog> {
               valueListenable: _obscureController,
               builder: (_, obscure, _) {
                 return TextFormField(
-                  controller: passwordController,
+                  controller: _passwordController,
                   obscureText: obscure,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.password),
