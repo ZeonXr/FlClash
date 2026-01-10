@@ -79,15 +79,15 @@ dev_dependencies:
   riverpod_lint: ^3.0.0
   isar_community_generator: 3.3.0
 dependency_overrides:
-  # 锁定 analyzer 到 6.x 的末尾或 7.x 初，这是兼容两者的平衡点
-  analyzer: 6.11.0
-  # 强制统一 build 生态
+  # 允许使用最新的 analyzer 以匹配 Master 分支 SDK
+  analyzer: any
+  # 强制统一构建环境，解决 isar 和 riverpod 的 build 库冲突
   build: ^2.4.1
   build_config: ^1.1.1
-  # 解决 test_api 冲突
+  source_gen: ^1.5.0
+  # 保持与 Flutter SDK 锁定的测试库一致
   test_api: 0.7.8
   matcher: 0.12.18
-
 flutter:
   uses-material-design: true
   assets:
