@@ -51,7 +51,7 @@ dependencies:
   flutter_riverpod: ^3.0.0
   riverpod_annotation: ^3.0.0
   riverpod: ^3.0.0
-  material_color_utilities: ^0.13.0
+  material_color_utilities: ^0.11.1
   flutter_js:
     git:
       url: https://github.com/chen08209/flutter_js
@@ -65,15 +65,10 @@ dependencies:
       url: https://github.com/chen08209/yaml_writer
       ref: master
   super_sliver_list: ^0.4.1
-<<<<<<< HEAD
-  isar_community: 3.3.0
-  isar_community_flutter_libs: 3.3.0
-=======
 
   drift: ^2.29.0
   drift_flutter: ^0.2.7
   fractional_indexing: ^1.0.0
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -84,7 +79,6 @@ dev_dependencies:
   freezed: ^3.2.0
   riverpod_generator: ^3.0.0
   riverpod_lint: ^3.0.0
-  isar_community_generator: 3.3.0
 
   drift_dev: ^2.29.0
 

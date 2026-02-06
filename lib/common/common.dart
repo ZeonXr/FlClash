@@ -13,11 +13,7 @@ export 'future.dart';
 export 'hive.dart';
 export 'http.dart';
 export 'icons.dart';
-<<<<<<< HEAD
-export 'isar.dart';
-=======
 export 'indexing.dart';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 export 'iterable.dart';
 export 'keyboard.dart';
 export 'launch.dart';

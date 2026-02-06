@@ -28,11 +28,7 @@ class _AppStateManagerState extends ConsumerState<AppStateManager>
     WidgetsBinding.instance.addObserver(this);
     ref.listenManual(checkIpProvider, (prev, next) {
       if (prev != next && next.a && next.c) {
-<<<<<<< HEAD
-        detectionState.startCheck();
-=======
         ref.read(networkDetectionProvider.notifier).startCheck();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       }
     });
     ref.listenManual(configProvider, (prev, next) {
@@ -233,27 +229,7 @@ class AppSidebarContainer extends ConsumerWidget {
                         ),
                       ],
                     ),
-<<<<<<< HEAD
-                    const SizedBox(height: 16),
-                    IconButton(
-                      onPressed: () {
-                        ref
-                            .read(appSettingProvider.notifier)
-                            .update(
-                              (state) =>
-                                  state.copyWith(showLabel: !state.showLabel),
-                            );
-                      },
-                      icon: Icon(
-                        Icons.menu,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                  ],
-=======
                   ),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
                 ),
                 const SizedBox(height: 16),
                 IconButton(

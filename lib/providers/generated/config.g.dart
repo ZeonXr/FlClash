@@ -41,11 +41,7 @@ final class AppSettingProvider
   }
 }
 
-<<<<<<< HEAD
-String _$appSettingHash() => r'dede19a9d4e5d631406f56efb4271ea2c59a5ec4';
-=======
 String _$appSettingHash() => r'0efd340a05a5be1b1190b3f2e9465bdfc6182046';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$AppSetting extends $Notifier<AppSettingProps> {
   AppSettingProps build();
@@ -203,11 +199,7 @@ final class NetworkSettingProvider
   }
 }
 
-<<<<<<< HEAD
-String _$networkSettingHash() => r'281ff425db7c9a08f95aaadb4fd585abf90636f8';
-=======
 String _$networkSettingHash() => r'54bd68084a1eb1b68650e353089c240d4a07f3a5';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$NetworkSetting extends $Notifier<NetworkProps> {
   NetworkProps build();
@@ -313,11 +305,7 @@ final class CurrentProfileIdProvider
   }
 }
 
-<<<<<<< HEAD
-String _$currentProfileIdHash() => r'6f5cba8def834ee51a379f5ba070424dd19c6720';
-=======
 String _$currentProfileIdHash() => r'98ff7a3a0b8ed420d086993839f4d629df7590a6';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$CurrentProfileId extends $Notifier<int?> {
   int? build();
@@ -370,11 +358,7 @@ final class DavSettingProvider
   }
 }
 
-<<<<<<< HEAD
-String _$davSettingHash() => r'49b7624acc75952b99949b8bdbc9366f0d15aedb';
-=======
 String _$davSettingHash() => r'5c85725b0d988c8f44ef6ba373953e551e09e857';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$DavSetting extends $Notifier<DAVProps?> {
   DAVProps? build();
@@ -533,11 +517,7 @@ final class ProxiesStyleSettingProvider
 }
 
 String _$proxiesStyleSettingHash() =>
-<<<<<<< HEAD
-    r'bfdb7119de53c380645533300c01593588acfd6c';
-=======
     r'b785ed2e71d74384150d80456d2b852e80629b8e';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$ProxiesStyleSetting extends $Notifier<ProxiesStyleProps> {
   ProxiesStyleProps build();
@@ -590,11 +570,7 @@ final class PatchClashConfigProvider
   }
 }
 
-<<<<<<< HEAD
-String _$patchClashConfigHash() => r'de173d8fdec59b6b6fdbf5bce2c7f911c5a35f15';
-=======
 String _$patchClashConfigHash() => r'ff92f991ccb3a3d13a938affc006d7e2cb85fecd';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 abstract class _$PatchClashConfig extends $Notifier<ClashConfig> {
   ClashConfig build();

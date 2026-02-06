@@ -8,16 +8,7 @@ part 'generated/config.g.dart';
 class AppSetting extends _$AppSetting with AutoDisposeNotifierMixin {
   @override
   AppSettingProps build() {
-<<<<<<< HEAD
-    return globalState.config.appSettingProps;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(appSettingProps: value);
-=======
     return AppSettingProps();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -43,16 +34,7 @@ class VpnSetting extends _$VpnSetting with AutoDisposeNotifierMixin {
 class NetworkSetting extends _$NetworkSetting with AutoDisposeNotifierMixin {
   @override
   NetworkProps build() {
-<<<<<<< HEAD
-    return globalState.config.networkProps;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(networkProps: value);
-=======
     return NetworkProps();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -60,20 +42,7 @@ class NetworkSetting extends _$NetworkSetting with AutoDisposeNotifierMixin {
 class ThemeSetting extends _$ThemeSetting with AutoDisposeNotifierMixin {
   @override
   ThemeProps build() {
-<<<<<<< HEAD
-    return globalState.config.themeProps;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(themeProps: value);
-  }
-
-  void updateState(ThemeProps Function(ThemeProps state) builder) {
-    value = builder(state);
-=======
     return ThemeProps();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -82,16 +51,7 @@ class CurrentProfileId extends _$CurrentProfileId
     with AutoDisposeNotifierMixin {
   @override
   int? build() {
-<<<<<<< HEAD
-    return globalState.config.currentProfileId;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(currentProfileId: value);
-=======
     return null;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -99,16 +59,7 @@ class CurrentProfileId extends _$CurrentProfileId
 class DavSetting extends _$DavSetting with AutoDisposeNotifierMixin {
   @override
   DAVProps? build() {
-<<<<<<< HEAD
-    return globalState.config.davProps;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(davProps: value);
-=======
     return null;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -133,16 +84,7 @@ class ProxiesStyleSetting extends _$ProxiesStyleSetting
     with AutoDisposeNotifierMixin {
   @override
   ProxiesStyleProps build() {
-<<<<<<< HEAD
-    return globalState.config.proxiesStyleProps;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(proxiesStyleProps: value);
-=======
     return ProxiesStyleProps();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -151,16 +93,7 @@ class PatchClashConfig extends _$PatchClashConfig
     with AutoDisposeNotifierMixin {
   @override
   ClashConfig build() {
-<<<<<<< HEAD
-    return globalState.config.patchClashConfig;
-  }
-
-  @override
-  onUpdate(value) {
-    globalState.config = globalState.config.copyWith(patchClashConfig: value);
-=======
     return ClashConfig();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 

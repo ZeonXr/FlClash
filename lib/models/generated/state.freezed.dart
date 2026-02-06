@@ -3264,11 +3264,7 @@ as bool,
 mixin _$ProfilesState {
 
  List<Profile> get profiles; int? get currentProfileId; int get columns;
-<<<<<<< HEAD
-/// Create a copy of ProfilesSelectorState
-=======
 /// Create a copy of ProfilesState
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -8791,11 +8787,7 @@ $VpnOptionsCopyWith<$Res>? get vpnOptions {
 /// @nodoc
 mixin _$ComputeGroupsState {
 
-<<<<<<< HEAD
- Map<String, dynamic> get proxies; ProxiesSortType get sortType; DelayMap get delayMap; Map<String, String> get selectedMap; String get defaultTestUrl;
-=======
  ProxiesData get proxiesData; ProxiesSortType get sortType; DelayMap get delayMap; Map<String, String> get selectedMap; String get defaultTestUrl;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 /// Create a copy of ComputeGroupsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -8806,28 +8798,16 @@ $ComputeGroupsStateCopyWith<ComputeGroupsState> get copyWith => _$ComputeGroupsS
 
 @override
 bool operator ==(Object other) {
-<<<<<<< HEAD
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ComputeGroupsState&&const DeepCollectionEquality().equals(other.proxies, proxies)&&(identical(other.sortType, sortType) || other.sortType == sortType)&&const DeepCollectionEquality().equals(other.delayMap, delayMap)&&const DeepCollectionEquality().equals(other.selectedMap, selectedMap)&&(identical(other.defaultTestUrl, defaultTestUrl) || other.defaultTestUrl == defaultTestUrl));
-=======
   return identical(this, other) || (other.runtimeType == runtimeType&&other is ComputeGroupsState&&(identical(other.proxiesData, proxiesData) || other.proxiesData == proxiesData)&&(identical(other.sortType, sortType) || other.sortType == sortType)&&const DeepCollectionEquality().equals(other.delayMap, delayMap)&&const DeepCollectionEquality().equals(other.selectedMap, selectedMap)&&(identical(other.defaultTestUrl, defaultTestUrl) || other.defaultTestUrl == defaultTestUrl));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
 @override
-<<<<<<< HEAD
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(proxies),sortType,const DeepCollectionEquality().hash(delayMap),const DeepCollectionEquality().hash(selectedMap),defaultTestUrl);
-
-@override
-String toString() {
-  return 'ComputeGroupsState(proxies: $proxies, sortType: $sortType, delayMap: $delayMap, selectedMap: $selectedMap, defaultTestUrl: $defaultTestUrl)';
-=======
 int get hashCode => Object.hash(runtimeType,proxiesData,sortType,const DeepCollectionEquality().hash(delayMap),const DeepCollectionEquality().hash(selectedMap),defaultTestUrl);
 
 @override
 String toString() {
   return 'ComputeGroupsState(proxiesData: $proxiesData, sortType: $sortType, delayMap: $delayMap, selectedMap: $selectedMap, defaultTestUrl: $defaultTestUrl)';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
@@ -8838,19 +8818,11 @@ abstract mixin class $ComputeGroupsStateCopyWith<$Res>  {
   factory $ComputeGroupsStateCopyWith(ComputeGroupsState value, $Res Function(ComputeGroupsState) _then) = _$ComputeGroupsStateCopyWithImpl;
 @useResult
 $Res call({
-<<<<<<< HEAD
- Map<String, dynamic> proxies, ProxiesSortType sortType, DelayMap delayMap, Map<String, String> selectedMap, String defaultTestUrl
-});
-
-
-
-=======
  ProxiesData proxiesData, ProxiesSortType sortType, DelayMap delayMap, Map<String, String> selectedMap, String defaultTestUrl
 });
 
 
 $ProxiesDataCopyWith<$Res> get proxiesData;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 }
 /// @nodoc
@@ -8863,26 +8835,16 @@ class _$ComputeGroupsStateCopyWithImpl<$Res>
 
 /// Create a copy of ComputeGroupsState
 /// with the given fields replaced by the non-null parameter values.
-<<<<<<< HEAD
-@pragma('vm:prefer-inline') @override $Res call({Object? proxies = null,Object? sortType = null,Object? delayMap = null,Object? selectedMap = null,Object? defaultTestUrl = null,}) {
-  return _then(_self.copyWith(
-proxies: null == proxies ? _self.proxies : proxies // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,sortType: null == sortType ? _self.sortType : sortType // ignore: cast_nullable_to_non_nullable
-=======
 @pragma('vm:prefer-inline') @override $Res call({Object? proxiesData = null,Object? sortType = null,Object? delayMap = null,Object? selectedMap = null,Object? defaultTestUrl = null,}) {
   return _then(_self.copyWith(
 proxiesData: null == proxiesData ? _self.proxiesData : proxiesData // ignore: cast_nullable_to_non_nullable
 as ProxiesData,sortType: null == sortType ? _self.sortType : sortType // ignore: cast_nullable_to_non_nullable
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 as ProxiesSortType,delayMap: null == delayMap ? _self.delayMap : delayMap // ignore: cast_nullable_to_non_nullable
 as DelayMap,selectedMap: null == selectedMap ? _self.selectedMap : selectedMap // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,defaultTestUrl: null == defaultTestUrl ? _self.defaultTestUrl : defaultTestUrl // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
-<<<<<<< HEAD
-
-=======
 /// Create a copy of ComputeGroupsState
 /// with the given fields replaced by the non-null parameter values.
 @override
@@ -8893,7 +8855,6 @@ $ProxiesDataCopyWith<$Res> get proxiesData {
     return _then(_self.copyWith(proxiesData: value));
   });
 }
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
@@ -8975,17 +8936,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, dynamic> proxies,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _ComputeGroupsState() when $default != null:
-return $default(_that.proxies,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
-=======
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ProxiesData proxiesData,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ComputeGroupsState() when $default != null:
 return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return orElse();
 
 }
@@ -9003,17 +8957,10 @@ return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMa
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, dynamic> proxies,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)  $default,) {final _that = this;
-switch (_that) {
-case _ComputeGroupsState():
-return $default(_that.proxies,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
-=======
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ProxiesData proxiesData,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)  $default,) {final _that = this;
 switch (_that) {
 case _ComputeGroupsState():
 return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   throw StateError('Unexpected subclass');
 
 }
@@ -9030,17 +8977,10 @@ return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMa
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, dynamic> proxies,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)?  $default,) {final _that = this;
-switch (_that) {
-case _ComputeGroupsState() when $default != null:
-return $default(_that.proxies,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
-=======
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ProxiesData proxiesData,  ProxiesSortType sortType,  DelayMap delayMap,  Map<String, String> selectedMap,  String defaultTestUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _ComputeGroupsState() when $default != null:
 return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMap,_that.defaultTestUrl);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return null;
 
 }
@@ -9052,33 +8992,6 @@ return $default(_that.proxiesData,_that.sortType,_that.delayMap,_that.selectedMa
 
 
 class _ComputeGroupsState implements ComputeGroupsState {
-<<<<<<< HEAD
-  const _ComputeGroupsState({required final  Map<String, dynamic> proxies, required this.sortType, required final  DelayMap delayMap, required final  Map<String, String> selectedMap, required this.defaultTestUrl}): _proxies = proxies,_delayMap = delayMap,_selectedMap = selectedMap;
-  
-
- final  Map<String, dynamic> _proxies;
-@override Map<String, dynamic> get proxies {
-  if (_proxies is EqualUnmodifiableMapView) return _proxies;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_proxies);
-}
-
-@override final  ProxiesSortType sortType;
- final  DelayMap _delayMap;
-@override DelayMap get delayMap {
-  if (_delayMap is EqualUnmodifiableMapView) return _delayMap;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_delayMap);
-}
-
- final  Map<String, String> _selectedMap;
-@override Map<String, String> get selectedMap {
-  if (_selectedMap is EqualUnmodifiableMapView) return _selectedMap;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_selectedMap);
-}
-
-=======
   const _ComputeGroupsState({required this.proxiesData, required this.sortType, required final  DelayMap delayMap, required final  Map<String, String> selectedMap, required this.defaultTestUrl}): _delayMap = delayMap,_selectedMap = selectedMap;
   
 
@@ -9098,7 +9011,6 @@ class _ComputeGroupsState implements ComputeGroupsState {
   return EqualUnmodifiableMapView(_selectedMap);
 }
 
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @override final  String defaultTestUrl;
 
 /// Create a copy of ComputeGroupsState
@@ -9111,28 +9023,16 @@ _$ComputeGroupsStateCopyWith<_ComputeGroupsState> get copyWith => __$ComputeGrou
 
 @override
 bool operator ==(Object other) {
-<<<<<<< HEAD
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ComputeGroupsState&&const DeepCollectionEquality().equals(other._proxies, _proxies)&&(identical(other.sortType, sortType) || other.sortType == sortType)&&const DeepCollectionEquality().equals(other._delayMap, _delayMap)&&const DeepCollectionEquality().equals(other._selectedMap, _selectedMap)&&(identical(other.defaultTestUrl, defaultTestUrl) || other.defaultTestUrl == defaultTestUrl));
-=======
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _ComputeGroupsState&&(identical(other.proxiesData, proxiesData) || other.proxiesData == proxiesData)&&(identical(other.sortType, sortType) || other.sortType == sortType)&&const DeepCollectionEquality().equals(other._delayMap, _delayMap)&&const DeepCollectionEquality().equals(other._selectedMap, _selectedMap)&&(identical(other.defaultTestUrl, defaultTestUrl) || other.defaultTestUrl == defaultTestUrl));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
 @override
-<<<<<<< HEAD
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_proxies),sortType,const DeepCollectionEquality().hash(_delayMap),const DeepCollectionEquality().hash(_selectedMap),defaultTestUrl);
-
-@override
-String toString() {
-  return 'ComputeGroupsState(proxies: $proxies, sortType: $sortType, delayMap: $delayMap, selectedMap: $selectedMap, defaultTestUrl: $defaultTestUrl)';
-=======
 int get hashCode => Object.hash(runtimeType,proxiesData,sortType,const DeepCollectionEquality().hash(_delayMap),const DeepCollectionEquality().hash(_selectedMap),defaultTestUrl);
 
 @override
 String toString() {
   return 'ComputeGroupsState(proxiesData: $proxiesData, sortType: $sortType, delayMap: $delayMap, selectedMap: $selectedMap, defaultTestUrl: $defaultTestUrl)';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
@@ -9143,19 +9043,11 @@ abstract mixin class _$ComputeGroupsStateCopyWith<$Res> implements $ComputeGroup
   factory _$ComputeGroupsStateCopyWith(_ComputeGroupsState value, $Res Function(_ComputeGroupsState) _then) = __$ComputeGroupsStateCopyWithImpl;
 @override @useResult
 $Res call({
-<<<<<<< HEAD
- Map<String, dynamic> proxies, ProxiesSortType sortType, DelayMap delayMap, Map<String, String> selectedMap, String defaultTestUrl
-});
-
-
-
-=======
  ProxiesData proxiesData, ProxiesSortType sortType, DelayMap delayMap, Map<String, String> selectedMap, String defaultTestUrl
 });
 
 
 @override $ProxiesDataCopyWith<$Res> get proxiesData;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 }
 /// @nodoc
@@ -9168,17 +9060,10 @@ class __$ComputeGroupsStateCopyWithImpl<$Res>
 
 /// Create a copy of ComputeGroupsState
 /// with the given fields replaced by the non-null parameter values.
-<<<<<<< HEAD
-@override @pragma('vm:prefer-inline') $Res call({Object? proxies = null,Object? sortType = null,Object? delayMap = null,Object? selectedMap = null,Object? defaultTestUrl = null,}) {
-  return _then(_ComputeGroupsState(
-proxies: null == proxies ? _self._proxies : proxies // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,sortType: null == sortType ? _self.sortType : sortType // ignore: cast_nullable_to_non_nullable
-=======
 @override @pragma('vm:prefer-inline') $Res call({Object? proxiesData = null,Object? sortType = null,Object? delayMap = null,Object? selectedMap = null,Object? defaultTestUrl = null,}) {
   return _then(_ComputeGroupsState(
 proxiesData: null == proxiesData ? _self.proxiesData : proxiesData // ignore: cast_nullable_to_non_nullable
 as ProxiesData,sortType: null == sortType ? _self.sortType : sortType // ignore: cast_nullable_to_non_nullable
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 as ProxiesSortType,delayMap: null == delayMap ? _self._delayMap : delayMap // ignore: cast_nullable_to_non_nullable
 as DelayMap,selectedMap: null == selectedMap ? _self._selectedMap : selectedMap // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,defaultTestUrl: null == defaultTestUrl ? _self.defaultTestUrl : defaultTestUrl // ignore: cast_nullable_to_non_nullable
@@ -9186,83 +9071,6 @@ as String,
   ));
 }
 
-<<<<<<< HEAD
-
-}
-
-/// @nodoc
-mixin _$MakeRealProfileState {
-
- String get profilesPath; int get profileId; Map<String, dynamic> get rawConfig; ClashConfig get realPatchConfig; bool get overrideDns; bool get appendSystemDns; List<Rule> get addedRules; String get defaultUA;
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$MakeRealProfileStateCopyWith<MakeRealProfileState> get copyWith => _$MakeRealProfileStateCopyWithImpl<MakeRealProfileState>(this as MakeRealProfileState, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MakeRealProfileState&&(identical(other.profilesPath, profilesPath) || other.profilesPath == profilesPath)&&(identical(other.profileId, profileId) || other.profileId == profileId)&&const DeepCollectionEquality().equals(other.rawConfig, rawConfig)&&(identical(other.realPatchConfig, realPatchConfig) || other.realPatchConfig == realPatchConfig)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.appendSystemDns, appendSystemDns) || other.appendSystemDns == appendSystemDns)&&const DeepCollectionEquality().equals(other.addedRules, addedRules)&&(identical(other.defaultUA, defaultUA) || other.defaultUA == defaultUA));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,profilesPath,profileId,const DeepCollectionEquality().hash(rawConfig),realPatchConfig,overrideDns,appendSystemDns,const DeepCollectionEquality().hash(addedRules),defaultUA);
-
-@override
-String toString() {
-  return 'MakeRealProfileState(profilesPath: $profilesPath, profileId: $profileId, rawConfig: $rawConfig, realPatchConfig: $realPatchConfig, overrideDns: $overrideDns, appendSystemDns: $appendSystemDns, addedRules: $addedRules, defaultUA: $defaultUA)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $MakeRealProfileStateCopyWith<$Res>  {
-  factory $MakeRealProfileStateCopyWith(MakeRealProfileState value, $Res Function(MakeRealProfileState) _then) = _$MakeRealProfileStateCopyWithImpl;
-@useResult
-$Res call({
- String profilesPath, int profileId, Map<String, dynamic> rawConfig, ClashConfig realPatchConfig, bool overrideDns, bool appendSystemDns, List<Rule> addedRules, String defaultUA
-});
-
-
-$ClashConfigCopyWith<$Res> get realPatchConfig;
-
-}
-/// @nodoc
-class _$MakeRealProfileStateCopyWithImpl<$Res>
-    implements $MakeRealProfileStateCopyWith<$Res> {
-  _$MakeRealProfileStateCopyWithImpl(this._self, this._then);
-
-  final MakeRealProfileState _self;
-  final $Res Function(MakeRealProfileState) _then;
-
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? profilesPath = null,Object? profileId = null,Object? rawConfig = null,Object? realPatchConfig = null,Object? overrideDns = null,Object? appendSystemDns = null,Object? addedRules = null,Object? defaultUA = null,}) {
-  return _then(_self.copyWith(
-profilesPath: null == profilesPath ? _self.profilesPath : profilesPath // ignore: cast_nullable_to_non_nullable
-as String,profileId: null == profileId ? _self.profileId : profileId // ignore: cast_nullable_to_non_nullable
-as int,rawConfig: null == rawConfig ? _self.rawConfig : rawConfig // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,realPatchConfig: null == realPatchConfig ? _self.realPatchConfig : realPatchConfig // ignore: cast_nullable_to_non_nullable
-as ClashConfig,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
-as bool,appendSystemDns: null == appendSystemDns ? _self.appendSystemDns : appendSystemDns // ignore: cast_nullable_to_non_nullable
-as bool,addedRules: null == addedRules ? _self.addedRules : addedRules // ignore: cast_nullable_to_non_nullable
-as List<Rule>,defaultUA: null == defaultUA ? _self.defaultUA : defaultUA // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ClashConfigCopyWith<$Res> get realPatchConfig {
-  
-  return $ClashConfigCopyWith<$Res>(_self.realPatchConfig, (value) {
-    return _then(_self.copyWith(realPatchConfig: value));
-=======
 /// Create a copy of ComputeGroupsState
 /// with the given fields replaced by the non-null parameter values.
 @override
@@ -9271,533 +9079,8 @@ $ProxiesDataCopyWith<$Res> get proxiesData {
   
   return $ProxiesDataCopyWith<$Res>(_self.proxiesData, (value) {
     return _then(_self.copyWith(proxiesData: value));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   });
 }
-}
-
-
-/// Adds pattern-matching-related methods to [MakeRealProfileState].
-extension MakeRealProfileStatePatterns on MakeRealProfileState {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MakeRealProfileState value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _MakeRealProfileState() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MakeRealProfileState value)  $default,){
-final _that = this;
-switch (_that) {
-case _MakeRealProfileState():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MakeRealProfileState value)?  $default,){
-final _that = this;
-switch (_that) {
-case _MakeRealProfileState() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String profilesPath,  int profileId,  Map<String, dynamic> rawConfig,  ClashConfig realPatchConfig,  bool overrideDns,  bool appendSystemDns,  List<Rule> addedRules,  String defaultUA)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _MakeRealProfileState() when $default != null:
-return $default(_that.profilesPath,_that.profileId,_that.rawConfig,_that.realPatchConfig,_that.overrideDns,_that.appendSystemDns,_that.addedRules,_that.defaultUA);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String profilesPath,  int profileId,  Map<String, dynamic> rawConfig,  ClashConfig realPatchConfig,  bool overrideDns,  bool appendSystemDns,  List<Rule> addedRules,  String defaultUA)  $default,) {final _that = this;
-switch (_that) {
-case _MakeRealProfileState():
-return $default(_that.profilesPath,_that.profileId,_that.rawConfig,_that.realPatchConfig,_that.overrideDns,_that.appendSystemDns,_that.addedRules,_that.defaultUA);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String profilesPath,  int profileId,  Map<String, dynamic> rawConfig,  ClashConfig realPatchConfig,  bool overrideDns,  bool appendSystemDns,  List<Rule> addedRules,  String defaultUA)?  $default,) {final _that = this;
-switch (_that) {
-case _MakeRealProfileState() when $default != null:
-return $default(_that.profilesPath,_that.profileId,_that.rawConfig,_that.realPatchConfig,_that.overrideDns,_that.appendSystemDns,_that.addedRules,_that.defaultUA);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-
-
-class _MakeRealProfileState implements MakeRealProfileState {
-  const _MakeRealProfileState({required this.profilesPath, required this.profileId, required final  Map<String, dynamic> rawConfig, required this.realPatchConfig, required this.overrideDns, required this.appendSystemDns, required final  List<Rule> addedRules, required this.defaultUA}): _rawConfig = rawConfig,_addedRules = addedRules;
-  
-
-@override final  String profilesPath;
-@override final  int profileId;
- final  Map<String, dynamic> _rawConfig;
-@override Map<String, dynamic> get rawConfig {
-  if (_rawConfig is EqualUnmodifiableMapView) return _rawConfig;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_rawConfig);
-}
-
-@override final  ClashConfig realPatchConfig;
-@override final  bool overrideDns;
-@override final  bool appendSystemDns;
- final  List<Rule> _addedRules;
-@override List<Rule> get addedRules {
-  if (_addedRules is EqualUnmodifiableListView) return _addedRules;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_addedRules);
-}
-
-@override final  String defaultUA;
-
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$MakeRealProfileStateCopyWith<_MakeRealProfileState> get copyWith => __$MakeRealProfileStateCopyWithImpl<_MakeRealProfileState>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MakeRealProfileState&&(identical(other.profilesPath, profilesPath) || other.profilesPath == profilesPath)&&(identical(other.profileId, profileId) || other.profileId == profileId)&&const DeepCollectionEquality().equals(other._rawConfig, _rawConfig)&&(identical(other.realPatchConfig, realPatchConfig) || other.realPatchConfig == realPatchConfig)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.appendSystemDns, appendSystemDns) || other.appendSystemDns == appendSystemDns)&&const DeepCollectionEquality().equals(other._addedRules, _addedRules)&&(identical(other.defaultUA, defaultUA) || other.defaultUA == defaultUA));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,profilesPath,profileId,const DeepCollectionEquality().hash(_rawConfig),realPatchConfig,overrideDns,appendSystemDns,const DeepCollectionEquality().hash(_addedRules),defaultUA);
-
-@override
-String toString() {
-  return 'MakeRealProfileState(profilesPath: $profilesPath, profileId: $profileId, rawConfig: $rawConfig, realPatchConfig: $realPatchConfig, overrideDns: $overrideDns, appendSystemDns: $appendSystemDns, addedRules: $addedRules, defaultUA: $defaultUA)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$MakeRealProfileStateCopyWith<$Res> implements $MakeRealProfileStateCopyWith<$Res> {
-  factory _$MakeRealProfileStateCopyWith(_MakeRealProfileState value, $Res Function(_MakeRealProfileState) _then) = __$MakeRealProfileStateCopyWithImpl;
-@override @useResult
-$Res call({
- String profilesPath, int profileId, Map<String, dynamic> rawConfig, ClashConfig realPatchConfig, bool overrideDns, bool appendSystemDns, List<Rule> addedRules, String defaultUA
-});
-
-
-@override $ClashConfigCopyWith<$Res> get realPatchConfig;
-
-}
-/// @nodoc
-class __$MakeRealProfileStateCopyWithImpl<$Res>
-    implements _$MakeRealProfileStateCopyWith<$Res> {
-  __$MakeRealProfileStateCopyWithImpl(this._self, this._then);
-
-  final _MakeRealProfileState _self;
-  final $Res Function(_MakeRealProfileState) _then;
-
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? profilesPath = null,Object? profileId = null,Object? rawConfig = null,Object? realPatchConfig = null,Object? overrideDns = null,Object? appendSystemDns = null,Object? addedRules = null,Object? defaultUA = null,}) {
-  return _then(_MakeRealProfileState(
-profilesPath: null == profilesPath ? _self.profilesPath : profilesPath // ignore: cast_nullable_to_non_nullable
-as String,profileId: null == profileId ? _self.profileId : profileId // ignore: cast_nullable_to_non_nullable
-as int,rawConfig: null == rawConfig ? _self._rawConfig : rawConfig // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,realPatchConfig: null == realPatchConfig ? _self.realPatchConfig : realPatchConfig // ignore: cast_nullable_to_non_nullable
-as ClashConfig,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
-as bool,appendSystemDns: null == appendSystemDns ? _self.appendSystemDns : appendSystemDns // ignore: cast_nullable_to_non_nullable
-as bool,addedRules: null == addedRules ? _self._addedRules : addedRules // ignore: cast_nullable_to_non_nullable
-as List<Rule>,defaultUA: null == defaultUA ? _self.defaultUA : defaultUA // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-/// Create a copy of MakeRealProfileState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ClashConfigCopyWith<$Res> get realPatchConfig {
-  
-  return $ClashConfigCopyWith<$Res>(_self.realPatchConfig, (value) {
-    return _then(_self.copyWith(realPatchConfig: value));
-  });
-}
-}
-
-/// @nodoc
-mixin _$MigrationData {
-
- Map<String, Object?>? get configMap; List<Rule> get rules; List<Script> get scripts; List<Profile> get profiles;
-/// Create a copy of MigrationData
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$MigrationDataCopyWith<MigrationData> get copyWith => _$MigrationDataCopyWithImpl<MigrationData>(this as MigrationData, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MigrationData&&const DeepCollectionEquality().equals(other.configMap, configMap)&&const DeepCollectionEquality().equals(other.rules, rules)&&const DeepCollectionEquality().equals(other.scripts, scripts)&&const DeepCollectionEquality().equals(other.profiles, profiles));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(configMap),const DeepCollectionEquality().hash(rules),const DeepCollectionEquality().hash(scripts),const DeepCollectionEquality().hash(profiles));
-
-@override
-String toString() {
-  return 'MigrationData(configMap: $configMap, rules: $rules, scripts: $scripts, profiles: $profiles)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $MigrationDataCopyWith<$Res>  {
-  factory $MigrationDataCopyWith(MigrationData value, $Res Function(MigrationData) _then) = _$MigrationDataCopyWithImpl;
-@useResult
-$Res call({
- Map<String, Object?>? configMap, List<Rule> rules, List<Script> scripts, List<Profile> profiles
-});
-
-
-
-
-}
-/// @nodoc
-class _$MigrationDataCopyWithImpl<$Res>
-    implements $MigrationDataCopyWith<$Res> {
-  _$MigrationDataCopyWithImpl(this._self, this._then);
-
-  final MigrationData _self;
-  final $Res Function(MigrationData) _then;
-
-/// Create a copy of MigrationData
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? configMap = freezed,Object? rules = null,Object? scripts = null,Object? profiles = null,}) {
-  return _then(_self.copyWith(
-configMap: freezed == configMap ? _self.configMap : configMap // ignore: cast_nullable_to_non_nullable
-as Map<String, Object?>?,rules: null == rules ? _self.rules : rules // ignore: cast_nullable_to_non_nullable
-as List<Rule>,scripts: null == scripts ? _self.scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<Script>,profiles: null == profiles ? _self.profiles : profiles // ignore: cast_nullable_to_non_nullable
-as List<Profile>,
-  ));
-}
-
-}
-
-
-/// Adds pattern-matching-related methods to [MigrationData].
-extension MigrationDataPatterns on MigrationData {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MigrationData value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _MigrationData() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MigrationData value)  $default,){
-final _that = this;
-switch (_that) {
-case _MigrationData():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MigrationData value)?  $default,){
-final _that = this;
-switch (_that) {
-case _MigrationData() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, Object?>? configMap,  List<Rule> rules,  List<Script> scripts,  List<Profile> profiles)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _MigrationData() when $default != null:
-return $default(_that.configMap,_that.rules,_that.scripts,_that.profiles);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, Object?>? configMap,  List<Rule> rules,  List<Script> scripts,  List<Profile> profiles)  $default,) {final _that = this;
-switch (_that) {
-case _MigrationData():
-return $default(_that.configMap,_that.rules,_that.scripts,_that.profiles);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, Object?>? configMap,  List<Rule> rules,  List<Script> scripts,  List<Profile> profiles)?  $default,) {final _that = this;
-switch (_that) {
-case _MigrationData() when $default != null:
-return $default(_that.configMap,_that.rules,_that.scripts,_that.profiles);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-
-
-class _MigrationData implements MigrationData {
-  const _MigrationData({final  Map<String, Object?>? configMap, final  List<Rule> rules = const [], final  List<Script> scripts = const [], final  List<Profile> profiles = const []}): _configMap = configMap,_rules = rules,_scripts = scripts,_profiles = profiles;
-  
-
- final  Map<String, Object?>? _configMap;
-@override Map<String, Object?>? get configMap {
-  final value = _configMap;
-  if (value == null) return null;
-  if (_configMap is EqualUnmodifiableMapView) return _configMap;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
-}
-
- final  List<Rule> _rules;
-@override@JsonKey() List<Rule> get rules {
-  if (_rules is EqualUnmodifiableListView) return _rules;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_rules);
-}
-
- final  List<Script> _scripts;
-@override@JsonKey() List<Script> get scripts {
-  if (_scripts is EqualUnmodifiableListView) return _scripts;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_scripts);
-}
-
- final  List<Profile> _profiles;
-@override@JsonKey() List<Profile> get profiles {
-  if (_profiles is EqualUnmodifiableListView) return _profiles;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_profiles);
-}
-
-
-/// Create a copy of MigrationData
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$MigrationDataCopyWith<_MigrationData> get copyWith => __$MigrationDataCopyWithImpl<_MigrationData>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MigrationData&&const DeepCollectionEquality().equals(other._configMap, _configMap)&&const DeepCollectionEquality().equals(other._rules, _rules)&&const DeepCollectionEquality().equals(other._scripts, _scripts)&&const DeepCollectionEquality().equals(other._profiles, _profiles));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_configMap),const DeepCollectionEquality().hash(_rules),const DeepCollectionEquality().hash(_scripts),const DeepCollectionEquality().hash(_profiles));
-
-@override
-String toString() {
-  return 'MigrationData(configMap: $configMap, rules: $rules, scripts: $scripts, profiles: $profiles)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$MigrationDataCopyWith<$Res> implements $MigrationDataCopyWith<$Res> {
-  factory _$MigrationDataCopyWith(_MigrationData value, $Res Function(_MigrationData) _then) = __$MigrationDataCopyWithImpl;
-@override @useResult
-$Res call({
- Map<String, Object?>? configMap, List<Rule> rules, List<Script> scripts, List<Profile> profiles
-});
-
-
-
-
-}
-/// @nodoc
-class __$MigrationDataCopyWithImpl<$Res>
-    implements _$MigrationDataCopyWith<$Res> {
-  __$MigrationDataCopyWithImpl(this._self, this._then);
-
-  final _MigrationData _self;
-  final $Res Function(_MigrationData) _then;
-
-/// Create a copy of MigrationData
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? configMap = freezed,Object? rules = null,Object? scripts = null,Object? profiles = null,}) {
-  return _then(_MigrationData(
-configMap: freezed == configMap ? _self._configMap : configMap // ignore: cast_nullable_to_non_nullable
-as Map<String, Object?>?,rules: null == rules ? _self._rules : rules // ignore: cast_nullable_to_non_nullable
-as List<Rule>,scripts: null == scripts ? _self._scripts : scripts // ignore: cast_nullable_to_non_nullable
-as List<Script>,profiles: null == profiles ? _self._profiles : profiles // ignore: cast_nullable_to_non_nullable
-as List<Profile>,
-  ));
-}
-
-
 }
 
 /// @nodoc
@@ -10412,11 +9695,7 @@ as List<ProfileRuleLink>,
 /// @nodoc
 mixin _$SetupState {
 
-<<<<<<< HEAD
- int? get profileId; int? get profileLastUpdateDate; OverwriteType get overwriteType; List<Rule> get addedRules; int? get scriptId; DateTime? get scriptLastUpdateTime; bool get overrideDns; Dns get dns;
-=======
  int? get profileId; int? get profileLastUpdateDate; OverwriteType get overwriteType; List<Rule> get addedRules; Script? get script; bool get overrideDns; Dns get dns;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -10427,28 +9706,16 @@ $SetupStateCopyWith<SetupState> get copyWith => _$SetupStateCopyWithImpl<SetupSt
 
 @override
 bool operator ==(Object other) {
-<<<<<<< HEAD
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.profileId, profileId) || other.profileId == profileId)&&(identical(other.profileLastUpdateDate, profileLastUpdateDate) || other.profileLastUpdateDate == profileLastUpdateDate)&&(identical(other.overwriteType, overwriteType) || other.overwriteType == overwriteType)&&const DeepCollectionEquality().equals(other.addedRules, addedRules)&&(identical(other.scriptId, scriptId) || other.scriptId == scriptId)&&(identical(other.scriptLastUpdateTime, scriptLastUpdateTime) || other.scriptLastUpdateTime == scriptLastUpdateTime)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.dns, dns) || other.dns == dns));
-=======
   return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupState&&(identical(other.profileId, profileId) || other.profileId == profileId)&&(identical(other.profileLastUpdateDate, profileLastUpdateDate) || other.profileLastUpdateDate == profileLastUpdateDate)&&(identical(other.overwriteType, overwriteType) || other.overwriteType == overwriteType)&&const DeepCollectionEquality().equals(other.addedRules, addedRules)&&(identical(other.script, script) || other.script == script)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.dns, dns) || other.dns == dns));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
 @override
-<<<<<<< HEAD
-int get hashCode => Object.hash(runtimeType,profileId,profileLastUpdateDate,overwriteType,const DeepCollectionEquality().hash(addedRules),scriptId,scriptLastUpdateTime,overrideDns,dns);
-
-@override
-String toString() {
-  return 'SetupState(profileId: $profileId, profileLastUpdateDate: $profileLastUpdateDate, overwriteType: $overwriteType, addedRules: $addedRules, scriptId: $scriptId, scriptLastUpdateTime: $scriptLastUpdateTime, overrideDns: $overrideDns, dns: $dns)';
-=======
 int get hashCode => Object.hash(runtimeType,profileId,profileLastUpdateDate,overwriteType,const DeepCollectionEquality().hash(addedRules),script,overrideDns,dns);
 
 @override
 String toString() {
   return 'SetupState(profileId: $profileId, profileLastUpdateDate: $profileLastUpdateDate, overwriteType: $overwriteType, addedRules: $addedRules, script: $script, overrideDns: $overrideDns, dns: $dns)';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
@@ -10459,11 +9726,7 @@ abstract mixin class $SetupStateCopyWith<$Res>  {
   factory $SetupStateCopyWith(SetupState value, $Res Function(SetupState) _then) = _$SetupStateCopyWithImpl;
 @useResult
 $Res call({
-<<<<<<< HEAD
- int? profileId, int? profileLastUpdateDate, OverwriteType overwriteType, List<Rule> addedRules, int? scriptId, DateTime? scriptLastUpdateTime, bool overrideDns, Dns dns
-=======
  int? profileId, int? profileLastUpdateDate, OverwriteType overwriteType, List<Rule> addedRules, Script? script, bool overrideDns, Dns dns
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 });
 
 
@@ -10480,24 +9743,14 @@ class _$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-<<<<<<< HEAD
-@pragma('vm:prefer-inline') @override $Res call({Object? profileId = freezed,Object? profileLastUpdateDate = freezed,Object? overwriteType = null,Object? addedRules = null,Object? scriptId = freezed,Object? scriptLastUpdateTime = freezed,Object? overrideDns = null,Object? dns = null,}) {
-=======
 @pragma('vm:prefer-inline') @override $Res call({Object? profileId = freezed,Object? profileLastUpdateDate = freezed,Object? overwriteType = null,Object? addedRules = null,Object? script = freezed,Object? overrideDns = null,Object? dns = null,}) {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return _then(_self.copyWith(
 profileId: freezed == profileId ? _self.profileId : profileId // ignore: cast_nullable_to_non_nullable
 as int?,profileLastUpdateDate: freezed == profileLastUpdateDate ? _self.profileLastUpdateDate : profileLastUpdateDate // ignore: cast_nullable_to_non_nullable
 as int?,overwriteType: null == overwriteType ? _self.overwriteType : overwriteType // ignore: cast_nullable_to_non_nullable
 as OverwriteType,addedRules: null == addedRules ? _self.addedRules : addedRules // ignore: cast_nullable_to_non_nullable
-<<<<<<< HEAD
-as List<Rule>,scriptId: freezed == scriptId ? _self.scriptId : scriptId // ignore: cast_nullable_to_non_nullable
-as int?,scriptLastUpdateTime: freezed == scriptLastUpdateTime ? _self.scriptLastUpdateTime : scriptLastUpdateTime // ignore: cast_nullable_to_non_nullable
-as DateTime?,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
-=======
 as List<Rule>,script: freezed == script ? _self.script : script // ignore: cast_nullable_to_non_nullable
 as Script?,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 as bool,dns: null == dns ? _self.dns : dns // ignore: cast_nullable_to_non_nullable
 as Dns,
   ));
@@ -10605,17 +9858,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  int? scriptId,  DateTime? scriptLastUpdateTime,  bool overrideDns,  Dns dns)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.scriptId,_that.scriptLastUpdateTime,_that.overrideDns,_that.dns);case _:
-=======
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  Script? script,  bool overrideDns,  Dns dns)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
 return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.script,_that.overrideDns,_that.dns);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return orElse();
 
 }
@@ -10633,17 +9879,10 @@ return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  int? scriptId,  DateTime? scriptLastUpdateTime,  bool overrideDns,  Dns dns)  $default,) {final _that = this;
-switch (_that) {
-case _SetupState():
-return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.scriptId,_that.scriptLastUpdateTime,_that.overrideDns,_that.dns);case _:
-=======
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  Script? script,  bool overrideDns,  Dns dns)  $default,) {final _that = this;
 switch (_that) {
 case _SetupState():
 return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.script,_that.overrideDns,_that.dns);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   throw StateError('Unexpected subclass');
 
 }
@@ -10660,17 +9899,10 @@ return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,
 /// }
 /// ```
 
-<<<<<<< HEAD
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  int? scriptId,  DateTime? scriptLastUpdateTime,  bool overrideDns,  Dns dns)?  $default,) {final _that = this;
-switch (_that) {
-case _SetupState() when $default != null:
-return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.scriptId,_that.scriptLastUpdateTime,_that.overrideDns,_that.dns);case _:
-=======
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? profileId,  int? profileLastUpdateDate,  OverwriteType overwriteType,  List<Rule> addedRules,  Script? script,  bool overrideDns,  Dns dns)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupState() when $default != null:
 return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,_that.addedRules,_that.script,_that.overrideDns,_that.dns);case _:
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return null;
 
 }
@@ -10682,11 +9914,7 @@ return $default(_that.profileId,_that.profileLastUpdateDate,_that.overwriteType,
 
 
 class _SetupState implements SetupState {
-<<<<<<< HEAD
-  const _SetupState({required this.profileId, required this.profileLastUpdateDate, required this.overwriteType, required final  List<Rule> addedRules, required this.scriptId, required this.scriptLastUpdateTime, required this.overrideDns, required this.dns}): _addedRules = addedRules;
-=======
   const _SetupState({required this.profileId, required this.profileLastUpdateDate, required this.overwriteType, required final  List<Rule> addedRules, required this.script, required this.overrideDns, required this.dns}): _addedRules = addedRules;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   
 
 @override final  int? profileId;
@@ -10699,12 +9927,7 @@ class _SetupState implements SetupState {
   return EqualUnmodifiableListView(_addedRules);
 }
 
-<<<<<<< HEAD
-@override final  int? scriptId;
-@override final  DateTime? scriptLastUpdateTime;
-=======
 @override final  Script? script;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @override final  bool overrideDns;
 @override final  Dns dns;
 
@@ -10718,28 +9941,16 @@ _$SetupStateCopyWith<_SetupState> get copyWith => __$SetupStateCopyWithImpl<_Set
 
 @override
 bool operator ==(Object other) {
-<<<<<<< HEAD
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.profileId, profileId) || other.profileId == profileId)&&(identical(other.profileLastUpdateDate, profileLastUpdateDate) || other.profileLastUpdateDate == profileLastUpdateDate)&&(identical(other.overwriteType, overwriteType) || other.overwriteType == overwriteType)&&const DeepCollectionEquality().equals(other._addedRules, _addedRules)&&(identical(other.scriptId, scriptId) || other.scriptId == scriptId)&&(identical(other.scriptLastUpdateTime, scriptLastUpdateTime) || other.scriptLastUpdateTime == scriptLastUpdateTime)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.dns, dns) || other.dns == dns));
-=======
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupState&&(identical(other.profileId, profileId) || other.profileId == profileId)&&(identical(other.profileLastUpdateDate, profileLastUpdateDate) || other.profileLastUpdateDate == profileLastUpdateDate)&&(identical(other.overwriteType, overwriteType) || other.overwriteType == overwriteType)&&const DeepCollectionEquality().equals(other._addedRules, _addedRules)&&(identical(other.script, script) || other.script == script)&&(identical(other.overrideDns, overrideDns) || other.overrideDns == overrideDns)&&(identical(other.dns, dns) || other.dns == dns));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
 @override
-<<<<<<< HEAD
-int get hashCode => Object.hash(runtimeType,profileId,profileLastUpdateDate,overwriteType,const DeepCollectionEquality().hash(_addedRules),scriptId,scriptLastUpdateTime,overrideDns,dns);
-
-@override
-String toString() {
-  return 'SetupState(profileId: $profileId, profileLastUpdateDate: $profileLastUpdateDate, overwriteType: $overwriteType, addedRules: $addedRules, scriptId: $scriptId, scriptLastUpdateTime: $scriptLastUpdateTime, overrideDns: $overrideDns, dns: $dns)';
-=======
 int get hashCode => Object.hash(runtimeType,profileId,profileLastUpdateDate,overwriteType,const DeepCollectionEquality().hash(_addedRules),script,overrideDns,dns);
 
 @override
 String toString() {
   return 'SetupState(profileId: $profileId, profileLastUpdateDate: $profileLastUpdateDate, overwriteType: $overwriteType, addedRules: $addedRules, script: $script, overrideDns: $overrideDns, dns: $dns)';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 
@@ -10750,11 +9961,7 @@ abstract mixin class _$SetupStateCopyWith<$Res> implements $SetupStateCopyWith<$
   factory _$SetupStateCopyWith(_SetupState value, $Res Function(_SetupState) _then) = __$SetupStateCopyWithImpl;
 @override @useResult
 $Res call({
-<<<<<<< HEAD
- int? profileId, int? profileLastUpdateDate, OverwriteType overwriteType, List<Rule> addedRules, int? scriptId, DateTime? scriptLastUpdateTime, bool overrideDns, Dns dns
-=======
  int? profileId, int? profileLastUpdateDate, OverwriteType overwriteType, List<Rule> addedRules, Script? script, bool overrideDns, Dns dns
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 });
 
 
@@ -10771,24 +9978,14 @@ class __$SetupStateCopyWithImpl<$Res>
 
 /// Create a copy of SetupState
 /// with the given fields replaced by the non-null parameter values.
-<<<<<<< HEAD
-@override @pragma('vm:prefer-inline') $Res call({Object? profileId = freezed,Object? profileLastUpdateDate = freezed,Object? overwriteType = null,Object? addedRules = null,Object? scriptId = freezed,Object? scriptLastUpdateTime = freezed,Object? overrideDns = null,Object? dns = null,}) {
-=======
 @override @pragma('vm:prefer-inline') $Res call({Object? profileId = freezed,Object? profileLastUpdateDate = freezed,Object? overwriteType = null,Object? addedRules = null,Object? script = freezed,Object? overrideDns = null,Object? dns = null,}) {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return _then(_SetupState(
 profileId: freezed == profileId ? _self.profileId : profileId // ignore: cast_nullable_to_non_nullable
 as int?,profileLastUpdateDate: freezed == profileLastUpdateDate ? _self.profileLastUpdateDate : profileLastUpdateDate // ignore: cast_nullable_to_non_nullable
 as int?,overwriteType: null == overwriteType ? _self.overwriteType : overwriteType // ignore: cast_nullable_to_non_nullable
 as OverwriteType,addedRules: null == addedRules ? _self._addedRules : addedRules // ignore: cast_nullable_to_non_nullable
-<<<<<<< HEAD
-as List<Rule>,scriptId: freezed == scriptId ? _self.scriptId : scriptId // ignore: cast_nullable_to_non_nullable
-as int?,scriptLastUpdateTime: freezed == scriptLastUpdateTime ? _self.scriptLastUpdateTime : scriptLastUpdateTime // ignore: cast_nullable_to_non_nullable
-as DateTime?,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
-=======
 as List<Rule>,script: freezed == script ? _self.script : script // ignore: cast_nullable_to_non_nullable
 as Script?,overrideDns: null == overrideDns ? _self.overrideDns : overrideDns // ignore: cast_nullable_to_non_nullable
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 as bool,dns: null == dns ? _self.dns : dns // ignore: cast_nullable_to_non_nullable
 as Dns,
   ));

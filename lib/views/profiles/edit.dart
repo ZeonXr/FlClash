@@ -30,20 +30,11 @@ class _EditProfileViewState extends State<EditProfileView> {
   late final TextEditingController _labelController;
   late final TextEditingController _urlController;
   late final TextEditingController _autoUpdateDurationController;
-<<<<<<< HEAD
-  late final bool _autoUpdate;
-=======
   late bool _autoUpdate;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   String? _rawText;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _fileInfoNotifier = ValueNotifier<FileInfo?>(null);
   Uint8List? _fileData;
-<<<<<<< HEAD
-
-  Profile get profile => widget.profile;
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
   @override
   void initState() {
@@ -72,12 +63,7 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   Future<void> _handleConfirm() async {
     if (!_formKey.currentState!.validate()) return;
-<<<<<<< HEAD
-    final appController = globalState.appController;
-    Profile profile = this.profile.copyWith(
-=======
     var profile = widget.profile.copyWith(
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       url: _urlController.text,
       label: _labelController.text,
       autoUpdate: _autoUpdate,
@@ -96,11 +82,7 @@ class _EditProfileViewState extends State<EditProfileView> {
           profile = profile.copyWith(autoUpdate: false);
         }
       }
-<<<<<<< HEAD
-      appController.setProfileAndAutoApply(await profile.saveFile(_fileData!));
-=======
       appController.putProfile(await profile.saveFile(_fileData!));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     } else if (!hasUpdate) {
       appController.putProfile(profile);
     } else {
@@ -124,11 +106,7 @@ class _EditProfileViewState extends State<EditProfileView> {
   }
 
   Future<void> _handleSaveEdit(BuildContext context, String data) async {
-<<<<<<< HEAD
-    final message = await globalState.appController.safeRun<String>(() async {
-=======
     final message = await appController.safeRun<String>(() async {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       final message = await coreController.validateConfigWithData(data);
       return message;
     }, silence: false);
@@ -155,15 +133,9 @@ class _EditProfileViewState extends State<EditProfileView> {
       }
     }
     if (!mounted) return;
-<<<<<<< HEAD
-    final title = widget.profile.label.getSafeValue(
-      widget.profile.id.toString(),
-    );
-=======
     final title = widget.profile.label.takeFirstValid([
       widget.profile.id.toString(),
     ]);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final editorPage = EditorPage(
       title: title,
       content: _rawText!,
@@ -232,10 +204,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     _fileInfoNotifier.dispose();
     _autoUpdateDurationController.dispose();
     super.dispose();
-<<<<<<< HEAD
-=======
     appController.autoApplyProfile();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   @override

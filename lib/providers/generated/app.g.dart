@@ -1560,11 +1560,7 @@ final class SelectedItemsProvider
   }
 }
 
-<<<<<<< HEAD
-String _$selectedItemsHash() => r'483536e8c20146a2708323eb449f2680c8147c6a';
-=======
 String _$selectedItemsHash() => r'05ef5c5584cbac90d416e5c4fe53ec9e29604020';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 final class SelectedItemsFamily extends $Family
     with
@@ -1662,11 +1658,7 @@ final class SelectedItemProvider
   }
 }
 
-<<<<<<< HEAD
-String _$selectedItemHash() => r'b2ddb8182c2022f4d9d3df91497c6d487ad43fbe';
-=======
 String _$selectedItemHash() => r'b50be0386d53ee8441c37d1a2a4c25640ce10766';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 final class SelectedItemFamily extends $Family
     with $ClassFamilyOverride<SelectedItem, dynamic, dynamic, dynamic, String> {
@@ -1708,166 +1700,6 @@ abstract class _$SelectedItem extends $Notifier<dynamic> {
   }
 }
 
-<<<<<<< HEAD
-@ProviderFor(Profiles)
-const profilesProvider = ProfilesProvider._();
-
-final class ProfilesProvider
-    extends $NotifierProvider<Profiles, List<Profile>> {
-  const ProfilesProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'profilesProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$profilesHash();
-
-  @$internal
-  @override
-  Profiles create() => Profiles();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Profile> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Profile>>(value),
-    );
-  }
-}
-
-String _$profilesHash() => r'3f5c0d5c95c88bce07f762902a2689e01e6b07f8';
-
-abstract class _$Profiles extends $Notifier<List<Profile>> {
-  List<Profile> build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<List<Profile>, List<Profile>>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<List<Profile>, List<Profile>>,
-              List<Profile>,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-@ProviderFor(Scripts)
-const scriptsProvider = ScriptsProvider._();
-
-final class ScriptsProvider extends $NotifierProvider<Scripts, List<Script>> {
-  const ScriptsProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'scriptsProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$scriptsHash();
-
-  @$internal
-  @override
-  Scripts create() => Scripts();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Script> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Script>>(value),
-    );
-  }
-}
-
-String _$scriptsHash() => r'79ba80926f7e131c9931838b44a3b02ade3ddcee';
-
-abstract class _$Scripts extends $Notifier<List<Script>> {
-  List<Script> build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<List<Script>, List<Script>>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<List<Script>, List<Script>>,
-              List<Script>,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-@ProviderFor(Rules)
-const rulesProvider = RulesProvider._();
-
-final class RulesProvider extends $NotifierProvider<Rules, List<Rule>> {
-  const RulesProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'rulesProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$rulesHash();
-
-  @$internal
-  @override
-  Rules create() => Rules();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Rule> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Rule>>(value),
-    );
-  }
-}
-
-String _$rulesHash() => r'569a87273580a826bdf474182dd90e02cb32857e';
-
-abstract class _$Rules extends $Notifier<List<Rule>> {
-  List<Rule> build();
-  @$mustCallSuper
-  @override
-  void runBuild() {
-    final created = build();
-    final ref = this.ref as $Ref<List<Rule>, List<Rule>>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<List<Rule>, List<Rule>>,
-              List<Rule>,
-              Object?,
-              Object?
-            >;
-    element.handleValue(ref, created);
-  }
-}
-
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @ProviderFor(IsUpdating)
 const isUpdatingProvider = IsUpdatingFamily._();
 
@@ -1916,11 +1748,7 @@ final class IsUpdatingProvider extends $NotifierProvider<IsUpdating, bool> {
   }
 }
 
-<<<<<<< HEAD
-String _$isUpdatingHash() => r'e5cb47af4ce8e5a891e67062f0c39ebccfca587c';
-=======
 String _$isUpdatingHash() => r'934cc96cbf8cf6909d27867455a31bf3008470e6';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 final class IsUpdatingFamily extends $Family
     with $ClassFamilyOverride<IsUpdating, bool, bool, bool, String> {
@@ -1955,8 +1783,6 @@ abstract class _$IsUpdating extends $Notifier<bool> {
             as $ClassProviderElement<
               AnyNotifier<bool, bool>,
               bool,
-<<<<<<< HEAD
-=======
               Object?,
               Object?
             >;
@@ -2010,7 +1836,6 @@ abstract class _$NetworkDetection extends $Notifier<NetworkDetectionState> {
             as $ClassProviderElement<
               AnyNotifier<NetworkDetectionState, NetworkDetectionState>,
               NetworkDetectionState,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
               Object?,
               Object?
             >;

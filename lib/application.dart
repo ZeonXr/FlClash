@@ -84,15 +84,10 @@ class ApplicationState extends ConsumerState<Application> {
         child: ConnectivityManager(
           onConnectivityChanged: (results) async {
             commonPrint.log('connectivityChanged ${results.toString()}');
-<<<<<<< HEAD
-            if (!results.contains(ConnectivityResult.vpn)) {
-              coreController.closeConnections();
-=======
             appController.updateLocalIp();
             final hasVpn = results.contains(ConnectivityResult.vpn);
             if (_preHasVpn == hasVpn) {
               appController.addCheckIp();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
             }
             _preHasVpn = hasVpn;
           },
@@ -172,12 +167,7 @@ class ApplicationState extends ConsumerState<Application> {
     linkManager.destroy();
     _autoUpdateProfilesTaskTimer?.cancel();
     await coreController.destroy();
-<<<<<<< HEAD
-    await globalState.savePreferences();
-    await globalState.appController.handleExit();
-=======
     await appController.handleExit();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     super.dispose();
   }
 }

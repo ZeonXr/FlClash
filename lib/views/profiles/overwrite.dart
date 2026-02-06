@@ -78,11 +78,7 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => appLocalizations.standard,
       OverwriteType.script => appLocalizations.script,
-<<<<<<< HEAD
-      OverwriteType.custom => appLocalizations.overwriteTypeCustom,
-=======
       // OverwriteType.custom => appLocalizations.overwriteTypeCustom,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
@@ -90,11 +86,7 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => Icons.stars,
       OverwriteType.script => Icons.rocket,
-<<<<<<< HEAD
-      OverwriteType.custom => Icons.dashboard_customize,
-=======
       // OverwriteType.custom => Icons.dashboard_customize,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
@@ -102,11 +94,7 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => appLocalizations.standardModeDesc,
       OverwriteType.script => appLocalizations.scriptModeDesc,
-<<<<<<< HEAD
-      OverwriteType.custom => appLocalizations.overwriteTypeCustomDesc,
-=======
       // OverwriteType.custom => appLocalizations.overwriteTypeCustomDesc,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
@@ -179,11 +167,7 @@ class _Content extends ConsumerWidget {
     return switch (overwriteType) {
       OverwriteType.standard => _StandardContent(profileId),
       OverwriteType.script => _ScriptContent(profileId),
-<<<<<<< HEAD
-      OverwriteType.custom => SliverToBoxAdapter(),
-=======
       // OverwriteType.custom => SliverToBoxAdapter(),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 }
@@ -381,17 +365,9 @@ class _ScriptContent extends ConsumerWidget {
 
   void _handleChange(WidgetRef ref, int scriptId) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
-<<<<<<< HEAD
-      int? newScriptId = scriptId;
-      if (newScriptId == state.overwrite.scriptOverwrite.scriptId) {
-        newScriptId = null;
-      }
-      return state.copyWith.overwrite.scriptOverwrite(scriptId: newScriptId);
-=======
       return state.copyWith(
         scriptId: state.scriptId == scriptId ? null : scriptId,
       );
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     });
   }
 
@@ -509,24 +485,12 @@ class _EditGlobalAddedRules extends ConsumerWidget {
 
   const _EditGlobalAddedRules({required this.profileId});
 
-<<<<<<< HEAD
-  void _handleChange(WidgetRef ref, int ruleId) {
-    ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
-      final newDisabledRuleIds = Set<int>.from(
-        state.overwrite.standardOverwrite.disabledRuleIds,
-      )..addOrRemove(ruleId);
-      return state.copyWith.overwrite.standardOverwrite(
-        disabledRuleIds: newDisabledRuleIds.toList(),
-      );
-    });
-=======
   void _handleChange(WidgetRef ref, bool status, int ruleId) {
     if (status) {
       ref.read(profileDisabledRuleIdsProvider(profileId).notifier).put(ruleId);
     } else {
       ref.read(profileDisabledRuleIdsProvider(profileId).notifier).del(ruleId);
     }
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   @override

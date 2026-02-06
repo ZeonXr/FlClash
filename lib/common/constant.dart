@@ -127,9 +127,5 @@ const main = (config) => {
   return config;
 }''';
 
-<<<<<<< HEAD
-const backupIsarName = 'backup.isar';
-=======
 const backupDatabaseName = 'database.sqlite';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 const configJsonName = 'config.json';

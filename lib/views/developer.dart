@@ -79,13 +79,6 @@ class DeveloperView extends ConsumerWidget {
             appController.shakingStore();
           },
         ),
-        ListItem(
-          title: Text('修剪缓存'),
-          minVerticalPadding: 12,
-          onTap: () {
-            globalState.shakingStore();
-          },
-        ),
       ],
     );
   }

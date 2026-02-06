@@ -462,9 +462,6 @@
   "overwriteTypeCustom": "Custom",
   "overwriteTypeCustomDesc": "Custom mode, fully customize proxy groups and rules",
   "unknownNetworkError": "Unknown network error",
-<<<<<<< HEAD
-  "networkRequestException": "Network request exception, please try again later."
-=======
   "networkRequestException": "Network request exception, please try again later.",
   "restoreException": "Recovery exception",
   "networkException": "Network exception, please check your connection and try again",
@@ -480,5 +477,4 @@
   "restoreAllData": "Restore all data",
   "addProfile": "Add Profile",
   "delayTest": "Delay Test"
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }

@@ -182,13 +182,6 @@ abstract class CoreHandlerInterface with CoreInterface {
   }
 
   @override
-<<<<<<< HEAD
-  Future<Map<String, dynamic>> getProxies() async {
-    final map = await _invoke<Map<String, dynamic>>(
-      method: ActionMethod.getProxies,
-    );
-    return map ?? {};
-=======
   Future<ProxiesData> getProxies() async {
     final data = await _invoke<Map<String, dynamic>>(
       method: ActionMethod.getProxies,
@@ -196,7 +189,6 @@ abstract class CoreHandlerInterface with CoreInterface {
     return data != null
         ? ProxiesData.fromJson(data)
         : ProxiesData(proxies: {}, all: []);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   @override

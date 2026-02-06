@@ -44,11 +44,7 @@ class Request {
         if (e.type == DioExceptionType.unknown) {
           throw appLocalizations.unknownNetworkError;
         } else if (e.type == DioExceptionType.badResponse) {
-<<<<<<< HEAD
-          throw '网络异常，请检查连接后重试';
-=======
           throw appLocalizations.networkException;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         }
         rethrow;
       }

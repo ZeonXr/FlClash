@@ -6,10 +6,6 @@ extension FileExt on File {
       await create(recursive: true);
       return;
     }
-<<<<<<< HEAD
-    await copy(newPath);
-  }
-=======
     final targetFile = File(newPath);
     if (!await targetFile.exists()) {
       await targetFile.create(recursive: true);
@@ -30,7 +26,6 @@ extension FileExt on File {
     }
     return await writeAsBytes(bytes);
   }
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 extension FileSystemEntityExt on FileSystemEntity {

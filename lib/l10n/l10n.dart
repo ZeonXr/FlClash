@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -3629,8 +3628,6 @@ class AppLocalizations {
       args: [],
     );
   }
-<<<<<<< HEAD
-=======
 
   /// `Recovery exception`
   String get restoreException {
@@ -3751,7 +3748,6 @@ class AppLocalizations {
   String get delayTest {
     return Intl.message('Delay Test', name: 'delayTest', desc: '', args: []);
   }
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -3768,10 +3764,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

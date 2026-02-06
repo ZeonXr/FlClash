@@ -30,11 +30,7 @@ class BackupAndRestore extends ConsumerWidget {
   Future<void> _backupOnWebDAV(DAVClient client) async {
     final res = await appController.loadingRun<bool>(
       () async {
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-        final path = await globalState.backup();
-=======
         final path = await appController.backup();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
         if (path.isEmpty) {
           return false;
         }
@@ -57,13 +53,8 @@ class BackupAndRestore extends ConsumerWidget {
   ) async {
     final res = await appController.loadingRun<bool>(
       () async {
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-        await client.recovery();
-        await globalState.appController.restore(option);
-=======
         await client.restore();
         await appController.restore(option);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
         return true;
       },
       tag: LoadingTag.backup_restore,
@@ -80,13 +71,8 @@ class BackupAndRestore extends ConsumerWidget {
     BuildContext context,
     DAVClient client,
   ) async {
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-    final recoveryOption = await globalState.showCommonDialog<RestoreOption>(
-      child: const RecoveryOptionsDialog(),
-=======
     final restoreOption = await globalState.showCommonDialog<RestoreOption>(
       child: const RestoreOptionsDialog(),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
     );
     if (restoreOption == null || !context.mounted) return;
     _restoreOnWebDAV(context, client, restoreOption);
@@ -95,11 +81,7 @@ class BackupAndRestore extends ConsumerWidget {
   Future<void> _backupOnLocal(BuildContext context) async {
     final res = await appController.loadingRun<bool>(
       () async {
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-        final path = await globalState.backup();
-=======
         final path = await appController.backup();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
         if (path.isEmpty) {
           return false;
         }
@@ -120,24 +102,14 @@ class BackupAndRestore extends ConsumerWidget {
     );
   }
 
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-  Future<void> _recoveryOnLocal(RestoreOption option) async {
-=======
   Future<void> _restoreOnLocal(RestoreOption option) async {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
     final file = await picker.pickerFile(withData: false);
     final path = file?.path;
     if (path == null) return;
     await File(path).safeCopy(await appPath.backupFilePath);
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-    final res = await globalState.appController.safeRun<bool>(
-      () async {
-        await globalState.appController.restore(option);
-=======
     final res = await appController.loadingRun<bool>(
       () async {
         await appController.restore(option);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
         return true;
       },
       tag: LoadingTag.backup_restore,
@@ -150,21 +122,12 @@ class BackupAndRestore extends ConsumerWidget {
     );
   }
 
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-  Future<void> _handleRecoveryOnLocal(BuildContext context) async {
-    final option = await globalState.showCommonDialog<RestoreOption>(
-      child: const RecoveryOptionsDialog(),
-    );
-    if (option == null || !context.mounted) return;
-    _recoveryOnLocal(option);
-=======
   Future<void> _handleRestoreOnLocal(BuildContext context) async {
     final option = await globalState.showCommonDialog<RestoreOption>(
       child: const RestoreOptionsDialog(),
     );
     if (option == null || !context.mounted) return;
     _restoreOnLocal(option);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
   }
 
   void _handleChange(String? value, WidgetRef ref) {
@@ -193,20 +156,13 @@ class BackupAndRestore extends ConsumerWidget {
     }
     ref
         .read(appSettingProvider.notifier)
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-        .update((state) => state.copyWith(recoveryStrategy: res));
-=======
         .update((state) => state.copyWith(restoreStrategy: res));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
   }
 
   @override
   Widget build(BuildContext context, ref) {
     final dav = ref.watch(davSettingProvider);
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-=======
     final isLoading = ref.watch(loadingProvider(LoadingTag.backup_restore));
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
     final client = dav != null ? DAVClient(dav) : null;
     return CommonScaffold(
       isLoading: isLoading,
@@ -358,11 +314,7 @@ class RestoreOptionsDialog extends StatefulWidget {
   State<RestoreOptionsDialog> createState() => _RestoreOptionsDialogState();
 }
 
-<<<<<<< HEAD:lib/views/backup_and_recovery.dart
-class _RecoveryOptionsDialogState extends State<RecoveryOptionsDialog> {
-=======
 class _RestoreOptionsDialogState extends State<RestoreOptionsDialog> {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735:lib/views/backup_and_restore.dart
   void _handleOnTab(RestoreOption? option) {
     if (option == null) return;
     Navigator.of(context).pop(option);

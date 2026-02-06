@@ -6,10 +6,6 @@ import com.follow.clash.State
 import com.follow.clash.common.Components
 import com.follow.clash.invokeMethodOnMainThread
 import com.follow.clash.models.SharedState
-<<<<<<< HEAD
-import com.follow.clash.service.models.NotificationParams
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import com.google.gson.Gson
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -112,29 +108,13 @@ class ServicePlugin : FlutterPlugin, MethodChannel.MethodCallHandler,
     private fun handleSyncState(call: MethodCall, result: MethodChannel.Result) {
         val data = call.arguments<String>()!!
         State.sharedState = Gson().fromJson(data, SharedState::class.java)
-<<<<<<< HEAD
-        GlobalState.setCrashlytics(State.sharedState.crashlytics)
-        launch {
-            Service.updateNotificationParams(
-                NotificationParams(
-                    title = State.sharedState.currentProfileName,
-                    stopText = State.sharedState.stopText,
-                    onlyStatisticsProxy = State.sharedState.onlyStatisticsProxy
-                )
-            )
-            Service.setCrashlytics(State.sharedState.crashlytics)
-=======
         launch {
             State.syncState()
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
             result.success("")
         }
     }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     fun handleInit(result: MethodChannel.Result) {
         Service.bind()
         launch {
