@@ -303,11 +303,7 @@ class ListItem<T> extends StatelessWidget {
         // openElevation: 0,
         closedBuilder: (_, action) {
           openAction() async {
-<<<<<<< HEAD
-            final isMobile = globalState.appState.viewMode == ViewMode.mobile;
-=======
             final isMobile = appController.isMobile;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
             if (!isMobile || kDebugMode) {
               final res = await showExtend(
                 context,

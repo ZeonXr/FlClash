@@ -377,12 +377,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "network": MessageLookupByLibrary.simpleMessage("ネットワーク"),
     "networkDesc": MessageLookupByLibrary.simpleMessage("ネットワーク関連設定の変更"),
     "networkDetection": MessageLookupByLibrary.simpleMessage("ネットワーク検出"),
-<<<<<<< HEAD
-=======
     "networkException": MessageLookupByLibrary.simpleMessage(
       "ネットワーク例外、接続を確認してもう一度お試しください",
     ),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     "networkRequestException": MessageLookupByLibrary.simpleMessage(
       "ネットワーク要求例外、後でもう一度試してください。",
     ),

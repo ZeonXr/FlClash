@@ -1,7 +1,6 @@
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/handler.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/pages/editor.dart';
 import 'package:fl_clash/providers/providers.dart';
@@ -41,37 +40,19 @@ class _ProfilesViewState extends State<ProfilesView> {
     );
   }
 
-<<<<<<< HEAD
-  Future<void> _updateProfiles() async {
-    final profiles = globalState.profiles;
-=======
   Future<void> _updateProfiles(List<Profile> profiles) async {
     if (_isUpdating == true) {
       return;
     }
     _isUpdating = true;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final List<UpdatingMessage> messages = [];
     final updateProfiles = profiles.map<Future>((profile) async {
       if (profile.type == ProfileType.file) return;
       try {
-<<<<<<< HEAD
-        await globalState.appController.updateProfile(
-          profile,
-          showLoading: true,
-        );
-      } catch (e) {
-        messages.add(
-          UpdatingMessage(
-            label: profile.label.getSafeValue(profile.id.toString()),
-            message: e.toString(),
-          ),
-=======
         await appController.updateProfile(profile, showLoading: true);
       } catch (e) {
         messages.add(
           UpdatingMessage(label: profile.realLabel, message: e.toString()),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         );
       }
     });
@@ -153,18 +134,9 @@ class _ProfilesViewState extends State<ProfilesView> {
                         for (int i = 0; i < state.profiles.length; i++)
                           GridItem(
                             child: ProfileItem(
-<<<<<<< HEAD
-                              key: Key(
-                                profilesSelectorState.profiles[i].id.toString(),
-                              ),
-                              profile: profilesSelectorState.profiles[i],
-                              groupValue:
-                                  profilesSelectorState.currentProfileId,
-=======
                               key: Key(state.profiles[i].id.toString()),
                               profile: state.profiles[i],
                               groupValue: state.currentProfileId,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
                               onChanged: (profileId) {
                                 ref
                                         .read(currentProfileIdProvider.notifier)
@@ -209,40 +181,22 @@ class ProfileItem extends StatelessWidget {
   }
 
   Future<void> _handlePreview(BuildContext context) async {
-<<<<<<< HEAD
-    final config = await appHandler.getProfileConfig(profile.id);
-    final content = await encodeYamlTask(config);
-=======
     final configMap = await appController.getProfileWithId(profile.id);
     final content = await encodeYamlTask(configMap);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     if (!context.mounted) {
       return;
     }
 
-<<<<<<< HEAD
-    final previewPage = EditorPage(
-      title: profile.label.getSafeValue(profile.id.toString()),
-      content: content,
-    );
-=======
     final previewPage = EditorPage(title: profile.realLabel, content: content);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     BaseNavigator.push<String>(context, previewPage);
   }
 
   Future updateProfile() async {
     if (profile.type == ProfileType.file) return;
-<<<<<<< HEAD
-    await globalState.appController.safeRun(silence: false, () async {
-      await appController.updateProfile(profile, showLoading: true);
-    });
-=======
     try {} finally {}
     await appController.loadingRun(() async {
       await appController.updateProfile(profile, showLoading: true);
     }, tag: LoadingTag.profiles);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   void _handleShowEditExtendPage(BuildContext context) {
@@ -289,21 +243,6 @@ class ProfileItem extends StatelessWidget {
   }
 
   Future<void> _handleExportFile(BuildContext context) async {
-<<<<<<< HEAD
-    final res = await globalState.appController.safeRun<bool>(
-      () async {
-        final mFile = await profile.file;
-        final value = await picker.saveFile(
-          profile.label.getSafeValue(profile.id.toString()),
-          mFile.readAsBytesSync(),
-        );
-        if (value == null) return false;
-        return true;
-      },
-      needLoading: true,
-      title: appLocalizations.tip,
-    );
-=======
     final res = await appController.safeRun<bool>(() async {
       final mFile = await profile.file;
       final value = await picker.saveFile(
@@ -313,7 +252,6 @@ class ProfileItem extends StatelessWidget {
       if (value == null) return false;
       return true;
     }, title: appLocalizations.tip);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     if (res == true && context.mounted) {
       context.showNotifier(appLocalizations.exportSuccess);
     }
@@ -451,11 +389,7 @@ class ProfileItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-<<<<<<< HEAD
-                profile.label.getSafeValue(profile.id.toString()),
-=======
                 profile.realLabel,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
                 style: context.textTheme.titleMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -514,11 +448,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
         index: index,
         child: const Icon(Icons.drag_handle),
       ),
-<<<<<<< HEAD
-      title: Text(profile.label.getSafeValue(profile.id.toString())),
-=======
       title: Text(profile.realLabel),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       isFirst: isFirst,
       isLast: isLast,
       isDecorator: isDecorator,

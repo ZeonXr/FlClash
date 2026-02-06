@@ -290,11 +290,7 @@ class _ProxyGroupViewState extends ConsumerState<ProxyGroupView> {
   }
 
   PageStorageKey _getPageStorageKey() {
-<<<<<<< HEAD
-    final profile = globalState.currentProfile;
-=======
     final profile = appController.currentProfile;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final key =
         '${profile?.id}_${ScrollPositionCacheKey.proxiesTabList.name}_${widget.group.name}';
     return ProxiesTabView.pageListStoreMap.updateCacheValue(

@@ -3,10 +3,5 @@ export 'clash_config.dart';
 export 'common.dart';
 export 'config.dart';
 export 'core.dart';
-export 'isar.dart';
 export 'profile.dart';
 export 'state.dart';
-<<<<<<< HEAD
-export 'widget.dart';
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735

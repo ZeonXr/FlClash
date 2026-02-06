@@ -5,11 +5,8 @@ import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/pages/editor.dart';
 import 'package:fl_clash/providers/app.dart';
-<<<<<<< HEAD
-=======
 import 'package:fl_clash/providers/database.dart';
 import 'package:fl_clash/providers/state.dart';
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/input.dart';
 import 'package:fl_clash/widgets/list.dart';
@@ -163,11 +160,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
   }
 
   void _handleToEditor([int? id]) async {
-<<<<<<< HEAD
-    final script = ref.read(scriptsProvider.select((state) => state.get(id)));
-=======
     final script = await ref.read(scriptProvider(id).future);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final title = script?.label ?? '';
     final raw = (await script?.content) ?? scriptTemplate;
     if (!mounted) {

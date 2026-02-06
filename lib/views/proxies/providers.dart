@@ -28,11 +28,7 @@ class _ProvidersViewState extends ConsumerState<ProvidersView> {
     final providers = ref.read(providersProvider);
     final List<UpdatingMessage> messages = [];
     final updateProviders = providers.map<Future>((provider) async {
-<<<<<<< HEAD
-      final message = await globalState.appController.updateProvider(provider);
-=======
       final message = await appController.updateProvider(provider);
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       if (message.isNotEmpty) {
         messages.add(UpdatingMessage(label: provider.name, message: message));
       }
@@ -84,19 +80,11 @@ class ProviderItem extends StatelessWidget {
 
   Future<void> _handleUpdateProvider() async {
     if (provider.vehicleType != 'HTTP') return;
-<<<<<<< HEAD
-    await globalState.appController.safeRun(() async {
-      final message = await globalState.appController.updateProvider(provider);
-      if (message.isNotEmpty) throw message;
-    }, silence: false);
-    globalState.appController.updateGroupsDebounce();
-=======
     await appController.safeRun(() async {
       final message = await appController.updateProvider(provider);
       if (message.isNotEmpty) throw message;
     }, silence: false);
     appController.updateGroupsDebounce();
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   Future<void> _handleSideLoadProvider() async {

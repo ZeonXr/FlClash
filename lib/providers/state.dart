@@ -1,7 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/handler.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
@@ -15,37 +14,6 @@ import 'database.dart';
 part 'generated/state.g.dart';
 
 @riverpod
-<<<<<<< HEAD
-Config configState(Ref ref) {
-  final overrideDns = ref.watch(overrideDnsProvider);
-  final currentProfileId = ref.watch(currentProfileIdProvider);
-  final themeProps = ref.watch(themeSettingProvider);
-  final appSettingProps = ref.watch(appSettingProvider);
-  final networkProps = ref.watch(networkSettingProvider);
-  final vpnProps = ref.watch(vpnSettingProvider);
-  final proxiesStyleProps = ref.watch(proxiesStyleSettingProvider);
-  final hotKeyActions = ref.watch(hotKeyActionsProvider);
-  final davProps = ref.watch(davSettingProvider);
-  final windowProps = ref.watch(windowSettingProvider);
-  final patchClashConfig = ref.watch(patchClashConfigProvider);
-  return Config(
-    currentProfileId: currentProfileId,
-    davProps: davProps,
-    windowProps: windowProps,
-    hotKeyActions: hotKeyActions,
-    proxiesStyleProps: proxiesStyleProps,
-    vpnProps: vpnProps,
-    networkProps: networkProps,
-    overrideDns: overrideDns,
-    appSettingProps: appSettingProps,
-    themeProps: themeProps,
-    patchClashConfig: patchClashConfig,
-  );
-}
-
-@riverpod
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 GroupsState currentGroupsState(Ref ref) {
   final mode = ref.watch(
     patchClashConfigProvider.select((state) => state.mode),
@@ -531,27 +499,6 @@ String getProxyDesc(Ref ref, Proxy proxy) {
   }
 }
 
-<<<<<<< HEAD
-// @riverpod
-// OverrideData? getProfileOverrideData(Ref ref, String profileId) {
-//   return ref.watch(
-//     profilesProvider.select(
-//       (state) => state.getProfile(profileId)?.overrideData,
-//     ),
-//   );
-// }
-
-@riverpod
-VM2? layoutChange(Ref ref) {
-  final viewWidth = ref.watch(viewWidthProvider);
-  final textScale = ref.watch(
-    themeSettingProvider.select((state) => state.textScale),
-  );
-  return VM2(viewWidth, textScale);
-}
-
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @riverpod
 VM3<bool, int, bool> checkIp(Ref ref) {
   final isInit = ref.watch(initProvider);
@@ -599,11 +546,7 @@ ColorScheme genColorScheme(
 }
 
 @riverpod
-<<<<<<< HEAD
-VM4<int?, String?, Dns?, bool> needSetup(Ref ref) {
-=======
 SetupState? currentSetupState(Ref ref) {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   final profileId = ref.watch(currentProfileIdProvider);
   return ref.watch(setupStateProvider(profileId)).value;
 }
@@ -673,29 +616,15 @@ SharedState sharedState(Ref ref) {
   final testUrl = appSettingVM3.c;
   final stack = clashConfigVM2.a;
   final port = clashConfigVM2.b;
-<<<<<<< HEAD
-  return appHandler.getSharedState(
-=======
   return SharedState(
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     currentProfileName: currentProfileName,
     onlyStatisticsProxy: onlyStatisticsProxy,
     stopText: appLocalizations.stop,
     crashlytics: crashlytics,
-<<<<<<< HEAD
-    startTip: appLocalizations.startVpn,
-    stopTip: appLocalizations.stopVpn,
-    setupParams: appHandler.getSetupParams(
-      selectedMap: selectedMap,
-      testUrl: testUrl,
-    ),
-    vpnOptions: appHandler.getVpnOptions(
-=======
     stopTip: appLocalizations.stopVpn,
     startTip: appLocalizations.startVpn,
     setupParams: SetupParams(selectedMap: selectedMap, testUrl: testUrl),
     vpnOptions: VpnOptions(
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       enable: vpnSetting.enable,
       stack: stack,
       systemProxy: vpnSetting.systemProxy,
@@ -729,11 +658,7 @@ Profile? profile(Ref ref, int? profileId) {
 }
 
 @riverpod
-<<<<<<< HEAD
-Overwrite? profileOverwrite(Ref ref, int profileId) {
-=======
 OverwriteType overwriteType(Ref ref, int? profileId) {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   return ref.watch(
     profileProvider(
       profileId,
@@ -780,31 +705,4 @@ class AccessControlState extends _$AccessControlState
     with AutoDisposeNotifierMixin {
   @override
   AccessControlProps build() => AccessControlProps();
-<<<<<<< HEAD
-}
-
-@riverpod
-SetupState setupState(Ref ref, int? profileId) {
-  final vm2 = ref.watch(
-    profileProvider(
-      profileId,
-    ).select((state) => VM2(state?.lastUpdateDate, state?.overwrite)),
-  );
-  final lastUpdateDate = vm2.a;
-  final overwrite = vm2.b;
-  final dns = ref.watch(patchClashConfigProvider.select((state) => state.dns));
-  final overrideDns = ref.watch(overrideDnsProvider);
-  final scripts = ref.watch(scriptsProvider);
-  final rules = ref.watch(rulesProvider);
-  return appHandler.getSetupState(
-    profileId: profileId,
-    rules: rules,
-    scripts: scripts,
-    overrideDns: overrideDns,
-    dns: dns,
-    overwrite: overwrite,
-    profileLastUpdateDate: lastUpdateDate,
-  );
-=======
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }

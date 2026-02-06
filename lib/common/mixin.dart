@@ -26,19 +26,11 @@ mixin AutoDisposeNotifierMixin<T> on AnyNotifier<T, T> {
   void onUpdate(T value) {}
 
   void update(T? Function(T) builder) {
-<<<<<<< HEAD
-    final value = builder(state);
-    if (value == null) {
-      return;
-    }
-    this.value = value;
-=======
     final res = builder(value);
     if (res == null) {
       return;
     }
     value = res;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 

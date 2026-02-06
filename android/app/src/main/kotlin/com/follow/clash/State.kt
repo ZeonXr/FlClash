@@ -5,10 +5,7 @@ import com.follow.clash.common.GlobalState
 import com.follow.clash.models.SharedState
 import com.follow.clash.plugins.AppPlugin
 import com.follow.clash.plugins.TilePlugin
-<<<<<<< HEAD
-=======
 import com.follow.clash.service.models.NotificationParams
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import com.google.gson.Gson
 import io.flutter.embedding.engine.FlutterEngine
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,11 +73,7 @@ object State {
             if (flutterEngine != null) {
                 return
             }
-<<<<<<< HEAD
-            startServiceWithFile()
-=======
             startServiceWithPref()
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         }
 
     }
@@ -110,38 +103,18 @@ object State {
         startService()
     }
 
-<<<<<<< HEAD
-    private fun startServiceWithFile() {
-=======
     private fun startServiceWithPref() {
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         GlobalState.launch {
             runLock.withLock {
                 if (runStateFlow.value != RunState.STOP) {
                     return@launch
                 }
-<<<<<<< HEAD
-                val sharedFile = GlobalState.application.sharedFile
-                try {
-                    val data = sharedFile.readText()
-                    sharedState = Gson().fromJson(data, SharedState::class.java)
-                    setupAndStart()
-                } catch (e: Exception) {
-                    GlobalState.log("startServiceWithFile error: $e")
-                    GlobalState.application.showToast("Initialization failed")
-                }
-=======
                 sharedState = GlobalState.application.sharedState
                 setupAndStart()
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
             }
         }
     }
 
-<<<<<<< HEAD
-    private suspend fun setupAndStart() {
-        Service.bind()
-=======
     suspend fun syncState() {
         GlobalState.setCrashlytics(sharedState.crashlytics)
         Service.updateNotificationParams(
@@ -157,7 +130,6 @@ object State {
     private suspend fun setupAndStart() {
         Service.bind()
         syncState()
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         GlobalState.application.showToast(sharedState.startTip)
         val initParams = mutableMapOf<String, Any>()
         initParams["home-dir"] = GlobalState.application.filesDir.path

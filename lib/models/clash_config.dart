@@ -375,16 +375,8 @@ extension ParsedRuleExt on ParsedRule {
 
 @freezed
 abstract class Rule with _$Rule {
-<<<<<<< HEAD
-  const factory Rule({
-    required int id,
-    required String value,
-    @Default(-1) int order,
-  }) = _Rule;
-=======
   const factory Rule({required int id, required String value, String? order}) =
       _Rule;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
   factory Rule.value(String value) {
     return Rule(value: value, id: snowflake.id);

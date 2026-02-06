@@ -44,8 +44,6 @@ abstract class InitState with _$InitState {
   const factory InitState({
     required Config config,
     required List<Profile> profiles,
-<<<<<<< HEAD
-=======
   }) = _InitState;
 }
 
@@ -105,7 +103,6 @@ abstract class StartButtonState with _$StartButtonState {
 abstract class ProfilesState with _$ProfilesState {
   const factory ProfilesState({
     required List<Profile> profiles,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     required int? currentProfileId,
     required int columns,
   }) = _ProfilesState;
@@ -332,11 +329,7 @@ extension SharedStateExt on SharedState {
 @freezed
 abstract class ComputeGroupsState with _$ComputeGroupsState {
   const factory ComputeGroupsState({
-<<<<<<< HEAD
-    required Map<String, dynamic> proxies,
-=======
     required ProxiesData proxiesData,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     required ProxiesSortType sortType,
     required DelayMap delayMap,
     required Map<String, String> selectedMap,
@@ -365,10 +358,7 @@ abstract class MigrationData with _$MigrationData {
     @Default([]) List<Rule> rules,
     @Default([]) List<Script> scripts,
     @Default([]) List<Profile> profiles,
-<<<<<<< HEAD
-=======
     @Default([]) List<ProfileRuleLink> links,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }) = _MigrationData;
 }
 
@@ -379,12 +369,7 @@ abstract class SetupState with _$SetupState {
     required int? profileLastUpdateDate,
     required OverwriteType overwriteType,
     required List<Rule> addedRules,
-<<<<<<< HEAD
-    required int? scriptId,
-    required DateTime? scriptLastUpdateTime,
-=======
     required Script? script,
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     required bool overrideDns,
     required Dns dns,
   }) = _SetupState;
@@ -401,13 +386,7 @@ extension SetupStateExt on SetupState {
     if (profileLastUpdateDate != lastSetupState.profileLastUpdateDate) {
       return true;
     }
-<<<<<<< HEAD
-    final scriptIsChange =
-        scriptId != lastSetupState.scriptId ||
-        scriptLastUpdateTime != lastSetupState.scriptLastUpdateTime;
-=======
     final scriptIsChange = script != lastSetupState.script;
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     if (overwriteType != lastSetupState.overwriteType) {
       if (!ruleListEquality.equals(addedRules, lastSetupState.addedRules) ||
           scriptIsChange) {

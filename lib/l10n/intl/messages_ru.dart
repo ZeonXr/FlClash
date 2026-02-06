@@ -529,12 +529,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "networkDetection": MessageLookupByLibrary.simpleMessage(
       "Обнаружение сети",
     ),
-<<<<<<< HEAD
-=======
     "networkException": MessageLookupByLibrary.simpleMessage(
       "Ошибка сети, проверьте соединение и попробуйте еще раз",
     ),
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     "networkRequestException": MessageLookupByLibrary.simpleMessage(
       "Исключение сетевого запроса, пожалуйста, попробуйте позже.",
     ),

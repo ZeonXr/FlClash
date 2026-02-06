@@ -463,9 +463,6 @@
   "overwriteTypeCustom": "カスタム",
   "overwriteTypeCustomDesc": "カスタムモード、プロキシグループとルールを完全にカスタマイズ可能",
   "unknownNetworkError": "不明なネットワークエラー",
-<<<<<<< HEAD
-  "networkRequestException": "ネットワーク要求例外、後でもう一度試してください。"
-=======
   "networkRequestException": "ネットワーク要求例外、後でもう一度試してください。",
   "restoreException": "復元例外",
   "networkException": "ネットワーク例外、接続を確認してもう一度お試しください",
@@ -481,5 +478,4 @@
   "restoreAllData": "すべてのデータを復元する",
   "addProfile": "プロファイルを追加",
   "delayTest": "遅延テスト"
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }

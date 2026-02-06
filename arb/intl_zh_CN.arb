@@ -463,9 +463,6 @@
   "overwriteTypeCustom": "自定义",
   "overwriteTypeCustomDesc": "自定义模式，支持完全自定义修改代理组以及规则",
   "unknownNetworkError": "未知网络错误",
-<<<<<<< HEAD
-  "networkRequestException": "网络请求异常，请稍后再试。"
-=======
   "networkRequestException": "网络请求异常，请稍后再试。",
   "restoreException": "恢复异常",
   "networkException": "网络异常，请检查连接后重试",
@@ -481,5 +478,4 @@
   "restoreAllData": "恢复所有数据",
   "addProfile": "添加配置",
   "delayTest": "延迟测试"
->>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
