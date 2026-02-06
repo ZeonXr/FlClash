@@ -178,6 +178,17 @@ abstract class Action with _$Action {
 }
 
 @freezed
+abstract class ProxiesData with _$ProxiesData {
+  const factory ProxiesData({
+    required Map<String, dynamic> proxies,
+    required List<String> all,
+  }) = _ProxiesData;
+
+  factory ProxiesData.fromJson(Map<String, Object?> json) =>
+      _$ProxiesDataFromJson(json);
+}
+
+@freezed
 abstract class ActionResult with _$ActionResult {
   const factory ActionResult({
     required ActionMethod method,

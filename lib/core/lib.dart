@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/core.dart';
 import 'package:fl_clash/plugins/service.dart';
-import 'package:fl_clash/state.dart';
 
 import 'interface.dart';
 
@@ -22,7 +22,11 @@ class CoreLib extends CoreHandlerInterface {
       return res ?? '';
     }
     _connectedCompleter.complete(true);
+<<<<<<< HEAD
     final syncRes = await service?.syncState(globalState.sharedState);
+=======
+    final syncRes = await service?.syncState(appController.sharedState);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     return syncRes ?? '';
   }
 
@@ -37,10 +41,12 @@ class CoreLib extends CoreHandlerInterface {
   }
 
   @override
-  Future<bool> shutdown() async {
-    await service?.shutdown();
+  Future<bool> shutdown(_) async {
+    if (!_connectedCompleter.isCompleted) {
+      return false;
+    }
     _connectedCompleter = Completer();
-    return true;
+    return service?.shutdown() ?? true;
   }
 
   @override

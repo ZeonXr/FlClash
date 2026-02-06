@@ -82,7 +82,7 @@ abstract class AppSettingProps with _$AppSettingProps {
     @Default(true) bool minimizeOnExit,
     @Default(false) bool hidden,
     @Default(false) bool developerMode,
-    @Default(RecoveryStrategy.compatible) RecoveryStrategy recoveryStrategy,
+    @Default(RestoreStrategy.compatible) RestoreStrategy restoreStrategy,
     @Default(true) bool showTrayTitle,
   }) = _AppSettingProps;
 
@@ -243,4 +243,14 @@ abstract class Config with _$Config {
   }) = _Config;
 
   factory Config.fromJson(Map<String, Object?> json) => _$ConfigFromJson(json);
+<<<<<<< HEAD
+=======
+
+  factory Config.realFromJson(Map<String, Object?>? json) {
+    if (json == null) {
+      return Config(themeProps: defaultThemeProps);
+    }
+    return _$ConfigFromJson(json);
+  }
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }

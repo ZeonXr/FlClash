@@ -65,8 +65,8 @@ class CoreController {
     );
   }
 
-  Future<void> shutdown() async {
-    await _interface.shutdown();
+  Future<void> shutdown(bool isUser) async {
+    await _interface.shutdown(isUser);
   }
 
   FutureOr<bool> get isInit => _interface.isInit;
@@ -79,10 +79,14 @@ class CoreController {
   Future<String> validateConfigWithData(String data) async {
     final path = await appPath.tempFilePath;
     final file = File(path);
+<<<<<<< HEAD
     if (!await file.exists()) {
       await file.create(recursive: true);
     }
     await file.writeAsString(data);
+=======
+    await file.safeWriteAsString(data);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final res = await _interface.validateConfig(path);
     await File(path).safeDelete();
     return res;
@@ -110,10 +114,17 @@ class CoreController {
     required Map<String, String> selectedMap,
     required String defaultTestUrl,
   }) async {
+<<<<<<< HEAD
     final proxies = await _interface.getProxies();
     return toGroupsTask(
       ComputeGroupsState(
         proxies: proxies,
+=======
+    final proxiesData = await _interface.getProxies();
+    return toGroupsTask(
+      ComputeGroupsState(
+        proxiesData: proxiesData,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         sortType: sortType,
         delayMap: delayMap,
         selectedMap: selectedMap,
@@ -204,7 +215,10 @@ class CoreController {
     final profilePath = await appPath.getProfilePath(id.toString());
     final res = await _interface.getConfig(profilePath);
     if (res.isSuccess) {
-      return res.data;
+      final data = Map<String, dynamic>.from(res.data);
+      data['rules'] = data['rule'];
+      data.remove('rule');
+      return data;
     } else {
       throw res.message;
     }

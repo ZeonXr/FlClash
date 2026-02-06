@@ -16,6 +16,8 @@ class CoreService extends CoreHandlerInterface {
 
   Completer<Socket> _socketCompleter = Completer();
 
+  Completer<bool> _shutdownCompleter = Completer();
+
   final Map<String, Completer> _callbackCompleterMap = {};
 
   Process? _process;
@@ -34,6 +36,9 @@ class CoreService extends CoreHandlerInterface {
     final data = await parasResult(result);
     if (result.id?.isEmpty == true) {
       coreEventManager.sendEvent(CoreEvent.fromJson(result.data));
+    }
+    if (completer?.isCompleted == true) {
+      return;
     }
     completer?.complete(data);
   }
@@ -76,6 +81,9 @@ class CoreService extends CoreHandlerInterface {
         })
         .onDone(() {
           _handleInvokeCrashEvent();
+          if (!_shutdownCompleter.isCompleted) {
+            _shutdownCompleter.complete(true);
+          }
         });
   }
 
@@ -87,7 +95,7 @@ class CoreService extends CoreHandlerInterface {
 
   Future<void> start() async {
     if (_process != null) {
-      await shutdown();
+      await shutdown(false);
     }
     final serverSocket = await _serverCompleter.future;
     final arg = system.isWindows
@@ -113,7 +121,7 @@ class CoreService extends CoreHandlerInterface {
   @override
   destroy() async {
     final server = await _serverCompleter.future;
-    await shutdown();
+    await shutdown(false);
     await server.close();
     await _deleteSocketFile();
     return true;
@@ -135,12 +143,16 @@ class CoreService extends CoreHandlerInterface {
     if (_socketCompleter.isCompleted) {
       final socket = await _socketCompleter.future;
       _socketCompleter = Completer();
-      socket.close();
+      await socket.close();
     }
   }
 
   @override
-  shutdown() async {
+  shutdown(bool isUser) async {
+    if (!_socketCompleter.isCompleted && _process == null) {
+      return false;
+    }
+    _shutdownCompleter = Completer();
     await _destroySocket();
     _clearCompleter();
     if (system.isWindows) {
@@ -148,7 +160,11 @@ class CoreService extends CoreHandlerInterface {
     }
     _process?.kill();
     _process = null;
-    return true;
+    if (isUser) {
+      return _shutdownCompleter.future;
+    } else {
+      return true;
+    }
   }
 
   void _clearCompleter() {

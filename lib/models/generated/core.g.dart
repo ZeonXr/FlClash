@@ -299,6 +299,14 @@ const _$ActionMethodEnumMap = {
   ActionMethod.getCurrentProfileName: 'getCurrentProfileName',
 };
 
+_ProxiesData _$ProxiesDataFromJson(Map<String, dynamic> json) => _ProxiesData(
+  proxies: json['proxies'] as Map<String, dynamic>,
+  all: (json['all'] as List<dynamic>).map((e) => e as String).toList(),
+);
+
+Map<String, dynamic> _$ProxiesDataToJson(_ProxiesData instance) =>
+    <String, dynamic>{'proxies': instance.proxies, 'all': instance.all};
+
 _ActionResult _$ActionResultFromJson(Map<String, dynamic> json) =>
     _ActionResult(
       method: $enumDecode(_$ActionMethodEnumMap, json['method']),

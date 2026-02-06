@@ -11,7 +11,7 @@ mixin CoreInterface {
 
   Future<String> preload();
 
-  Future<bool> shutdown();
+  Future<bool> shutdown(bool isUser);
 
   Future<bool> get isInit;
 
@@ -27,7 +27,7 @@ mixin CoreInterface {
 
   Future<String> setupConfig(SetupParams setupParams);
 
-  Future<Map> getProxies();
+  Future<ProxiesData> getProxies();
 
   Future<String> changeProxy(ChangeProxyParams changeProxyParams);
 
@@ -94,13 +94,13 @@ abstract class CoreHandlerInterface with CoreInterface {
       );
       return null;
     }
-    if (kDebugMode) {
+    if (kDebugMode && watchExecution) {
       commonPrint.log('Invoke ${method.name} ${DateTime.now()} $data');
     }
 
-    return utils.handleWatch(
+    return await utils.handleWatch(
       function: () async {
-        return await invoke(method: method, data: data, timeout: timeout);
+        return await invoke<T>(method: method, data: data, timeout: timeout);
       },
       onWatch: (data, elapsedMilliseconds) {
         commonPrint.log('Invoke ${method.name} ${elapsedMilliseconds}ms');
@@ -131,7 +131,7 @@ abstract class CoreHandlerInterface with CoreInterface {
   }
 
   @override
-  Future<bool> shutdown();
+  Future<bool> shutdown(bool isUser);
 
   @override
   Future<bool> get isInit async {
@@ -163,8 +163,8 @@ abstract class CoreHandlerInterface with CoreInterface {
 
   @override
   Future<Result> getConfig(String path) async {
-    return await _invoke<Result>(method: ActionMethod.getConfig, data: path) ??
-        Result.success({});
+    final res = await _invoke(method: ActionMethod.getConfig, data: path);
+    return res ?? Result.success({});
   }
 
   @override
@@ -182,11 +182,21 @@ abstract class CoreHandlerInterface with CoreInterface {
   }
 
   @override
+<<<<<<< HEAD
   Future<Map<String, dynamic>> getProxies() async {
     final map = await _invoke<Map<String, dynamic>>(
       method: ActionMethod.getProxies,
     );
     return map ?? {};
+=======
+  Future<ProxiesData> getProxies() async {
+    final data = await _invoke<Map<String, dynamic>>(
+      method: ActionMethod.getProxies,
+    );
+    return data != null
+        ? ProxiesData.fromJson(data)
+        : ProxiesData(proxies: {}, all: []);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   @override

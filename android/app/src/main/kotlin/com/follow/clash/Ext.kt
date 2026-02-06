@@ -1,6 +1,10 @@
 package com.follow.clash
 
 import android.app.Application
+<<<<<<< HEAD
+=======
+import android.content.Context.MODE_PRIVATE
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -10,6 +14,8 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import com.follow.clash.common.GlobalState
+import com.follow.clash.models.SharedState
+import com.google.gson.Gson
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodChannel
@@ -23,8 +29,21 @@ import kotlin.coroutines.resume
 
 private const val ICON_TTL_DAYS = 1L
 
+<<<<<<< HEAD
 val Application.sharedFile
     get() = File(filesDir, "shared.json")
+=======
+val Application.sharedState: SharedState
+    get() {
+        try {
+            val sp = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE)
+            val res = sp.getString("flutter.sharedState", "")
+            return Gson().fromJson(res, SharedState::class.java)
+        } catch (_: Exception) {
+            return SharedState()
+        }
+    }
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 
 private var lastToast: Toast? = null
@@ -36,6 +55,10 @@ fun Application.showToast(text: String?) {
             show()
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 }
 
 suspend fun PackageManager.getPackageIconPath(packageName: String): String =

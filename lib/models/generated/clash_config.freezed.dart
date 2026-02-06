@@ -2698,7 +2698,11 @@ as bool,
 /// @nodoc
 mixin _$Rule {
 
+<<<<<<< HEAD
  int get id; String get value; int get order;
+=======
+ int get id; String get value; String? get order;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 /// Create a copy of Rule
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2731,7 +2735,11 @@ abstract mixin class $RuleCopyWith<$Res>  {
   factory $RuleCopyWith(Rule value, $Res Function(Rule) _then) = _$RuleCopyWithImpl;
 @useResult
 $Res call({
+<<<<<<< HEAD
  int id, String value, int order
+=======
+ int id, String value, String? order
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 });
 
 
@@ -2748,12 +2756,21 @@ class _$RuleCopyWithImpl<$Res>
 
 /// Create a copy of Rule
 /// with the given fields replaced by the non-null parameter values.
+<<<<<<< HEAD
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? value = null,Object? order = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,
+=======
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? value = null,Object? order = freezed,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as String?,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   ));
 }
 
@@ -2838,7 +2855,11 @@ return $default(_that);case _:
 /// }
 /// ```
 
+<<<<<<< HEAD
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String value,  int order)?  $default,{required TResult orElse(),}) {final _that = this;
+=======
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String value,  String? order)?  $default,{required TResult orElse(),}) {final _that = this;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 switch (_that) {
 case _Rule() when $default != null:
 return $default(_that.id,_that.value,_that.order);case _:
@@ -2859,7 +2880,11 @@ return $default(_that.id,_that.value,_that.order);case _:
 /// }
 /// ```
 
+<<<<<<< HEAD
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String value,  int order)  $default,) {final _that = this;
+=======
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String value,  String? order)  $default,) {final _that = this;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 switch (_that) {
 case _Rule():
 return $default(_that.id,_that.value,_that.order);case _:
@@ -2879,7 +2904,11 @@ return $default(_that.id,_that.value,_that.order);case _:
 /// }
 /// ```
 
+<<<<<<< HEAD
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String value,  int order)?  $default,) {final _that = this;
+=======
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String value,  String? order)?  $default,) {final _that = this;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 switch (_that) {
 case _Rule() when $default != null:
 return $default(_that.id,_that.value,_that.order);case _:
@@ -2894,12 +2923,20 @@ return $default(_that.id,_that.value,_that.order);case _:
 @JsonSerializable()
 
 class _Rule implements Rule {
+<<<<<<< HEAD
   const _Rule({required this.id, required this.value, this.order = -1});
+=======
+  const _Rule({required this.id, required this.value, this.order});
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   factory _Rule.fromJson(Map<String, dynamic> json) => _$RuleFromJson(json);
 
 @override final  int id;
 @override final  String value;
+<<<<<<< HEAD
 @override@JsonKey() final  int order;
+=======
+@override final  String? order;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 /// Create a copy of Rule
 /// with the given fields replaced by the non-null parameter values.
@@ -2934,7 +2971,11 @@ abstract mixin class _$RuleCopyWith<$Res> implements $RuleCopyWith<$Res> {
   factory _$RuleCopyWith(_Rule value, $Res Function(_Rule) _then) = __$RuleCopyWithImpl;
 @override @useResult
 $Res call({
+<<<<<<< HEAD
  int id, String value, int order
+=======
+ int id, String value, String? order
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 });
 
 
@@ -2951,12 +2992,21 @@ class __$RuleCopyWithImpl<$Res>
 
 /// Create a copy of Rule
 /// with the given fields replaced by the non-null parameter values.
+<<<<<<< HEAD
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? value = null,Object? order = null,}) {
   return _then(_Rule(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
 as int,
+=======
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? value = null,Object? order = freezed,}) {
+  return _then(_Rule(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,order: freezed == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as String?,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   ));
 }
 

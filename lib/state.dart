@@ -1,16 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
+<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
+=======
+import 'dart:ffi' as ffi;
+
+import 'package:animations/animations.dart';
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fl_clash/common/theme.dart';
 import 'package:fl_clash/core/core.dart';
-import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/l10n/l10n.dart';
 import 'package:fl_clash/plugins/service.dart';
+import 'package:fl_clash/providers/app.dart';
+import 'package:fl_clash/providers/config.dart';
+import 'package:fl_clash/providers/database.dart';
 import 'package:fl_clash/widgets/dialog.dart';
 import 'package:fl_clash/widgets/list.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +25,20 @@ import 'package:flutter/services.dart';
 import 'package:isar_community/isar.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+<<<<<<< HEAD
 import 'package:url_launcher/url_launcher.dart';
 
 import 'common/common.dart';
 import 'controller.dart';
 import 'handler.dart';
+=======
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'common/common.dart';
+import 'database/database.dart';
+import 'l10n/l10n.dart';
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 import 'models/models.dart';
 
 typedef UpdateTasks = List<FutureOr Function()>;
@@ -31,10 +47,13 @@ class GlobalState {
   static GlobalState? _instance;
   final navigatorKey = GlobalKey<NavigatorState>();
   Timer? timer;
+<<<<<<< HEAD
   late final Isar isar;
   late Config config;
   late AppState appState;
   late RunningState runningState;
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   bool isPre = true;
   late final String coreSHA256;
   late final PackageInfo packageInfo;
@@ -42,23 +61,20 @@ class GlobalState {
   late Measure measure;
   late CommonTheme theme;
   late Color accentColor;
+  bool needInitStatus = true;
   CorePalette? corePalette;
   DateTime? startTime;
   UpdateTasks tasks = [];
+<<<<<<< HEAD
   AppController? _appController;
   bool isInit = false;
   bool isUserDisconnected = false;
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   SetupState? lastSetupState;
   VpnState? lastVpnState;
 
   bool get isStart => startTime != null && startTime!.isBeforeNow;
-
-  AppController get appController => _appController!;
-
-  set appController(AppController appController) {
-    _appController = appController;
-    isInit = true;
-  }
 
   GlobalState._internal();
 
@@ -67,6 +83,7 @@ class GlobalState {
     return _instance!;
   }
 
+<<<<<<< HEAD
   String get ua => config.patchClashConfig.globalUa ?? packageInfo.ua;
 
   List<Profile> get profiles {
@@ -121,21 +138,18 @@ class GlobalState {
   }
 
   Future<void> initApp(int version) async {
+=======
+  Future<ProviderContainer> init(int version) async {
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     coreSHA256 = const String.fromEnvironment('CORE_SHA256');
     isPre = const String.fromEnvironment('APP_ENV') != 'stable';
-    appState = AppState(
-      brightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
-      version: version,
-      viewSize: Size.zero,
-      requests: FixedList(maxLength),
-      logs: FixedList(maxLength),
-      traffics: FixedList(30),
-      totalTraffic: Traffic(),
-      systemUiOverlayStyle: const SystemUiOverlayStyle(),
-    );
     await _initDynamicColor();
+<<<<<<< HEAD
     await init();
     await window?.init(version, config.windowProps);
+=======
+    return await _initData(version);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   Future<void> _initDynamicColor() async {
@@ -147,6 +161,7 @@ class GlobalState {
     } catch (_) {}
   }
 
+<<<<<<< HEAD
   Future<void> shakingStore() async {
     final profileIds = runningState.profiles.map((item) => item.id).toList();
     final scriptIds = runningState.scripts.map((item) => item.id).toList();
@@ -207,12 +222,49 @@ class GlobalState {
       rules: rules.toList(),
       scripts: scripts.toList(),
     );
+=======
+  Future<ProviderContainer> _initData(int version) async {
+    final appState = AppState(
+      brightness: WidgetsBinding.instance.platformDispatcher.platformBrightness,
+      version: version,
+      viewSize: Size.zero,
+      requests: FixedList(maxLength),
+      logs: FixedList(maxLength),
+      traffics: FixedList(30),
+      totalTraffic: Traffic(),
+      systemUiOverlayStyle: const SystemUiOverlayStyle(),
+    );
+    final appStateOverrides = buildAppStateOverrides(appState);
+    packageInfo = await PackageInfo.fromPlatform();
+    final configMap = await preferences.getConfigMap();
+    final config = await migration.migrationIfNeeded(
+      configMap,
+      sync: (data) async {
+        final newConfigMap = data.configMap;
+        final config = Config.realFromJson(newConfigMap);
+        await Future.wait([
+          database.restore(data.profiles, data.scripts, data.rules, data.links),
+          preferences.saveConfig(config),
+        ]);
+        return config;
+      },
+    );
+    final configOverrides = buildConfigOverrides(config);
+    final container = ProviderContainer(
+      overrides: [...appStateOverrides, ...configOverrides],
+    );
+    final profiles = await database.profilesDao.all().get();
+    container.read(profilesProvider.notifier).setAndReorder(profiles);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     await AppLocalizations.load(
       utils.getLocaleForString(config.appSettingProps.locale) ??
           WidgetsBinding.instance.platformDispatcher.locale,
     );
+    await window?.init(version, config.windowProps);
+    return container;
   }
 
+<<<<<<< HEAD
   Future<Isar> openIsar({String? directory, String? name}) async {
     return await Isar.open(
       [ProfileCollectionSchema, ScriptCollectionSchema, RuleCollectionSchema],
@@ -221,6 +273,8 @@ class GlobalState {
     );
   }
 
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   Future<void> startUpdateTasks([UpdateTasks? tasks]) async {
     if (timer != null && timer!.isActive == true) return;
     if (tasks != null) {
@@ -410,6 +464,7 @@ class GlobalState {
     launchUrl(Uri.parse(url));
   }
 
+<<<<<<< HEAD
   Future<Map> getProfileMap(int profileId) async {
     var res = {};
     try {
@@ -505,82 +560,30 @@ class GlobalState {
       routeMode: routeMode,
       overrideDns: overrideDns,
     );
+=======
+  Future<Map<String, dynamic>> handleEvaluate(
+    String scriptContent,
+    Map<String, dynamic> config,
+  ) async {
+    if (config['proxy-providers'] == null) {
+      config['proxy-providers'] = {};
+    }
+    final configJs = json.encode(config);
+    final runtime = getJavascriptRuntime();
+    final res = await runtime.evaluateAsync('''
+      $scriptContent
+      main($configJs)
+    ''');
+    if (res.isError) {
+      throw res.stringResult;
+    }
+    final value = switch (res.rawResult is ffi.Pointer) {
+      true => runtime.convertValue<Map<String, dynamic>>(res),
+      false => Map<String, dynamic>.from(res.rawResult),
+    };
+    return value ?? config;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
 final globalState = GlobalState();
-
-class DetectionState {
-  static DetectionState? _instance;
-  bool? _preIsStart;
-  Timer? _setTimeoutTimer;
-  CancelToken? cancelToken;
-
-  final state = ValueNotifier<NetworkDetectionState>(
-    const NetworkDetectionState(isLoading: true, ipInfo: null),
-  );
-
-  DetectionState._internal();
-
-  factory DetectionState() {
-    _instance ??= DetectionState._internal();
-    return _instance!;
-  }
-
-  void startCheck() {
-    debouncer.call(
-      FunctionTag.checkIp,
-      _checkIp,
-      duration: Duration(milliseconds: 1200),
-    );
-  }
-
-  void tryStartCheck() {
-    if (state.value.isLoading == false && state.value.ipInfo == null) {
-      startCheck();
-    }
-  }
-
-  Future<void> _checkIp() async {
-    final appState = globalState.appState;
-    final isInit = appState.isInit;
-    if (!isInit) return;
-    final isStart = appState.runTime != null;
-    if (_preIsStart == false &&
-        _preIsStart == isStart &&
-        state.value.ipInfo != null) {
-      return;
-    }
-    _clearSetTimeoutTimer();
-    state.value = state.value.copyWith(isLoading: true, ipInfo: null);
-    _preIsStart = isStart;
-    if (cancelToken != null) {
-      cancelToken!.cancel();
-      cancelToken = null;
-    }
-    cancelToken = CancelToken();
-    final res = await request.checkIp(cancelToken: cancelToken);
-    if (res.isError) {
-      state.value = state.value.copyWith(isLoading: true, ipInfo: null);
-      return;
-    }
-    final ipInfo = res.data;
-    if (ipInfo != null) {
-      state.value = state.value.copyWith(isLoading: false, ipInfo: ipInfo);
-      return;
-    }
-    _clearSetTimeoutTimer();
-    _setTimeoutTimer = Timer(const Duration(milliseconds: 300), () {
-      state.value = state.value.copyWith(isLoading: false, ipInfo: null);
-    });
-  }
-
-  void _clearSetTimeoutTimer() {
-    if (_setTimeoutTimer != null) {
-      _setTimeoutTimer?.cancel();
-      _setTimeoutTimer = null;
-    }
-  }
-}
-
-final detectionState = DetectionState();

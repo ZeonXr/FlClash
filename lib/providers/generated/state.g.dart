@@ -9,6 +9,7 @@ part of '../state.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
+<<<<<<< HEAD
 @ProviderFor(configState)
 const configStateProvider = ConfigStateProvider._();
 
@@ -50,6 +51,8 @@ final class ConfigStateProvider
 
 String _$configStateHash() => r'7287598858d91e6902902c33d80440526a257221';
 
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @ProviderFor(currentGroupsState)
 const currentGroupsStateProvider = CurrentGroupsStateProvider._();
 
@@ -566,101 +569,46 @@ final class ProxiesActionsStateProvider
 String _$proxiesActionsStateHash() =>
     r'84f8a94706233ff5d4b8a456291a4e66c1381c62';
 
-@ProviderFor(startButtonSelectorState)
-const startButtonSelectorStateProvider = StartButtonSelectorStateProvider._();
+@ProviderFor(profilesState)
+const profilesStateProvider = ProfilesStateProvider._();
 
-final class StartButtonSelectorStateProvider
-    extends
-        $FunctionalProvider<
-          StartButtonSelectorState,
-          StartButtonSelectorState,
-          StartButtonSelectorState
-        >
-    with $Provider<StartButtonSelectorState> {
-  const StartButtonSelectorStateProvider._()
+final class ProfilesStateProvider
+    extends $FunctionalProvider<ProfilesState, ProfilesState, ProfilesState>
+    with $Provider<ProfilesState> {
+  const ProfilesStateProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'startButtonSelectorStateProvider',
+        name: r'profilesStateProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$startButtonSelectorStateHash();
+  String debugGetCreateSourceHash() => _$profilesStateHash();
 
   @$internal
   @override
-  $ProviderElement<StartButtonSelectorState> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
+  $ProviderElement<ProfilesState> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
 
   @override
-  StartButtonSelectorState create(Ref ref) {
-    return startButtonSelectorState(ref);
+  ProfilesState create(Ref ref) {
+    return profilesState(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(StartButtonSelectorState value) {
+  Override overrideWithValue(ProfilesState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<StartButtonSelectorState>(value),
+      providerOverride: $SyncValueProvider<ProfilesState>(value),
     );
   }
 }
 
-String _$startButtonSelectorStateHash() =>
-    r'537aff93c98b0a689cf8cabd080c610c9c58e611';
-
-@ProviderFor(profilesSelectorState)
-const profilesSelectorStateProvider = ProfilesSelectorStateProvider._();
-
-final class ProfilesSelectorStateProvider
-    extends
-        $FunctionalProvider<
-          ProfilesSelectorState,
-          ProfilesSelectorState,
-          ProfilesSelectorState
-        >
-    with $Provider<ProfilesSelectorState> {
-  const ProfilesSelectorStateProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'profilesSelectorStateProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$profilesSelectorStateHash();
-
-  @$internal
-  @override
-  $ProviderElement<ProfilesSelectorState> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  ProfilesSelectorState create(Ref ref) {
-    return profilesSelectorState(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ProfilesSelectorState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<ProfilesSelectorState>(value),
-    );
-  }
-}
-
-String _$profilesSelectorStateHash() =>
-    r'da4a4382d7054dfe4010e44e55368d31ec805536';
+String _$profilesStateHash() => r'8b07eeacb83b9002ba7e6283ff7a7f451a0845a6';
 
 @ProviderFor(filterGroupsState)
 const filterGroupsStateProvider = FilterGroupsStateFamily._();
@@ -1196,29 +1144,29 @@ final class IsCurrentPageFamily extends $Family
   String toString() => r'isCurrentPageProvider';
 }
 
-@ProviderFor(getRealTestUrl)
-const getRealTestUrlProvider = GetRealTestUrlFamily._();
+@ProviderFor(realTestUrl)
+const realTestUrlProvider = RealTestUrlFamily._();
 
-final class GetRealTestUrlProvider
+final class RealTestUrlProvider
     extends $FunctionalProvider<String, String, String>
     with $Provider<String> {
-  const GetRealTestUrlProvider._({
-    required GetRealTestUrlFamily super.from,
+  const RealTestUrlProvider._({
+    required RealTestUrlFamily super.from,
     required String? super.argument,
   }) : super(
          retry: null,
-         name: r'getRealTestUrlProvider',
+         name: r'realTestUrlProvider',
          isAutoDispose: true,
          dependencies: null,
          $allTransitiveDependencies: null,
        );
 
   @override
-  String debugGetCreateSourceHash() => _$getRealTestUrlHash();
+  String debugGetCreateSourceHash() => _$realTestUrlHash();
 
   @override
   String toString() {
-    return r'getRealTestUrlProvider'
+    return r'realTestUrlProvider'
         ''
         '($argument)';
   }
@@ -1231,7 +1179,7 @@ final class GetRealTestUrlProvider
   @override
   String create(Ref ref) {
     final argument = this.argument as String?;
-    return getRealTestUrl(ref, argument);
+    return realTestUrl(ref, argument);
   }
 
   /// {@macro riverpod.override_with_value}
@@ -1244,7 +1192,7 @@ final class GetRealTestUrlProvider
 
   @override
   bool operator ==(Object other) {
-    return other is GetRealTestUrlProvider && other.argument == argument;
+    return other is RealTestUrlProvider && other.argument == argument;
   }
 
   @override
@@ -1253,24 +1201,24 @@ final class GetRealTestUrlProvider
   }
 }
 
-String _$getRealTestUrlHash() => r'5c6513cabb53e5e6689cba5919f49aeaeff90247';
+String _$realTestUrlHash() => r'6d68caa7a526b6788e3e4899d3ec8ad1c065b15e';
 
-final class GetRealTestUrlFamily extends $Family
+final class RealTestUrlFamily extends $Family
     with $FunctionalFamilyOverride<String, String?> {
-  const GetRealTestUrlFamily._()
+  const RealTestUrlFamily._()
     : super(
         retry: null,
-        name: r'getRealTestUrlProvider',
+        name: r'realTestUrlProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
         isAutoDispose: true,
       );
 
-  GetRealTestUrlProvider call([String? testUrl]) =>
-      GetRealTestUrlProvider._(argument: testUrl, from: this);
+  RealTestUrlProvider call([String? testUrl]) =>
+      RealTestUrlProvider._(argument: testUrl, from: this);
 
   @override
-  String toString() => r'getRealTestUrlProvider';
+  String toString() => r'realTestUrlProvider';
 }
 
 @ProviderFor(getDelay)
@@ -1333,7 +1281,7 @@ final class GetDelayProvider extends $FunctionalProvider<int?, int?, int?>
   }
 }
 
-String _$getDelayHash() => r'15df90fb31665501b21ea671a72e35beaf32141b';
+String _$getDelayHash() => r'ee2df2db2b12d599794f77519a9ac518f42245a7';
 
 final class GetDelayFamily extends $Family
     with
@@ -1920,6 +1868,7 @@ final class GetProxyDescFamily extends $Family
   String toString() => r'getProxyDescProvider';
 }
 
+<<<<<<< HEAD
 @ProviderFor(layoutChange)
 const layoutChangeProvider = LayoutChangeProvider._();
 
@@ -1967,6 +1916,8 @@ final class LayoutChangeProvider
 
 String _$layoutChangeHash() => r'd83d879f9ae182082c59c3541c0b5bf7693f5bab';
 
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 @ProviderFor(checkIp)
 const checkIpProvider = CheckIpProvider._();
 
@@ -2107,9 +2058,10 @@ final class GenColorSchemeFamily extends $Family
   String toString() => r'genColorSchemeProvider';
 }
 
-@ProviderFor(needSetup)
-const needSetupProvider = NeedSetupProvider._();
+@ProviderFor(currentSetupState)
+const currentSetupStateProvider = CurrentSetupStateProvider._();
 
+<<<<<<< HEAD
 final class NeedSetupProvider
     extends
         $FunctionalProvider<
@@ -2119,21 +2071,28 @@ final class NeedSetupProvider
         >
     with $Provider<VM4<int?, String?, Dns?, bool>> {
   const NeedSetupProvider._()
+=======
+final class CurrentSetupStateProvider
+    extends $FunctionalProvider<SetupState?, SetupState?, SetupState?>
+    with $Provider<SetupState?> {
+  const CurrentSetupStateProvider._()
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'needSetupProvider',
+        name: r'currentSetupStateProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$needSetupHash();
+  String debugGetCreateSourceHash() => _$currentSetupStateHash();
 
   @$internal
   @override
+<<<<<<< HEAD
   $ProviderElement<VM4<int?, String?, Dns?, bool>> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
@@ -2150,11 +2109,30 @@ final class NeedSetupProvider
       providerOverride: $SyncValueProvider<VM4<int?, String?, Dns?, bool>>(
         value,
       ),
+=======
+  $ProviderElement<SetupState?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  SetupState? create(Ref ref) {
+    return currentSetupState(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SetupState? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SetupState?>(value),
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     );
   }
 }
 
+<<<<<<< HEAD
 String _$needSetupHash() => r'41f9cd5db4cc15197b82cfc2b12bb5ca60511510';
+=======
+String _$currentSetupStateHash() => r'd687b0563ea8cc8eb1ca345fdfeee3411d67ad47';
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 @ProviderFor(currentBrightness)
 const currentBrightnessProvider = CurrentBrightnessProvider._();
@@ -2328,7 +2306,11 @@ final class SharedStateProvider
   }
 }
 
+<<<<<<< HEAD
 String _$sharedStateHash() => r'5af2de336f20f526d2292ebc6d900ffaaffa0369';
+=======
+String _$sharedStateHash() => r'864fdf3f750fb6d1beadcb5f9226a614a9cb2caa';
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
 @ProviderFor(overlayTopOffset)
 const overlayTopOffsetProvider = OverlayTopOffsetProvider._();
@@ -2448,55 +2430,70 @@ final class ProfileFamily extends $Family
   String toString() => r'profileProvider';
 }
 
-@ProviderFor(profileOverwrite)
-const profileOverwriteProvider = ProfileOverwriteFamily._();
+@ProviderFor(overwriteType)
+const overwriteTypeProvider = OverwriteTypeFamily._();
 
+<<<<<<< HEAD
 final class ProfileOverwriteProvider
     extends $FunctionalProvider<Overwrite?, Overwrite?, Overwrite?>
     with $Provider<Overwrite?> {
   const ProfileOverwriteProvider._({
     required ProfileOverwriteFamily super.from,
     required int super.argument,
+=======
+final class OverwriteTypeProvider
+    extends $FunctionalProvider<OverwriteType, OverwriteType, OverwriteType>
+    with $Provider<OverwriteType> {
+  const OverwriteTypeProvider._({
+    required OverwriteTypeFamily super.from,
+    required int? super.argument,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }) : super(
          retry: null,
-         name: r'profileOverwriteProvider',
+         name: r'overwriteTypeProvider',
          isAutoDispose: true,
          dependencies: null,
          $allTransitiveDependencies: null,
        );
 
   @override
-  String debugGetCreateSourceHash() => _$profileOverwriteHash();
+  String debugGetCreateSourceHash() => _$overwriteTypeHash();
 
   @override
   String toString() {
-    return r'profileOverwriteProvider'
+    return r'overwriteTypeProvider'
         ''
         '($argument)';
   }
 
   @$internal
   @override
-  $ProviderElement<Overwrite?> $createElement($ProviderPointer pointer) =>
+  $ProviderElement<OverwriteType> $createElement($ProviderPointer pointer) =>
       $ProviderElement(pointer);
 
   @override
+<<<<<<< HEAD
   Overwrite? create(Ref ref) {
     final argument = this.argument as int;
     return profileOverwrite(ref, argument);
+=======
+  OverwriteType create(Ref ref) {
+    final argument = this.argument as int?;
+    return overwriteType(ref, argument);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(Overwrite? value) {
+  Override overrideWithValue(OverwriteType value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<Overwrite?>(value),
+      providerOverride: $SyncValueProvider<OverwriteType>(value),
     );
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ProfileOverwriteProvider && other.argument == argument;
+    return other is OverwriteTypeProvider && other.argument == argument;
   }
 
   @override
@@ -2505,24 +2502,238 @@ final class ProfileOverwriteProvider
   }
 }
 
+<<<<<<< HEAD
 String _$profileOverwriteHash() => r'c193a36219a6cb96a5ed68794cf8cd4c60a35849';
 
 final class ProfileOverwriteFamily extends $Family
     with $FunctionalFamilyOverride<Overwrite?, int> {
   const ProfileOverwriteFamily._()
+=======
+String _$overwriteTypeHash() => r'03a8ab8ddec76935da5fa231270b65baa70fd727';
+
+final class OverwriteTypeFamily extends $Family
+    with $FunctionalFamilyOverride<OverwriteType, int?> {
+  const OverwriteTypeFamily._()
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     : super(
         retry: null,
-        name: r'profileOverwriteProvider',
+        name: r'overwriteTypeProvider',
         dependencies: null,
         $allTransitiveDependencies: null,
         isAutoDispose: true,
       );
 
+<<<<<<< HEAD
   ProfileOverwriteProvider call(int profileId) =>
       ProfileOverwriteProvider._(argument: profileId, from: this);
+=======
+  OverwriteTypeProvider call(int? profileId) =>
+      OverwriteTypeProvider._(argument: profileId, from: this);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
 
   @override
-  String toString() => r'profileOverwriteProvider';
+  String toString() => r'overwriteTypeProvider';
+}
+
+@ProviderFor(script)
+const scriptProvider = ScriptFamily._();
+
+<<<<<<< HEAD
+final class AccessControlStateProvider
+    extends $NotifierProvider<AccessControlState, AccessControlProps> {
+  const AccessControlStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'accessControlStateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+=======
+final class ScriptProvider
+    extends $FunctionalProvider<AsyncValue<Script?>, Script?, FutureOr<Script?>>
+    with $FutureModifier<Script?>, $FutureProvider<Script?> {
+  const ScriptProvider._({
+    required ScriptFamily super.from,
+    required int? super.argument,
+  }) : super(
+         retry: null,
+         name: r'scriptProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
+
+  @override
+  String debugGetCreateSourceHash() => _$scriptHash();
+
+  @override
+  String toString() {
+    return r'scriptProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Script?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+<<<<<<< HEAD
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AccessControlProps value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AccessControlProps>(value),
+    );
+  }
+}
+
+String _$accessControlStateHash() =>
+    r'08fda2e342d027c1bdd49c1ef9a13f2e775db204';
+
+abstract class _$AccessControlState extends $Notifier<AccessControlProps> {
+  AccessControlProps build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AccessControlProps, AccessControlProps>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AccessControlProps, AccessControlProps>,
+              AccessControlProps,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+=======
+  @override
+  FutureOr<Script?> create(Ref ref) {
+    final argument = this.argument as int?;
+    return script(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ScriptProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$scriptHash() => r'b12a6dbe34e08cb1232afafa8b0b0f5363d28bc0';
+
+final class ScriptFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Script?>, int?> {
+  const ScriptFamily._()
+    : super(
+        retry: null,
+        name: r'scriptProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ScriptProvider call(int? scriptId) =>
+      ScriptProvider._(argument: scriptId, from: this);
+
+  @override
+  String toString() => r'scriptProvider';
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
+}
+
+@ProviderFor(setupState)
+const setupStateProvider = SetupStateFamily._();
+
+final class SetupStateProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<SetupState>,
+          SetupState,
+          FutureOr<SetupState>
+        >
+    with $FutureModifier<SetupState>, $FutureProvider<SetupState> {
+  const SetupStateProvider._({
+    required SetupStateFamily super.from,
+    required int? super.argument,
+  }) : super(
+         retry: null,
+         name: r'setupStateProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$setupStateHash();
+
+  @override
+  String toString() {
+    return r'setupStateProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<SetupState> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+<<<<<<< HEAD
+  SetupState create(Ref ref) {
+=======
+  FutureOr<SetupState> create(Ref ref) {
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
+    final argument = this.argument as int?;
+    return setupState(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SetupStateProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+<<<<<<< HEAD
+String _$setupStateHash() => r'f5becd09bca08d4c04c7718625bd3f85d11e65e6';
+
+final class SetupStateFamily extends $Family
+    with $FunctionalFamilyOverride<SetupState, int?> {
+=======
+String _$setupStateHash() => r'8e0c849fa1a51ee15f8b40be94e3094182325b58';
+
+final class SetupStateFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<SetupState>, int?> {
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
+  const SetupStateFamily._()
+    : super(
+        retry: null,
+        name: r'setupStateProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  SetupStateProvider call(int? profileId) =>
+      SetupStateProvider._(argument: profileId, from: this);
+
+  @override
+  String toString() => r'setupStateProvider';
 }
 
 @ProviderFor(AccessControlState)
@@ -2577,81 +2788,4 @@ abstract class _$AccessControlState extends $Notifier<AccessControlProps> {
             >;
     element.handleValue(ref, created);
   }
-}
-
-@ProviderFor(setupState)
-const setupStateProvider = SetupStateFamily._();
-
-final class SetupStateProvider
-    extends $FunctionalProvider<SetupState, SetupState, SetupState>
-    with $Provider<SetupState> {
-  const SetupStateProvider._({
-    required SetupStateFamily super.from,
-    required int? super.argument,
-  }) : super(
-         retry: null,
-         name: r'setupStateProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
-
-  @override
-  String debugGetCreateSourceHash() => _$setupStateHash();
-
-  @override
-  String toString() {
-    return r'setupStateProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $ProviderElement<SetupState> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  SetupState create(Ref ref) {
-    final argument = this.argument as int?;
-    return setupState(ref, argument);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(SetupState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<SetupState>(value),
-    );
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is SetupStateProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$setupStateHash() => r'f5becd09bca08d4c04c7718625bd3f85d11e65e6';
-
-final class SetupStateFamily extends $Family
-    with $FunctionalFamilyOverride<SetupState, int?> {
-  const SetupStateFamily._()
-    : super(
-        retry: null,
-        name: r'setupStateProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  SetupStateProvider call(int? profileId) =>
-      SetupStateProvider._(argument: profileId, from: this);
-
-  @override
-  String toString() => r'setupStateProvider';
 }

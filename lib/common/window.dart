@@ -83,6 +83,7 @@ class Window {
   }
 
   Future<void> close() async {
+    await windowManager.close();
     exit(0);
   }
 

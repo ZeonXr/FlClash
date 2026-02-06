@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/plugins/app.dart';
@@ -31,7 +32,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
   void initState() {
     super.initState();
     _controller = ScrollController();
-    _completer.complete(globalState.appController.getPackages());
+    _completer.complete(appController.getPackages());
     final accessControl = ref
         .read(vpnSettingProvider.select((state) => state.accessControlProps))
         .copyWith();
@@ -91,12 +92,9 @@ class _AccessViewState extends ConsumerState<AccessView> {
       return;
     }
     final selectedPackageNames =
-        (await globalState.appController.safeRun<List<String>>(
-          needLoading: true,
-          () async {
-            return await app?.getChinaPackageNames() ?? [];
-          },
-        ))?.toSet() ??
+        (await appController.loadingRun<List<String>>(() async {
+          return await app?.getChinaPackageNames() ?? [];
+        }, tag: LoadingTag.access))?.toSet() ??
         {};
     final acceptList = packageNames
         .where((item) => !selectedPackageNames.contains(item))
@@ -222,7 +220,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
   }
 
   Future<void> _exportToClipboard() async {
-    await globalState.appController.safeRun(() {
+    await appController.safeRun(() {
       final currentList = ref.read(
         accessControlStateProvider.select((state) => state.currentList),
       );
@@ -231,7 +229,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
   }
 
   Future<void> _importFormClipboard() async {
-    await globalState.appController.safeRun(() async {
+    await appController.safeRun(() async {
       final data = await Clipboard.getData('text/plain');
       final text = data?.text;
       if (text == null) return;
@@ -374,6 +372,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(loadingProvider(LoadingTag.access));
     final query = ref.watch(queryProvider(QueryTag.access));
     final packages = ref.watch(packagesProvider);
     final accessControl = ref.watch(accessControlStateProvider);
@@ -404,6 +403,7 @@ class _AccessViewState extends ConsumerState<AccessView> {
     final valueList = currentList.intersection(viewPackageNameList);
     return CommonScaffold(
       key: _scaffoldKey,
+      isLoading: isLoading,
       searchState: AppBarSearchState(onSearch: _onSearch, autoAddSearch: false),
       title: appLocalizations.appAccessControl,
       actions: _buildActions(enable: accessControl.enable),

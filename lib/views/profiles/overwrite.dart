@@ -1,9 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/features/features.dart';
+import 'package:fl_clash/features/overwrite/rule.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:fl_clash/pages/editor.dart';
+import 'package:fl_clash/providers/database.dart';
 import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/views/config/scripts.dart';
@@ -21,46 +24,37 @@ class OverwriteView extends ConsumerStatefulWidget {
 }
 
 class _OverwriteViewState extends ConsumerState<OverwriteView> {
-  late final Overwrite _originOverwriteData;
-
   @override
   void initState() {
     super.initState();
-    _originOverwriteData =
-        ref.read(profileOverwriteProvider(widget.profileId)) ?? Overwrite();
   }
 
-  Future<void> _handleReset() async {
-    final res = await globalState.showMessage(
-      message: TextSpan(text: appLocalizations.resetPageChangesTip),
-    );
-    if (res != true) {
+  Future<void> _handlePreview() async {
+    final profile = ref.read(profileProvider(widget.profileId));
+    if (profile == null) {
       return;
     }
-    ref.read(profilesProvider.notifier).updateProfile(widget.profileId, (
-      state,
-    ) {
-      return state.copyWith(overwrite: _originOverwriteData);
-    });
+    final configMap = await appController.getProfileWithId(profile.id);
+    final content = await encodeYamlTask(configMap);
+    if (!mounted) {
+      return;
+    }
+    final previewPage = EditorPage(title: profile.realLabel, content: content);
+    BaseNavigator.push<String>(context, previewPage);
   }
 
   @override
   Widget build(BuildContext context) {
-    final needReset = ref.watch(
-      profileOverwriteProvider(
-        widget.profileId,
-      ).select((state) => state != _originOverwriteData),
-    );
     return CommonScaffold(
       title: appLocalizations.override,
       actions: [
-        if (needReset)
-          CommonMinFilledButtonTheme(
-            child: FilledButton(
-              onPressed: _handleReset,
-              child: Text(appLocalizations.reset),
-            ),
+        CommonMinFilledButtonTheme(
+          child: FilledButton(
+            onPressed: _handlePreview,
+            child: Text(appLocalizations.preview),
           ),
+        ),
+        SizedBox(width: 8),
       ],
       body: CustomScrollView(
         slivers: [_Title(widget.profileId), _Content(widget.profileId)],
@@ -71,9 +65,7 @@ class _OverwriteViewState extends ConsumerState<OverwriteView> {
   @override
   void dispose() {
     super.dispose();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      globalState.appController.checkNeedSetup();
-    });
+    appController.autoApplyProfile();
   }
 }
 
@@ -86,7 +78,11 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => appLocalizations.standard,
       OverwriteType.script => appLocalizations.script,
+<<<<<<< HEAD
       OverwriteType.custom => appLocalizations.overwriteTypeCustom,
+=======
+      // OverwriteType.custom => appLocalizations.overwriteTypeCustom,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
@@ -94,7 +90,11 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => Icons.stars,
       OverwriteType.script => Icons.rocket,
+<<<<<<< HEAD
       OverwriteType.custom => Icons.dashboard_customize,
+=======
+      // OverwriteType.custom => Icons.dashboard_customize,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
@@ -102,23 +102,23 @@ class _Title extends ConsumerWidget {
     return switch (type) {
       OverwriteType.standard => appLocalizations.standardModeDesc,
       OverwriteType.script => appLocalizations.scriptModeDesc,
+<<<<<<< HEAD
       OverwriteType.custom => appLocalizations.overwriteTypeCustomDesc,
+=======
+      // OverwriteType.custom => appLocalizations.overwriteTypeCustomDesc,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 
-  void _handleChange(WidgetRef ref, OverwriteType type) {
+  void _handleChangeType(WidgetRef ref, OverwriteType type) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
-      return state.copyWith.overwrite(type: type);
+      return state.copyWith(overwriteType: type);
     });
   }
 
   @override
   Widget build(context, ref) {
-    final overwriteType = ref.watch(
-      profileOverwriteProvider(
-        profileId,
-      ).select((state) => state?.type ?? OverwriteType.standard),
-    );
+    final overwriteType = ref.watch(overwriteTypeProvider(profileId));
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,7 @@ class _Title extends ConsumerWidget {
                   CommonCard(
                     isSelected: overwriteType == type,
                     onPressed: () {
-                      _handleChange(ref, type);
+                      _handleChangeType(ref, type);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(16),
@@ -175,15 +175,15 @@ class _Content extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final type = ref.watch(
-      profileOverwriteProvider(
-        profileId,
-      ).select((state) => state?.type ?? OverwriteType.standard),
-    );
-    return switch (type) {
+    final overwriteType = ref.watch(overwriteTypeProvider(profileId));
+    return switch (overwriteType) {
       OverwriteType.standard => _StandardContent(profileId),
       OverwriteType.script => _ScriptContent(profileId),
+<<<<<<< HEAD
       OverwriteType.custom => SliverToBoxAdapter(),
+=======
+      // OverwriteType.custom => SliverToBoxAdapter(),
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     };
   }
 }
@@ -207,15 +207,7 @@ class __StandardContentState extends ConsumerState<_StandardContent> {
     if (res == null) {
       return;
     }
-    ref.read(profilesProvider.notifier).updateProfile(widget.profileId, (
-      state,
-    ) {
-      final newAddedRules = state.overwrite.standardOverwrite.addedRules
-          .updateWith(res);
-      return state.copyWith.overwrite.standardOverwrite(
-        addedRules: newAddedRules,
-      );
-    });
+    ref.read(profileAddedRulesProvider(widget.profileId).notifier).put(res);
   }
 
   void _handleSelected(int ruleId) {
@@ -227,14 +219,13 @@ class __StandardContentState extends ConsumerState<_StandardContent> {
   }
 
   void _handleSelectAll() {
-    final ids = ref
-        .read(
-          profileOverwriteProvider(
-            widget.profileId,
-          ).select((state) => state?.standardOverwrite.addedRules ?? []),
-        )
-        .map((item) => item.id)
-        .toSet();
+    final ids =
+        ref
+            .read(profileAddedRulesProvider(widget.profileId))
+            .value
+            ?.map((item) => item.id)
+            .toSet() ??
+        {};
     ref.read(selectedItemsProvider(_key).notifier).update((selected) {
       return selected.containsAll(ids) ? {} : ids;
     });
@@ -251,28 +242,17 @@ class __StandardContentState extends ConsumerState<_StandardContent> {
       return;
     }
     final selectedRules = ref.read(selectedItemsProvider(_key));
-    ref.read(profilesProvider.notifier).updateProfile(widget.profileId, (
-      state,
-    ) {
-      final newAddedRules = state.overwrite.standardOverwrite.addedRules
-          .where((item) => !selectedRules.contains(item.id))
-          .toList();
-      return state.copyWith.overwrite.standardOverwrite(
-        addedRules: newAddedRules,
-      );
-    });
+    ref
+        .read(profileAddedRulesProvider(widget.profileId).notifier)
+        .delAll(selectedRules.cast<int>());
     ref.read(selectedItemsProvider(_key).notifier).value = {};
   }
 
   @override
   Widget build(BuildContext context) {
-    final standardOverwrite = ref.watch(
-      profileOverwriteProvider(
-        widget.profileId,
-      ).select((state) => state?.standardOverwrite),
-    );
+    final addedRules =
+        ref.watch(profileAddedRulesProvider(widget.profileId)).value ?? [];
     final selectedRules = ref.watch(selectedItemsProvider(_key));
-    final addedRules = standardOverwrite?.addedRules ?? [];
     return CommonPopScope(
       onPop: (_) {
         if (selectedRules.isNotEmpty) {
@@ -345,24 +325,9 @@ class __StandardContentState extends ConsumerState<_StandardContent> {
                     ),
                   );
                 },
-                onReorder: (int oldIndex, int newIndex) {
-                  if (oldIndex < newIndex) {
-                    newIndex -= 1;
-                  }
-                  ref.read(profilesProvider.notifier).updateProfile(
-                    widget.profileId,
-                    (state) {
-                      final newAddRules = List<Rule>.from(
-                        state.overwrite.standardOverwrite.addedRules,
-                      );
-                      final item = newAddRules.removeAt(oldIndex);
-                      newAddRules.insert(newIndex, item);
-                      return state.copyWith.overwrite.standardOverwrite(
-                        addedRules: newAddRules,
-                      );
-                    },
-                  );
-                },
+                onReorder: ref
+                    .read(profileAddedRulesProvider(widget.profileId).notifier)
+                    .order,
               );
             },
           ),
@@ -416,22 +381,26 @@ class _ScriptContent extends ConsumerWidget {
 
   void _handleChange(WidgetRef ref, int scriptId) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
+<<<<<<< HEAD
       int? newScriptId = scriptId;
       if (newScriptId == state.overwrite.scriptOverwrite.scriptId) {
         newScriptId = null;
       }
       return state.copyWith.overwrite.scriptOverwrite(scriptId: newScriptId);
+=======
+      return state.copyWith(
+        scriptId: state.scriptId == scriptId ? null : scriptId,
+      );
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     });
   }
 
   @override
   Widget build(BuildContext context, ref) {
     final scriptId = ref.watch(
-      profileOverwriteProvider(
-        profileId,
-      ).select((state) => state?.scriptOverwrite.scriptId),
+      profileProvider(profileId).select((state) => state?.scriptId),
     );
-    final scripts = ref.watch(scriptsProvider);
+    final scripts = ref.watch(scriptsProvider).value ?? [];
     return SliverMainAxisGroup(
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: 24)),
@@ -540,6 +509,7 @@ class _EditGlobalAddedRules extends ConsumerWidget {
 
   const _EditGlobalAddedRules({required this.profileId});
 
+<<<<<<< HEAD
   void _handleChange(WidgetRef ref, int ruleId) {
     ref.read(profilesProvider.notifier).updateProfile(profileId, (state) {
       final newDisabledRuleIds = Set<int>.from(
@@ -549,16 +519,21 @@ class _EditGlobalAddedRules extends ConsumerWidget {
         disabledRuleIds: newDisabledRuleIds.toList(),
       );
     });
+=======
+  void _handleChange(WidgetRef ref, bool status, int ruleId) {
+    if (status) {
+      ref.read(profileDisabledRuleIdsProvider(profileId).notifier).put(ruleId);
+    } else {
+      ref.read(profileDisabledRuleIdsProvider(profileId).notifier).del(ruleId);
+    }
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final disabledRuleIds = ref.watch(
-      profileOverwriteProvider(
-        profileId,
-      ).select((state) => state?.standardOverwrite.disabledRuleIds ?? []),
-    );
-    final rules = ref.watch(rulesProvider);
+    final disabledRuleIds =
+        ref.watch(profileDisabledRuleIdsProvider(profileId)).value ?? [];
+    final rules = ref.watch(globalRulesProvider).value ?? [];
     return BaseScaffold(
       title: appLocalizations.editGlobalRules,
       body: rules.isEmpty
@@ -573,8 +548,8 @@ class _EditGlobalAddedRules extends ConsumerWidget {
                 return RuleStatusItem(
                   status: !disabledRuleIds.contains(rule.id),
                   rule: rule,
-                  onChange: (_) {
-                    _handleChange(ref, rule.id);
+                  onChange: (status) {
+                    _handleChange(ref, !status, rule.id);
                   },
                 );
               },

@@ -37,9 +37,12 @@ abstract class AppState with _$AppState {
     @Default(false) bool realTunEnable,
     @Default(false) bool loading,
     required SystemUiOverlayStyle systemUiOverlayStyle,
+<<<<<<< HEAD
     @Default({}) Map<QueryTag, String> queryMap,
     @Default({}) Map<String, dynamic> selectedItemMap,
     @Default({}) Map<String, Set<dynamic>> selectedItemsMap,
+=======
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     @Default(CoreStatus.connecting) CoreStatus coreStatus,
     @Default({}) Map<String, bool> updatingMap,
   }) = _AppState;

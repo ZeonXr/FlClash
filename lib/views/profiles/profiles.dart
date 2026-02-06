@@ -1,4 +1,5 @@
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/controller.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/handler.dart';
 import 'package:fl_clash/models/models.dart';
@@ -23,6 +24,7 @@ class ProfilesView extends StatefulWidget {
 
 class _ProfilesViewState extends State<ProfilesView> {
   Function? applyConfigDebounce;
+  bool _isUpdating = false;
 
   void _handleShowAddExtendPage() {
     showExtend(
@@ -39,12 +41,21 @@ class _ProfilesViewState extends State<ProfilesView> {
     );
   }
 
+<<<<<<< HEAD
   Future<void> _updateProfiles() async {
     final profiles = globalState.profiles;
+=======
+  Future<void> _updateProfiles(List<Profile> profiles) async {
+    if (_isUpdating == true) {
+      return;
+    }
+    _isUpdating = true;
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final List<UpdatingMessage> messages = [];
     final updateProfiles = profiles.map<Future>((profile) async {
       if (profile.type == ProfileType.file) return;
       try {
+<<<<<<< HEAD
         await globalState.appController.updateProfile(
           profile,
           showLoading: true,
@@ -55,6 +66,12 @@ class _ProfilesViewState extends State<ProfilesView> {
             label: profile.label.getSafeValue(profile.id.toString()),
             message: e.toString(),
           ),
+=======
+        await appController.updateProfile(profile, showLoading: true);
+      } catch (e) {
+        messages.add(
+          UpdatingMessage(label: profile.realLabel, message: e.toString()),
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
         );
       }
     });
@@ -62,6 +79,7 @@ class _ProfilesViewState extends State<ProfilesView> {
     if (messages.isNotEmpty) {
       globalState.showAllUpdatingMessagesDialog(messages);
     }
+    _isUpdating = false;
   }
 
   List<Widget> _buildActions(List<Profile> profiles) {
@@ -69,7 +87,7 @@ class _ProfilesViewState extends State<ProfilesView> {
         ? [
             IconButton(
               onPressed: () {
-                _updateProfiles();
+                _updateProfiles(profiles);
               },
               icon: const Icon(Icons.sync),
             ),
@@ -93,10 +111,10 @@ class _ProfilesViewState extends State<ProfilesView> {
   }
 
   Widget _buildFAB() {
-    return FloatingActionButton(
-      heroTag: null,
+    return CommonFloatingActionButton(
       onPressed: _handleShowAddExtendPage,
-      child: const Icon(Icons.add),
+      icon: const Icon(Icons.add),
+      label: context.appLocalizations.addProfile,
     );
   }
 
@@ -104,13 +122,15 @@ class _ProfilesViewState extends State<ProfilesView> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (_, ref, _) {
-        final profilesSelectorState = ref.watch(profilesSelectorStateProvider);
-        final spacing = 14.ap;
+        final isLoading = ref.watch(loadingProvider(LoadingTag.profiles));
+        final state = ref.watch(profilesStateProvider);
+        final spacing = 14.mAp;
         return CommonScaffold(
+          isLoading: isLoading,
           title: appLocalizations.profiles,
           floatingActionButton: _buildFAB(),
-          actions: _buildActions(profilesSelectorState.profiles),
-          body: profilesSelectorState.profiles.isEmpty
+          actions: _buildActions(state.profiles),
+          body: state.profiles.isEmpty
               ? NullStatus(
                   label: appLocalizations.nullProfileDesc,
                   illustration: ProfileEmptyIllustration(),
@@ -128,21 +148,23 @@ class _ProfilesViewState extends State<ProfilesView> {
                     child: Grid(
                       mainAxisSpacing: spacing,
                       crossAxisSpacing: spacing,
-                      crossAxisCount: profilesSelectorState.columns,
+                      crossAxisCount: state.columns,
                       children: [
-                        for (
-                          int i = 0;
-                          i < profilesSelectorState.profiles.length;
-                          i++
-                        )
+                        for (int i = 0; i < state.profiles.length; i++)
                           GridItem(
                             child: ProfileItem(
+<<<<<<< HEAD
                               key: Key(
                                 profilesSelectorState.profiles[i].id.toString(),
                               ),
                               profile: profilesSelectorState.profiles[i],
                               groupValue:
                                   profilesSelectorState.currentProfileId,
+=======
+                              key: Key(state.profiles[i].id.toString()),
+                              profile: state.profiles[i],
+                              groupValue: state.currentProfileId,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
                               onChanged: (profileId) {
                                 ref
                                         .read(currentProfileIdProvider.notifier)
@@ -183,29 +205,44 @@ class ProfileItem extends StatelessWidget {
     if (res != true) {
       return;
     }
-    await globalState.appController.deleteProfile(profile.id);
+    await appController.deleteProfile(profile.id);
   }
 
   Future<void> _handlePreview(BuildContext context) async {
+<<<<<<< HEAD
     final config = await appHandler.getProfileConfig(profile.id);
     final content = await encodeYamlTask(config);
+=======
+    final configMap = await appController.getProfileWithId(profile.id);
+    final content = await encodeYamlTask(configMap);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     if (!context.mounted) {
       return;
     }
 
+<<<<<<< HEAD
     final previewPage = EditorPage(
       title: profile.label.getSafeValue(profile.id.toString()),
       content: content,
     );
+=======
+    final previewPage = EditorPage(title: profile.realLabel, content: content);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     BaseNavigator.push<String>(context, previewPage);
   }
 
   Future updateProfile() async {
-    final appController = globalState.appController;
     if (profile.type == ProfileType.file) return;
+<<<<<<< HEAD
     await globalState.appController.safeRun(silence: false, () async {
       await appController.updateProfile(profile, showLoading: true);
     });
+=======
+    try {} finally {}
+    await appController.loadingRun(() async {
+      await appController.updateProfile(profile, showLoading: true);
+    }, tag: LoadingTag.profiles);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 
   void _handleShowEditExtendPage(BuildContext context) {
@@ -252,6 +289,7 @@ class ProfileItem extends StatelessWidget {
   }
 
   Future<void> _handleExportFile(BuildContext context) async {
+<<<<<<< HEAD
     final res = await globalState.appController.safeRun<bool>(
       () async {
         final mFile = await profile.file;
@@ -265,6 +303,17 @@ class ProfileItem extends StatelessWidget {
       needLoading: true,
       title: appLocalizations.tip,
     );
+=======
+    final res = await appController.safeRun<bool>(() async {
+      final mFile = await profile.file;
+      final value = await picker.saveFile(
+        profile.realLabel,
+        mFile.readAsBytesSync(),
+      );
+      if (value == null) return false;
+      return true;
+    }, title: appLocalizations.tip);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     if (res == true && context.mounted) {
       context.showNotifier(appLocalizations.exportSuccess);
     }
@@ -402,7 +451,11 @@ class ProfileItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+<<<<<<< HEAD
                 profile.label.getSafeValue(profile.id.toString()),
+=======
+                profile.realLabel,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
                 style: context.textTheme.titleMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -461,11 +514,20 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
         index: index,
         child: const Icon(Icons.drag_handle),
       ),
+<<<<<<< HEAD
       title: Text(profile.label.getSafeValue(profile.id.toString())),
+=======
+      title: Text(profile.realLabel),
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       isFirst: isFirst,
       isLast: isLast,
       isDecorator: isDecorator,
     );
+  }
+
+  void _handleSave() {
+    Navigator.of(context).pop();
+    appController.reorder(profiles);
   }
 
   @override
@@ -475,10 +537,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
       actions: [
         if (widget.type == SheetType.bottomSheet)
           IconButton.filledTonal(
-            onPressed: () {
-              Navigator.of(context).pop();
-              globalState.appController.setProfiles(profiles);
-            },
+            onPressed: _handleSave,
             style: IconButton.styleFrom(
               visualDensity: VisualDensity.comfortable,
               tapTargetSize: MaterialTapTargetSize.padded,
@@ -490,10 +549,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
         else
           IconButton.filledTonal(
             icon: Icon(Icons.check),
-            onPressed: () {
-              Navigator.of(context).pop();
-              globalState.appController.setProfiles(profiles);
-            },
+            onPressed: _handleSave,
           ),
       ],
       body: Padding(

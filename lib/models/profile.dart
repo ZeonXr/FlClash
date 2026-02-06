@@ -7,6 +7,7 @@ import 'package:fl_clash/enum/enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'clash_config.dart';
+import 'state.dart';
 
 part 'generated/profile.freezed.dart';
 part 'generated/profile.g.dart';
@@ -53,8 +54,14 @@ abstract class Profile with _$Profile {
     @Default(true) bool autoUpdate,
     @Default({}) Map<String, String> selectedMap,
     @Default({}) Set<String> unfoldSet,
+<<<<<<< HEAD
     @Default(Overwrite()) Overwrite overwrite,
     @Default(-1) int order,
+=======
+    @Default(OverwriteType.standard) OverwriteType overwriteType,
+    int? scriptId,
+    int? order,
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, Object?> json) =>
@@ -63,7 +70,11 @@ abstract class Profile with _$Profile {
   factory Profile.normal({String? label, String url = ''}) {
     final id = snowflake.id;
     return Profile(
+<<<<<<< HEAD
       label: label ?? id.toString(),
+=======
+      label: label ?? '',
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       url: url,
       id: id,
       autoUpdateDuration: defaultUpdateDuration,
@@ -72,16 +83,37 @@ abstract class Profile with _$Profile {
 }
 
 @freezed
-abstract class Overwrite with _$Overwrite {
-  const factory Overwrite({
-    @Default(OverwriteType.standard) OverwriteType type,
-    @Default(StandardOverwrite()) StandardOverwrite standardOverwrite,
-    @Default(ScriptOverwrite()) ScriptOverwrite scriptOverwrite,
-  }) = _Overwrite;
-
-  factory Overwrite.fromJson(Map<String, Object?> json) =>
-      _$OverwriteFromJson(json);
+abstract class ProfileRuleLink with _$ProfileRuleLink {
+  const factory ProfileRuleLink({
+    int? profileId,
+    required int ruleId,
+    RuleScene? scene,
+    String? order,
+  }) = _ProfileRuleLink;
 }
+
+extension ProfileRuleLinkExt on ProfileRuleLink {
+  String get key {
+    final splits = <String?>[
+      profileId?.toString(),
+      ruleId.toString(),
+      scene?.name,
+    ];
+    return splits.where((item) => item != null).join('_');
+  }
+}
+
+// @freezed
+// abstract class Overwrite with _$Overwrite {
+//   const factory Overwrite({
+//     @Default(OverwriteType.standard) OverwriteType type,
+//     @Default(StandardOverwrite()) StandardOverwrite standardOverwrite,
+//     @Default(ScriptOverwrite()) ScriptOverwrite scriptOverwrite,
+//   }) = _Overwrite;
+//
+//   factory Overwrite.fromJson(Map<String, Object?> json) =>
+//       _$OverwriteFromJson(json);
+// }
 
 @freezed
 abstract class StandardOverwrite with _$StandardOverwrite {
@@ -109,7 +141,11 @@ extension ProfilesExt on List<Profile> {
   }
 
   String _getLabel(String label, int id) {
+<<<<<<< HEAD
     final realLabel = label.getSafeValue(id.toString());
+=======
+    final realLabel = label.takeFirstValid([id.toString()]);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final hasDup =
         indexWhere(
           (element) => element.label == realLabel && element.id != id,
@@ -122,7 +158,11 @@ extension ProfilesExt on List<Profile> {
     }
   }
 
+<<<<<<< HEAD
   List<Profile> copyAndAddProfile(Profile profile) {
+=======
+  VM2<List<Profile>, Profile> copyAndAddProfile(Profile profile) {
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final List<Profile> profilesTemp = List.from(this);
     final index = profilesTemp.indexWhere(
       (element) => element.id == profile.id,
@@ -135,7 +175,11 @@ extension ProfilesExt on List<Profile> {
     } else {
       profilesTemp[index] = updateProfile;
     }
+<<<<<<< HEAD
     return profilesTemp;
+=======
+    return VM2(profilesTemp, updateProfile);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   }
 }
 
@@ -145,6 +189,11 @@ extension ProfileExtension on Profile {
 
   bool get realAutoUpdate => url.isEmpty == true ? false : autoUpdate;
 
+<<<<<<< HEAD
+=======
+  String get realLabel => label.takeFirstValid([id.toString()]);
+
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
   String get fileName => '$id.yaml';
 
   String get updatingKey => 'profile_$id';
@@ -190,11 +239,18 @@ extension ProfileExtension on Profile {
     final disposition = response.headers.value('content-disposition');
     final userinfo = response.headers.value('subscription-userinfo');
     return await copyWith(
+<<<<<<< HEAD
       label: label.getSafeValue(
         utils
             .getFileNameForDisposition(disposition)
             .getSafeValue(id.toString()),
       ),
+=======
+      label: label.takeFirstValid([
+        utils.getFileNameForDisposition(disposition),
+        id.toString(),
+      ]),
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
       subscriptionInfo: SubscriptionInfo.formHString(userinfo),
     ).saveFile(response.data ?? Uint8List.fromList([]));
   }
@@ -202,10 +258,14 @@ extension ProfileExtension on Profile {
   Future<Profile> saveFile(Uint8List bytes) async {
     final path = await appPath.tempFilePath;
     final tempFile = File(path);
+<<<<<<< HEAD
     if (!await tempFile.exists()) {
       await tempFile.create(recursive: true);
     }
     await tempFile.writeAsBytes(bytes);
+=======
+    await tempFile.safeWriteAsBytes(bytes);
+>>>>>>> 672eaccd35dcd84f7a0492638adc779a3fd97735
     final message = await coreController.validateConfig(path);
     if (message.isNotEmpty) {
       throw message;
