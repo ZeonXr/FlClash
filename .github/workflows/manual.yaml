@@ -1,0 +1,148 @@
+name: manual build
+
+on:
+  workflow_dispatch:
+    inputs:
+      android:
+        description: 'Android'
+        type: boolean
+        default: false
+      windows_amd64:
+        description: 'Windows (AMD64)'
+        type: boolean
+        default: false
+      windows_arm64:
+        description: 'Windows (ARM64)'
+        type: boolean
+        default: false
+      linux_amd64:
+        description: 'Linux (AMD64)'
+        type: boolean
+        default: false
+      linux_arm64:
+        description: 'Linux (ARM64)'
+        type: boolean
+        default: false
+      macos_amd64:
+        description: 'macOS (Intel)'
+        type: boolean
+        default: false
+      macos_arm64:
+        description: 'macOS (ARM64)'
+        type: boolean
+        default: false
+
+env:
+  IS_STABLE: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        shell: bash
+        run: |
+          matrix_include="["
+
+          if [[ "${{ inputs.android }}" == "true" ]]; then
+            matrix_include+='{"platform": "android", "os": "ubuntu-latest"},'
+          fi
+          if [[ "${{ inputs.windows_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "windows", "os": "Windows-2022", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.windows_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "windows", "os": "windows-11-arm", "arch": "arm64"},'
+          fi
+          if [[ "${{ inputs.linux_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "linux", "os": "ubuntu-22.04", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.linux_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "linux", "os": "ubuntu-24.04-arm", "arch": "arm64"},'
+          fi
+          if [[ "${{ inputs.macos_amd64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "macos", "os": "macos-15-intel", "arch": "amd64"},'
+          fi
+          if [[ "${{ inputs.macos_arm64 }}" == "true" ]]; then
+            matrix_include+='{"platform": "macos", "os": "macos-latest", "arch": "arm64"},'
+          fi
+
+          # Remove trailing comma if present
+          if [[ "$matrix_include" == *"," ]]; then
+            matrix_include="${matrix_include%,}"
+          fi
+          
+          matrix_include+="]"
+          
+          echo "matrix=$matrix_include" >> $GITHUB_OUTPUT
+
+  build:
+    needs: check
+    if: needs.check.outputs.matrix != '[]'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.check.outputs.matrix) }}
+
+    steps:
+      - name: Setup Rust for Windows ARM64
+        if: startsWith(matrix.os, 'windows-11-arm')
+        run: |
+          Invoke-WebRequest -Uri "https://win.rustup.rs/aarch64" -OutFile rustup-init.exe
+          .\rustup-init.exe -y --default-toolchain stable
+          $cargoPath = "$env:USERPROFILE\.cargo\bin"
+          Add-Content $env:GITHUB_PATH $cargoPath
+
+      - name: Setup Rust ARM64 target for cross-compilation
+        if: matrix.platform == 'windows' && matrix.arch == 'arm64' && !startsWith(matrix.os, 'windows-11-arm')
+        run: rustup target add aarch64-pc-windows-msvc
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Android Signing
+        if: startsWith(matrix.platform,'android')
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/keystore.jks
+          echo "${{ secrets.SERVICE_JSON }}" | base64 --decode > android/app/google-services.json
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/local.properties
+          echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> android/local.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/local.properties
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.0'
+          cache-dependency-path: |
+            core/go.sum
+
+      - name: Setup Flutter Master
+        if: startsWith(matrix.os, 'windows-11-arm') || startsWith(matrix.os, 'ubuntu-24.04-arm')
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "master"
+          cache: true
+      - name: Setup Flutter
+        if: ${{ !(startsWith(matrix.os, 'windows-11-arm') || startsWith(matrix.os, 'ubuntu-24.04-arm')) }}
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          cache: true
+          flutter-version: 3.32.8
+
+      - name: Get Flutter Dependency
+        run: flutter pub get
+
+      - name: Setup
+        run: dart setup.dart ${{ matrix.platform }} ${{ matrix.arch && format('--arch {0}', matrix.arch) }} ${{ env.IS_STABLE == 'true' && '--env stable' || '' }}
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-${{ matrix.platform }}${{ matrix.arch && format('-{0}', matrix.arch) }}
+          path: ./dist
+          overwrite: true
